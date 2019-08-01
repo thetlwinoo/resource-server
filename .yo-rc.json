@@ -1,0 +1,43 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.resource.server",
+            "nativeLanguage": "en"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "resource",
+        "packageName": "com.resource.server",
+        "packageFolder": "com/resource/server",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": "spring-websocket",
+        "databaseType": "sql",
+        "devDatabaseType": "postgresql",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "NDFlYmY2MmI0ZmFjNzc2YzViZDk4YTZlZDRjYjQ5YWFlY2RlNjE1MTQ4M2VmZTg2ZTE3YTgzMDhlNzVjMWMwMjkxOWIyZjAxNzE4ZTc0M2E4YzM5MDM0Zjg5ODQ0MjUwMGFjOWEzNDdlZmEwOTQxNzA3OTVmNDIxYzdkMGMzODI=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["gatling", "cucumber", "protractor"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [
+            {
+                "name": "generator-jhipster-primeng",
+                "version": "2.3.0"
+            }
+        ],
+        "enableTranslation": true,
+        "nativeLanguage": "en",
+        "languages": ["en", "my"]
+    }
+}
