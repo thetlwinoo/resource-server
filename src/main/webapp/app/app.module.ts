@@ -20,6 +20,7 @@ import { ResourceEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { PortalProductModule } from './products/products.module';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         ResourceAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         ResourceEntityModule,
-        ResourceAppRoutingModule
+        ResourceAppRoutingModule,
+        PortalProductModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [

@@ -1,0 +1,7 @@
+<div class="next-table-cell-wrapper">
+    <div class="product-images product-images-show-main sku-images-sortable">
+        <div>
+            <image-selector *ngFor="let item of counter; let i = index" [product]="product" [productPhoto]="product.productPhotos | productFilter: i: product.id" [selectedIndex]="i" (createCompleted)="onCreateCompleted($event)" (setDefaultCompleted)="onSetDefaultCompleted($event)"></image-selector>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="global.menu.products.manageImages">Manage Images</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <p-tabMenu [model]="mangeImageTabs" [activeItem]="mangeImageTabs[0]"></p-tabMenu>
+    <div *ngIf="products">
+        <p-progressBar [value]="uploadProgress" [style]="{'height': '6px','margin':'5px 0px 5px 0px'}"></p-progressBar>
+        <p-table #tt [columns]="cols" [value]="products | missingImagesFilter: missingImagesInd">
+            <ng-template pTemplate="caption">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText placeholder="Global Filter"
+                       (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [style.width]="col.width">
+                        {{col.header}}
+                    </th>
+                    <th>All Images</th>
+                </tr>
+                <tr>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <input *ngSwitchCase="'productName'" pInputText type="text"
+                               (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns" class="ui-resizable-column">
+                        {{rowData[col.field]}}
+                    </td>
+                    <td class="text-right">
+                        <image-uploader [product]="rowData"></image-uploader>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div *ngIf="products && products.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5"
+                                [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+    <p-fileUpload [hidden]="true" mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="myUploader($event)"
+                  multiple="false" visible="false"></p-fileUpload>
+</div>
