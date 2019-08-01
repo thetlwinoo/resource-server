@@ -1,0 +1,33 @@
+{
+    "name": "PaymentTransactions",
+    "fields": [
+        {
+            "fieldName": "returnedCompletedPaymentData",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "orders",
+            "otherEntityRelationshipName": "payment",
+            "relationshipName": "paymentOnOrder",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190801044928",
+    "entityTableName": "payment_transactions",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

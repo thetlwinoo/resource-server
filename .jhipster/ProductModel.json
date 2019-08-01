@@ -1,0 +1,38 @@
+{
+    "name": "ProductModel",
+    "fields": [
+        {
+            "fieldName": "productModelName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "calalogDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "instructions",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "productDescription",
+            "otherEntityRelationshipName": "productModel",
+            "relationshipName": "description"
+        }
+    ],
+    "changelogDate": "20190801044946",
+    "entityTableName": "product_model",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

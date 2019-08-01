@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-review-lines-heading" jhiTranslate="resourceApp.reviewLines.home.createOrEditLabel">Create or edit a Review Lines</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!reviewLines.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="reviewLines.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.productRating" for="field_productRating">Product Rating</label>
+                    <input type="number" class="form-control" name="productRating" id="field_productRating"
+                        [(ngModel)]="reviewLines.productRating" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.productReview" for="field_productReview">Product Review</label>
+                    <input type="text" class="form-control" name="productReview" id="field_productReview"
+                        [(ngModel)]="reviewLines.productReview" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.sellerRating" for="field_sellerRating">Seller Rating</label>
+                    <input type="number" class="form-control" name="sellerRating" id="field_sellerRating"
+                        [(ngModel)]="reviewLines.sellerRating" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.sellerReview" for="field_sellerReview">Seller Review</label>
+                    <input type="text" class="form-control" name="sellerReview" id="field_sellerReview"
+                        [(ngModel)]="reviewLines.sellerReview" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.deliveryRating" for="field_deliveryRating">Delivery Rating</label>
+                    <input type="number" class="form-control" name="deliveryRating" id="field_deliveryRating"
+                        [(ngModel)]="reviewLines.deliveryRating" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.deliveryReview" for="field_deliveryReview">Delivery Review</label>
+                    <input type="text" class="form-control" name="deliveryReview" id="field_deliveryReview"
+                        [(ngModel)]="reviewLines.deliveryReview" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.photo" for="field_photo">Photo</label>
+                    <div>
+                        <img [src]="'data:' + reviewLines.photoContentType + ';base64,' + reviewLines.photo" style="max-height: 100px;" *ngIf="reviewLines.photo" alt="reviewLines image"/>
+                        <div *ngIf="reviewLines.photo" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{reviewLines.photoContentType}}, {{byteSize(reviewLines.photo)}}</span>
+                            <button type="button" (click)="clearInputImage('photo', 'photoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_photo" (change)="setFileData($event, reviewLines, 'photo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="photo" id="field_photo"
+                        [(ngModel)]="reviewLines.photo" />
+                    <input type="hidden" class="form-control" name="photoContentType" id="field_photoContentType"
+                        [(ngModel)]="reviewLines.photoContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="reviewLines.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.review" for="field_review">Review</label>
+                    <select class="form-control" id="field_review" name="review" [(ngModel)]="reviewLines.reviewId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="reviewsOption.id" *ngFor="let reviewsOption of reviews; trackBy: trackReviewsById">{{reviewsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

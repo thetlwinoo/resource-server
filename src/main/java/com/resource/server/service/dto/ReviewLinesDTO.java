@@ -1,0 +1,169 @@
+package com.resource.server.service.dto;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Lob;
+
+/**
+ * A DTO for the ReviewLines entity.
+ */
+public class ReviewLinesDTO extends AbstractAuditingDTO implements Serializable {
+
+    private Long id;
+
+    private Integer productRating;
+
+    private String productReview;
+
+    private Integer sellerRating;
+
+    private String sellerReview;
+
+    private Integer deliveryRating;
+
+    private String deliveryReview;
+
+    @Lob
+    private byte[] photo;
+
+    private String photoContentType;
+
+    private Long productId;
+
+    private String productProductName;
+
+    private Long reviewId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getProductRating() {
+        return productRating;
+    }
+
+    public void setProductRating(Integer productRating) {
+        this.productRating = productRating;
+    }
+
+    public String getProductReview() {
+        return productReview;
+    }
+
+    public void setProductReview(String productReview) {
+        this.productReview = productReview;
+    }
+
+    public Integer getSellerRating() {
+        return sellerRating;
+    }
+
+    public void setSellerRating(Integer sellerRating) {
+        this.sellerRating = sellerRating;
+    }
+
+    public String getSellerReview() {
+        return sellerReview;
+    }
+
+    public void setSellerReview(String sellerReview) {
+        this.sellerReview = sellerReview;
+    }
+
+    public Integer getDeliveryRating() {
+        return deliveryRating;
+    }
+
+    public void setDeliveryRating(Integer deliveryRating) {
+        this.deliveryRating = deliveryRating;
+    }
+
+    public String getDeliveryReview() {
+        return deliveryReview;
+    }
+
+    public void setDeliveryReview(String deliveryReview) {
+        this.deliveryReview = deliveryReview;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productsId) {
+        this.productId = productsId;
+    }
+
+    public String getProductProductName() {
+        return productProductName;
+    }
+
+    public void setProductProductName(String productsProductName) {
+        this.productProductName = productsProductName;
+    }
+
+    public Long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Long reviewsId) {
+        this.reviewId = reviewsId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ReviewLinesDTO reviewLinesDTO = (ReviewLinesDTO) o;
+        if (reviewLinesDTO.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), reviewLinesDTO.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "ReviewLinesDTO{" +
+            "id=" + getId() +
+            ", productRating=" + getProductRating() +
+            ", productReview='" + getProductReview() + "'" +
+            ", sellerRating=" + getSellerRating() +
+            ", sellerReview='" + getSellerReview() + "'" +
+            ", deliveryRating=" + getDeliveryRating() +
+            ", deliveryReview='" + getDeliveryReview() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", product=" + getProductId() +
+            ", product='" + getProductProductName() + "'" +
+            ", review=" + getReviewId() +
+            "}";
+    }
+}

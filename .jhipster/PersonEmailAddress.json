@@ -1,0 +1,39 @@
+{
+    "name": "PersonEmailAddress",
+    "fields": [
+        {
+            "fieldName": "emailAddress",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "defaultInd",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "activeInd",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "personEmailAddress",
+            "relationshipName": "person",
+            "otherEntityField": "fullName"
+        }
+    ],
+    "changelogDate": "20190801044905",
+    "entityTableName": "person_email_address",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

@@ -1,0 +1,38 @@
+{
+    "name": "SystemParameters",
+    "fields": [
+        {
+            "fieldName": "applicationSettings",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cities",
+            "otherEntityRelationshipName": "systemParameters",
+            "relationshipName": "deliveryCity",
+            "otherEntityField": "cityName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cities",
+            "otherEntityRelationshipName": "systemParameters",
+            "relationshipName": "postalCity",
+            "otherEntityField": "cityName"
+        }
+    ],
+    "changelogDate": "20190801044913",
+    "entityTableName": "system_parameters",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

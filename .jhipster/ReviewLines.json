@@ -1,0 +1,60 @@
+{
+    "name": "ReviewLines",
+    "fields": [
+        {
+            "fieldName": "productRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "productReview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sellerRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sellerReview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deliveryRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "deliveryReview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "reviewLines",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "reviews",
+            "otherEntityRelationshipName": "reviewList",
+            "relationshipName": "review",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044934",
+    "entityTableName": "review_lines",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

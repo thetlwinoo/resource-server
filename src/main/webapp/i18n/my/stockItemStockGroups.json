@@ -1,0 +1,22 @@
+{
+    "resourceApp": {
+        "stockItemStockGroups": {
+            "home": {
+                "title": "Stock Item Stock Groups",
+                "createLabel": "Stock Item Stock Groups အသစ်ထည့်မည်",
+                "createOrEditLabel": "Stock Item Stock Groups အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Stock Item Stock Groups အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Stock Item Stock Groups တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Stock Item Stock Groups တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Stock Item Stock Groups {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Stock Item Stock Groups"
+            },
+            "stockGroup": "Stock Group",
+            "product": "Product"
+        }
+    }
+}

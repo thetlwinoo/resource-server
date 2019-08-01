@@ -1,0 +1,25 @@
+{
+    "resourceApp": {
+        "productInventory": {
+            "home": {
+                "title": "Product Inventories",
+                "createLabel": "Create a new Product Inventory",
+                "createOrEditLabel": "Create or edit a Product Inventory"
+            },
+            "created": "A new Product Inventory is created with identifier {{ param }}",
+            "updated": "A Product Inventory is updated with identifier {{ param }}",
+            "deleted": "A Product Inventory is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Inventory {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Inventory"
+            },
+            "shelf": "Shelf",
+            "bin": "Bin",
+            "quantity": "Quantity",
+            "product": "Product",
+            "location": "Location"
+        }
+    }
+}

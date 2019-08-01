@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.ProductPhotoExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProductPhotoExtendResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final ProductPhotoExtendService productPhotoExtendService;
+
+    public ProductPhotoExtendResourceIntTest(ProductPhotoExtendService productPhotoExtendService) {
+        this.productPhotoExtendService = productPhotoExtendService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ProductPhotoExtendResource productPhotoExtendResource = new ProductPhotoExtendResource();
+        ProductPhotoExtendResource productPhotoExtendResource = new ProductPhotoExtendResource(productPhotoExtendService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(productPhotoExtendResource)
             .build();

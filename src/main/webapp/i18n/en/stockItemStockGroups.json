@@ -1,0 +1,22 @@
+{
+    "resourceApp": {
+        "stockItemStockGroups": {
+            "home": {
+                "title": "Stock Item Stock Groups",
+                "createLabel": "Create a new Stock Item Stock Groups",
+                "createOrEditLabel": "Create or edit a Stock Item Stock Groups"
+            },
+            "created": "A new Stock Item Stock Groups is created with identifier {{ param }}",
+            "updated": "A Stock Item Stock Groups is updated with identifier {{ param }}",
+            "deleted": "A Stock Item Stock Groups is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Stock Item Stock Groups {{ id }}?"
+            },
+            "detail": {
+                "title": "Stock Item Stock Groups"
+            },
+            "stockGroup": "Stock Group",
+            "product": "Product"
+        }
+    }
+}

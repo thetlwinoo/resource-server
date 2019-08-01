@@ -1,0 +1,23 @@
+{
+    "resourceApp": {
+        "locations": {
+            "home": {
+                "title": "Locations",
+                "createLabel": "Locations အသစ်ထည့်မည်",
+                "createOrEditLabel": "Locations အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Locations အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Locations တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Locations တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Locations {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Locations"
+            },
+            "locationName": "Location Name",
+            "costRate": "Cost Rate",
+            "availability": "Availability"
+        }
+    }
+}

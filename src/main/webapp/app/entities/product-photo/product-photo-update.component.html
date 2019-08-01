@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-product-photo-heading" jhiTranslate="resourceApp.productPhoto.home.createOrEditLabel">Create or edit a Product Photo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!productPhoto.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="productPhoto.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.thumbnailPhoto" for="field_thumbnailPhoto">Thumbnail Photo</label>
+                    <input type="text" class="form-control" name="thumbnailPhoto" id="field_thumbnailPhoto"
+                        [(ngModel)]="productPhoto.thumbnailPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.originalPhoto" for="field_originalPhoto">Original Photo</label>
+                    <input type="text" class="form-control" name="originalPhoto" id="field_originalPhoto"
+                        [(ngModel)]="productPhoto.originalPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.bannerTallPhoto" for="field_bannerTallPhoto">Banner Tall Photo</label>
+                    <input type="text" class="form-control" name="bannerTallPhoto" id="field_bannerTallPhoto"
+                        [(ngModel)]="productPhoto.bannerTallPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.bannerWidePhoto" for="field_bannerWidePhoto">Banner Wide Photo</label>
+                    <input type="text" class="form-control" name="bannerWidePhoto" id="field_bannerWidePhoto"
+                        [(ngModel)]="productPhoto.bannerWidePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.circlePhoto" for="field_circlePhoto">Circle Photo</label>
+                    <input type="text" class="form-control" name="circlePhoto" id="field_circlePhoto"
+                        [(ngModel)]="productPhoto.circlePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.sharpenedPhoto" for="field_sharpenedPhoto">Sharpened Photo</label>
+                    <input type="text" class="form-control" name="sharpenedPhoto" id="field_sharpenedPhoto"
+                        [(ngModel)]="productPhoto.sharpenedPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.squarePhoto" for="field_squarePhoto">Square Photo</label>
+                    <input type="text" class="form-control" name="squarePhoto" id="field_squarePhoto"
+                        [(ngModel)]="productPhoto.squarePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.watermarkPhoto" for="field_watermarkPhoto">Watermark Photo</label>
+                    <input type="text" class="form-control" name="watermarkPhoto" id="field_watermarkPhoto"
+                        [(ngModel)]="productPhoto.watermarkPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.priority" for="field_priority">Priority</label>
+                    <input type="number" class="form-control" name="priority" id="field_priority"
+                        [(ngModel)]="productPhoto.priority" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.defaultInd" for="field_defaultInd">Default Ind</label>
+                    <input type="checkbox" class="form-control" name="defaultInd" id="field_defaultInd"
+                        [(ngModel)]="productPhoto.defaultInd" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.deleteToken" for="field_deleteToken">Delete Token</label>
+                    <input type="text" class="form-control" name="deleteToken" id="field_deleteToken"
+                        [(ngModel)]="productPhoto.deleteToken" minlength="1" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.deleteToken?.dirty && editForm.controls.deleteToken?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.deleteToken?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.deleteToken?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productPhoto.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="productPhoto.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

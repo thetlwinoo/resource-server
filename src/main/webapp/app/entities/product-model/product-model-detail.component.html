@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productModel">
+            <h2><span jhiTranslate="resourceApp.productModel.detail.title">Product Model</span> {{productModel.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productModel.productModelName">Product Model Name</span></dt>
+                <dd>
+                    <span>{{productModel.productModelName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productModel.calalogDescription">Calalog Description</span></dt>
+                <dd>
+                    <span>{{productModel.calalogDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productModel.instructions">Instructions</span></dt>
+                <dd>
+                    <span>{{productModel.instructions}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-model', productModel.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

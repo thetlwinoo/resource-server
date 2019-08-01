@@ -1,6 +1,8 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.repository.OrdersExtendRepository;
+import com.resource.server.service.OrdersExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +24,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OrdersExtendResourceIntTest {
 
     private MockMvc restMockMvc;
+    private OrdersExtendService ordersExtendService;
+    private final OrdersExtendRepository ordersExtendRepository;
+
+    public OrdersExtendResourceIntTest(OrdersExtendService ordersExtendService, OrdersExtendRepository ordersExtendRepository) {
+        this.ordersExtendService = ordersExtendService;
+        this.ordersExtendRepository = ordersExtendRepository;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        OrdersExtendResource ordersExtendResource = new OrdersExtendResource();
+        OrdersExtendResource ordersExtendResource = new OrdersExtendResource(ordersExtendService, ordersExtendRepository);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(ordersExtendResource)
             .build();

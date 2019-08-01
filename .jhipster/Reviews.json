@@ -1,0 +1,66 @@
+{
+    "name": "Reviews",
+    "fields": [
+        {
+            "fieldName": "reviewerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emailAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reviewDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "overAllSellerRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "overAllSellerReview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "overAllDeliveryRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "overAllDeliveryReview",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reviewAsAnonymous",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "completedReview",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reviewLines",
+            "otherEntityRelationshipName": "review",
+            "relationshipName": "reviewList"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "orders",
+            "otherEntityRelationshipName": "orderReview",
+            "relationshipName": "order",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190801044933",
+    "entityTableName": "reviews",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

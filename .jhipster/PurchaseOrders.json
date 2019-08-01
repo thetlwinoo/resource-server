@@ -1,0 +1,71 @@
+{
+    "name": "PurchaseOrders",
+    "fields": [
+        {
+            "fieldName": "orderDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "expectedDeliveryDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "supplierReference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isOrderFinalized",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "internalComments",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "purchaseOrderLines",
+            "otherEntityRelationshipName": "purchaseOrder",
+            "relationshipName": "purchaseOrderList"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "purchaseOrders",
+            "relationshipName": "contactPerson",
+            "otherEntityField": "fullName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "suppliers",
+            "otherEntityRelationshipName": "purchaseOrders",
+            "relationshipName": "supplier",
+            "otherEntityField": "supplierName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "deliveryMethods",
+            "otherEntityRelationshipName": "purchaseOrders",
+            "relationshipName": "deliveryMethod",
+            "otherEntityField": "deliveryMethodName"
+        }
+    ],
+    "changelogDate": "20190801044922",
+    "entityTableName": "purchase_orders",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

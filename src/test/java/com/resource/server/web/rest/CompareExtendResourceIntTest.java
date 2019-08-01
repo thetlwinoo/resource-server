@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.CompareExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CompareExtendResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final CompareExtendService compareExtendService;
+
+    public CompareExtendResourceIntTest(CompareExtendService compareExtendService) {
+        this.compareExtendService = compareExtendService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        CompareExtendResource compareExtendResource = new CompareExtendResource();
+        CompareExtendResource compareExtendResource = new CompareExtendResource(compareExtendService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(compareExtendResource)
             .build();

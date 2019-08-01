@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productInventory">
+            <h2><span jhiTranslate="resourceApp.productInventory.detail.title">Product Inventory</span> {{productInventory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productInventory.shelf">Shelf</span></dt>
+                <dd>
+                    <span>{{productInventory.shelf}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productInventory.bin">Bin</span></dt>
+                <dd>
+                    <span>{{productInventory.bin}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productInventory.quantity">Quantity</span></dt>
+                <dd>
+                    <span>{{productInventory.quantity}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productInventory.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="productInventory.productId">
+                        <a [routerLink]="['/products', productInventory.productId, 'view']">{{productInventory.productProductName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productInventory.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="productInventory.locationId">
+                        <a [routerLink]="['/locations', productInventory.locationId, 'view']">{{productInventory.locationLocationName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-inventory', productInventory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-purchase-order-lines-heading" jhiTranslate="resourceApp.purchaseOrderLines.home.createOrEditLabel">Create or edit a Purchase Order Lines</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!purchaseOrderLines.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="purchaseOrderLines.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.ordersOuters" for="field_ordersOuters">Orders Outers</label>
+                    <input type="number" class="form-control" name="ordersOuters" id="field_ordersOuters"
+                        [(ngModel)]="purchaseOrderLines.ordersOuters" required/>
+                    <div [hidden]="!(editForm.controls.ordersOuters?.dirty && editForm.controls.ordersOuters?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ordersOuters?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.ordersOuters?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="purchaseOrderLines.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.receivedOuters" for="field_receivedOuters">Received Outers</label>
+                    <input type="number" class="form-control" name="receivedOuters" id="field_receivedOuters"
+                        [(ngModel)]="purchaseOrderLines.receivedOuters" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.expectedUnitPricePerOuter" for="field_expectedUnitPricePerOuter">Expected Unit Price Per Outer</label>
+                    <input type="number" class="form-control" name="expectedUnitPricePerOuter" id="field_expectedUnitPricePerOuter"
+                        [(ngModel)]="purchaseOrderLines.expectedUnitPricePerOuter" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.lastReceiptDate" for="field_lastReceiptDate">Last Receipt Date</label>
+                    <div class="input-group">
+                        <input id="field_lastReceiptDate" type="text" class="form-control" name="lastReceiptDate" ngbDatepicker  #lastReceiptDateDp="ngbDatepicker" [(ngModel)]="purchaseOrderLines.lastReceiptDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastReceiptDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.isOrderLineFinalized" for="field_isOrderLineFinalized">Is Order Line Finalized</label>
+                    <input type="checkbox" class="form-control" name="isOrderLineFinalized" id="field_isOrderLineFinalized"
+                        [(ngModel)]="purchaseOrderLines.isOrderLineFinalized" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="purchaseOrderLines.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.packageType" for="field_packageType">Package Type</label>
+                    <select class="form-control" id="field_packageType" name="packageType" [(ngModel)]="purchaseOrderLines.packageTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="packageTypesOption.id" *ngFor="let packageTypesOption of packagetypes; trackBy: trackPackageTypesById">{{packageTypesOption.packageTypeName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.purchaseOrderLines.purchaseOrder" for="field_purchaseOrder">Purchase Order</label>
+                    <select class="form-control" id="field_purchaseOrder" name="purchaseOrder" [(ngModel)]="purchaseOrderLines.purchaseOrderId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="purchaseOrdersOption.id" *ngFor="let purchaseOrdersOption of purchaseorders; trackBy: trackPurchaseOrdersById">{{purchaseOrdersOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

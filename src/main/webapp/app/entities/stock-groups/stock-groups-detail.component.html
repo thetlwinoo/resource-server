@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="stockGroups">
+            <h2><span jhiTranslate="resourceApp.stockGroups.detail.title">Stock Groups</span> {{stockGroups.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.stockGroups.stockGroupName">Stock Group Name</span></dt>
+                <dd>
+                    <span>{{stockGroups.stockGroupName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockGroups.validFrom">Valid From</span></dt>
+                <dd>
+                    <span>{{stockGroups.validFrom}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockGroups.validTo">Valid To</span></dt>
+                <dd>
+                    <span>{{stockGroups.validTo}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/stock-groups', stockGroups.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

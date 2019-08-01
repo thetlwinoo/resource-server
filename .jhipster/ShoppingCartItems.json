@@ -1,0 +1,35 @@
+{
+    "name": "ShoppingCartItems",
+    "fields": [
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "shoppingCartItems",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "shoppingCarts",
+            "otherEntityRelationshipName": "cartItemList",
+            "relationshipName": "cart",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044955",
+    "entityTableName": "shopping_cart_items",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

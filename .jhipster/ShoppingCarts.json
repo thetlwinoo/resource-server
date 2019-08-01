@@ -1,0 +1,52 @@
+{
+    "name": "ShoppingCarts",
+    "fields": [
+        {
+            "fieldName": "totalPrice",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "totalCargoPrice",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "specialDeals",
+            "otherEntityName": "specialDeals",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "cart",
+            "relationshipName": "cartUser",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "shoppingCartItems",
+            "otherEntityRelationshipName": "cart",
+            "relationshipName": "cartItemList"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customers",
+            "otherEntityRelationshipName": "shoppingCarts",
+            "relationshipName": "customer",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044954",
+    "entityTableName": "shopping_carts",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

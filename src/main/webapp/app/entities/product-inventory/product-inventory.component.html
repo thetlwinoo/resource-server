@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.productInventory.home.title">Product Inventories</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product-inventory" [routerLink]="['/product-inventory/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.productInventory.home.createLabel">
+            Create new Product Inventory
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="productInventories">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.productInventory.shelf">Shelf</span></th>
+            <th><span jhiTranslate="resourceApp.productInventory.bin">Bin</span></th>
+            <th><span jhiTranslate="resourceApp.productInventory.quantity">Quantity</span></th>
+            <th><span jhiTranslate="resourceApp.productInventory.product">Product</span></th>
+            <th><span jhiTranslate="resourceApp.productInventory.location">Location</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let productInventory of productInventories ;trackBy: trackId">
+                <td><a [routerLink]="['/product-inventory', productInventory.id, 'view' ]">{{productInventory.id}}</a></td>
+                <td>{{productInventory.shelf}}</td>
+                <td>{{productInventory.bin}}</td>
+                <td>{{productInventory.quantity}}</td>
+                <td>
+                    <div *ngIf="productInventory.productId">
+                        <a [routerLink]="['../products', productInventory.productId , 'view' ]" >{{productInventory.productProductName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="productInventory.locationId">
+                        <a [routerLink]="['../locations', productInventory.locationId , 'view' ]" >{{productInventory.locationLocationName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/product-inventory', productInventory.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/product-inventory', productInventory.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'product-inventory', { outlets: { popup: productInventory.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+{
+    "name": "BusinessEntityAddress",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "addresses",
+            "otherEntityRelationshipName": "businessEntityAddress",
+            "relationshipName": "address",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "people",
+            "otherEntityRelationshipName": "businessEntityAddress",
+            "relationshipName": "person",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "addressTypes",
+            "otherEntityRelationshipName": "businessEntityAddress",
+            "relationshipName": "addressType",
+            "otherEntityField": "addressTypeName"
+        }
+    ],
+    "changelogDate": "20190801044903",
+    "entityTableName": "business_entity_address",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

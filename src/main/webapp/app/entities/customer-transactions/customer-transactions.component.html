@@ -1,0 +1,96 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.customerTransactions.home.title">Customer Transactions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-customer-transactions" [routerLink]="['/customer-transactions/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.customerTransactions.home.createLabel">
+            Create new Customer Transactions
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="customerTransactions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.transactionDate">Transaction Date</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.amountExcludingTax">Amount Excluding Tax</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.taxAmount">Tax Amount</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.transactionAmount">Transaction Amount</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.outstandingBalance">Outstanding Balance</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.finalizationDate">Finalization Date</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.isFinalized">Is Finalized</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.customer">Customer</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.paymentMethod">Payment Method</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.paymentTransaction">Payment Transaction</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.transactionType">Transaction Type</span></th>
+            <th><span jhiTranslate="resourceApp.customerTransactions.invoice">Invoice</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customerTransactions of customerTransactions ;trackBy: trackId">
+                <td><a [routerLink]="['/customer-transactions', customerTransactions.id, 'view' ]">{{customerTransactions.id}}</a></td>
+                <td>{{customerTransactions.transactionDate | date:'mediumDate'}}</td>
+                <td>{{customerTransactions.amountExcludingTax}}</td>
+                <td>{{customerTransactions.taxAmount}}</td>
+                <td>{{customerTransactions.transactionAmount}}</td>
+                <td>{{customerTransactions.outstandingBalance}}</td>
+                <td>{{customerTransactions.finalizationDate | date:'mediumDate'}}</td>
+                <td>{{customerTransactions.isFinalized}}</td>
+                <td>
+                    <div *ngIf="customerTransactions.customerId">
+                        <a [routerLink]="['../customers', customerTransactions.customerId , 'view' ]" >{{customerTransactions.customerId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customerTransactions.paymentMethodId">
+                        <a [routerLink]="['../payment-methods', customerTransactions.paymentMethodId , 'view' ]" >{{customerTransactions.paymentMethodPaymentMethodName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customerTransactions.paymentTransactionId">
+                        <a [routerLink]="['../payment-transactions', customerTransactions.paymentTransactionId , 'view' ]" >{{customerTransactions.paymentTransactionId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customerTransactions.transactionTypeId">
+                        <a [routerLink]="['../transaction-types', customerTransactions.transactionTypeId , 'view' ]" >{{customerTransactions.transactionTypeId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customerTransactions.invoiceId">
+                        <a [routerLink]="['../invoices', customerTransactions.invoiceId , 'view' ]" >{{customerTransactions.invoiceId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/customer-transactions', customerTransactions.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/customer-transactions', customerTransactions.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'customer-transactions', { outlets: { popup: customerTransactions.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

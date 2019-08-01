@@ -1,0 +1,52 @@
+{
+    "name": "ProductInventory",
+    "fields": [
+        {
+            "fieldName": "shelf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bin",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "productInventory",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "locations",
+            "otherEntityRelationshipName": "productInventory",
+            "relationshipName": "location",
+            "otherEntityField": "locationName"
+        }
+    ],
+    "changelogDate": "20190801044945",
+    "entityTableName": "product_inventory",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

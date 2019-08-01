@@ -1,0 +1,73 @@
+{
+    "name": "OrderLines",
+    "fields": [
+        {
+            "fieldName": "carrierTrackingNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "unitPrice",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "unitPriceDiscount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lineTotal",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "taxRate",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "pickedQuantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pickingCompletedWhen",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "packageTypes",
+            "otherEntityRelationshipName": "orderLines",
+            "relationshipName": "packageType",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "orderLines",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "orders",
+            "otherEntityRelationshipName": "orderLineList",
+            "relationshipName": "order",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044931",
+    "entityTableName": "order_lines",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

@@ -1,5 +1,8 @@
 package com.resource.server.service;
 
-public interface PayPalClientService {
+import java.util.Map;
 
+public interface PayPalClientService {
+    Map<String, Object> createPayment(String sum, String returnUrl, String cancelUrl);
+    Map<String, Object> completePayment(String paymentId,String payerId,Number orderId);
 }

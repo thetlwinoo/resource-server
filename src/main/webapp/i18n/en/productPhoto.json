@@ -1,0 +1,32 @@
+{
+    "resourceApp": {
+        "productPhoto": {
+            "home": {
+                "title": "Product Photos",
+                "createLabel": "Create a new Product Photo",
+                "createOrEditLabel": "Create or edit a Product Photo"
+            },
+            "created": "A new Product Photo is created with identifier {{ param }}",
+            "updated": "A Product Photo is updated with identifier {{ param }}",
+            "deleted": "A Product Photo is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Photo {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Photo"
+            },
+            "thumbnailPhoto": "Thumbnail Photo",
+            "originalPhoto": "Original Photo",
+            "bannerTallPhoto": "Banner Tall Photo",
+            "bannerWidePhoto": "Banner Wide Photo",
+            "circlePhoto": "Circle Photo",
+            "sharpenedPhoto": "Sharpened Photo",
+            "squarePhoto": "Square Photo",
+            "watermarkPhoto": "Watermark Photo",
+            "priority": "Priority",
+            "defaultInd": "Default Ind",
+            "deleteToken": "Delete Token",
+            "product": "Product"
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "name": "PurchaseOrderLines",
+    "fields": [
+        {
+            "fieldName": "ordersOuters",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "receivedOuters",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "expectedUnitPricePerOuter",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lastReceiptDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "isOrderLineFinalized",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "purchaseOrderLines",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "packageTypes",
+            "otherEntityRelationshipName": "purchaseOrderLines",
+            "relationshipName": "packageType",
+            "otherEntityField": "packageTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "purchaseOrders",
+            "otherEntityRelationshipName": "purchaseOrderList",
+            "relationshipName": "purchaseOrder",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044923",
+    "entityTableName": "purchase_order_lines",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

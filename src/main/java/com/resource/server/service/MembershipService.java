@@ -1,5 +1,9 @@
 package com.resource.server.service;
 
-public interface MembershipService {
+import com.resource.server.domain.People;
 
+import java.security.Principal;
+
+public interface MembershipService {
+    People checkProfile(Principal principal, People people);
 }

@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.MembershipService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MembershipResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final MembershipService membershipService;
+
+    public MembershipResourceIntTest(MembershipService membershipService) {
+        this.membershipService = membershipService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        MembershipResource membershipResource = new MembershipResource();
+        MembershipResource membershipResource = new MembershipResource(membershipService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(membershipResource)
             .build();

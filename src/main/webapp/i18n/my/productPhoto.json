@@ -1,0 +1,32 @@
+{
+    "resourceApp": {
+        "productPhoto": {
+            "home": {
+                "title": "Product Photos",
+                "createLabel": "Product Photo အသစ်ထည့်မည်",
+                "createOrEditLabel": "Product Photo အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Product Photo အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Product Photo တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Product Photo တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Product Photo {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Product Photo"
+            },
+            "thumbnailPhoto": "Thumbnail Photo",
+            "originalPhoto": "Original Photo",
+            "bannerTallPhoto": "Banner Tall Photo",
+            "bannerWidePhoto": "Banner Wide Photo",
+            "circlePhoto": "Circle Photo",
+            "sharpenedPhoto": "Sharpened Photo",
+            "squarePhoto": "Square Photo",
+            "watermarkPhoto": "Watermark Photo",
+            "priority": "Priority",
+            "defaultInd": "Default Ind",
+            "deleteToken": "Delete Token",
+            "product": "Product"
+        }
+    }
+}

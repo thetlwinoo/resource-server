@@ -1,0 +1,58 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.deliveryMethods.home.title">Delivery Methods</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-delivery-methods" [routerLink]="['/delivery-methods/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.deliveryMethods.home.createLabel">
+            Create new Delivery Methods
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="deliveryMethods">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.deliveryMethods.deliveryMethodName">Delivery Method Name</span></th>
+            <th><span jhiTranslate="resourceApp.deliveryMethods.validFrom">Valid From</span></th>
+            <th><span jhiTranslate="resourceApp.deliveryMethods.validTo">Valid To</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let deliveryMethods of deliveryMethods ;trackBy: trackId">
+                <td><a [routerLink]="['/delivery-methods', deliveryMethods.id, 'view' ]">{{deliveryMethods.id}}</a></td>
+                <td>{{deliveryMethods.deliveryMethodName}}</td>
+                <td>{{deliveryMethods.validFrom | date:'mediumDate'}}</td>
+                <td>{{deliveryMethods.validTo | date:'mediumDate'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/delivery-methods', deliveryMethods.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/delivery-methods', deliveryMethods.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'delivery-methods', { outlets: { popup: deliveryMethods.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="stockItemStockGroups">
+            <h2><span jhiTranslate="resourceApp.stockItemStockGroups.detail.title">Stock Item Stock Groups</span> {{stockItemStockGroups.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.stockItemStockGroups.stockGroup">Stock Group</span></dt>
+                <dd>
+                    <div *ngIf="stockItemStockGroups.stockGroupId">
+                        <a [routerLink]="['/stock-groups', stockItemStockGroups.stockGroupId, 'view']">{{stockItemStockGroups.stockGroupStockGroupName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItemStockGroups.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="stockItemStockGroups.productId">
+                        <a [routerLink]="['/products', stockItemStockGroups.productId, 'view']">{{stockItemStockGroups.productProductName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/stock-item-stock-groups', stockItemStockGroups.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

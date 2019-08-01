@@ -1,0 +1,25 @@
+export interface IStockItemHoldings {
+    id?: number;
+    quantityOnHand?: number;
+    binLocation?: string;
+    lastStocktakeQuantity?: number;
+    lastCostPrice?: number;
+    reorderLevel?: number;
+    targerStockLevel?: number;
+    productProductName?: string;
+    productId?: number;
+}
+
+export class StockItemHoldings implements IStockItemHoldings {
+    constructor(
+        public id?: number,
+        public quantityOnHand?: number,
+        public binLocation?: string,
+        public lastStocktakeQuantity?: number,
+        public lastCostPrice?: number,
+        public reorderLevel?: number,
+        public targerStockLevel?: number,
+        public productProductName?: string,
+        public productId?: number
+    ) {}
+}

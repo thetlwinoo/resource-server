@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-special-deals-heading" jhiTranslate="resourceApp.specialDeals.home.createOrEditLabel">Create or edit a Special Deals</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!specialDeals.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="specialDeals.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.dealDescription" for="field_dealDescription">Deal Description</label>
+                    <input type="text" class="form-control" name="dealDescription" id="field_dealDescription"
+                        [(ngModel)]="specialDeals.dealDescription" required/>
+                    <div [hidden]="!(editForm.controls.dealDescription?.dirty && editForm.controls.dealDescription?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dealDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.startDate" for="field_startDate">Start Date</label>
+                    <div class="input-group">
+                        <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="specialDeals.startDate"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.startDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.endDate" for="field_endDate">End Date</label>
+                    <div class="input-group">
+                        <input id="field_endDate" type="text" class="form-control" name="endDate" ngbDatepicker  #endDateDp="ngbDatepicker" [(ngModel)]="specialDeals.endDate"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.endDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.discountAmount" for="field_discountAmount">Discount Amount</label>
+                    <input type="number" class="form-control" name="discountAmount" id="field_discountAmount"
+                        [(ngModel)]="specialDeals.discountAmount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.discountPercentage" for="field_discountPercentage">Discount Percentage</label>
+                    <input type="number" class="form-control" name="discountPercentage" id="field_discountPercentage"
+                        [(ngModel)]="specialDeals.discountPercentage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.discountCode" for="field_discountCode">Discount Code</label>
+                    <input type="text" class="form-control" name="discountCode" id="field_discountCode"
+                        [(ngModel)]="specialDeals.discountCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.unitPrice" for="field_unitPrice">Unit Price</label>
+                    <input type="number" class="form-control" name="unitPrice" id="field_unitPrice"
+                        [(ngModel)]="specialDeals.unitPrice" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.buyingGroup" for="field_buyingGroup">Buying Group</label>
+                    <select class="form-control" id="field_buyingGroup" name="buyingGroup" [(ngModel)]="specialDeals.buyingGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="buyingGroupsOption.id" *ngFor="let buyingGroupsOption of buyinggroups; trackBy: trackBuyingGroupsById">{{buyingGroupsOption.buyingGroupName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.customerCategory" for="field_customerCategory">Customer Category</label>
+                    <select class="form-control" id="field_customerCategory" name="customerCategory" [(ngModel)]="specialDeals.customerCategoryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerCategoriesOption.id" *ngFor="let customerCategoriesOption of customercategories; trackBy: trackCustomerCategoriesById">{{customerCategoriesOption.customerCategoryName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" [(ngModel)]="specialDeals.customerId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customersOption.id" *ngFor="let customersOption of customers; trackBy: trackCustomersById">{{customersOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.stockGroup" for="field_stockGroup">Stock Group</label>
+                    <select class="form-control" id="field_stockGroup" name="stockGroup" [(ngModel)]="specialDeals.stockGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stockGroupsOption.id" *ngFor="let stockGroupsOption of stockgroups; trackBy: trackStockGroupsById">{{stockGroupsOption.stockGroupName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.specialDeals.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="specialDeals.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

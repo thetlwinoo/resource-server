@@ -1,0 +1,24 @@
+{
+    "resourceApp": {
+        "productModel": {
+            "home": {
+                "title": "Product Models",
+                "createLabel": "Create a new Product Model",
+                "createOrEditLabel": "Create or edit a Product Model"
+            },
+            "created": "A new Product Model is created with identifier {{ param }}",
+            "updated": "A Product Model is updated with identifier {{ param }}",
+            "deleted": "A Product Model is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Model {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Model"
+            },
+            "productModelName": "Product Model Name",
+            "calalogDescription": "Calalog Description",
+            "instructions": "Instructions",
+            "description": "Description"
+        }
+    }
+}

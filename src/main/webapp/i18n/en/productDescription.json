@@ -1,0 +1,22 @@
+{
+    "resourceApp": {
+        "productDescription": {
+            "home": {
+                "title": "Product Descriptions",
+                "createLabel": "Create a new Product Description",
+                "createOrEditLabel": "Create or edit a Product Description"
+            },
+            "created": "A new Product Description is created with identifier {{ param }}",
+            "updated": "A Product Description is updated with identifier {{ param }}",
+            "deleted": "A Product Description is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Description {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Description"
+            },
+            "description": "Description",
+            "productModel": "Product Model"
+        }
+    }
+}

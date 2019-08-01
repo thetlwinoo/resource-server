@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productPhoto">
+            <h2><span jhiTranslate="resourceApp.productPhoto.detail.title">Product Photo</span> {{productPhoto.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productPhoto.thumbnailPhoto">Thumbnail Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.thumbnailPhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.originalPhoto">Original Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.originalPhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.bannerTallPhoto">Banner Tall Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.bannerTallPhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.bannerWidePhoto">Banner Wide Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.bannerWidePhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.circlePhoto">Circle Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.circlePhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.sharpenedPhoto">Sharpened Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.sharpenedPhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.squarePhoto">Square Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.squarePhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.watermarkPhoto">Watermark Photo</span></dt>
+                <dd>
+                    <span>{{productPhoto.watermarkPhoto}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.priority">Priority</span></dt>
+                <dd>
+                    <span>{{productPhoto.priority}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.defaultInd">Default Ind</span></dt>
+                <dd>
+                    <span>{{productPhoto.defaultInd}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.deleteToken">Delete Token</span></dt>
+                <dd>
+                    <span>{{productPhoto.deleteToken}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productPhoto.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="productPhoto.productId">
+                        <a [routerLink]="['/products', productPhoto.productId, 'view']">{{productPhoto.productProductName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-photo', productPhoto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

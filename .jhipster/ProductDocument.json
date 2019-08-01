@@ -1,0 +1,39 @@
+{
+    "name": "ProductDocument",
+    "fields": [
+        {
+            "fieldName": "documentNode",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "productDocument",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "culture",
+            "otherEntityRelationshipName": "productDocument",
+            "relationshipName": "culture",
+            "otherEntityField": "cultureName"
+        }
+    ],
+    "changelogDate": "20190801044942",
+    "entityTableName": "product_document",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

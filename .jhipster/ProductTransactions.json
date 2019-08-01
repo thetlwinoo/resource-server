@@ -1,0 +1,70 @@
+{
+    "name": "ProductTransactions",
+    "fields": [
+        {
+            "fieldName": "transactionOccuredWhen",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customers",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "customer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "invoices",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "invoice",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "suppliers",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "supplier",
+            "otherEntityField": "supplierName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "transactionTypes",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "transactionType",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "purchaseOrders",
+            "otherEntityRelationshipName": "productTransactions",
+            "relationshipName": "purchaseOrder",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190801044943",
+    "entityTableName": "product_transactions",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

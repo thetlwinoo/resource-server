@@ -1,0 +1,25 @@
+{
+    "resourceApp": {
+        "productInventory": {
+            "home": {
+                "title": "Product Inventories",
+                "createLabel": "Product Inventory အသစ်ထည့်မည်",
+                "createOrEditLabel": "Product Inventory အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Product Inventory အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Product Inventory တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Product Inventory တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Product Inventory {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Product Inventory"
+            },
+            "shelf": "Shelf",
+            "bin": "Bin",
+            "quantity": "Quantity",
+            "product": "Product",
+            "location": "Location"
+        }
+    }
+}

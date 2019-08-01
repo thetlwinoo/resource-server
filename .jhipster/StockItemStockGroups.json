@@ -1,0 +1,30 @@
+{
+    "name": "StockItemStockGroups",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "stockGroups",
+            "otherEntityRelationshipName": "stockItemStockGroups",
+            "relationshipName": "stockGroup",
+            "otherEntityField": "stockGroupName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "stockItemStockGroups",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        }
+    ],
+    "changelogDate": "20190801044951",
+    "entityTableName": "stock_item_stock_groups",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

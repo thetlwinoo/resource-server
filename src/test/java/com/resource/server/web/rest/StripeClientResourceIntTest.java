@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.StripeClientService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class StripeClientResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final StripeClientService stripeClientService;
+
+    public StripeClientResourceIntTest(StripeClientService stripeClientService) {
+        this.stripeClientService = stripeClientService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        StripeClientResource stripeClientResource = new StripeClientResource();
+        StripeClientResource stripeClientResource = new StripeClientResource(stripeClientService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(stripeClientResource)
             .build();

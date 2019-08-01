@@ -1,0 +1,28 @@
+{
+    "resourceApp": {
+        "productTransactions": {
+            "home": {
+                "title": "Product Transactions",
+                "createLabel": "Create a new Product Transactions",
+                "createOrEditLabel": "Create or edit a Product Transactions"
+            },
+            "created": "A new Product Transactions is created with identifier {{ param }}",
+            "updated": "A Product Transactions is updated with identifier {{ param }}",
+            "deleted": "A Product Transactions is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Transactions {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Transactions"
+            },
+            "transactionOccuredWhen": "Transaction Occured When",
+            "quantity": "Quantity",
+            "product": "Product",
+            "customer": "Customer",
+            "invoice": "Invoice",
+            "supplier": "Supplier",
+            "transactionType": "Transaction Type",
+            "purchaseOrder": "Purchase Order"
+        }
+    }
+}

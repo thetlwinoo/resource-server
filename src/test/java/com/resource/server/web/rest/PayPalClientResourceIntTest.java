@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.PayPalClientService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PayPalClientResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final PayPalClientService payPalClientService;
+
+    public PayPalClientResourceIntTest(PayPalClientService payPalClientService) {
+        this.payPalClientService = payPalClientService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        PayPalClientResource payPalClientResource = new PayPalClientResource();
+        PayPalClientResource payPalClientResource = new PayPalClientResource(payPalClientService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(payPalClientResource)
             .build();

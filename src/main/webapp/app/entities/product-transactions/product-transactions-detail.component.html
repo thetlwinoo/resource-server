@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productTransactions">
+            <h2><span jhiTranslate="resourceApp.productTransactions.detail.title">Product Transactions</span> {{productTransactions.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productTransactions.transactionOccuredWhen">Transaction Occured When</span></dt>
+                <dd>
+                    <span>{{productTransactions.transactionOccuredWhen}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.quantity">Quantity</span></dt>
+                <dd>
+                    <span>{{productTransactions.quantity}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.productId">
+                        <a [routerLink]="['/products', productTransactions.productId, 'view']">{{productTransactions.productProductName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.customerId">
+                        <a [routerLink]="['/customers', productTransactions.customerId, 'view']">{{productTransactions.customerId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.invoice">Invoice</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.invoiceId">
+                        <a [routerLink]="['/invoices', productTransactions.invoiceId, 'view']">{{productTransactions.invoiceId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.supplier">Supplier</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.supplierId">
+                        <a [routerLink]="['/suppliers', productTransactions.supplierId, 'view']">{{productTransactions.supplierSupplierName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.transactionType">Transaction Type</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.transactionTypeId">
+                        <a [routerLink]="['/transaction-types', productTransactions.transactionTypeId, 'view']">{{productTransactions.transactionTypeId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productTransactions.purchaseOrder">Purchase Order</span></dt>
+                <dd>
+                    <div *ngIf="productTransactions.purchaseOrderId">
+                        <a [routerLink]="['/purchase-orders', productTransactions.purchaseOrderId, 'view']">{{productTransactions.purchaseOrderId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-transactions', productTransactions.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

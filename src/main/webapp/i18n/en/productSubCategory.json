@@ -1,0 +1,22 @@
+{
+    "resourceApp": {
+        "productSubCategory": {
+            "home": {
+                "title": "Product Sub Categories",
+                "createLabel": "Create a new Product Sub Category",
+                "createOrEditLabel": "Create or edit a Product Sub Category"
+            },
+            "created": "A new Product Sub Category is created with identifier {{ param }}",
+            "updated": "A Product Sub Category is updated with identifier {{ param }}",
+            "deleted": "A Product Sub Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Sub Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Sub Category"
+            },
+            "productSubCategoryName": "Product Sub Category Name",
+            "productCategory": "Product Category"
+        }
+    }
+}

@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.ProductsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BatchUploadResourceIntTest {
 
     private MockMvc restMockMvc;
+private final ProductsService productsService;
+
+    public BatchUploadResourceIntTest(ProductsService productsService) {
+        this.productsService = productsService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        BatchUploadResource batchUploadResource = new BatchUploadResource();
+        BatchUploadResource batchUploadResource = new BatchUploadResource(productsService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(batchUploadResource)
             .build();

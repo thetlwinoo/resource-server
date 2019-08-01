@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-state-provinces-heading" jhiTranslate="resourceApp.stateProvinces.home.createOrEditLabel">Create or edit a State Provinces</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!stateProvinces.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="stateProvinces.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.stateProvinceCode" for="field_stateProvinceCode">State Province Code</label>
+                    <input type="text" class="form-control" name="stateProvinceCode" id="field_stateProvinceCode"
+                        [(ngModel)]="stateProvinces.stateProvinceCode" required/>
+                    <div [hidden]="!(editForm.controls.stateProvinceCode?.dirty && editForm.controls.stateProvinceCode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.stateProvinceCode?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.stateProvinceName" for="field_stateProvinceName">State Province Name</label>
+                    <input type="text" class="form-control" name="stateProvinceName" id="field_stateProvinceName"
+                        [(ngModel)]="stateProvinces.stateProvinceName" required/>
+                    <div [hidden]="!(editForm.controls.stateProvinceName?.dirty && editForm.controls.stateProvinceName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.stateProvinceName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.salesTerritory" for="field_salesTerritory">Sales Territory</label>
+                    <input type="text" class="form-control" name="salesTerritory" id="field_salesTerritory"
+                        [(ngModel)]="stateProvinces.salesTerritory" required/>
+                    <div [hidden]="!(editForm.controls.salesTerritory?.dirty && editForm.controls.salesTerritory?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.salesTerritory?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.border" for="field_border">Border</label>
+                    <input type="text" class="form-control" name="border" id="field_border"
+                        [(ngModel)]="stateProvinces.border" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.latestRecordedPopulation" for="field_latestRecordedPopulation">Latest Recorded Population</label>
+                    <input type="number" class="form-control" name="latestRecordedPopulation" id="field_latestRecordedPopulation"
+                        [(ngModel)]="stateProvinces.latestRecordedPopulation" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.validFrom" for="field_validFrom">Valid From</label>
+                    <div class="input-group">
+                        <input id="field_validFrom" type="text" class="form-control" name="validFrom" ngbDatepicker  #validFromDp="ngbDatepicker" [(ngModel)]="stateProvinces.validFrom"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="validFromDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.validFrom?.dirty && editForm.controls.validFrom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.validFrom?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.validTo" for="field_validTo">Valid To</label>
+                    <div class="input-group">
+                        <input id="field_validTo" type="text" class="form-control" name="validTo" ngbDatepicker  #validToDp="ngbDatepicker" [(ngModel)]="stateProvinces.validTo"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="validToDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.validTo?.dirty && editForm.controls.validTo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.validTo?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stateProvinces.country" for="field_country">Country</label>
+                    <select class="form-control" id="field_country" name="country" [(ngModel)]="stateProvinces.countryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countriesOption.id" *ngFor="let countriesOption of countries; trackBy: trackCountriesById">{{countriesOption.countryName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

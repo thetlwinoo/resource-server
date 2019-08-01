@@ -1,6 +1,8 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.ShoppingCartsExtendService;
+import com.resource.server.service.mapper.ShoppingCartsMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +24,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ShoppingCartsExtendResourceIntTest {
 
     private MockMvc restMockMvc;
+    private ShoppingCartsExtendService cartService;
+    private ShoppingCartsMapper shoppingCartsMapper;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ShoppingCartsExtendResource shoppingCartsExtendResource = new ShoppingCartsExtendResource();
+        ShoppingCartsExtendResource shoppingCartsExtendResource = new ShoppingCartsExtendResource(cartService, shoppingCartsMapper);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(shoppingCartsExtendResource)
             .build();

@@ -1,5 +1,7 @@
 package com.resource.server.service;
 
-public interface PriceService {
+import com.resource.server.domain.ShoppingCarts;
 
+public interface PriceService {
+    ShoppingCarts calculatePrice(ShoppingCarts cart);
 }

@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-product-model-heading" jhiTranslate="resourceApp.productModel.home.createOrEditLabel">Create or edit a Product Model</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!productModel.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="productModel.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productModel.productModelName" for="field_productModelName">Product Model Name</label>
+                    <input type="text" class="form-control" name="productModelName" id="field_productModelName"
+                        [(ngModel)]="productModel.productModelName" required/>
+                    <div [hidden]="!(editForm.controls.productModelName?.dirty && editForm.controls.productModelName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productModelName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productModel.calalogDescription" for="field_calalogDescription">Calalog Description</label>
+                    <input type="text" class="form-control" name="calalogDescription" id="field_calalogDescription"
+                        [(ngModel)]="productModel.calalogDescription" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productModel.instructions" for="field_instructions">Instructions</label>
+                    <input type="text" class="form-control" name="instructions" id="field_instructions"
+                        [(ngModel)]="productModel.instructions" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{
+    "name": "CurrencyRate",
+    "fields": [
+        {
+            "fieldName": "currencyRateDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fromCurrencyCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "toCurrencyCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "averageRate",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "endOfDayRate",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190801044921",
+    "entityTableName": "currency_rate",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

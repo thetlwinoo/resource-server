@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.WishlistExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class WishlistExtendResourceIntTest {
 
     private MockMvc restMockMvc;
+    private final WishlistExtendService wishlistExtendService;
+
+    public WishlistExtendResourceIntTest(WishlistExtendService wishlistExtendService) {
+        this.wishlistExtendService = wishlistExtendService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        WishlistExtendResource wishlistExtendResource = new WishlistExtendResource();
+        WishlistExtendResource wishlistExtendResource = new WishlistExtendResource(wishlistExtendService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(wishlistExtendResource)
             .build();

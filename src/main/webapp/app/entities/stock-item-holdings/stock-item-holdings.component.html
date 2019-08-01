@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.stockItemHoldings.home.title">Stock Item Holdings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-stock-item-holdings" [routerLink]="['/stock-item-holdings/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.stockItemHoldings.home.createLabel">
+            Create new Stock Item Holdings
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="stockItemHoldings">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.quantityOnHand">Quantity On Hand</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.binLocation">Bin Location</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.lastStocktakeQuantity">Last Stocktake Quantity</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.lastCostPrice">Last Cost Price</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.reorderLevel">Reorder Level</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.targerStockLevel">Targer Stock Level</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemHoldings.product">Product</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let stockItemHoldings of stockItemHoldings ;trackBy: trackId">
+                <td><a [routerLink]="['/stock-item-holdings', stockItemHoldings.id, 'view' ]">{{stockItemHoldings.id}}</a></td>
+                <td>{{stockItemHoldings.quantityOnHand}}</td>
+                <td>{{stockItemHoldings.binLocation}}</td>
+                <td>{{stockItemHoldings.lastStocktakeQuantity}}</td>
+                <td>{{stockItemHoldings.lastCostPrice}}</td>
+                <td>{{stockItemHoldings.reorderLevel}}</td>
+                <td>{{stockItemHoldings.targerStockLevel}}</td>
+                <td>
+                    <div *ngIf="stockItemHoldings.productId">
+                        <a [routerLink]="['../products', stockItemHoldings.productId , 'view' ]" >{{stockItemHoldings.productProductName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/stock-item-holdings', stockItemHoldings.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/stock-item-holdings', stockItemHoldings.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'stock-item-holdings', { outlets: { popup: stockItemHoldings.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

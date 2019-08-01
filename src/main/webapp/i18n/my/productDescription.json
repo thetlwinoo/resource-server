@@ -1,0 +1,22 @@
+{
+    "resourceApp": {
+        "productDescription": {
+            "home": {
+                "title": "Product Descriptions",
+                "createLabel": "Product Description အသစ်ထည့်မည်",
+                "createOrEditLabel": "Product Description အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Product Description အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Product Description တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Product Description တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Product Description {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Product Description"
+            },
+            "description": "Description",
+            "productModel": "Product Model"
+        }
+    }
+}

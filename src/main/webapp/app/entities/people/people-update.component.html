@@ -1,0 +1,205 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-people-heading" jhiTranslate="resourceApp.people.home.createOrEditLabel">Create or edit a People</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!people.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="people.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.fullName" for="field_fullName">Full Name</label>
+                    <input type="text" class="form-control" name="fullName" id="field_fullName"
+                        [(ngModel)]="people.fullName" required/>
+                    <div [hidden]="!(editForm.controls.fullName?.dirty && editForm.controls.fullName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fullName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.preferredName" for="field_preferredName">Preferred Name</label>
+                    <input type="text" class="form-control" name="preferredName" id="field_preferredName"
+                        [(ngModel)]="people.preferredName" required/>
+                    <div [hidden]="!(editForm.controls.preferredName?.dirty && editForm.controls.preferredName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.preferredName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.searchName" for="field_searchName">Search Name</label>
+                    <input type="text" class="form-control" name="searchName" id="field_searchName"
+                        [(ngModel)]="people.searchName" required/>
+                    <div [hidden]="!(editForm.controls.searchName?.dirty && editForm.controls.searchName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.searchName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isPermittedToLogon" for="field_isPermittedToLogon">Is Permitted To Logon</label>
+                    <input type="checkbox" class="form-control" name="isPermittedToLogon" id="field_isPermittedToLogon"
+                        [(ngModel)]="people.isPermittedToLogon" />
+                    <div [hidden]="!(editForm.controls.isPermittedToLogon?.dirty && editForm.controls.isPermittedToLogon?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isPermittedToLogon?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.logonName" for="field_logonName">Logon Name</label>
+                    <input type="text" class="form-control" name="logonName" id="field_logonName"
+                        [(ngModel)]="people.logonName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isExternalLogonProvider" for="field_isExternalLogonProvider">Is External Logon Provider</label>
+                    <input type="checkbox" class="form-control" name="isExternalLogonProvider" id="field_isExternalLogonProvider"
+                        [(ngModel)]="people.isExternalLogonProvider" />
+                    <div [hidden]="!(editForm.controls.isExternalLogonProvider?.dirty && editForm.controls.isExternalLogonProvider?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isExternalLogonProvider?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isSystemUser" for="field_isSystemUser">Is System User</label>
+                    <input type="checkbox" class="form-control" name="isSystemUser" id="field_isSystemUser"
+                        [(ngModel)]="people.isSystemUser" />
+                    <div [hidden]="!(editForm.controls.isSystemUser?.dirty && editForm.controls.isSystemUser?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isSystemUser?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isEmployee" for="field_isEmployee">Is Employee</label>
+                    <input type="checkbox" class="form-control" name="isEmployee" id="field_isEmployee"
+                        [(ngModel)]="people.isEmployee" />
+                    <div [hidden]="!(editForm.controls.isEmployee?.dirty && editForm.controls.isEmployee?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isEmployee?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isSalesPerson" for="field_isSalesPerson">Is Sales Person</label>
+                    <input type="checkbox" class="form-control" name="isSalesPerson" id="field_isSalesPerson"
+                        [(ngModel)]="people.isSalesPerson" />
+                    <div [hidden]="!(editForm.controls.isSalesPerson?.dirty && editForm.controls.isSalesPerson?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isSalesPerson?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.isGuestUser" for="field_isGuestUser">Is Guest User</label>
+                    <input type="checkbox" class="form-control" name="isGuestUser" id="field_isGuestUser"
+                        [(ngModel)]="people.isGuestUser" />
+                    <div [hidden]="!(editForm.controls.isGuestUser?.dirty && editForm.controls.isGuestUser?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isGuestUser?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.emailPromotion" for="field_emailPromotion">Email Promotion</label>
+                    <input type="number" class="form-control" name="emailPromotion" id="field_emailPromotion"
+                        [(ngModel)]="people.emailPromotion" required/>
+                    <div [hidden]="!(editForm.controls.emailPromotion?.dirty && editForm.controls.emailPromotion?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.emailPromotion?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.emailPromotion?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.userPreferences" for="field_userPreferences">User Preferences</label>
+                    <input type="text" class="form-control" name="userPreferences" id="field_userPreferences"
+                        [(ngModel)]="people.userPreferences" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                        [(ngModel)]="people.phoneNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.emailAddress" for="field_emailAddress">Email Address</label>
+                    <input type="text" class="form-control" name="emailAddress" id="field_emailAddress"
+                        [(ngModel)]="people.emailAddress" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.photo" for="field_photo">Photo</label>
+                    <input type="text" class="form-control" name="photo" id="field_photo"
+                        [(ngModel)]="people.photo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.customFields" for="field_customFields">Custom Fields</label>
+                    <input type="text" class="form-control" name="customFields" id="field_customFields"
+                        [(ngModel)]="people.customFields" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.otherLanguages" for="field_otherLanguages">Other Languages</label>
+                    <input type="text" class="form-control" name="otherLanguages" id="field_otherLanguages"
+                        [(ngModel)]="people.otherLanguages" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.validFrom" for="field_validFrom">Valid From</label>
+                    <div class="input-group">
+                        <input id="field_validFrom" type="text" class="form-control" name="validFrom" ngbDatepicker  #validFromDp="ngbDatepicker" [(ngModel)]="people.validFrom"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="validFromDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.validFrom?.dirty && editForm.controls.validFrom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.validFrom?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.people.validTo" for="field_validTo">Valid To</label>
+                    <div class="input-group">
+                        <input id="field_validTo" type="text" class="form-control" name="validTo" ngbDatepicker  #validToDp="ngbDatepicker" [(ngModel)]="people.validTo"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="validToDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.validTo?.dirty && editForm.controls.validTo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.validTo?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
