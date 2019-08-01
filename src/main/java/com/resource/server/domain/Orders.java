@@ -77,7 +77,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(unique = true)
     private Reviews orderReview;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrderLines> orderLineLists = new HashSet<>();
     @ManyToOne
@@ -100,7 +100,7 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("orders")
     private CurrencyRate currencyRate;
 
-    @OneToOne(mappedBy = "paymentOnOrder")
+    @OneToOne(mappedBy = "paymentOnOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private PaymentTransactions payment;
 

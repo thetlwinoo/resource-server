@@ -77,7 +77,7 @@ public class Invoices extends AbstractAuditingEntity implements Serializable {
     @Column(name = "confirmed_received_by")
     private String confirmedReceivedBy;
 
-    @OneToMany(mappedBy = "invoice")
+    @OneToMany(mappedBy = "invoice",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<InvoiceLines> invoiceLineLists = new HashSet<>();
     @ManyToOne

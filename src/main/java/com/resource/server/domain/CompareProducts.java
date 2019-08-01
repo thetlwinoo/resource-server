@@ -29,7 +29,7 @@ public class CompareProducts extends AbstractAuditingEntity implements Serializa
     @JsonIgnoreProperties("compareProducts")
     private Products product;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("compareLists")
     private Compares compare;
 
