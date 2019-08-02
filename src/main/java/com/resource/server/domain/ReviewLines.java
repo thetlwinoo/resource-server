@@ -54,7 +54,7 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
     @JsonIgnoreProperties("reviewLines")
     private Products product;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("reviewLists")
     private Reviews review;
 

@@ -17,7 +17,7 @@ import java.util.Map;
  * PayPalClientResource controller
  */
 @RestController
-@RequestMapping("/api/pay-pal-client")
+@RequestMapping("/api/paypal")
 public class PayPalClientResource {
 
     private static final String ENTITY_NAME = "PayPalClient";

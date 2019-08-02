@@ -16,7 +16,7 @@ import java.util.Map;
  * StripeClientResource controller
  */
 @RestController
-@RequestMapping("/api/stripe-client")
+@RequestMapping("/api/stripe")
 public class StripeClientResource {
 
     private final Logger log = LoggerFactory.getLogger(StripeClientResource.class);

@@ -24,7 +24,7 @@ import java.util.Optional;
  * AddressesExtendResource controller
  */
 @RestController
-@RequestMapping("/api/addresses-extend")
+@RequestMapping("/api")
 public class AddressesExtendResource {
 
     private static final String ENTITY_NAME = "addresses-extend";

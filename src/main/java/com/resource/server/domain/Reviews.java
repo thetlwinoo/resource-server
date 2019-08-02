@@ -58,7 +58,8 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "review",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewLines> reviewLists = new HashSet<>();
-    @OneToOne(mappedBy = "orderReview", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToOne(mappedBy = "orderReview", cascade = CascadeType.ALL)
     @JsonIgnore
     private Orders order;
 

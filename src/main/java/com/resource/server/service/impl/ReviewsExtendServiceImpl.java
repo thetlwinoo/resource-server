@@ -1,16 +1,13 @@
 package com.resource.server.service.impl;
 
-import com.resource.server.domain.Customers;
-import com.resource.server.domain.Orders;
-import com.resource.server.domain.People;
-import com.resource.server.domain.Reviews;
-import com.resource.server.repository.CustomersExtendRepository;
-import com.resource.server.repository.OrdersExtendRepository;
-import com.resource.server.repository.PeopleExtendRepository;
-import com.resource.server.repository.ReviewsExtendRepository;
+import com.resource.server.domain.*;
+import com.resource.server.repository.*;
 import com.resource.server.service.ReviewsExtendService;
+import com.resource.server.service.dto.ReviewLinesDTO;
 import com.resource.server.service.dto.ReviewsDTO;
+import com.resource.server.service.mapper.ReviewLinesMapper;
 import com.resource.server.service.mapper.ReviewsMapper;
+import com.stripe.model.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,33 +29,56 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
     private final CustomersExtendRepository customersExtendRepository;
     private final OrdersExtendRepository ordersExtendRepository;
     private final ReviewsMapper reviewsMapper;
+    private final ReviewLinesRepository reviewLinesRepository;
+    private final ReviewLinesMapper reviewLinesMapper;
 
-    public ReviewsExtendServiceImpl(ReviewsExtendRepository reviewsExtendRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository, OrdersExtendRepository ordersExtendRepository, ReviewsMapper reviewsMapper) {
+    public ReviewsExtendServiceImpl(ReviewsExtendRepository reviewsExtendRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository, OrdersExtendRepository ordersExtendRepository, ReviewsMapper reviewsMapper, ReviewLinesRepository reviewLinesRepository, ReviewLinesMapper reviewLinesMapper) {
         this.reviewsExtendRepository = reviewsExtendRepository;
         this.peopleExtendRepository = peopleExtendRepository;
         this.customersExtendRepository = customersExtendRepository;
         this.ordersExtendRepository = ordersExtendRepository;
         this.reviewsMapper = reviewsMapper;
+        this.reviewLinesRepository = reviewLinesRepository;
+        this.reviewLinesMapper = reviewLinesMapper;
     }
 
 //    public Reviews getReviewsByProductId(Long productId) {
 //        return this.reviewsExtendRepository.findReviewsByProductId(productId);
 //    }
 
-    public ReviewsDTO postReview(Principal principal, ReviewsDTO reviewsDTO, Long orderId) {
+    @Override
+    public ReviewsDTO save(Principal principal, ReviewsDTO reviewsDTO, Long orderId) {
         People people = getUserFromPrinciple(principal);
         reviewsDTO.setReviewerName(people.getFullName());
         reviewsDTO.setEmailAddress(people.getEmailAddress());
         reviewsDTO.setReviewDate(LocalDate.now());
         Reviews reviews = reviewsMapper.toEntity(reviewsDTO);
-        Optional<Orders> orders = ordersExtendRepository.findById(orderId);
-        if (orders.isPresent()) {
-            reviews.setOrder(orders.get());
-        }
         reviews = reviewsExtendRepository.save(reviews);
+
+        if(reviewsDTO.getId() == null){
+            Optional<Orders> orders = ordersExtendRepository.findById(orderId);
+
+            if (orders.isPresent()) {
+                orders.get().setOrderReview(reviews);
+            }
+        }
+
         return reviewsMapper.toDto(reviews);
     }
 
+    public ReviewsDTO completedReview(Long orderId){
+        Optional<Orders> orders = ordersExtendRepository.findById(orderId);
+        Reviews reviews = new Reviews();
+        if (orders.isPresent()) {
+            reviews = orders.get().getOrderReview();
+            reviews.setCompletedReview(true);
+            reviewsExtendRepository.save(reviews);
+        }
+
+        return reviewsMapper.toDto(reviews);
+    }
+
+    @Override
     public List<Orders> findAllOrderedProducts(Principal principal) {
         try {
             People people = getUserFromPrinciple(principal);
