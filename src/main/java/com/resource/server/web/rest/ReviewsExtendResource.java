@@ -79,4 +79,9 @@ public class ReviewsExtendResource {
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/reviewed", method = RequestMethod.GET, params = "productId")
+    public ResponseEntity getReviewLinesByProductId(@RequestParam("productId") Long productId) {
+        List returnList = reviewsExtendService.findReviewLinesByProductId(productId);
+        return new ResponseEntity<List>(returnList, HttpStatus.OK);
+    }
 }

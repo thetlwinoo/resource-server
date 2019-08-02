@@ -13,5 +13,7 @@ public interface ReviewsExtendService {
 
     List<Orders> findAllOrderedProducts(Principal principal);
 
+    List<ReviewLinesDTO> findReviewLinesByProductId(Long productId);
+
     ReviewsDTO completedReview(Long orderId);
 }

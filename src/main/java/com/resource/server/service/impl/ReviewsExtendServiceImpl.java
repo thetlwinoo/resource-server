@@ -16,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,8 +33,9 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
     private final ReviewsMapper reviewsMapper;
     private final ReviewLinesRepository reviewLinesRepository;
     private final ReviewLinesMapper reviewLinesMapper;
+    private final ReviewLinesExtendRepository reviewLinesExtendRepository;
 
-    public ReviewsExtendServiceImpl(ReviewsExtendRepository reviewsExtendRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository, OrdersExtendRepository ordersExtendRepository, ReviewsMapper reviewsMapper, ReviewLinesRepository reviewLinesRepository, ReviewLinesMapper reviewLinesMapper) {
+    public ReviewsExtendServiceImpl(ReviewsExtendRepository reviewsExtendRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository, OrdersExtendRepository ordersExtendRepository, ReviewsMapper reviewsMapper, ReviewLinesRepository reviewLinesRepository, ReviewLinesMapper reviewLinesMapper, ReviewLinesExtendRepository reviewLinesExtendRepository) {
         this.reviewsExtendRepository = reviewsExtendRepository;
         this.peopleExtendRepository = peopleExtendRepository;
         this.customersExtendRepository = customersExtendRepository;
@@ -40,6 +43,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         this.reviewsMapper = reviewsMapper;
         this.reviewLinesRepository = reviewLinesRepository;
         this.reviewLinesMapper = reviewLinesMapper;
+        this.reviewLinesExtendRepository = reviewLinesExtendRepository;
     }
 
 //    public Reviews getReviewsByProductId(Long productId) {
@@ -55,7 +59,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         Reviews reviews = reviewsMapper.toEntity(reviewsDTO);
         reviews = reviewsExtendRepository.save(reviews);
 
-        if(reviewsDTO.getId() == null){
+        if (reviewsDTO.getId() == null) {
             Optional<Orders> orders = ordersExtendRepository.findById(orderId);
 
             if (orders.isPresent()) {
@@ -66,7 +70,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         return reviewsMapper.toDto(reviews);
     }
 
-    public ReviewsDTO completedReview(Long orderId){
+    public ReviewsDTO completedReview(Long orderId) {
         Optional<Orders> orders = ordersExtendRepository.findById(orderId);
         Reviews reviews = new Reviews();
         if (orders.isPresent()) {
@@ -95,6 +99,13 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }
+    }
+
+    @Override
+    public List<ReviewLinesDTO> findReviewLinesByProductId(Long productId) {
+        return reviewLinesExtendRepository.findAllByProductId(productId).stream()
+            .map(reviewLinesMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     private People getUserFromPrinciple(Principal principal) {
