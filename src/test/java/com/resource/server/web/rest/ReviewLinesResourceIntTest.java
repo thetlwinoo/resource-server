@@ -189,15 +189,15 @@ public class ReviewLinesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reviewLines.getId().intValue())))
             .andExpect(jsonPath("$.[*].productRating").value(hasItem(DEFAULT_PRODUCT_RATING)))
-            .andExpect(jsonPath("$.[*].productReview").value(hasItem(DEFAULT_PRODUCT_REVIEW.toString())))
+            .andExpect(jsonPath("$.[*].productReview").value(hasItem(DEFAULT_PRODUCT_REVIEW)))
             .andExpect(jsonPath("$.[*].sellerRating").value(hasItem(DEFAULT_SELLER_RATING)))
-            .andExpect(jsonPath("$.[*].sellerReview").value(hasItem(DEFAULT_SELLER_REVIEW.toString())))
+            .andExpect(jsonPath("$.[*].sellerReview").value(hasItem(DEFAULT_SELLER_REVIEW)))
             .andExpect(jsonPath("$.[*].deliveryRating").value(hasItem(DEFAULT_DELIVERY_RATING)))
-            .andExpect(jsonPath("$.[*].deliveryReview").value(hasItem(DEFAULT_DELIVERY_REVIEW.toString())))
+            .andExpect(jsonPath("$.[*].deliveryReview").value(hasItem(DEFAULT_DELIVERY_REVIEW)))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
     }
-    
+
     @Test
     @Transactional
     public void getReviewLines() throws Exception {
@@ -210,11 +210,11 @@ public class ReviewLinesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reviewLines.getId().intValue()))
             .andExpect(jsonPath("$.productRating").value(DEFAULT_PRODUCT_RATING))
-            .andExpect(jsonPath("$.productReview").value(DEFAULT_PRODUCT_REVIEW.toString()))
+            .andExpect(jsonPath("$.productReview").value(DEFAULT_PRODUCT_REVIEW))
             .andExpect(jsonPath("$.sellerRating").value(DEFAULT_SELLER_RATING))
-            .andExpect(jsonPath("$.sellerReview").value(DEFAULT_SELLER_REVIEW.toString()))
+            .andExpect(jsonPath("$.sellerReview").value(DEFAULT_SELLER_REVIEW))
             .andExpect(jsonPath("$.deliveryRating").value(DEFAULT_DELIVERY_RATING))
-            .andExpect(jsonPath("$.deliveryReview").value(DEFAULT_DELIVERY_REVIEW.toString()))
+            .andExpect(jsonPath("$.deliveryReview").value(DEFAULT_DELIVERY_REVIEW))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }

@@ -203,11 +203,11 @@ public class CustomerCategoriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customerCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].customerCategoryName").value(hasItem(DEFAULT_CUSTOMER_CATEGORY_NAME.toString())))
+            .andExpect(jsonPath("$.[*].customerCategoryName").value(hasItem(DEFAULT_CUSTOMER_CATEGORY_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCustomerCategories() throws Exception {
@@ -219,7 +219,7 @@ public class CustomerCategoriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(customerCategories.getId().intValue()))
-            .andExpect(jsonPath("$.customerCategoryName").value(DEFAULT_CUSTOMER_CATEGORY_NAME.toString()))
+            .andExpect(jsonPath("$.customerCategoryName").value(DEFAULT_CUSTOMER_CATEGORY_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

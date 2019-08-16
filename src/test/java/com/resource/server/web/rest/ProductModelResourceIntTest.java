@@ -182,11 +182,11 @@ public class ProductModelResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productModel.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productModelName").value(hasItem(DEFAULT_PRODUCT_MODEL_NAME.toString())))
-            .andExpect(jsonPath("$.[*].calalogDescription").value(hasItem(DEFAULT_CALALOG_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].instructions").value(hasItem(DEFAULT_INSTRUCTIONS.toString())));
+            .andExpect(jsonPath("$.[*].productModelName").value(hasItem(DEFAULT_PRODUCT_MODEL_NAME)))
+            .andExpect(jsonPath("$.[*].calalogDescription").value(hasItem(DEFAULT_CALALOG_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].instructions").value(hasItem(DEFAULT_INSTRUCTIONS)));
     }
-    
+
     @Test
     @Transactional
     public void getProductModel() throws Exception {
@@ -198,9 +198,9 @@ public class ProductModelResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productModel.getId().intValue()))
-            .andExpect(jsonPath("$.productModelName").value(DEFAULT_PRODUCT_MODEL_NAME.toString()))
-            .andExpect(jsonPath("$.calalogDescription").value(DEFAULT_CALALOG_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.instructions").value(DEFAULT_INSTRUCTIONS.toString()));
+            .andExpect(jsonPath("$.productModelName").value(DEFAULT_PRODUCT_MODEL_NAME))
+            .andExpect(jsonPath("$.calalogDescription").value(DEFAULT_CALALOG_DESCRIPTION))
+            .andExpect(jsonPath("$.instructions").value(DEFAULT_INSTRUCTIONS));
     }
 
     @Test

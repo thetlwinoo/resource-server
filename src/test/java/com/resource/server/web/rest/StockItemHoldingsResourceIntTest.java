@@ -294,13 +294,13 @@ public class StockItemHoldingsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItemHoldings.getId().intValue())))
             .andExpect(jsonPath("$.[*].quantityOnHand").value(hasItem(DEFAULT_QUANTITY_ON_HAND)))
-            .andExpect(jsonPath("$.[*].binLocation").value(hasItem(DEFAULT_BIN_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].binLocation").value(hasItem(DEFAULT_BIN_LOCATION)))
             .andExpect(jsonPath("$.[*].lastStocktakeQuantity").value(hasItem(DEFAULT_LAST_STOCKTAKE_QUANTITY)))
             .andExpect(jsonPath("$.[*].lastCostPrice").value(hasItem(DEFAULT_LAST_COST_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].reorderLevel").value(hasItem(DEFAULT_REORDER_LEVEL)))
             .andExpect(jsonPath("$.[*].targerStockLevel").value(hasItem(DEFAULT_TARGER_STOCK_LEVEL)));
     }
-    
+
     @Test
     @Transactional
     public void getStockItemHoldings() throws Exception {
@@ -313,7 +313,7 @@ public class StockItemHoldingsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stockItemHoldings.getId().intValue()))
             .andExpect(jsonPath("$.quantityOnHand").value(DEFAULT_QUANTITY_ON_HAND))
-            .andExpect(jsonPath("$.binLocation").value(DEFAULT_BIN_LOCATION.toString()))
+            .andExpect(jsonPath("$.binLocation").value(DEFAULT_BIN_LOCATION))
             .andExpect(jsonPath("$.lastStocktakeQuantity").value(DEFAULT_LAST_STOCKTAKE_QUANTITY))
             .andExpect(jsonPath("$.lastCostPrice").value(DEFAULT_LAST_COST_PRICE.intValue()))
             .andExpect(jsonPath("$.reorderLevel").value(DEFAULT_REORDER_LEVEL))

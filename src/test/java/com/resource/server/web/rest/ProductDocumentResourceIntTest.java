@@ -154,9 +154,9 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productDocument.getId().intValue())))
-            .andExpect(jsonPath("$.[*].documentNode").value(hasItem(DEFAULT_DOCUMENT_NODE.toString())));
+            .andExpect(jsonPath("$.[*].documentNode").value(hasItem(DEFAULT_DOCUMENT_NODE)));
     }
-    
+
     @Test
     @Transactional
     public void getProductDocument() throws Exception {
@@ -168,7 +168,7 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productDocument.getId().intValue()))
-            .andExpect(jsonPath("$.documentNode").value(DEFAULT_DOCUMENT_NODE.toString()));
+            .andExpect(jsonPath("$.documentNode").value(DEFAULT_DOCUMENT_NODE));
     }
 
     @Test

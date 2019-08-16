@@ -154,9 +154,9 @@ public class PaymentTransactionsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(paymentTransactions.getId().intValue())))
-            .andExpect(jsonPath("$.[*].returnedCompletedPaymentData").value(hasItem(DEFAULT_RETURNED_COMPLETED_PAYMENT_DATA.toString())));
+            .andExpect(jsonPath("$.[*].returnedCompletedPaymentData").value(hasItem(DEFAULT_RETURNED_COMPLETED_PAYMENT_DATA)));
     }
-    
+
     @Test
     @Transactional
     public void getPaymentTransactions() throws Exception {
@@ -168,7 +168,7 @@ public class PaymentTransactionsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(paymentTransactions.getId().intValue()))
-            .andExpect(jsonPath("$.returnedCompletedPaymentData").value(DEFAULT_RETURNED_COMPLETED_PAYMENT_DATA.toString()));
+            .andExpect(jsonPath("$.returnedCompletedPaymentData").value(DEFAULT_RETURNED_COMPLETED_PAYMENT_DATA));
     }
 
     @Test

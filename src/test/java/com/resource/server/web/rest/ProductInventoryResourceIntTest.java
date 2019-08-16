@@ -220,11 +220,11 @@ public class ProductInventoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productInventory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].shelf").value(hasItem(DEFAULT_SHELF.toString())))
+            .andExpect(jsonPath("$.[*].shelf").value(hasItem(DEFAULT_SHELF)))
             .andExpect(jsonPath("$.[*].bin").value(hasItem(DEFAULT_BIN)))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)));
     }
-    
+
     @Test
     @Transactional
     public void getProductInventory() throws Exception {
@@ -236,7 +236,7 @@ public class ProductInventoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productInventory.getId().intValue()))
-            .andExpect(jsonPath("$.shelf").value(DEFAULT_SHELF.toString()))
+            .andExpect(jsonPath("$.shelf").value(DEFAULT_SHELF))
             .andExpect(jsonPath("$.bin").value(DEFAULT_BIN))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY));
     }

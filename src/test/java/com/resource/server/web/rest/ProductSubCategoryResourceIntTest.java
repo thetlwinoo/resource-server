@@ -178,9 +178,9 @@ public class ProductSubCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSubCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME.toString())));
+            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getProductSubCategory() throws Exception {
@@ -192,7 +192,7 @@ public class ProductSubCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productSubCategory.getId().intValue()))
-            .andExpect(jsonPath("$.productSubCategoryName").value(DEFAULT_PRODUCT_SUB_CATEGORY_NAME.toString()));
+            .andExpect(jsonPath("$.productSubCategoryName").value(DEFAULT_PRODUCT_SUB_CATEGORY_NAME));
     }
 
     @Test

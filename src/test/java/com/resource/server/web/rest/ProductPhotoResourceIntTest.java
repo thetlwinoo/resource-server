@@ -203,19 +203,19 @@ public class ProductPhotoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productPhoto.getId().intValue())))
-            .andExpect(jsonPath("$.[*].thumbnailPhoto").value(hasItem(DEFAULT_THUMBNAIL_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].originalPhoto").value(hasItem(DEFAULT_ORIGINAL_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].bannerTallPhoto").value(hasItem(DEFAULT_BANNER_TALL_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].bannerWidePhoto").value(hasItem(DEFAULT_BANNER_WIDE_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].circlePhoto").value(hasItem(DEFAULT_CIRCLE_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].sharpenedPhoto").value(hasItem(DEFAULT_SHARPENED_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].squarePhoto").value(hasItem(DEFAULT_SQUARE_PHOTO.toString())))
-            .andExpect(jsonPath("$.[*].watermarkPhoto").value(hasItem(DEFAULT_WATERMARK_PHOTO.toString())))
+            .andExpect(jsonPath("$.[*].thumbnailPhoto").value(hasItem(DEFAULT_THUMBNAIL_PHOTO)))
+            .andExpect(jsonPath("$.[*].originalPhoto").value(hasItem(DEFAULT_ORIGINAL_PHOTO)))
+            .andExpect(jsonPath("$.[*].bannerTallPhoto").value(hasItem(DEFAULT_BANNER_TALL_PHOTO)))
+            .andExpect(jsonPath("$.[*].bannerWidePhoto").value(hasItem(DEFAULT_BANNER_WIDE_PHOTO)))
+            .andExpect(jsonPath("$.[*].circlePhoto").value(hasItem(DEFAULT_CIRCLE_PHOTO)))
+            .andExpect(jsonPath("$.[*].sharpenedPhoto").value(hasItem(DEFAULT_SHARPENED_PHOTO)))
+            .andExpect(jsonPath("$.[*].squarePhoto").value(hasItem(DEFAULT_SQUARE_PHOTO)))
+            .andExpect(jsonPath("$.[*].watermarkPhoto").value(hasItem(DEFAULT_WATERMARK_PHOTO)))
             .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
             .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())))
-            .andExpect(jsonPath("$.[*].deleteToken").value(hasItem(DEFAULT_DELETE_TOKEN.toString())));
+            .andExpect(jsonPath("$.[*].deleteToken").value(hasItem(DEFAULT_DELETE_TOKEN)));
     }
-    
+
     @Test
     @Transactional
     public void getProductPhoto() throws Exception {
@@ -227,17 +227,17 @@ public class ProductPhotoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productPhoto.getId().intValue()))
-            .andExpect(jsonPath("$.thumbnailPhoto").value(DEFAULT_THUMBNAIL_PHOTO.toString()))
-            .andExpect(jsonPath("$.originalPhoto").value(DEFAULT_ORIGINAL_PHOTO.toString()))
-            .andExpect(jsonPath("$.bannerTallPhoto").value(DEFAULT_BANNER_TALL_PHOTO.toString()))
-            .andExpect(jsonPath("$.bannerWidePhoto").value(DEFAULT_BANNER_WIDE_PHOTO.toString()))
-            .andExpect(jsonPath("$.circlePhoto").value(DEFAULT_CIRCLE_PHOTO.toString()))
-            .andExpect(jsonPath("$.sharpenedPhoto").value(DEFAULT_SHARPENED_PHOTO.toString()))
-            .andExpect(jsonPath("$.squarePhoto").value(DEFAULT_SQUARE_PHOTO.toString()))
-            .andExpect(jsonPath("$.watermarkPhoto").value(DEFAULT_WATERMARK_PHOTO.toString()))
+            .andExpect(jsonPath("$.thumbnailPhoto").value(DEFAULT_THUMBNAIL_PHOTO))
+            .andExpect(jsonPath("$.originalPhoto").value(DEFAULT_ORIGINAL_PHOTO))
+            .andExpect(jsonPath("$.bannerTallPhoto").value(DEFAULT_BANNER_TALL_PHOTO))
+            .andExpect(jsonPath("$.bannerWidePhoto").value(DEFAULT_BANNER_WIDE_PHOTO))
+            .andExpect(jsonPath("$.circlePhoto").value(DEFAULT_CIRCLE_PHOTO))
+            .andExpect(jsonPath("$.sharpenedPhoto").value(DEFAULT_SHARPENED_PHOTO))
+            .andExpect(jsonPath("$.squarePhoto").value(DEFAULT_SQUARE_PHOTO))
+            .andExpect(jsonPath("$.watermarkPhoto").value(DEFAULT_WATERMARK_PHOTO))
             .andExpect(jsonPath("$.priority").value(DEFAULT_PRIORITY))
             .andExpect(jsonPath("$.defaultInd").value(DEFAULT_DEFAULT_IND.booleanValue()))
-            .andExpect(jsonPath("$.deleteToken").value(DEFAULT_DELETE_TOKEN.toString()));
+            .andExpect(jsonPath("$.deleteToken").value(DEFAULT_DELETE_TOKEN));
     }
 
     @Test

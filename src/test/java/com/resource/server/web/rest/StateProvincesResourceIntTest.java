@@ -280,15 +280,15 @@ public class StateProvincesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stateProvinces.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stateProvinceCode").value(hasItem(DEFAULT_STATE_PROVINCE_CODE.toString())))
-            .andExpect(jsonPath("$.[*].stateProvinceName").value(hasItem(DEFAULT_STATE_PROVINCE_NAME.toString())))
-            .andExpect(jsonPath("$.[*].salesTerritory").value(hasItem(DEFAULT_SALES_TERRITORY.toString())))
-            .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER.toString())))
+            .andExpect(jsonPath("$.[*].stateProvinceCode").value(hasItem(DEFAULT_STATE_PROVINCE_CODE)))
+            .andExpect(jsonPath("$.[*].stateProvinceName").value(hasItem(DEFAULT_STATE_PROVINCE_NAME)))
+            .andExpect(jsonPath("$.[*].salesTerritory").value(hasItem(DEFAULT_SALES_TERRITORY)))
+            .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getStateProvinces() throws Exception {
@@ -300,10 +300,10 @@ public class StateProvincesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stateProvinces.getId().intValue()))
-            .andExpect(jsonPath("$.stateProvinceCode").value(DEFAULT_STATE_PROVINCE_CODE.toString()))
-            .andExpect(jsonPath("$.stateProvinceName").value(DEFAULT_STATE_PROVINCE_NAME.toString()))
-            .andExpect(jsonPath("$.salesTerritory").value(DEFAULT_SALES_TERRITORY.toString()))
-            .andExpect(jsonPath("$.border").value(DEFAULT_BORDER.toString()))
+            .andExpect(jsonPath("$.stateProvinceCode").value(DEFAULT_STATE_PROVINCE_CODE))
+            .andExpect(jsonPath("$.stateProvinceName").value(DEFAULT_STATE_PROVINCE_NAME))
+            .andExpect(jsonPath("$.salesTerritory").value(DEFAULT_SALES_TERRITORY))
+            .andExpect(jsonPath("$.border").value(DEFAULT_BORDER))
             .andExpect(jsonPath("$.latestRecordedPopulation").value(DEFAULT_LATEST_RECORDED_POPULATION.intValue()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));

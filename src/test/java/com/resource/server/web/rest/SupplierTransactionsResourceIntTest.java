@@ -286,7 +286,7 @@ public class SupplierTransactionsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplierTransactions.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierInvoiceNumber").value(hasItem(DEFAULT_SUPPLIER_INVOICE_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].supplierInvoiceNumber").value(hasItem(DEFAULT_SUPPLIER_INVOICE_NUMBER)))
             .andExpect(jsonPath("$.[*].transactionDate").value(hasItem(DEFAULT_TRANSACTION_DATE.toString())))
             .andExpect(jsonPath("$.[*].amountExcludingTax").value(hasItem(DEFAULT_AMOUNT_EXCLUDING_TAX.intValue())))
             .andExpect(jsonPath("$.[*].taxAmount").value(hasItem(DEFAULT_TAX_AMOUNT.intValue())))
@@ -295,7 +295,7 @@ public class SupplierTransactionsResourceIntTest {
             .andExpect(jsonPath("$.[*].finalizationDate").value(hasItem(DEFAULT_FINALIZATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].isFinalized").value(hasItem(DEFAULT_IS_FINALIZED.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getSupplierTransactions() throws Exception {
@@ -307,7 +307,7 @@ public class SupplierTransactionsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(supplierTransactions.getId().intValue()))
-            .andExpect(jsonPath("$.supplierInvoiceNumber").value(DEFAULT_SUPPLIER_INVOICE_NUMBER.toString()))
+            .andExpect(jsonPath("$.supplierInvoiceNumber").value(DEFAULT_SUPPLIER_INVOICE_NUMBER))
             .andExpect(jsonPath("$.transactionDate").value(DEFAULT_TRANSACTION_DATE.toString()))
             .andExpect(jsonPath("$.amountExcludingTax").value(DEFAULT_AMOUNT_EXCLUDING_TAX.intValue()))
             .andExpect(jsonPath("$.taxAmount").value(DEFAULT_TAX_AMOUNT.intValue()))

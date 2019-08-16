@@ -209,7 +209,7 @@ public class OrderLinesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderLines.getId().intValue())))
-            .andExpect(jsonPath("$.[*].carrierTrackingNumber").value(hasItem(DEFAULT_CARRIER_TRACKING_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].carrierTrackingNumber").value(hasItem(DEFAULT_CARRIER_TRACKING_NUMBER)))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].unitPriceDiscount").value(hasItem(DEFAULT_UNIT_PRICE_DISCOUNT.doubleValue())))
@@ -218,7 +218,7 @@ public class OrderLinesResourceIntTest {
             .andExpect(jsonPath("$.[*].pickedQuantity").value(hasItem(DEFAULT_PICKED_QUANTITY)))
             .andExpect(jsonPath("$.[*].pickingCompletedWhen").value(hasItem(DEFAULT_PICKING_COMPLETED_WHEN.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getOrderLines() throws Exception {
@@ -230,7 +230,7 @@ public class OrderLinesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(orderLines.getId().intValue()))
-            .andExpect(jsonPath("$.carrierTrackingNumber").value(DEFAULT_CARRIER_TRACKING_NUMBER.toString()))
+            .andExpect(jsonPath("$.carrierTrackingNumber").value(DEFAULT_CARRIER_TRACKING_NUMBER))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.unitPriceDiscount").value(DEFAULT_UNIT_PRICE_DISCOUNT.doubleValue()))

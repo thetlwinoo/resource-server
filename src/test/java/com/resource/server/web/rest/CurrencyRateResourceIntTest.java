@@ -195,12 +195,12 @@ public class CurrencyRateResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currencyRate.getId().intValue())))
             .andExpect(jsonPath("$.[*].currencyRateDate").value(hasItem(DEFAULT_CURRENCY_RATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].fromCurrencyCode").value(hasItem(DEFAULT_FROM_CURRENCY_CODE.toString())))
-            .andExpect(jsonPath("$.[*].toCurrencyCode").value(hasItem(DEFAULT_TO_CURRENCY_CODE.toString())))
+            .andExpect(jsonPath("$.[*].fromCurrencyCode").value(hasItem(DEFAULT_FROM_CURRENCY_CODE)))
+            .andExpect(jsonPath("$.[*].toCurrencyCode").value(hasItem(DEFAULT_TO_CURRENCY_CODE)))
             .andExpect(jsonPath("$.[*].averageRate").value(hasItem(DEFAULT_AVERAGE_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].endOfDayRate").value(hasItem(DEFAULT_END_OF_DAY_RATE.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getCurrencyRate() throws Exception {
@@ -213,8 +213,8 @@ public class CurrencyRateResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(currencyRate.getId().intValue()))
             .andExpect(jsonPath("$.currencyRateDate").value(DEFAULT_CURRENCY_RATE_DATE.toString()))
-            .andExpect(jsonPath("$.fromCurrencyCode").value(DEFAULT_FROM_CURRENCY_CODE.toString()))
-            .andExpect(jsonPath("$.toCurrencyCode").value(DEFAULT_TO_CURRENCY_CODE.toString()))
+            .andExpect(jsonPath("$.fromCurrencyCode").value(DEFAULT_FROM_CURRENCY_CODE))
+            .andExpect(jsonPath("$.toCurrencyCode").value(DEFAULT_TO_CURRENCY_CODE))
             .andExpect(jsonPath("$.averageRate").value(DEFAULT_AVERAGE_RATE.doubleValue()))
             .andExpect(jsonPath("$.endOfDayRate").value(DEFAULT_END_OF_DAY_RATE.doubleValue()));
     }

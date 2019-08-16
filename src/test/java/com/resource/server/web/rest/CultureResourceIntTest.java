@@ -196,10 +196,10 @@ public class CultureResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(culture.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cultureCode").value(hasItem(DEFAULT_CULTURE_CODE.toString())))
-            .andExpect(jsonPath("$.[*].cultureName").value(hasItem(DEFAULT_CULTURE_NAME.toString())));
+            .andExpect(jsonPath("$.[*].cultureCode").value(hasItem(DEFAULT_CULTURE_CODE)))
+            .andExpect(jsonPath("$.[*].cultureName").value(hasItem(DEFAULT_CULTURE_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getCulture() throws Exception {
@@ -211,8 +211,8 @@ public class CultureResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(culture.getId().intValue()))
-            .andExpect(jsonPath("$.cultureCode").value(DEFAULT_CULTURE_CODE.toString()))
-            .andExpect(jsonPath("$.cultureName").value(DEFAULT_CULTURE_NAME.toString()));
+            .andExpect(jsonPath("$.cultureCode").value(DEFAULT_CULTURE_CODE))
+            .andExpect(jsonPath("$.cultureName").value(DEFAULT_CULTURE_NAME));
     }
 
     @Test

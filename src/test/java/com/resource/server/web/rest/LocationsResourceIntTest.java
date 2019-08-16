@@ -220,11 +220,11 @@ public class LocationsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(locations.getId().intValue())))
-            .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME.toString())))
+            .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME)))
             .andExpect(jsonPath("$.[*].costRate").value(hasItem(DEFAULT_COST_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].availability").value(hasItem(DEFAULT_AVAILABILITY.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getLocations() throws Exception {
@@ -236,7 +236,7 @@ public class LocationsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(locations.getId().intValue()))
-            .andExpect(jsonPath("$.locationName").value(DEFAULT_LOCATION_NAME.toString()))
+            .andExpect(jsonPath("$.locationName").value(DEFAULT_LOCATION_NAME))
             .andExpect(jsonPath("$.costRate").value(DEFAULT_COST_RATE.doubleValue()))
             .andExpect(jsonPath("$.availability").value(DEFAULT_AVAILABILITY.doubleValue()));
     }

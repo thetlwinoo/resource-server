@@ -222,11 +222,11 @@ public class StockGroupsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockGroups.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stockGroupName").value(hasItem(DEFAULT_STOCK_GROUP_NAME.toString())))
+            .andExpect(jsonPath("$.[*].stockGroupName").value(hasItem(DEFAULT_STOCK_GROUP_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getStockGroups() throws Exception {
@@ -238,7 +238,7 @@ public class StockGroupsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stockGroups.getId().intValue()))
-            .andExpect(jsonPath("$.stockGroupName").value(DEFAULT_STOCK_GROUP_NAME.toString()))
+            .andExpect(jsonPath("$.stockGroupName").value(DEFAULT_STOCK_GROUP_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

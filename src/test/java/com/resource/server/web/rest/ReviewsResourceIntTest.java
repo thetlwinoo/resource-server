@@ -195,17 +195,17 @@ public class ReviewsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reviews.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reviewerName").value(hasItem(DEFAULT_REVIEWER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS.toString())))
+            .andExpect(jsonPath("$.[*].reviewerName").value(hasItem(DEFAULT_REVIEWER_NAME)))
+            .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS)))
             .andExpect(jsonPath("$.[*].reviewDate").value(hasItem(DEFAULT_REVIEW_DATE.toString())))
             .andExpect(jsonPath("$.[*].overAllSellerRating").value(hasItem(DEFAULT_OVER_ALL_SELLER_RATING)))
-            .andExpect(jsonPath("$.[*].overAllSellerReview").value(hasItem(DEFAULT_OVER_ALL_SELLER_REVIEW.toString())))
+            .andExpect(jsonPath("$.[*].overAllSellerReview").value(hasItem(DEFAULT_OVER_ALL_SELLER_REVIEW)))
             .andExpect(jsonPath("$.[*].overAllDeliveryRating").value(hasItem(DEFAULT_OVER_ALL_DELIVERY_RATING)))
-            .andExpect(jsonPath("$.[*].overAllDeliveryReview").value(hasItem(DEFAULT_OVER_ALL_DELIVERY_REVIEW.toString())))
+            .andExpect(jsonPath("$.[*].overAllDeliveryReview").value(hasItem(DEFAULT_OVER_ALL_DELIVERY_REVIEW)))
             .andExpect(jsonPath("$.[*].reviewAsAnonymous").value(hasItem(DEFAULT_REVIEW_AS_ANONYMOUS.booleanValue())))
             .andExpect(jsonPath("$.[*].completedReview").value(hasItem(DEFAULT_COMPLETED_REVIEW.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getReviews() throws Exception {
@@ -217,13 +217,13 @@ public class ReviewsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reviews.getId().intValue()))
-            .andExpect(jsonPath("$.reviewerName").value(DEFAULT_REVIEWER_NAME.toString()))
-            .andExpect(jsonPath("$.emailAddress").value(DEFAULT_EMAIL_ADDRESS.toString()))
+            .andExpect(jsonPath("$.reviewerName").value(DEFAULT_REVIEWER_NAME))
+            .andExpect(jsonPath("$.emailAddress").value(DEFAULT_EMAIL_ADDRESS))
             .andExpect(jsonPath("$.reviewDate").value(DEFAULT_REVIEW_DATE.toString()))
             .andExpect(jsonPath("$.overAllSellerRating").value(DEFAULT_OVER_ALL_SELLER_RATING))
-            .andExpect(jsonPath("$.overAllSellerReview").value(DEFAULT_OVER_ALL_SELLER_REVIEW.toString()))
+            .andExpect(jsonPath("$.overAllSellerReview").value(DEFAULT_OVER_ALL_SELLER_REVIEW))
             .andExpect(jsonPath("$.overAllDeliveryRating").value(DEFAULT_OVER_ALL_DELIVERY_RATING))
-            .andExpect(jsonPath("$.overAllDeliveryReview").value(DEFAULT_OVER_ALL_DELIVERY_REVIEW.toString()))
+            .andExpect(jsonPath("$.overAllDeliveryReview").value(DEFAULT_OVER_ALL_DELIVERY_REVIEW))
             .andExpect(jsonPath("$.reviewAsAnonymous").value(DEFAULT_REVIEW_AS_ANONYMOUS.booleanValue()))
             .andExpect(jsonPath("$.completedReview").value(DEFAULT_COMPLETED_REVIEW.booleanValue()));
     }

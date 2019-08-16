@@ -343,20 +343,20 @@ public class CountriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(countries.getId().intValue())))
-            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME.toString())))
-            .andExpect(jsonPath("$.[*].formalName").value(hasItem(DEFAULT_FORMAL_NAME.toString())))
-            .andExpect(jsonPath("$.[*].isoAplha3Code").value(hasItem(DEFAULT_ISO_APLHA_3_CODE.toString())))
+            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)))
+            .andExpect(jsonPath("$.[*].formalName").value(hasItem(DEFAULT_FORMAL_NAME)))
+            .andExpect(jsonPath("$.[*].isoAplha3Code").value(hasItem(DEFAULT_ISO_APLHA_3_CODE)))
             .andExpect(jsonPath("$.[*].isoNumericCode").value(hasItem(DEFAULT_ISO_NUMERIC_CODE)))
-            .andExpect(jsonPath("$.[*].countryType").value(hasItem(DEFAULT_COUNTRY_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].countryType").value(hasItem(DEFAULT_COUNTRY_TYPE)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
-            .andExpect(jsonPath("$.[*].continent").value(hasItem(DEFAULT_CONTINENT.toString())))
-            .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION.toString())))
-            .andExpect(jsonPath("$.[*].subregion").value(hasItem(DEFAULT_SUBREGION.toString())))
-            .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER.toString())))
+            .andExpect(jsonPath("$.[*].continent").value(hasItem(DEFAULT_CONTINENT)))
+            .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION)))
+            .andExpect(jsonPath("$.[*].subregion").value(hasItem(DEFAULT_SUBREGION)))
+            .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCountries() throws Exception {
@@ -368,16 +368,16 @@ public class CountriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(countries.getId().intValue()))
-            .andExpect(jsonPath("$.countryName").value(DEFAULT_COUNTRY_NAME.toString()))
-            .andExpect(jsonPath("$.formalName").value(DEFAULT_FORMAL_NAME.toString()))
-            .andExpect(jsonPath("$.isoAplha3Code").value(DEFAULT_ISO_APLHA_3_CODE.toString()))
+            .andExpect(jsonPath("$.countryName").value(DEFAULT_COUNTRY_NAME))
+            .andExpect(jsonPath("$.formalName").value(DEFAULT_FORMAL_NAME))
+            .andExpect(jsonPath("$.isoAplha3Code").value(DEFAULT_ISO_APLHA_3_CODE))
             .andExpect(jsonPath("$.isoNumericCode").value(DEFAULT_ISO_NUMERIC_CODE))
-            .andExpect(jsonPath("$.countryType").value(DEFAULT_COUNTRY_TYPE.toString()))
+            .andExpect(jsonPath("$.countryType").value(DEFAULT_COUNTRY_TYPE))
             .andExpect(jsonPath("$.latestRecordedPopulation").value(DEFAULT_LATEST_RECORDED_POPULATION.intValue()))
-            .andExpect(jsonPath("$.continent").value(DEFAULT_CONTINENT.toString()))
-            .andExpect(jsonPath("$.region").value(DEFAULT_REGION.toString()))
-            .andExpect(jsonPath("$.subregion").value(DEFAULT_SUBREGION.toString()))
-            .andExpect(jsonPath("$.border").value(DEFAULT_BORDER.toString()))
+            .andExpect(jsonPath("$.continent").value(DEFAULT_CONTINENT))
+            .andExpect(jsonPath("$.region").value(DEFAULT_REGION))
+            .andExpect(jsonPath("$.subregion").value(DEFAULT_SUBREGION))
+            .andExpect(jsonPath("$.border").value(DEFAULT_BORDER))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

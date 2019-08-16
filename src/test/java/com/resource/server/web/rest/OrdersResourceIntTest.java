@@ -257,17 +257,17 @@ public class OrdersResourceIntTest {
             .andExpect(jsonPath("$.[*].shipDate").value(hasItem(DEFAULT_SHIP_DATE.toString())))
             .andExpect(jsonPath("$.[*].paymentStatus").value(hasItem(DEFAULT_PAYMENT_STATUS)))
             .andExpect(jsonPath("$.[*].orderFlag").value(hasItem(DEFAULT_ORDER_FLAG)))
-            .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER)))
             .andExpect(jsonPath("$.[*].subTotal").value(hasItem(DEFAULT_SUB_TOTAL.doubleValue())))
             .andExpect(jsonPath("$.[*].taxAmount").value(hasItem(DEFAULT_TAX_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].frieight").value(hasItem(DEFAULT_FRIEIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].totalDue").value(hasItem(DEFAULT_TOTAL_DUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS.toString())))
-            .andExpect(jsonPath("$.[*].deliveryInstructions").value(hasItem(DEFAULT_DELIVERY_INSTRUCTIONS.toString())))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
+            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
+            .andExpect(jsonPath("$.[*].deliveryInstructions").value(hasItem(DEFAULT_DELIVERY_INSTRUCTIONS)))
+            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
             .andExpect(jsonPath("$.[*].pickingCompletedWhen").value(hasItem(DEFAULT_PICKING_COMPLETED_WHEN.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getOrders() throws Exception {
@@ -284,14 +284,14 @@ public class OrdersResourceIntTest {
             .andExpect(jsonPath("$.shipDate").value(DEFAULT_SHIP_DATE.toString()))
             .andExpect(jsonPath("$.paymentStatus").value(DEFAULT_PAYMENT_STATUS))
             .andExpect(jsonPath("$.orderFlag").value(DEFAULT_ORDER_FLAG))
-            .andExpect(jsonPath("$.orderNumber").value(DEFAULT_ORDER_NUMBER.toString()))
+            .andExpect(jsonPath("$.orderNumber").value(DEFAULT_ORDER_NUMBER))
             .andExpect(jsonPath("$.subTotal").value(DEFAULT_SUB_TOTAL.doubleValue()))
             .andExpect(jsonPath("$.taxAmount").value(DEFAULT_TAX_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.frieight").value(DEFAULT_FRIEIGHT.doubleValue()))
             .andExpect(jsonPath("$.totalDue").value(DEFAULT_TOTAL_DUE.doubleValue()))
-            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS.toString()))
-            .andExpect(jsonPath("$.deliveryInstructions").value(DEFAULT_DELIVERY_INSTRUCTIONS.toString()))
-            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
+            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS))
+            .andExpect(jsonPath("$.deliveryInstructions").value(DEFAULT_DELIVERY_INSTRUCTIONS))
+            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS))
             .andExpect(jsonPath("$.pickingCompletedWhen").value(DEFAULT_PICKING_COMPLETED_WHEN.toString()));
     }
 

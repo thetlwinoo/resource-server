@@ -298,7 +298,7 @@ public class InvoiceLinesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoiceLines.getId().intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].taxRate").value(hasItem(DEFAULT_TAX_RATE.intValue())))
@@ -306,7 +306,7 @@ public class InvoiceLinesResourceIntTest {
             .andExpect(jsonPath("$.[*].lineProfit").value(hasItem(DEFAULT_LINE_PROFIT.intValue())))
             .andExpect(jsonPath("$.[*].extendedPrice").value(hasItem(DEFAULT_EXTENDED_PRICE.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getInvoiceLines() throws Exception {
@@ -318,7 +318,7 @@ public class InvoiceLinesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(invoiceLines.getId().intValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.intValue()))
             .andExpect(jsonPath("$.taxRate").value(DEFAULT_TAX_RATE.intValue()))

@@ -172,9 +172,9 @@ public class ContactTypeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(contactType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contactTypeName").value(hasItem(DEFAULT_CONTACT_TYPE_NAME.toString())));
+            .andExpect(jsonPath("$.[*].contactTypeName").value(hasItem(DEFAULT_CONTACT_TYPE_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getContactType() throws Exception {
@@ -186,7 +186,7 @@ public class ContactTypeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(contactType.getId().intValue()))
-            .andExpect(jsonPath("$.contactTypeName").value(DEFAULT_CONTACT_TYPE_NAME.toString()));
+            .andExpect(jsonPath("$.contactTypeName").value(DEFAULT_CONTACT_TYPE_NAME));
     }
 
     @Test

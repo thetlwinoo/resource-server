@@ -172,9 +172,9 @@ public class SystemParametersResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(systemParameters.getId().intValue())))
-            .andExpect(jsonPath("$.[*].applicationSettings").value(hasItem(DEFAULT_APPLICATION_SETTINGS.toString())));
+            .andExpect(jsonPath("$.[*].applicationSettings").value(hasItem(DEFAULT_APPLICATION_SETTINGS)));
     }
-    
+
     @Test
     @Transactional
     public void getSystemParameters() throws Exception {
@@ -186,7 +186,7 @@ public class SystemParametersResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(systemParameters.getId().intValue()))
-            .andExpect(jsonPath("$.applicationSettings").value(DEFAULT_APPLICATION_SETTINGS.toString()));
+            .andExpect(jsonPath("$.applicationSettings").value(DEFAULT_APPLICATION_SETTINGS));
     }
 
     @Test

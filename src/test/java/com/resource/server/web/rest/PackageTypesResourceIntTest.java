@@ -222,11 +222,11 @@ public class PackageTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(packageTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].packageTypeName").value(hasItem(DEFAULT_PACKAGE_TYPE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].packageTypeName").value(hasItem(DEFAULT_PACKAGE_TYPE_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getPackageTypes() throws Exception {
@@ -238,7 +238,7 @@ public class PackageTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(packageTypes.getId().intValue()))
-            .andExpect(jsonPath("$.packageTypeName").value(DEFAULT_PACKAGE_TYPE_NAME.toString()))
+            .andExpect(jsonPath("$.packageTypeName").value(DEFAULT_PACKAGE_TYPE_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
