@@ -1,0 +1,39 @@
+<p-progressBar [value]="uploadProgress" [style]="{'height': '6px','margin':'0px 0px 2px 0px'}"></p-progressBar>
+<input hidden type="file" accept="image/*" id="fileupload" #fileInput ng2FileSelect [style.display]="'none'"
+       [uploader]="uploader"
+       (change)="fileInput.value=''"
+       multiple/>
+<div class="product-image">
+    <span>
+
+        <div class="image-upload-btn" *ngIf="!productPhoto;else preview" (click)="fileInput.click()">
+            <fa-icon icon="cannabis"
+                     class="next-icon next-icon-add next-icon-medium upload-btn-icon"></fa-icon>
+            <p class="upload-text">Select Images</p>
+        </div>
+        <ng-template #preview>
+            <div class="image-preview">
+                <a class="image-link" href="javascript:">
+                    <img src="{{productPhoto.thumbnailPhoto}}" draggable="false">
+                </a>
+                <div class="product-badge-wrapper" *ngIf="productPhoto.defaultInd">
+                    <fa-icon icon="star"></fa-icon>
+                </div>
+                <div class="image-tools">
+                    <fa-icon icon="star" (click)="setDefaultPhoto.emit(productPhoto)"></fa-icon>
+                    <fa-icon icon="image" (click)="previewimg.toggle($event)"></fa-icon>
+                    <fa-icon icon="trash-alt" (click)="onDeleteProductPhoto($event)"></fa-icon>
+                </div>
+            </div>
+        </ng-template>
+
+    </span>
+</div>
+<p-overlayPanel #previewimg [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [dismissable]="true"
+                [appendTo]="'body'">
+    <img class="overlay-image" [src]="productPhoto?.originalPhoto" *ngIf="productPhoto"/>
+</p-overlayPanel>
+<p-overlayPanel #descimg [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [dismissable]="true"
+                [appendTo]="'body'">
+    <div>Approved images can not be edited. To edit this image please re-upload it and proceed.</div>
+</p-overlayPanel>

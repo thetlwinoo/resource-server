@@ -100,6 +100,7 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
             orderLines.setUnitPrice(i.getProduct().getUnitPrice());
             saveOrder.getOrderLineLists().add(orderLines);
         }
+
         saveOrder.setPaymentStatus(0);
         saveOrder.setOrderFlag(0);
         saveOrder.setFrieight(cart.getTotalCargoPrice());

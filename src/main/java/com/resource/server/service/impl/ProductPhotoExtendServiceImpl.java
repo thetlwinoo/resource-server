@@ -6,6 +6,8 @@ import com.resource.server.repository.ProductPhotoExtendRepository;
 import com.resource.server.repository.ProductPhotoRepository;
 import com.resource.server.repository.ProductsRepository;
 import com.resource.server.service.ProductPhotoExtendService;
+import com.resource.server.service.dto.ProductPhotoDTO;
+import com.resource.server.service.mapper.ProductPhotoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -24,12 +28,14 @@ public class ProductPhotoExtendServiceImpl implements ProductPhotoExtendService 
     private final ProductPhotoExtendRepository productPhotoExtendRepository;
     private final ProductPhotoRepository productPhotoRepository;
     private final ProductsRepository productsRepository;
+    private final ProductPhotoMapper productPhotoMapper;
 
     @Autowired
-    public ProductPhotoExtendServiceImpl(ProductPhotoExtendRepository productPhotoExtendRepository, ProductPhotoRepository productPhotoRepository, ProductsRepository productsRepository) {
+    public ProductPhotoExtendServiceImpl(ProductPhotoExtendRepository productPhotoExtendRepository, ProductPhotoRepository productPhotoRepository, ProductsRepository productsRepository, ProductPhotoMapper productPhotoMapper) {
         this.productPhotoExtendRepository = productPhotoExtendRepository;
         this.productPhotoRepository = productPhotoRepository;
         this.productsRepository = productsRepository;
+        this.productPhotoMapper = productPhotoMapper;
     }
 
     @Override
@@ -42,24 +48,23 @@ public class ProductPhotoExtendServiceImpl implements ProductPhotoExtendService 
         Optional<ProductPhoto> productPhoto = productPhotoRepository.findById(productPhotoId);
         List<ProductPhoto> productPhotos = new ArrayList<>();
 
-        if(productPhoto.isPresent()){
+        if (productPhoto.isPresent()) {
             Long _ProductId = productPhoto.get().getProduct().getId();
-            productPhotos= productPhotoExtendRepository.findAllByProductId(_ProductId);
-        }else{
+            productPhotos = productPhotoExtendRepository.findAllByProductId(_ProductId);
+        } else {
             throw new IllegalArgumentException("product photo not found");
         }
 
         for (ProductPhoto i : productPhotos) {
-            if(i.getId() == productPhotoId){
+            if (i.getId() == productPhotoId) {
                 i.setDefaultInd(true);
                 productPhotoRepository.save(i);
 
                 Products products = productsRepository.getOne(i.getProduct().getId());
                 products.setPhoto(i.getThumbnailPhoto());
                 productsRepository.save(products);
-            }
-            else{
-                if(i.isDefaultInd()){
+            } else {
+                if (i.isDefaultInd()) {
                     i.setDefaultInd(false);
                     productPhotoRepository.save(i);
                 }
@@ -70,10 +75,10 @@ public class ProductPhotoExtendServiceImpl implements ProductPhotoExtendService 
     }
 
     @Override
-    public List<ProductPhoto> getProductPhotosByProduct(Long productId) {
-        List<ProductPhoto> returnList = productPhotoExtendRepository.findAllByProductId(productId);
-
-        return returnList;
+    public List<ProductPhotoDTO> getProductPhotosByProduct(Long productId) {
+        return productPhotoExtendRepository.findAllByProductId(productId).stream()
+            .map(productPhotoMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 }

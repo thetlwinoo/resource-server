@@ -5,6 +5,11 @@
         "menu": {
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "products": {
+                "main": "Products",
+                "manageProducts": "Manage Products",
+                "manageImages": "Manage Images"
+            },
             "entities": {
                 "main": "Entities",
                 "addressTypes": "Address Types",

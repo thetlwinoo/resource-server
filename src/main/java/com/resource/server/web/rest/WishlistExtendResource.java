@@ -1,7 +1,9 @@
 package com.resource.server.web.rest;
 
+import com.resource.server.domain.Products;
 import com.resource.server.domain.Wishlists;
 import com.resource.server.service.WishlistExtendService;
+import com.resource.server.service.dto.ProductsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * WishlistExtendResource controller
@@ -35,6 +38,12 @@ public class WishlistExtendResource {
     public ResponseEntity fetchWishlist(Principal principal) {
         Wishlists wishlists = wishlistExtendService.fetchWishlist(principal);
         return new ResponseEntity<Wishlists>(wishlists, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/fetch/products", method = RequestMethod.GET)
+    public ResponseEntity fetchWishlistProducts(Principal principal) {
+        List<ProductsDTO> productsList = wishlistExtendService.fetchWishlistProducts(principal);
+        return new ResponseEntity<List<ProductsDTO>>(productsList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.GET, params = {"productId"})
