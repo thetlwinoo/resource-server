@@ -1,6 +1,7 @@
 package com.resource.server.service;
 
 import com.resource.server.domain.ProductPhoto;
+import com.resource.server.service.dto.ProductPhotoDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,5 +11,5 @@ public interface ProductPhotoExtendService {
 
     Optional<ProductPhoto> setDefault(Long productPhotoId);
 
-    List<ProductPhoto> getProductPhotosByProduct(Long productId);
+    List<ProductPhotoDTO> getProductPhotosByProduct(Long productId);
 }

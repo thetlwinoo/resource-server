@@ -9,13 +9,19 @@ import com.resource.server.repository.ProductsRepository;
 import com.resource.server.repository.WishlistProductsRepository;
 import com.resource.server.repository.WishlistsRepository;
 import com.resource.server.service.WishlistExtendService;
+import com.resource.server.service.dto.ProductsDTO;
+import com.resource.server.service.mapper.ProductsMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,12 +32,14 @@ public class WishlistExtendServiceImpl implements WishlistExtendService {
     private final WishlistsRepository wishlistsRepository;
     private final WishlistProductsRepository wishlistProductsRepository;
     private final ProductsRepository productsRepository;
+    private final ProductsMapper productsMapper;
 
-    public WishlistExtendServiceImpl(PeopleExtendRepository peopleExtendRepository, WishlistsRepository wishlistsRepository, WishlistProductsRepository wishlistProductsRepository, ProductsRepository productsRepository) {
+    public WishlistExtendServiceImpl(PeopleExtendRepository peopleExtendRepository, WishlistsRepository wishlistsRepository, WishlistProductsRepository wishlistProductsRepository, ProductsRepository productsRepository, ProductsMapper productsMapper) {
         this.peopleExtendRepository = peopleExtendRepository;
         this.wishlistsRepository = wishlistsRepository;
         this.wishlistProductsRepository = wishlistProductsRepository;
         this.productsRepository = productsRepository;
+        this.productsMapper = productsMapper;
     }
 
     @Override
@@ -83,6 +91,20 @@ public class WishlistExtendServiceImpl implements WishlistExtendService {
     public Wishlists fetchWishlist(Principal principal) {
         People people = getUserFromPrinciple(principal);
         return people.getWishlist();
+    }
+
+    @Override
+    public List<ProductsDTO> fetchWishlistProducts(Principal principal) {
+        People people = getUserFromPrinciple(principal);
+
+        List<Products> productsList = new ArrayList<>();
+        Set<WishlistProducts> wishlistProductsList = people.getWishlist().getWishlistLists();
+        for (WishlistProducts wishlistProducts : wishlistProductsList) {
+            productsList.add(wishlistProducts.getProduct());
+        }
+        return productsList.stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

@@ -60,8 +60,8 @@ public class ProductPhotoExtendResource {
     }
 
     @RequestMapping(value = "/photos", method = RequestMethod.GET, params = "id")
-    public ResponseEntity getByRelated(@RequestParam("id") Long id) {
-        return new ResponseEntity<List>(productPhotoExtendService.getProductPhotosByProduct(id), HttpStatus.OK);
+    public List<ProductPhotoDTO> getByRelated(@RequestParam("id") Long id) {
+        return productPhotoExtendService.getProductPhotosByProduct(id);
     }
 
 }
