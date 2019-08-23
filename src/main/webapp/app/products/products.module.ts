@@ -6,47 +6,11 @@ import { RouterModule } from '@angular/router';
         RouterModule.forChild([
             {
                 path: 'manage-products',
-                loadChildren: './manage-products/manage-products.module#PortalProductsModule',
-                data: {
-                    breadcrumb: [
-                        {
-                            label: 'Products',
-                            command: event => {
-                                this.msgs.length = 0;
-                                this.msgs.push({ severity: 'info', summary: event.item.label });
-                            }
-                        },
-                        {
-                            label: 'Manage Products',
-                            command: event => {
-                                this.msgs.length = 0;
-                                this.msgs.push({ severity: 'info', summary: event.item.label });
-                            }
-                        }
-                    ]
-                }
+                loadChildren: './manage-products/manage-products.module#PortalProductsModule'
             },
             {
                 path: 'manage-images',
-                loadChildren: './manage-images/manage-images.module#PortalImagesModule',
-                data: {
-                    breadcrumb: [
-                        {
-                            label: 'Products',
-                            command: event => {
-                                this.msgs.length = 0;
-                                this.msgs.push({ severity: 'info', summary: event.item.label });
-                            }
-                        },
-                        {
-                            label: 'Manage Images',
-                            command: event => {
-                                this.msgs.length = 0;
-                                this.msgs.push({ severity: 'info', summary: event.item.label });
-                            }
-                        }
-                    ]
-                }
+                loadChildren: './manage-images/manage-images.module#PortalImagesModule'
             }
         ])
     ],

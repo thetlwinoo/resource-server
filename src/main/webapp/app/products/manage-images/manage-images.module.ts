@@ -24,7 +24,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { jhiCloudinaryModule } from 'app/shared/components';
-import { jhiPipesModule } from 'app/shared/pipes/pipes.module';
+import { ResourcePipesModule } from 'app/shared/pipes/pipes.module';
 
 const ENTITY_STATES = [...manageImagesRoute, ...imagePopupRoute];
 
@@ -43,7 +43,7 @@ const ENTITY_STATES = [...manageImagesRoute, ...imagePopupRoute];
         ProgressBarModule,
         InputTextModule,
         jhiCloudinaryModule,
-        jhiPipesModule
+        ResourcePipesModule
     ],
     declarations: [
         ImageDeletePopupComponent,

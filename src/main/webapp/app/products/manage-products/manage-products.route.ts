@@ -51,31 +51,7 @@ export const manageProductsRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'portalApp.products.home.title',
-            breadcrumb: [
-                {
-                    label: 'Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                },
-                {
-                    label: 'Manage Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    },
-                    routerLink: '/manage-products'
-                },
-                {
-                    label: 'Details',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                }
-            ]
+            pageTitle: 'portalApp.products.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -87,31 +63,7 @@ export const manageProductsRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'portalApp.products.home.title',
-            breadcrumb: [
-                {
-                    label: 'Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                },
-                {
-                    label: 'Manage Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    },
-                    routerLink: '/manage-products'
-                },
-                {
-                    label: 'Create New Product',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                }
-            ]
+            pageTitle: 'portalApp.products.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -123,31 +75,7 @@ export const manageProductsRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'portalApp.products.home.title',
-            breadcrumb: [
-                {
-                    label: 'Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                },
-                {
-                    label: 'Manage Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    },
-                    routerLink: '/manage-products'
-                },
-                {
-                    label: 'Batch Upload',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                }
-            ]
+            pageTitle: 'portalApp.products.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -159,31 +87,7 @@ export const manageProductsRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'portalApp.products.home.title',
-            breadcrumb: [
-                {
-                    label: 'Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                },
-                {
-                    label: 'Manage Products',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    },
-                    routerLink: '/manage-products'
-                },
-                {
-                    label: 'Edit Product',
-                    command: event => {
-                        this.msgs.length = 0;
-                        this.msgs.push({ severity: 'info', summary: event.item.label });
-                    }
-                }
-            ]
+            pageTitle: 'portalApp.products.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

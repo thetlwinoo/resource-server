@@ -13,5 +13,5 @@ public interface OrdersExtendService {
 
     List<Orders> getAllOrdersWithoutPaging(Principal principal);
 
-    Orders postOrder(Principal principal, OrdersDTO ordersDTO);
+    OrdersDTO postOrder(Principal principal, OrdersDTO ordersDTO);
 }

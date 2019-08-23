@@ -4,6 +4,7 @@ import com.resource.server.domain.*;
 import com.resource.server.repository.*;
 import com.resource.server.service.OrdersExtendService;
 import com.resource.server.service.dto.OrdersDTO;
+import com.resource.server.service.mapper.OrdersMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,16 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
     private final PeopleExtendRepository peopleExtendedRepository;
     private final CustomersExtendRepository customersExtendRepository;
     private final AddressesRepository addressesRepository;
+    private final OrdersMapper ordersMapper;
 
     @Autowired
-    public OrdersExtendServiceImpl(OrdersExtendRepository ordersExtendRepository, UserRepository userRepository, PeopleExtendRepository peopleExtendedRepository, CustomersExtendRepository customersExtendRepository, AddressesRepository addressesRepository) {
+    public OrdersExtendServiceImpl(OrdersExtendRepository ordersExtendRepository, UserRepository userRepository, PeopleExtendRepository peopleExtendedRepository, CustomersExtendRepository customersExtendRepository, AddressesRepository addressesRepository, OrdersMapper ordersMapper) {
         this.ordersExtendRepository = ordersExtendRepository;
         this.userRepository = userRepository;
         this.peopleExtendedRepository = peopleExtendedRepository;
         this.customersExtendRepository = customersExtendRepository;
         this.addressesRepository = addressesRepository;
+        this.ordersMapper = ordersMapper;
     }
 
     @Override
@@ -67,7 +70,7 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
     }
 
     @Override
-    public Orders postOrder(Principal principal, OrdersDTO ordersDTO) {
+    public OrdersDTO postOrder(Principal principal, OrdersDTO ordersDTO) {
         People people = getUserFromPrinciple(principal);
         ShoppingCarts cart = people.getCart();
         if (cart == null) {
@@ -113,7 +116,7 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
         saveOrder = ordersExtendRepository.save(saveOrder);
         saveOrder.setOrderNumber("SO" + saveOrder.getId());
         ordersExtendRepository.save(saveOrder);
-        return saveOrder;
+        return ordersMapper.toDto(saveOrder);
     }
 
 

@@ -8,4 +8,4 @@ import { MissingImagesFilterPipe } from './missing-images-filter.pipe';
     imports: [],
     exports: [ProductFilterPipe, MissingImagesFilterPipe]
 })
-export class jhiPipesModule {}
+export class ResourcePipesModule {}

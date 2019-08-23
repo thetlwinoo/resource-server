@@ -12,9 +12,9 @@ export class ProductFilterPipe implements PipeTransform {
      * @param {string} property
      * @returns {any}
      */
-    transform(productPhotos: IProductPhoto[], index: number, productId: number, missingInd: boolean = false): any {
+    transform(productPhotos: IProductPhoto[], index: number, productId: number, missingInd = false): any {
         if (productPhotos && productPhotos.length > 0) {
-            return productPhotos.filter(t => t.priority == index && t.productId == productId)[0];
+            return productPhotos.filter(t => t.priority === index && t.productId === productId)[0];
         }
         return null;
     }

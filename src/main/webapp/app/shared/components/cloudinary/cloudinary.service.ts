@@ -21,7 +21,7 @@ export class CloudinaryService {
     }
 
     removeResponse(publicId) {
-        var index = this.responses.findIndex(file => file.data.public_id == publicId);
+        let index = this.responses.findIndex(file => file.data.public_id == publicId);
         this.responses.splice(index, 1);
         this.onResponseChanged.next(this.responses);
     }

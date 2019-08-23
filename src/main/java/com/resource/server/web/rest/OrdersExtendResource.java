@@ -62,8 +62,8 @@ public class OrdersExtendResource {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        Orders saveOrder = orderService.postOrder(principal, ordersDTO);
-        return new ResponseEntity<Orders>(saveOrder, HttpStatus.OK);
+        OrdersDTO saveOrder = orderService.postOrder(principal, ordersDTO);
+        return new ResponseEntity<OrdersDTO>(saveOrder, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
