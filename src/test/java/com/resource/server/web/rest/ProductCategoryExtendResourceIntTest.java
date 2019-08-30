@@ -1,10 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
-import com.resource.server.service.ProductPhotoService;
-import com.resource.server.service.ProductsExtendService;
-import com.resource.server.service.ProductsQueryService;
-import com.resource.server.service.ProductsService;
+import com.resource.server.service.ProductCategoryExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,28 +13,30 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
- * Test class for the ProductsExtendResource REST controller.
+ * Test class for the ProductCategoryExtendResource REST controller.
  *
- * @see ProductsExtendResource
+ * @see ProductCategoryExtendResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ResourceApp.class)
-public class ProductsExtendResourceIntTest {
+public class ProductCategoryExtendResourceIntTest {
 
     private MockMvc restMockMvc;
-    private ProductsExtendService productExtendedService;
-    private ProductsService productsService;
-    private ProductPhotoService productPhotoService;
-    private ProductsQueryService productsQueryService;
+    private final ProductCategoryExtendService productCategoryExtendService;
+
+    public ProductCategoryExtendResourceIntTest(ProductCategoryExtendService productCategoryExtendService) {
+        this.productCategoryExtendService = productCategoryExtendService;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ProductsExtendResource productsExtendResource = new ProductsExtendResource(productExtendedService, productsService, productPhotoService, productsQueryService);
+        ProductCategoryExtendResource productCategoryExtendResource = new ProductCategoryExtendResource(productCategoryExtendService);
         restMockMvc = MockMvcBuilders
-            .standaloneSetup(productsExtendResource)
+            .standaloneSetup(productCategoryExtendResource)
             .build();
     }
 
@@ -46,7 +45,7 @@ public class ProductsExtendResourceIntTest {
      */
     @Test
     public void testDefaultAction() throws Exception {
-        restMockMvc.perform(get("/api/products-extend/default-action"))
+        restMockMvc.perform(get("/api/product-category-extend/default-action"))
             .andExpect(status().isOk());
     }
 }
