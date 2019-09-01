@@ -103,6 +103,13 @@ public class ProductsExtendResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @RequestMapping(value = "/tags", method = RequestMethod.GET, params = {"keyword"})
+    public ResponseEntity<List<String>> getProductTags(@RequestParam(value = "keyword", required = true) String keyword) {
+        log.debug("keyword:{}", keyword);
+        List<String> tagsList = productExtendedService.getProductTags(keyword);
+        return ResponseEntity.ok().body(tagsList);
+    }
+
     private boolean isBlank(String param) {
         return param.isEmpty() || param.trim().equals("");
     }

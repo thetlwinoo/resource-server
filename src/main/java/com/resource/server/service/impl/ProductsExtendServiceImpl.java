@@ -80,4 +80,8 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
         return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword);
     }
 
+    @Override
+    public List<String> getProductTags(String keyword) {
+        return productsExtendRepository.getProductTags(keyword);
+    }
 }

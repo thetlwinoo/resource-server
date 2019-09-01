@@ -21,4 +21,6 @@ public interface ProductsExtendService {
     List<Products> searchProducts(String keyword, Integer page, Integer size);
 
     List<Products> searchProductsAll(String keyword);
+
+    List<String> getProductTags(String keyword);
 }
