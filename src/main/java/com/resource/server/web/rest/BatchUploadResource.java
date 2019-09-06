@@ -152,7 +152,7 @@ public class BatchUploadResource {
                 product.setClassType(row[15]);
                 product.setStyle(row[16]);
                 product.setCustomFields(row[17]);
-                product.setTags(row[18]);
+//                product.setTags(row[18]);
                 product.setSearchDetails(row[19]);
                 product.setProductSubCategoryId(Long.valueOf(random.nextInt(1187-1151) + 1151));
                 product.setProductModelId(Long.valueOf(random.nextInt(1250-1201) + 1201));

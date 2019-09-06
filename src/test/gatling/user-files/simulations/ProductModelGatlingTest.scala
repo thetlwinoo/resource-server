@@ -75,6 +75,7 @@ class ProductModelGatlingTest extends Simulation {
                 , "productModelName":"SAMPLE_TEXT"
                 , "calalogDescription":"SAMPLE_TEXT"
                 , "instructions":"SAMPLE_TEXT"
+                , "photo":null
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productModel_url"))).exitHereIfFailed

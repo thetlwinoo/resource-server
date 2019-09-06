@@ -243,15 +243,15 @@ public class SpecialDealsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(specialDeals.getId().intValue())))
-            .andExpect(jsonPath("$.[*].dealDescription").value(hasItem(DEFAULT_DEAL_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].dealDescription").value(hasItem(DEFAULT_DEAL_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].discountAmount").value(hasItem(DEFAULT_DISCOUNT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].discountPercentage").value(hasItem(DEFAULT_DISCOUNT_PERCENTAGE.doubleValue())))
-            .andExpect(jsonPath("$.[*].discountCode").value(hasItem(DEFAULT_DISCOUNT_CODE)))
+            .andExpect(jsonPath("$.[*].discountCode").value(hasItem(DEFAULT_DISCOUNT_CODE.toString())))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.intValue())));
     }
-
+    
     @Test
     @Transactional
     public void getSpecialDeals() throws Exception {
@@ -263,12 +263,12 @@ public class SpecialDealsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(specialDeals.getId().intValue()))
-            .andExpect(jsonPath("$.dealDescription").value(DEFAULT_DEAL_DESCRIPTION))
+            .andExpect(jsonPath("$.dealDescription").value(DEFAULT_DEAL_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
             .andExpect(jsonPath("$.discountAmount").value(DEFAULT_DISCOUNT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.discountPercentage").value(DEFAULT_DISCOUNT_PERCENTAGE.doubleValue()))
-            .andExpect(jsonPath("$.discountCode").value(DEFAULT_DISCOUNT_CODE))
+            .andExpect(jsonPath("$.discountCode").value(DEFAULT_DISCOUNT_CODE.toString()))
             .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.intValue()));
     }
 

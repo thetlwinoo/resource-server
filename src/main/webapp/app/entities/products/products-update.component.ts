@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IProducts } from 'app/shared/model/products.model';
 import { ProductsService } from './products.service';
+import { IReviewLines } from 'app/shared/model/review-lines.model';
+import { ReviewLinesService } from 'app/entities/review-lines';
 import { IPackageTypes } from 'app/shared/model/package-types.model';
 import { PackageTypesService } from 'app/entities/package-types';
 import { ISuppliers } from 'app/shared/model/suppliers.model';
@@ -26,6 +28,8 @@ export class ProductsUpdateComponent implements OnInit {
     products: IProducts;
     isSaving: boolean;
 
+    productreviews: IReviewLines[];
+
     packagetypes: IPackageTypes[];
 
     suppliers: ISuppliers[];
@@ -42,6 +46,7 @@ export class ProductsUpdateComponent implements OnInit {
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected productsService: ProductsService,
+        protected reviewLinesService: ReviewLinesService,
         protected packageTypesService: PackageTypesService,
         protected suppliersService: SuppliersService,
         protected productSubCategoryService: ProductSubCategoryService,
@@ -55,6 +60,31 @@ export class ProductsUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ products }) => {
             this.products = products;
         });
+        this.reviewLinesService
+            .query({ 'productId.specified': 'false' })
+            .pipe(
+                filter((mayBeOk: HttpResponse<IReviewLines[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IReviewLines[]>) => response.body)
+            )
+            .subscribe(
+                (res: IReviewLines[]) => {
+                    if (!this.products.productReviewId) {
+                        this.productreviews = res;
+                    } else {
+                        this.reviewLinesService
+                            .find(this.products.productReviewId)
+                            .pipe(
+                                filter((subResMayBeOk: HttpResponse<IReviewLines>) => subResMayBeOk.ok),
+                                map((subResponse: HttpResponse<IReviewLines>) => subResponse.body)
+                            )
+                            .subscribe(
+                                (subRes: IReviewLines) => (this.productreviews = [subRes].concat(res)),
+                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                            );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         this.packageTypesService
             .query()
             .pipe(
@@ -123,6 +153,10 @@ export class ProductsUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackReviewLinesById(index: number, item: IReviewLines) {
+        return item.id;
     }
 
     trackPackageTypesById(index: number, item: IPackageTypes) {

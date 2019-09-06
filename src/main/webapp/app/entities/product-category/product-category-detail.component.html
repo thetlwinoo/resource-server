@@ -9,6 +9,15 @@
                 <dd>
                     <span>{{productCategory.productCategoryName}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.productCategory.photo">Photo</span></dt>
+                <dd>
+                    <div *ngIf="productCategory.photo">
+                        <a (click)="openFile(productCategory.photoContentType, productCategory.photo)">
+                            <img [src]="'data:' + productCategory.photoContentType + ';base64,' + productCategory.photo" style="max-width: 100%;" alt="productCategory image"/>
+                        </a>
+                        {{productCategory.photoContentType}}, {{byteSize(productCategory.photo)}}
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

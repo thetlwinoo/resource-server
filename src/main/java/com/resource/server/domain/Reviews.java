@@ -55,13 +55,12 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @Column(name = "completed_review")
     private Boolean completedReview;
 
-    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ReviewLines> reviewLists = new HashSet<>();
-
-    @OneToOne(mappedBy = "orderReview", cascade = CascadeType.ALL)
+    private Set<ReviewLines> reviewLineLists = new HashSet<>();
+    @OneToOne(mappedBy = "orderReview")
     @JsonIgnore
-    private Orders order;
+    private Orders review;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -189,42 +188,42 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
         this.completedReview = completedReview;
     }
 
-    public Set<ReviewLines> getReviewLists() {
-        return reviewLists;
+    public Set<ReviewLines> getReviewLineLists() {
+        return reviewLineLists;
     }
 
-    public Reviews reviewLists(Set<ReviewLines> reviewLines) {
-        this.reviewLists = reviewLines;
+    public Reviews reviewLineLists(Set<ReviewLines> reviewLines) {
+        this.reviewLineLists = reviewLines;
         return this;
     }
 
-    public Reviews addReviewList(ReviewLines reviewLines) {
-        this.reviewLists.add(reviewLines);
+    public Reviews addReviewLineList(ReviewLines reviewLines) {
+        this.reviewLineLists.add(reviewLines);
         reviewLines.setReview(this);
         return this;
     }
 
-    public Reviews removeReviewList(ReviewLines reviewLines) {
-        this.reviewLists.remove(reviewLines);
+    public Reviews removeReviewLineList(ReviewLines reviewLines) {
+        this.reviewLineLists.remove(reviewLines);
         reviewLines.setReview(null);
         return this;
     }
 
-    public void setReviewLists(Set<ReviewLines> reviewLines) {
-        this.reviewLists = reviewLines;
+    public void setReviewLineLists(Set<ReviewLines> reviewLines) {
+        this.reviewLineLists = reviewLines;
     }
 
-    public Orders getOrder() {
-        return order;
+    public Orders getReview() {
+        return review;
     }
 
-    public Reviews order(Orders orders) {
-        this.order = orders;
+    public Reviews review(Orders orders) {
+        this.review = orders;
         return this;
     }
 
-    public void setOrder(Orders orders) {
-        this.order = orders;
+    public void setReview(Orders orders) {
+        this.review = orders;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

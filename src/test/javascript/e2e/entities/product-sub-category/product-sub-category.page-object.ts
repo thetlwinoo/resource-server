@@ -27,6 +27,7 @@ export class ProductSubCategoryUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     productSubCategoryNameInput = element(by.id('field_productSubCategoryName'));
+    photoInput = element(by.id('file_photo'));
     productCategorySelect = element(by.id('field_productCategory'));
 
     async getPageTitle() {
@@ -39,6 +40,14 @@ export class ProductSubCategoryUpdatePage {
 
     async getProductSubCategoryNameInput() {
         return this.productSubCategoryNameInput.getAttribute('value');
+    }
+
+    async setPhotoInput(photo) {
+        await this.photoInput.sendKeys(photo);
+    }
+
+    async getPhotoInput() {
+        return this.photoInput.getAttribute('value');
     }
 
     async productCategorySelectLastOption() {

@@ -17,6 +17,15 @@
                 <dd>
                     <span>{{productModel.instructions}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.productModel.photo">Photo</span></dt>
+                <dd>
+                    <div *ngIf="productModel.photo">
+                        <a (click)="openFile(productModel.photoContentType, productModel.photo)">
+                            <img [src]="'data:' + productModel.photoContentType + ';base64,' + productModel.photo" style="max-width: 100%;" alt="productModel image"/>
+                        </a>
+                        {{productModel.photoContentType}}, {{byteSize(productModel.photo)}}
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

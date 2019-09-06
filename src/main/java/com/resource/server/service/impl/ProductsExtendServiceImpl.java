@@ -1,8 +1,12 @@
 package com.resource.server.service.impl;
 
+import com.resource.server.domain.ProductSubCategory;
 import com.resource.server.domain.Products;
+import com.resource.server.repository.ProductsExtendFilterRepository;
 import com.resource.server.repository.ProductsExtendRepository;
 import com.resource.server.service.ProductsExtendService;
+import com.resource.server.service.dto.ProductSubCategoryDTO;
+import com.resource.server.service.mapper.ProductSubCategoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,10 +27,14 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
 
     private final Logger log = LoggerFactory.getLogger(ProductsExtendServiceImpl.class);
     private final ProductsExtendRepository productsExtendRepository;
+    private final ProductSubCategoryMapper productSubCategoryMapper;
+    private final ProductsExtendFilterRepository productsExtendFilterRepository;
 
     @Autowired
-    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository) {
+    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductSubCategoryMapper productSubCategoryMapper, ProductsExtendFilterRepository productsExtendFilterRepository) {
         this.productsExtendRepository = productsExtendRepository;
+        this.productSubCategoryMapper = productSubCategoryMapper;
+        this.productsExtendFilterRepository = productsExtendFilterRepository;
     }
 
     @Override
@@ -81,7 +92,44 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
     }
 
     @Override
-    public List<String> getProductTags(String keyword) {
-        return productsExtendRepository.getProductTags(keyword);
+    public List<Long> getSubCategoryList(Long categoryId) {
+        return productsExtendFilterRepository.getSubCategoryIds(categoryId);
+    }
+
+    @Override
+    public List<ProductSubCategoryDTO> getRelatedCategories(String keyword, Long category) {
+        try {
+            List<ProductSubCategoryDTO> returnList = productsExtendFilterRepository.selectCategoriesByTags(keyword == null ? "" : keyword, category == null ? 0 : category).stream()
+                .map(productSubCategoryMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+//            List<ProductSubCategory> aa = productsExtendFilterRepository.selectCategoriesByTags(keyword,Long.valueOf(category));
+            return returnList;
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<String> getRelatedColors(String keyword, Long category) {
+        try {
+            return productsExtendFilterRepository.selectColorsByTags(keyword == null ? "" : keyword, category == null ? 0 : category);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<String> getRelatedBrands(String keyword, Long category) {
+        return productsExtendFilterRepository.selectBrandsByTags(keyword == null ? "" : keyword, category == null ? 0 : category);
+    }
+
+    @Override
+    public Object getRelatedPriceRange(String keyword, Long category) {
+        try {
+            return productsExtendFilterRepository.selectPriceRangeByTags(keyword == null ? "" : keyword, category == null ? 0 : category);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
+        }
     }
 }

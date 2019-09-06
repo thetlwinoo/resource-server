@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IProductCategory } from 'app/shared/model/product-category.model';
 import { AccountService } from 'app/core';
@@ -20,6 +20,7 @@ export class ProductCategoryComponent implements OnInit, OnDestroy {
     constructor(
         protected productCategoryService: ProductCategoryService,
         protected jhiAlertService: JhiAlertService,
+        protected dataUtils: JhiDataUtils,
         protected eventManager: JhiEventManager,
         protected accountService: AccountService
     ) {}
@@ -53,6 +54,14 @@ export class ProductCategoryComponent implements OnInit, OnDestroy {
 
     trackId(index: number, item: IProductCategory) {
         return item.id;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
 
     registerChangeInProductCategories() {

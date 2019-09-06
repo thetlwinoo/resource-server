@@ -1,4 +1,4 @@
-x`<div class="row justify-content-center">
+<div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-review-lines-heading" jhiTranslate="resourceApp.reviewLines.home.createOrEditLabel">Create or edit a Review Lines</h2>
@@ -57,13 +57,6 @@ x`<div class="row justify-content-center">
                         [(ngModel)]="reviewLines.photoContentType" />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="reviewLines.productId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.reviewLines.review" for="field_review">Review</label>
                     <select class="form-control" id="field_review" name="review" [(ngModel)]="reviewLines.reviewId" >

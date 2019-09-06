@@ -246,12 +246,12 @@ public class PaymentMethodsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(paymentMethods.getId().intValue())))
-            .andExpect(jsonPath("$.[*].paymentMethodName").value(hasItem(DEFAULT_PAYMENT_METHOD_NAME)))
+            .andExpect(jsonPath("$.[*].paymentMethodName").value(hasItem(DEFAULT_PAYMENT_METHOD_NAME.toString())))
             .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getPaymentMethods() throws Exception {
@@ -263,7 +263,7 @@ public class PaymentMethodsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(paymentMethods.getId().intValue()))
-            .andExpect(jsonPath("$.paymentMethodName").value(DEFAULT_PAYMENT_METHOD_NAME))
+            .andExpect(jsonPath("$.paymentMethodName").value(DEFAULT_PAYMENT_METHOD_NAME.toString()))
             .andExpect(jsonPath("$.activeInd").value(DEFAULT_ACTIVE_IND.booleanValue()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));

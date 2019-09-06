@@ -93,9 +93,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "custom_fields")
     private String customFields;
 
-    @Column(name = "tags")
-    private String tags;
-
     @Column(name = "photo")
     private String photo;
 
@@ -117,6 +114,10 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "sell_count")
     private Integer sellCount;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private ReviewLines productReview;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
@@ -402,19 +403,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.customFields = customFields;
     }
 
-    public String getTags() {
-        return tags;
-    }
-
-    public Products tags(String tags) {
-        this.tags = tags;
-        return this;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     public String getPhoto() {
         return photo;
     }
@@ -504,6 +492,19 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setSellCount(Integer sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public ReviewLines getProductReview() {
+        return productReview;
+    }
+
+    public Products productReview(ReviewLines reviewLines) {
+        this.productReview = reviewLines;
+        return this;
+    }
+
+    public void setProductReview(ReviewLines reviewLines) {
+        this.productReview = reviewLines;
     }
 
     public PackageTypes getUnitPackage() {
@@ -641,7 +642,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
             ", classType='" + getClassType() + "'" +
             ", style='" + getStyle() + "'" +
             ", customFields='" + getCustomFields() + "'" +
-            ", tags='" + getTags() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", sellStartDate='" + getSellStartDate() + "'" +
             ", sellEndDate='" + getSellEndDate() + "'" +

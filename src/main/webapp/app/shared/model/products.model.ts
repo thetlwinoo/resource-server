@@ -21,7 +21,6 @@ export interface IProducts {
     classType?: string;
     style?: string;
     customFields?: string;
-    tags?: string;
     photo?: string;
     sellStartDate?: Moment;
     sellEndDate?: Moment;
@@ -29,6 +28,7 @@ export interface IProducts {
     internalComments?: string;
     discontinuedDate?: Moment;
     sellCount?: number;
+    productReviewId?: number;
     unitPackagePackageTypeName?: string;
     unitPackageId?: number;
     outerPackagePackageTypeName?: string;
@@ -67,7 +67,6 @@ export class Products implements IProducts {
         public classType?: string,
         public style?: string,
         public customFields?: string,
-        public tags?: string,
         public photo?: string,
         public sellStartDate?: Moment,
         public sellEndDate?: Moment,
@@ -75,6 +74,7 @@ export class Products implements IProducts {
         public internalComments?: string,
         public discontinuedDate?: Moment,
         public sellCount?: number,
+        public productReviewId?: number,
         public unitPackagePackageTypeName?: string,
         public unitPackageId?: number,
         public outerPackagePackageTypeName?: string,

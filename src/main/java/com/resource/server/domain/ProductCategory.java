@@ -29,6 +29,13 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
     @Column(name = "product_category_name", nullable = false)
     private String productCategoryName;
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -49,6 +56,32 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
 
     public void setProductCategoryName(String productCategoryName) {
         this.productCategoryName = productCategoryName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public ProductCategory photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public ProductCategory photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -77,6 +110,8 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
         return "ProductCategory{" +
             "id=" + getId() +
             ", productCategoryName='" + getProductCategoryName() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
             "}";
     }
 }

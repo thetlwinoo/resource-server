@@ -22,7 +22,6 @@
             <th><span jhiTranslate="resourceApp.reviewLines.deliveryRating">Delivery Rating</span></th>
             <th><span jhiTranslate="resourceApp.reviewLines.deliveryReview">Delivery Review</span></th>
             <th><span jhiTranslate="resourceApp.reviewLines.photo">Photo</span></th>
-            <th><span jhiTranslate="resourceApp.reviewLines.product">Product</span></th>
             <th><span jhiTranslate="resourceApp.reviewLines.review">Review</span></th>
             <th></th>
             </tr>
@@ -41,11 +40,6 @@
                         <img [src]="'data:' + reviewLines.photoContentType + ';base64,' + reviewLines.photo" style="max-height: 30px;" alt="reviewLines image"/>
                     </a>
                     <span *ngIf="reviewLines.photo">{{reviewLines.photoContentType}}, {{byteSize(reviewLines.photo)}}</span>
-                </td>
-                <td>
-                    <div *ngIf="reviewLines.productId">
-                        <a [routerLink]="['../products', reviewLines.productId , 'view' ]" >{{reviewLines.productProductName}}</a>
-                    </div>
                 </td>
                 <td>
                     <div *ngIf="reviewLines.reviewId">

@@ -299,21 +299,21 @@ public class InvoicesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoices.getId().intValue())))
             .andExpect(jsonPath("$.[*].invoiceDate").value(hasItem(DEFAULT_INVOICE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].customerPurchaseOrderNumber").value(hasItem(DEFAULT_CUSTOMER_PURCHASE_ORDER_NUMBER)))
+            .andExpect(jsonPath("$.[*].customerPurchaseOrderNumber").value(hasItem(DEFAULT_CUSTOMER_PURCHASE_ORDER_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].isCreditNote").value(hasItem(DEFAULT_IS_CREDIT_NOTE.booleanValue())))
-            .andExpect(jsonPath("$.[*].creditNoteReason").value(hasItem(DEFAULT_CREDIT_NOTE_REASON)))
-            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
-            .andExpect(jsonPath("$.[*].deliveryInstructions").value(hasItem(DEFAULT_DELIVERY_INSTRUCTIONS)))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
+            .andExpect(jsonPath("$.[*].creditNoteReason").value(hasItem(DEFAULT_CREDIT_NOTE_REASON.toString())))
+            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS.toString())))
+            .andExpect(jsonPath("$.[*].deliveryInstructions").value(hasItem(DEFAULT_DELIVERY_INSTRUCTIONS.toString())))
+            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
             .andExpect(jsonPath("$.[*].totalDryItems").value(hasItem(DEFAULT_TOTAL_DRY_ITEMS)))
             .andExpect(jsonPath("$.[*].totalChillerItems").value(hasItem(DEFAULT_TOTAL_CHILLER_ITEMS)))
-            .andExpect(jsonPath("$.[*].deliveryRun").value(hasItem(DEFAULT_DELIVERY_RUN)))
-            .andExpect(jsonPath("$.[*].runPosition").value(hasItem(DEFAULT_RUN_POSITION)))
-            .andExpect(jsonPath("$.[*].returnedDeliveryData").value(hasItem(DEFAULT_RETURNED_DELIVERY_DATA)))
+            .andExpect(jsonPath("$.[*].deliveryRun").value(hasItem(DEFAULT_DELIVERY_RUN.toString())))
+            .andExpect(jsonPath("$.[*].runPosition").value(hasItem(DEFAULT_RUN_POSITION.toString())))
+            .andExpect(jsonPath("$.[*].returnedDeliveryData").value(hasItem(DEFAULT_RETURNED_DELIVERY_DATA.toString())))
             .andExpect(jsonPath("$.[*].confirmedDeliveryTime").value(hasItem(DEFAULT_CONFIRMED_DELIVERY_TIME.toString())))
-            .andExpect(jsonPath("$.[*].confirmedReceivedBy").value(hasItem(DEFAULT_CONFIRMED_RECEIVED_BY)));
+            .andExpect(jsonPath("$.[*].confirmedReceivedBy").value(hasItem(DEFAULT_CONFIRMED_RECEIVED_BY.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getInvoices() throws Exception {
@@ -326,19 +326,19 @@ public class InvoicesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(invoices.getId().intValue()))
             .andExpect(jsonPath("$.invoiceDate").value(DEFAULT_INVOICE_DATE.toString()))
-            .andExpect(jsonPath("$.customerPurchaseOrderNumber").value(DEFAULT_CUSTOMER_PURCHASE_ORDER_NUMBER))
+            .andExpect(jsonPath("$.customerPurchaseOrderNumber").value(DEFAULT_CUSTOMER_PURCHASE_ORDER_NUMBER.toString()))
             .andExpect(jsonPath("$.isCreditNote").value(DEFAULT_IS_CREDIT_NOTE.booleanValue()))
-            .andExpect(jsonPath("$.creditNoteReason").value(DEFAULT_CREDIT_NOTE_REASON))
-            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS))
-            .andExpect(jsonPath("$.deliveryInstructions").value(DEFAULT_DELIVERY_INSTRUCTIONS))
-            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS))
+            .andExpect(jsonPath("$.creditNoteReason").value(DEFAULT_CREDIT_NOTE_REASON.toString()))
+            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS.toString()))
+            .andExpect(jsonPath("$.deliveryInstructions").value(DEFAULT_DELIVERY_INSTRUCTIONS.toString()))
+            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
             .andExpect(jsonPath("$.totalDryItems").value(DEFAULT_TOTAL_DRY_ITEMS))
             .andExpect(jsonPath("$.totalChillerItems").value(DEFAULT_TOTAL_CHILLER_ITEMS))
-            .andExpect(jsonPath("$.deliveryRun").value(DEFAULT_DELIVERY_RUN))
-            .andExpect(jsonPath("$.runPosition").value(DEFAULT_RUN_POSITION))
-            .andExpect(jsonPath("$.returnedDeliveryData").value(DEFAULT_RETURNED_DELIVERY_DATA))
+            .andExpect(jsonPath("$.deliveryRun").value(DEFAULT_DELIVERY_RUN.toString()))
+            .andExpect(jsonPath("$.runPosition").value(DEFAULT_RUN_POSITION.toString()))
+            .andExpect(jsonPath("$.returnedDeliveryData").value(DEFAULT_RETURNED_DELIVERY_DATA.toString()))
             .andExpect(jsonPath("$.confirmedDeliveryTime").value(DEFAULT_CONFIRMED_DELIVERY_TIME.toString()))
-            .andExpect(jsonPath("$.confirmedReceivedBy").value(DEFAULT_CONFIRMED_RECEIVED_BY));
+            .andExpect(jsonPath("$.confirmedReceivedBy").value(DEFAULT_CONFIRMED_RECEIVED_BY.toString()));
     }
 
     @Test

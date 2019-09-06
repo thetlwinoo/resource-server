@@ -15,7 +15,8 @@
             "detail": {
                 "title": "Product Category"
             },
-            "productCategoryName": "Product Category Name"
+            "productCategoryName": "Product Category Name",
+            "photo": "Photo"
         }
     }
 }

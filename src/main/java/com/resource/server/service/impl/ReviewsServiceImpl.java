@@ -66,15 +66,15 @@ public class ReviewsServiceImpl implements ReviewsService {
 
 
     /**
-     *  get all the reviews where Order is null.
+     *  get all the reviews where Review is null.
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<ReviewsDTO> findAllWhereOrderIsNull() {
-        log.debug("Request to get all reviews where Order is null");
+    public List<ReviewsDTO> findAllWhereReviewIsNull() {
+        log.debug("Request to get all reviews where Review is null");
         return StreamSupport
             .stream(reviewsRepository.findAll().spliterator(), false)
-            .filter(reviews -> reviews.getOrder() == null)
+            .filter(reviews -> reviews.getReview() == null)
             .map(reviewsMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

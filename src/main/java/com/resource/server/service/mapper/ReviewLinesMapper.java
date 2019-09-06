@@ -8,15 +8,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity ReviewLines and its DTO ReviewLinesDTO.
  */
-@Mapper(componentModel = "spring", uses = {ProductsMapper.class, ReviewsMapper.class})
+@Mapper(componentModel = "spring", uses = {ReviewsMapper.class})
 public interface ReviewLinesMapper extends EntityMapper<ReviewLinesDTO, ReviewLines> {
 
-    @Mapping(source = "product.id", target = "productId")
-    @Mapping(source = "product.productName", target = "productProductName")
     @Mapping(source = "review.id", target = "reviewId")
     ReviewLinesDTO toDto(ReviewLines reviewLines);
 
-    @Mapping(source = "productId", target = "product")
+    @Mapping(target = "product", ignore = true)
     @Mapping(source = "reviewId", target = "review")
     ReviewLines toEntity(ReviewLinesDTO reviewLinesDTO);
 

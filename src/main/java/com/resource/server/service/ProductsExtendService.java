@@ -1,6 +1,7 @@
 package com.resource.server.service;
 
 import com.resource.server.domain.Products;
+import com.resource.server.service.dto.ProductSubCategoryDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -22,5 +23,13 @@ public interface ProductsExtendService {
 
     List<Products> searchProductsAll(String keyword);
 
-    List<String> getProductTags(String keyword);
+    List<Long> getSubCategoryList(Long categoryId);
+
+    List<ProductSubCategoryDTO> getRelatedCategories(String keyword, Long category);
+
+    List<String> getRelatedColors(String keyword, Long category);
+
+    Object getRelatedPriceRange(String keyword, Long category);
+
+    List<String> getRelatedBrands(String keyword, Long category);
 }

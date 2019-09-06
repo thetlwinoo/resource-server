@@ -12,8 +12,8 @@ export interface IReviews {
     overAllDeliveryReview?: string;
     reviewAsAnonymous?: boolean;
     completedReview?: boolean;
-    reviewLists?: IReviewLines[];
-    orderId?: number;
+    reviewLineLists?: IReviewLines[];
+    reviewId?: number;
 }
 
 export class Reviews implements IReviews {
@@ -28,8 +28,8 @@ export class Reviews implements IReviews {
         public overAllDeliveryReview?: string,
         public reviewAsAnonymous?: boolean,
         public completedReview?: boolean,
-        public reviewLists?: IReviewLines[],
-        public orderId?: number
+        public reviewLineLists?: IReviewLines[],
+        public reviewId?: number
     ) {
         this.reviewAsAnonymous = this.reviewAsAnonymous || false;
         this.completedReview = this.completedReview || false;

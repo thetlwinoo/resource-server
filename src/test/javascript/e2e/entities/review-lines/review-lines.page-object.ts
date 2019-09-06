@@ -33,7 +33,6 @@ export class ReviewLinesUpdatePage {
     deliveryRatingInput = element(by.id('field_deliveryRating'));
     deliveryReviewInput = element(by.id('field_deliveryReview'));
     photoInput = element(by.id('file_photo'));
-    productSelect = element(by.id('field_product'));
     reviewSelect = element(by.id('field_review'));
 
     async getPageTitle() {
@@ -94,25 +93,6 @@ export class ReviewLinesUpdatePage {
 
     async getPhotoInput() {
         return this.photoInput.getAttribute('value');
-    }
-
-    async productSelectLastOption() {
-        await this.productSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
-    }
-
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
-    }
-
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
     }
 
     async reviewSelectLastOption() {

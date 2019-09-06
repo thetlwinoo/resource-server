@@ -172,9 +172,9 @@ public class PhoneNumberTypeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(phoneNumberType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].phoneNumberTypeName").value(hasItem(DEFAULT_PHONE_NUMBER_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].phoneNumberTypeName").value(hasItem(DEFAULT_PHONE_NUMBER_TYPE_NAME.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getPhoneNumberType() throws Exception {
@@ -186,7 +186,7 @@ public class PhoneNumberTypeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(phoneNumberType.getId().intValue()))
-            .andExpect(jsonPath("$.phoneNumberTypeName").value(DEFAULT_PHONE_NUMBER_TYPE_NAME));
+            .andExpect(jsonPath("$.phoneNumberTypeName").value(DEFAULT_PHONE_NUMBER_TYPE_NAME.toString()));
     }
 
     @Test

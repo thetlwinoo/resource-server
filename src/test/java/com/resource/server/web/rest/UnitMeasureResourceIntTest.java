@@ -196,10 +196,10 @@ public class UnitMeasureResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(unitMeasure.getId().intValue())))
-            .andExpect(jsonPath("$.[*].unitMeasureCode").value(hasItem(DEFAULT_UNIT_MEASURE_CODE)))
-            .andExpect(jsonPath("$.[*].unitMeasureName").value(hasItem(DEFAULT_UNIT_MEASURE_NAME)));
+            .andExpect(jsonPath("$.[*].unitMeasureCode").value(hasItem(DEFAULT_UNIT_MEASURE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].unitMeasureName").value(hasItem(DEFAULT_UNIT_MEASURE_NAME.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getUnitMeasure() throws Exception {
@@ -211,8 +211,8 @@ public class UnitMeasureResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(unitMeasure.getId().intValue()))
-            .andExpect(jsonPath("$.unitMeasureCode").value(DEFAULT_UNIT_MEASURE_CODE))
-            .andExpect(jsonPath("$.unitMeasureName").value(DEFAULT_UNIT_MEASURE_NAME));
+            .andExpect(jsonPath("$.unitMeasureCode").value(DEFAULT_UNIT_MEASURE_CODE.toString()))
+            .andExpect(jsonPath("$.unitMeasureName").value(DEFAULT_UNIT_MEASURE_NAME.toString()));
     }
 
     @Test

@@ -146,9 +146,6 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getCustomFields() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCustomFields(), Products_.customFields));
             }
-            if (criteria.getTags() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getTags(), Products_.tags));
-            }
             if (criteria.getPhoto() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPhoto(), Products_.photo));
             }
@@ -169,6 +166,10 @@ public class ProductsQueryService extends QueryService<Products> {
             }
             if (criteria.getSellCount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellCount(), Products_.sellCount));
+            }
+            if (criteria.getProductReviewId() != null) {
+                specification = specification.and(buildSpecification(criteria.getProductReviewId(),
+                    root -> root.join(Products_.productReview, JoinType.LEFT).get(ReviewLines_.id)));
             }
             if (criteria.getUnitPackageId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUnitPackageId(),

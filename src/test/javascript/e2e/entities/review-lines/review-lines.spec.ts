@@ -51,7 +51,6 @@ describe('ReviewLines e2e test', () => {
             reviewLinesUpdatePage.setDeliveryRatingInput('5'),
             reviewLinesUpdatePage.setDeliveryReviewInput('deliveryReview'),
             reviewLinesUpdatePage.setPhotoInput(absolutePath),
-            reviewLinesUpdatePage.productSelectLastOption(),
             reviewLinesUpdatePage.reviewSelectLastOption()
         ]);
         expect(await reviewLinesUpdatePage.getProductRatingInput()).to.eq('5');

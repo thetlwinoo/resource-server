@@ -45,7 +45,6 @@ export class ProductsUpdatePage {
     classTypeInput = element(by.id('field_classType'));
     styleInput = element(by.id('field_style'));
     customFieldsInput = element(by.id('field_customFields'));
-    tagsInput = element(by.id('field_tags'));
     photoInput = element(by.id('field_photo'));
     sellStartDateInput = element(by.id('field_sellStartDate'));
     sellEndDateInput = element(by.id('field_sellEndDate'));
@@ -53,6 +52,7 @@ export class ProductsUpdatePage {
     internalCommentsInput = element(by.id('field_internalComments'));
     discontinuedDateInput = element(by.id('field_discontinuedDate'));
     sellCountInput = element(by.id('field_sellCount'));
+    productReviewSelect = element(by.id('field_productReview'));
     unitPackageSelect = element(by.id('field_unitPackage'));
     outerPackageSelect = element(by.id('field_outerPackage'));
     supplierSelect = element(by.id('field_supplier'));
@@ -207,14 +207,6 @@ export class ProductsUpdatePage {
         return this.customFieldsInput.getAttribute('value');
     }
 
-    async setTagsInput(tags) {
-        await this.tagsInput.sendKeys(tags);
-    }
-
-    async getTagsInput() {
-        return this.tagsInput.getAttribute('value');
-    }
-
     async setPhotoInput(photo) {
         await this.photoInput.sendKeys(photo);
     }
@@ -269,6 +261,25 @@ export class ProductsUpdatePage {
 
     async getSellCountInput() {
         return this.sellCountInput.getAttribute('value');
+    }
+
+    async productReviewSelectLastOption() {
+        await this.productReviewSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async productReviewSelectOption(option) {
+        await this.productReviewSelect.sendKeys(option);
+    }
+
+    getProductReviewSelect(): ElementFinder {
+        return this.productReviewSelect;
+    }
+
+    async getProductReviewSelectedOption() {
+        return this.productReviewSelect.element(by.css('option:checked')).getText();
     }
 
     async unitPackageSelectLastOption() {

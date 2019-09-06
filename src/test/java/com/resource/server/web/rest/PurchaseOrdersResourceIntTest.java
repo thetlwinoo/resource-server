@@ -201,12 +201,12 @@ public class PurchaseOrdersResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseOrders.getId().intValue())))
             .andExpect(jsonPath("$.[*].orderDate").value(hasItem(DEFAULT_ORDER_DATE.toString())))
             .andExpect(jsonPath("$.[*].expectedDeliveryDate").value(hasItem(DEFAULT_EXPECTED_DELIVERY_DATE.toString())))
-            .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE)))
+            .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].isOrderFinalized").value(hasItem(DEFAULT_IS_ORDER_FINALIZED.booleanValue())))
-            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)));
+            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS.toString())))
+            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getPurchaseOrders() throws Exception {
@@ -220,10 +220,10 @@ public class PurchaseOrdersResourceIntTest {
             .andExpect(jsonPath("$.id").value(purchaseOrders.getId().intValue()))
             .andExpect(jsonPath("$.orderDate").value(DEFAULT_ORDER_DATE.toString()))
             .andExpect(jsonPath("$.expectedDeliveryDate").value(DEFAULT_EXPECTED_DELIVERY_DATE.toString()))
-            .andExpect(jsonPath("$.supplierReference").value(DEFAULT_SUPPLIER_REFERENCE))
+            .andExpect(jsonPath("$.supplierReference").value(DEFAULT_SUPPLIER_REFERENCE.toString()))
             .andExpect(jsonPath("$.isOrderFinalized").value(DEFAULT_IS_ORDER_FINALIZED.booleanValue()))
-            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS))
-            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS));
+            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS.toString()))
+            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()));
     }
 
     @Test

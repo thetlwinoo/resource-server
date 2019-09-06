@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -51,6 +52,11 @@ public class ProductModelResourceIntTest {
 
     private static final String DEFAULT_INSTRUCTIONS = "AAAAAAAAAA";
     private static final String UPDATED_INSTRUCTIONS = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
 
     @Autowired
     private ProductModelRepository productModelRepository;
@@ -102,7 +108,9 @@ public class ProductModelResourceIntTest {
         ProductModel productModel = new ProductModel()
             .productModelName(DEFAULT_PRODUCT_MODEL_NAME)
             .calalogDescription(DEFAULT_CALALOG_DESCRIPTION)
-            .instructions(DEFAULT_INSTRUCTIONS);
+            .instructions(DEFAULT_INSTRUCTIONS)
+            .photo(DEFAULT_PHOTO)
+            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
         return productModel;
     }
 
@@ -130,6 +138,8 @@ public class ProductModelResourceIntTest {
         assertThat(testProductModel.getProductModelName()).isEqualTo(DEFAULT_PRODUCT_MODEL_NAME);
         assertThat(testProductModel.getCalalogDescription()).isEqualTo(DEFAULT_CALALOG_DESCRIPTION);
         assertThat(testProductModel.getInstructions()).isEqualTo(DEFAULT_INSTRUCTIONS);
+        assertThat(testProductModel.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testProductModel.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
     }
 
     @Test
@@ -182,11 +192,13 @@ public class ProductModelResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productModel.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productModelName").value(hasItem(DEFAULT_PRODUCT_MODEL_NAME)))
-            .andExpect(jsonPath("$.[*].calalogDescription").value(hasItem(DEFAULT_CALALOG_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].instructions").value(hasItem(DEFAULT_INSTRUCTIONS)));
+            .andExpect(jsonPath("$.[*].productModelName").value(hasItem(DEFAULT_PRODUCT_MODEL_NAME.toString())))
+            .andExpect(jsonPath("$.[*].calalogDescription").value(hasItem(DEFAULT_CALALOG_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].instructions").value(hasItem(DEFAULT_INSTRUCTIONS.toString())))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
     }
-
+    
     @Test
     @Transactional
     public void getProductModel() throws Exception {
@@ -198,9 +210,11 @@ public class ProductModelResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productModel.getId().intValue()))
-            .andExpect(jsonPath("$.productModelName").value(DEFAULT_PRODUCT_MODEL_NAME))
-            .andExpect(jsonPath("$.calalogDescription").value(DEFAULT_CALALOG_DESCRIPTION))
-            .andExpect(jsonPath("$.instructions").value(DEFAULT_INSTRUCTIONS));
+            .andExpect(jsonPath("$.productModelName").value(DEFAULT_PRODUCT_MODEL_NAME.toString()))
+            .andExpect(jsonPath("$.calalogDescription").value(DEFAULT_CALALOG_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.instructions").value(DEFAULT_INSTRUCTIONS.toString()))
+            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
 
     @Test
@@ -226,7 +240,9 @@ public class ProductModelResourceIntTest {
         updatedProductModel
             .productModelName(UPDATED_PRODUCT_MODEL_NAME)
             .calalogDescription(UPDATED_CALALOG_DESCRIPTION)
-            .instructions(UPDATED_INSTRUCTIONS);
+            .instructions(UPDATED_INSTRUCTIONS)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
         ProductModelDTO productModelDTO = productModelMapper.toDto(updatedProductModel);
 
         restProductModelMockMvc.perform(put("/api/product-models")
@@ -241,6 +257,8 @@ public class ProductModelResourceIntTest {
         assertThat(testProductModel.getProductModelName()).isEqualTo(UPDATED_PRODUCT_MODEL_NAME);
         assertThat(testProductModel.getCalalogDescription()).isEqualTo(UPDATED_CALALOG_DESCRIPTION);
         assertThat(testProductModel.getInstructions()).isEqualTo(UPDATED_INSTRUCTIONS);
+        assertThat(testProductModel.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testProductModel.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
     }
 
     @Test

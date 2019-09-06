@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ProductSubCategoryService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new ProductSubCategory(0, 'AAAAAAA');
+            elemDefault = new ProductSubCategory(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -55,7 +55,8 @@ describe('Service Tests', () => {
             it('should update a ProductSubCategory', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        productSubCategoryName: 'BBBBBB'
+                        productSubCategoryName: 'BBBBBB',
+                        photo: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -72,7 +73,8 @@ describe('Service Tests', () => {
             it('should return a list of ProductSubCategory', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        productSubCategoryName: 'BBBBBB'
+                        productSubCategoryName: 'BBBBBB',
+                        photo: 'BBBBBB'
                     },
                     elemDefault
                 );

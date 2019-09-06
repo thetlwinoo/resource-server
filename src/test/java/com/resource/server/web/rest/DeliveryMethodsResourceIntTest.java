@@ -222,11 +222,11 @@ public class DeliveryMethodsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(deliveryMethods.getId().intValue())))
-            .andExpect(jsonPath("$.[*].deliveryMethodName").value(hasItem(DEFAULT_DELIVERY_METHOD_NAME)))
+            .andExpect(jsonPath("$.[*].deliveryMethodName").value(hasItem(DEFAULT_DELIVERY_METHOD_NAME.toString())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getDeliveryMethods() throws Exception {
@@ -238,7 +238,7 @@ public class DeliveryMethodsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(deliveryMethods.getId().intValue()))
-            .andExpect(jsonPath("$.deliveryMethodName").value(DEFAULT_DELIVERY_METHOD_NAME))
+            .andExpect(jsonPath("$.deliveryMethodName").value(DEFAULT_DELIVERY_METHOD_NAME.toString()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

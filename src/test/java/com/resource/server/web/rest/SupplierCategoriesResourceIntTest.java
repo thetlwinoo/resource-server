@@ -222,11 +222,11 @@ public class SupplierCategoriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplierCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierCategoryName").value(hasItem(DEFAULT_SUPPLIER_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].supplierCategoryName").value(hasItem(DEFAULT_SUPPLIER_CATEGORY_NAME.toString())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getSupplierCategories() throws Exception {
@@ -238,7 +238,7 @@ public class SupplierCategoriesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(supplierCategories.getId().intValue()))
-            .andExpect(jsonPath("$.supplierCategoryName").value(DEFAULT_SUPPLIER_CATEGORY_NAME))
+            .andExpect(jsonPath("$.supplierCategoryName").value(DEFAULT_SUPPLIER_CATEGORY_NAME.toString()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

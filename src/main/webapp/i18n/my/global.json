@@ -72,6 +72,8 @@
                 "wishlistProducts": "Wishlist Products",
                 "compares": "Compares",
                 "compareProducts": "Compare Products",
+                "productReview": "Product Review",
+                "productTags": "Product Tags",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

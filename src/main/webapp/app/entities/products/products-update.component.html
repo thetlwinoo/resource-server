@@ -179,11 +179,6 @@
                         [(ngModel)]="products.customFields" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.tags" for="field_tags">Tags</label>
-                    <input type="text" class="form-control" name="tags" id="field_tags"
-                        [(ngModel)]="products.tags" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.photo" for="field_photo">Photo</label>
                     <input type="text" class="form-control" name="photo" id="field_photo"
                         [(ngModel)]="products.photo" />
@@ -240,6 +235,13 @@
                         [(ngModel)]="products.sellCount" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.productReview" for="field_productReview">Product Review</label>
+                    <select class="form-control" id="field_productReview" name="productReview" [(ngModel)]="products.productReviewId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="reviewLinesOption.id" *ngFor="let reviewLinesOption of productreviews; trackBy: trackReviewLinesById">{{reviewLinesOption.id}}</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.unitPackage" for="field_unitPackage">Unit Package</label>
                     <select class="form-control" id="field_unitPackage" name="unitPackage" [(ngModel)]="products.unitPackageId" >

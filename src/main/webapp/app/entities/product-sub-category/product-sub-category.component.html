@@ -16,6 +16,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="resourceApp.productSubCategory.productSubCategoryName">Product Sub Category Name</span></th>
+            <th><span jhiTranslate="resourceApp.productSubCategory.photo">Photo</span></th>
             <th><span jhiTranslate="resourceApp.productSubCategory.productCategory">Product Category</span></th>
             <th></th>
             </tr>
@@ -24,6 +25,12 @@
             <tr *ngFor="let productSubCategory of productSubCategories ;trackBy: trackId">
                 <td><a [routerLink]="['/product-sub-category', productSubCategory.id, 'view' ]">{{productSubCategory.id}}</a></td>
                 <td>{{productSubCategory.productSubCategoryName}}</td>
+                <td>
+                    <a *ngIf="productSubCategory.photo" (click)="openFile(productSubCategory.photoContentType, productSubCategory.photo)">
+                        <img [src]="'data:' + productSubCategory.photoContentType + ';base64,' + productSubCategory.photo" style="max-height: 30px;" alt="productSubCategory image"/>
+                    </a>
+                    <span *ngIf="productSubCategory.photo">{{productSubCategory.photoContentType}}, {{byteSize(productSubCategory.photo)}}</span>
+                </td>
                 <td>
                     <div *ngIf="productSubCategory.productCategoryId">
                         <a [routerLink]="['../product-category', productSubCategory.productCategoryId , 'view' ]" >{{productSubCategory.productCategoryProductCategoryName}}</a>

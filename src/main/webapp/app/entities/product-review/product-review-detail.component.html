@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productReview">
+            <h2><span jhiTranslate="resourceApp.productReview.detail.title">Product Review</span> {{productReview.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productReview.reviewerName">Reviewer Name</span></dt>
+                <dd>
+                    <span>{{productReview.reviewerName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productReview.reviewDate">Review Date</span></dt>
+                <dd>
+                    <span>{{productReview.reviewDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productReview.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{productReview.emailAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productReview.rating">Rating</span></dt>
+                <dd>
+                    <span>{{productReview.rating}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productReview.comments">Comments</span></dt>
+                <dd>
+                    <span>{{productReview.comments}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productReview.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="productReview.productId">
+                        <a [routerLink]="['/products', productReview.productId, 'view']">{{productReview.productProductName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-review', productReview.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

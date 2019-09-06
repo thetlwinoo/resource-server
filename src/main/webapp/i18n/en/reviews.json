@@ -24,8 +24,8 @@
             "overAllDeliveryReview": "Over All Delivery Review",
             "reviewAsAnonymous": "Review As Anonymous",
             "completedReview": "Completed Review",
-            "reviewList": "Review List",
-            "order": "Order"
+            "reviewLineList": "Review Line List",
+            "review": "Review"
         }
     }
 }

@@ -16,6 +16,7 @@
                 "title": "Product Sub Category"
             },
             "productSubCategoryName": "Product Sub Category Name",
+            "photo": "Photo",
             "productCategory": "Product Category"
         }
     }

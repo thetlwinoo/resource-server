@@ -7,6 +7,7 @@ import {
     ProductSubCategoryDeleteDialog,
     ProductSubCategoryUpdatePage
 } from './product-sub-category.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -16,6 +17,9 @@ describe('ProductSubCategory e2e test', () => {
     let productSubCategoryUpdatePage: ProductSubCategoryUpdatePage;
     let productSubCategoryComponentsPage: ProductSubCategoryComponentsPage;
     let productSubCategoryDeleteDialog: ProductSubCategoryDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -45,9 +49,11 @@ describe('ProductSubCategory e2e test', () => {
         await productSubCategoryComponentsPage.clickOnCreateButton();
         await promise.all([
             productSubCategoryUpdatePage.setProductSubCategoryNameInput('productSubCategoryName'),
+            productSubCategoryUpdatePage.setPhotoInput(absolutePath),
             productSubCategoryUpdatePage.productCategorySelectLastOption()
         ]);
         expect(await productSubCategoryUpdatePage.getProductSubCategoryNameInput()).to.eq('productSubCategoryName');
+        expect(await productSubCategoryUpdatePage.getPhotoInput()).to.endsWith(fileNameToUpload);
         await productSubCategoryUpdatePage.save();
         expect(await productSubCategoryUpdatePage.getSaveButton().isPresent()).to.be.false;
 

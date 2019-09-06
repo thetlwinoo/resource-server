@@ -81,9 +81,9 @@ public class ReviewsResource {
      */
     @GetMapping("/reviews")
     public List<ReviewsDTO> getAllReviews(@RequestParam(required = false) String filter) {
-        if ("order-is-null".equals(filter)) {
-            log.debug("REST request to get all Reviewss where order is null");
-            return reviewsService.findAllWhereOrderIsNull();
+        if ("review-is-null".equals(filter)) {
+            log.debug("REST request to get all Reviewss where review is null");
+            return reviewsService.findAllWhereReviewIsNull();
         }
         log.debug("REST request to get all Reviews");
         return reviewsService.findAll();

@@ -153,9 +153,9 @@ public class ShipMethodResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(shipMethod.getId().intValue())))
-            .andExpect(jsonPath("$.[*].shipMethodName").value(hasItem(DEFAULT_SHIP_METHOD_NAME)));
+            .andExpect(jsonPath("$.[*].shipMethodName").value(hasItem(DEFAULT_SHIP_METHOD_NAME.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getShipMethod() throws Exception {
@@ -167,7 +167,7 @@ public class ShipMethodResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(shipMethod.getId().intValue()))
-            .andExpect(jsonPath("$.shipMethodName").value(DEFAULT_SHIP_METHOD_NAME));
+            .andExpect(jsonPath("$.shipMethodName").value(DEFAULT_SHIP_METHOD_NAME.toString()));
     }
 
     @Test

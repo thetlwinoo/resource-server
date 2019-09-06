@@ -177,10 +177,10 @@ public class AddressTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(addressTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].addressTypeName").value(hasItem(DEFAULT_ADDRESS_TYPE_NAME)))
-            .andExpect(jsonPath("$.[*].refer").value(hasItem(DEFAULT_REFER)));
+            .andExpect(jsonPath("$.[*].addressTypeName").value(hasItem(DEFAULT_ADDRESS_TYPE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].refer").value(hasItem(DEFAULT_REFER.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getAddressTypes() throws Exception {
@@ -192,8 +192,8 @@ public class AddressTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(addressTypes.getId().intValue()))
-            .andExpect(jsonPath("$.addressTypeName").value(DEFAULT_ADDRESS_TYPE_NAME))
-            .andExpect(jsonPath("$.refer").value(DEFAULT_REFER));
+            .andExpect(jsonPath("$.addressTypeName").value(DEFAULT_ADDRESS_TYPE_NAME.toString()))
+            .andExpect(jsonPath("$.refer").value(DEFAULT_REFER.toString()));
     }
 
     @Test

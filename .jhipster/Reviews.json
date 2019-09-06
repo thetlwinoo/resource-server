@@ -43,13 +43,13 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "reviewLines",
             "otherEntityRelationshipName": "review",
-            "relationshipName": "reviewList"
+            "relationshipName": "reviewLineList"
         },
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "orders",
             "otherEntityRelationshipName": "orderReview",
-            "relationshipName": "order",
+            "relationshipName": "review",
             "ownerSide": false
         }
     ],

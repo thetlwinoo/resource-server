@@ -24,6 +24,12 @@ public interface ReviewLinesService {
      * @return the list of entities
      */
     List<ReviewLinesDTO> findAll();
+    /**
+     * Get all the ReviewLinesDTO where Product is null.
+     *
+     * @return the list of entities
+     */
+    List<ReviewLinesDTO> findAllWhereProductIsNull();
 
 
     /**

@@ -91,7 +91,6 @@ class ProductsGatlingTest extends Simulation {
                 , "classType":"SAMPLE_TEXT"
                 , "style":"SAMPLE_TEXT"
                 , "customFields":"SAMPLE_TEXT"
-                , "tags":"SAMPLE_TEXT"
                 , "photo":"SAMPLE_TEXT"
                 , "sellStartDate":"2020-01-01T00:00:00.000Z"
                 , "sellEndDate":"2020-01-01T00:00:00.000Z"

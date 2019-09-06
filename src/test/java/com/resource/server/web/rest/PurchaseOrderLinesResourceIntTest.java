@@ -200,13 +200,13 @@ public class PurchaseOrderLinesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseOrderLines.getId().intValue())))
             .andExpect(jsonPath("$.[*].ordersOuters").value(hasItem(DEFAULT_ORDERS_OUTERS)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].receivedOuters").value(hasItem(DEFAULT_RECEIVED_OUTERS)))
             .andExpect(jsonPath("$.[*].expectedUnitPricePerOuter").value(hasItem(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER.doubleValue())))
             .andExpect(jsonPath("$.[*].lastReceiptDate").value(hasItem(DEFAULT_LAST_RECEIPT_DATE.toString())))
             .andExpect(jsonPath("$.[*].isOrderLineFinalized").value(hasItem(DEFAULT_IS_ORDER_LINE_FINALIZED.booleanValue())));
     }
-
+    
     @Test
     @Transactional
     public void getPurchaseOrderLines() throws Exception {
@@ -219,7 +219,7 @@ public class PurchaseOrderLinesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(purchaseOrderLines.getId().intValue()))
             .andExpect(jsonPath("$.ordersOuters").value(DEFAULT_ORDERS_OUTERS))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.receivedOuters").value(DEFAULT_RECEIVED_OUTERS))
             .andExpect(jsonPath("$.expectedUnitPricePerOuter").value(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER.doubleValue()))
             .andExpect(jsonPath("$.lastReceiptDate").value(DEFAULT_LAST_RECEIPT_DATE.toString()))

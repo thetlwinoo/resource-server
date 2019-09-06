@@ -38,6 +38,13 @@ public class ProductModel extends AbstractAuditingEntity implements Serializable
     @Column(name = "instructions")
     private String instructions;
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
     @OneToMany(mappedBy = "productModel")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ProductDescription> descriptions = new HashSet<>();
@@ -87,6 +94,32 @@ public class ProductModel extends AbstractAuditingEntity implements Serializable
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public ProductModel photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public ProductModel photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
 
     public Set<ProductDescription> getDescriptions() {
@@ -142,6 +175,8 @@ public class ProductModel extends AbstractAuditingEntity implements Serializable
             ", productModelName='" + getProductModelName() + "'" +
             ", calalogDescription='" + getCalalogDescription() + "'" +
             ", instructions='" + getInstructions() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
             "}";
     }
 }

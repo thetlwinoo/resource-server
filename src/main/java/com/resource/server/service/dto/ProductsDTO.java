@@ -58,8 +58,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     private String customFields;
 
-    private String tags;
-
     private String photo;
 
     @NotNull
@@ -75,6 +73,8 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     private Integer sellCount;
 
+
+    private Long productReviewId;
 
     private Long unitPackageId;
 
@@ -264,14 +264,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.customFields = customFields;
     }
 
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     public String getPhoto() {
         return photo;
     }
@@ -326,6 +318,14 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setSellCount(Integer sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public Long getProductReviewId() {
+        return productReviewId;
+    }
+
+    public void setProductReviewId(Long reviewLinesId) {
+        this.productReviewId = reviewLinesId;
     }
 
     public Long getUnitPackageId() {
@@ -484,7 +484,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
             ", classType='" + getClassType() + "'" +
             ", style='" + getStyle() + "'" +
             ", customFields='" + getCustomFields() + "'" +
-            ", tags='" + getTags() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", sellStartDate='" + getSellStartDate() + "'" +
             ", sellEndDate='" + getSellEndDate() + "'" +
@@ -492,6 +491,7 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
             ", internalComments='" + getInternalComments() + "'" +
             ", discontinuedDate='" + getDiscontinuedDate() + "'" +
             ", sellCount=" + getSellCount() +
+            ", productReview=" + getProductReviewId() +
             ", unitPackage=" + getUnitPackageId() +
             ", unitPackage='" + getUnitPackagePackageTypeName() + "'" +
             ", outerPackage=" + getOuterPackageId() +

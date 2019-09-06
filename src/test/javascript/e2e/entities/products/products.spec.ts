@@ -57,7 +57,6 @@ describe('Products e2e test', () => {
             productsUpdatePage.setClassTypeInput('classType'),
             productsUpdatePage.setStyleInput('style'),
             productsUpdatePage.setCustomFieldsInput('customFields'),
-            productsUpdatePage.setTagsInput('tags'),
             productsUpdatePage.setPhotoInput('photo'),
             productsUpdatePage.setSellStartDateInput('2000-12-31'),
             productsUpdatePage.setSellEndDateInput('2000-12-31'),
@@ -65,6 +64,7 @@ describe('Products e2e test', () => {
             productsUpdatePage.setInternalCommentsInput('internalComments'),
             productsUpdatePage.setDiscontinuedDateInput('2000-12-31'),
             productsUpdatePage.setSellCountInput('5'),
+            productsUpdatePage.productReviewSelectLastOption(),
             productsUpdatePage.unitPackageSelectLastOption(),
             productsUpdatePage.outerPackageSelectLastOption(),
             productsUpdatePage.supplierSelectLastOption(),
@@ -106,7 +106,6 @@ describe('Products e2e test', () => {
         expect(await productsUpdatePage.getClassTypeInput()).to.eq('classType');
         expect(await productsUpdatePage.getStyleInput()).to.eq('style');
         expect(await productsUpdatePage.getCustomFieldsInput()).to.eq('customFields');
-        expect(await productsUpdatePage.getTagsInput()).to.eq('tags');
         expect(await productsUpdatePage.getPhotoInput()).to.eq('photo');
         expect(await productsUpdatePage.getSellStartDateInput()).to.eq('2000-12-31');
         expect(await productsUpdatePage.getSellEndDateInput()).to.eq('2000-12-31');

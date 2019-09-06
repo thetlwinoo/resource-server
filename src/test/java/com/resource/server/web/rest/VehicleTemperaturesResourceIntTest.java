@@ -280,14 +280,14 @@ public class VehicleTemperaturesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vehicleTemperatures.getId().intValue())))
             .andExpect(jsonPath("$.[*].vehicleRegistration").value(hasItem(DEFAULT_VEHICLE_REGISTRATION)))
-            .andExpect(jsonPath("$.[*].chillerSensorNumber").value(hasItem(DEFAULT_CHILLER_SENSOR_NUMBER)))
+            .andExpect(jsonPath("$.[*].chillerSensorNumber").value(hasItem(DEFAULT_CHILLER_SENSOR_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].recordedWhen").value(hasItem(DEFAULT_RECORDED_WHEN)))
             .andExpect(jsonPath("$.[*].temperature").value(hasItem(DEFAULT_TEMPERATURE.intValue())))
             .andExpect(jsonPath("$.[*].isCompressed").value(hasItem(DEFAULT_IS_COMPRESSED.booleanValue())))
-            .andExpect(jsonPath("$.[*].fullSensorData").value(hasItem(DEFAULT_FULL_SENSOR_DATA)))
-            .andExpect(jsonPath("$.[*].compressedSensorData").value(hasItem(DEFAULT_COMPRESSED_SENSOR_DATA)));
+            .andExpect(jsonPath("$.[*].fullSensorData").value(hasItem(DEFAULT_FULL_SENSOR_DATA.toString())))
+            .andExpect(jsonPath("$.[*].compressedSensorData").value(hasItem(DEFAULT_COMPRESSED_SENSOR_DATA.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getVehicleTemperatures() throws Exception {
@@ -300,12 +300,12 @@ public class VehicleTemperaturesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(vehicleTemperatures.getId().intValue()))
             .andExpect(jsonPath("$.vehicleRegistration").value(DEFAULT_VEHICLE_REGISTRATION))
-            .andExpect(jsonPath("$.chillerSensorNumber").value(DEFAULT_CHILLER_SENSOR_NUMBER))
+            .andExpect(jsonPath("$.chillerSensorNumber").value(DEFAULT_CHILLER_SENSOR_NUMBER.toString()))
             .andExpect(jsonPath("$.recordedWhen").value(DEFAULT_RECORDED_WHEN))
             .andExpect(jsonPath("$.temperature").value(DEFAULT_TEMPERATURE.intValue()))
             .andExpect(jsonPath("$.isCompressed").value(DEFAULT_IS_COMPRESSED.booleanValue()))
-            .andExpect(jsonPath("$.fullSensorData").value(DEFAULT_FULL_SENSOR_DATA))
-            .andExpect(jsonPath("$.compressedSensorData").value(DEFAULT_COMPRESSED_SENSOR_DATA));
+            .andExpect(jsonPath("$.fullSensorData").value(DEFAULT_FULL_SENSOR_DATA.toString()))
+            .andExpect(jsonPath("$.compressedSensorData").value(DEFAULT_COMPRESSED_SENSOR_DATA.toString()));
     }
 
     @Test

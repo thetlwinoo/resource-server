@@ -25,6 +25,13 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="photo" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="product_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -35,7 +42,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190801045107-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20190902071214-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="product_sub_category">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

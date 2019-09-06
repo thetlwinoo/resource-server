@@ -29,6 +29,7 @@ export class ProductModelUpdatePage {
     productModelNameInput = element(by.id('field_productModelName'));
     calalogDescriptionInput = element(by.id('field_calalogDescription'));
     instructionsInput = element(by.id('field_instructions'));
+    photoInput = element(by.id('file_photo'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -56,6 +57,14 @@ export class ProductModelUpdatePage {
 
     async getInstructionsInput() {
         return this.instructionsInput.getAttribute('value');
+    }
+
+    async setPhotoInput(photo) {
+        await this.photoInput.sendKeys(photo);
+    }
+
+    async getPhotoInput() {
+        return this.photoInput.getAttribute('value');
     }
 
     async save() {

@@ -203,11 +203,11 @@ public class BuyingGroupsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(buyingGroups.getId().intValue())))
-            .andExpect(jsonPath("$.[*].buyingGroupName").value(hasItem(DEFAULT_BUYING_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].buyingGroupName").value(hasItem(DEFAULT_BUYING_GROUP_NAME.toString())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getBuyingGroups() throws Exception {
@@ -219,7 +219,7 @@ public class BuyingGroupsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(buyingGroups.getId().intValue()))
-            .andExpect(jsonPath("$.buyingGroupName").value(DEFAULT_BUYING_GROUP_NAME))
+            .andExpect(jsonPath("$.buyingGroupName").value(DEFAULT_BUYING_GROUP_NAME.toString()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

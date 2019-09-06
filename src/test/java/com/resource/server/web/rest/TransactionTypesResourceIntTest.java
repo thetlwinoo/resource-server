@@ -222,11 +222,11 @@ public class TransactionTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transactionTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transactionTypeName").value(hasItem(DEFAULT_TRANSACTION_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].transactionTypeName").value(hasItem(DEFAULT_TRANSACTION_TYPE_NAME.toString())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getTransactionTypes() throws Exception {
@@ -238,7 +238,7 @@ public class TransactionTypesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(transactionTypes.getId().intValue()))
-            .andExpect(jsonPath("$.transactionTypeName").value(DEFAULT_TRANSACTION_TYPE_NAME))
+            .andExpect(jsonPath("$.transactionTypeName").value(DEFAULT_TRANSACTION_TYPE_NAME.toString()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

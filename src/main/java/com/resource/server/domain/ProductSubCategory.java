@@ -30,6 +30,13 @@ public class ProductSubCategory extends AbstractAuditingEntity implements Serial
     @Column(name = "product_sub_category_name", nullable = false)
     private String productSubCategoryName;
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
     @ManyToOne
     @JsonIgnoreProperties("productSubCategories")
     private ProductCategory productCategory;
@@ -54,6 +61,32 @@ public class ProductSubCategory extends AbstractAuditingEntity implements Serial
 
     public void setProductSubCategoryName(String productSubCategoryName) {
         this.productSubCategoryName = productSubCategoryName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public ProductSubCategory photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public ProductSubCategory photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
 
     public ProductCategory getProductCategory() {
@@ -95,6 +128,8 @@ public class ProductSubCategory extends AbstractAuditingEntity implements Serial
         return "ProductSubCategory{" +
             "id=" + getId() +
             ", productSubCategoryName='" + getProductSubCategoryName() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
             "}";
     }
 }

@@ -4,9 +4,11 @@ import com.resource.server.service.ProductPhotoService;
 import com.resource.server.service.ProductsExtendService;
 import com.resource.server.service.ProductsQueryService;
 import com.resource.server.service.ProductsService;
+import com.resource.server.service.dto.ProductSubCategoryDTO;
 import com.resource.server.service.dto.ProductsCriteria;
 import com.resource.server.service.dto.ProductsDTO;
 import com.resource.server.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,13 +31,13 @@ import java.util.Optional;
 public class ProductsExtendResource {
 
     private final Logger log = LoggerFactory.getLogger(ProductsExtendResource.class);
-    private final ProductsExtendService productExtendedService;
+    private final ProductsExtendService productExtendService;
     private final ProductsService productsService;
     private final ProductPhotoService productPhotoService;
     private final ProductsQueryService productsQueryService;
 
-    public ProductsExtendResource(ProductsExtendService productExtendedService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService) {
-        this.productExtendedService = productExtendedService;
+    public ProductsExtendResource(ProductsExtendService productExtendService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService) {
+        this.productExtendService = productExtendService;
         this.productsService = productsService;
         this.productPhotoService = productPhotoService;
         this.productsQueryService = productsQueryService;
@@ -58,30 +60,66 @@ public class ProductsExtendResource {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<List>(productExtendedService.getRelatedProducts(productsDTO.getProductSubCategoryId(), id), HttpStatus.OK);
+        return new ResponseEntity<List>(productExtendService.getRelatedProducts(productsDTO.getProductSubCategoryId(), id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/related/categories", method = RequestMethod.GET)
+    public ResponseEntity<List<ProductSubCategoryDTO>> getRelatedCategories(
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "category", required = false) Long category
+    ) {
+        List<ProductSubCategoryDTO> entityList = this.productExtendService.getRelatedCategories(keyword, category);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    @RequestMapping(value = "/related/colors", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> getRelatedColors(
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "category", required = false) Long category
+    ) {
+        List<String> entityList = this.productExtendService.getRelatedColors(keyword, category);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    @RequestMapping(value = "/related/brands", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> getRelatedBrands(
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "category", required = false) Long category
+    ) {
+        List<String> entityList = this.productExtendService.getRelatedBrands(keyword, category);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    @RequestMapping(value = "/related/pricerange", method = RequestMethod.GET)
+    public ResponseEntity<Object> getRelatedPriceRange(
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "category", required = false) Long category
+    ) {
+        Object entityList = this.productExtendService.getRelatedPriceRange(keyword, category);
+        return ResponseEntity.ok().body(entityList);
     }
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
     public ResponseEntity getByNewlyAdded() {
-        List returnList = productExtendedService.findTop12ByOrderByCreatedDateDesc();
+        List returnList = productExtendService.findTop12ByOrderByCreatedDateDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/dailydiscover", method = RequestMethod.GET)
     public ResponseEntity getByDailyDiscover() {
-        List returnList = productExtendedService.findTop12ByOrderByCreatedDateDesc();
+        List returnList = productExtendService.findTop12ByOrderByCreatedDateDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/mostselling", method = RequestMethod.GET)
     public ResponseEntity getByMostSelling() {
-        List returnList = productExtendedService.findTop12ByOrderBySellCountDesc();
+        List returnList = productExtendService.findTop12ByOrderBySellCountDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/interested", method = RequestMethod.GET)
     public ResponseEntity getByInterested() {
-        List returnList = productExtendedService.findTop12ByOrderBySellCountDesc();
+        List returnList = productExtendService.findTop12ByOrderBySellCountDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
@@ -90,7 +128,7 @@ public class ProductsExtendResource {
 
         List returnList;
 
-        returnList = productExtendedService.searchProductsAll(keyword);
+        returnList = productExtendService.searchProductsAll(keyword);
 
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
@@ -98,16 +136,17 @@ public class ProductsExtendResource {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ResponseEntity<List<ProductsDTO>> search(ProductsCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Products by criteria: {}", criteria);
+
+//        if (category != null) {
+//            List<Long> subCategoryList = productExtendService.getSubCategoryList(Long.parseLong(category));
+//            LongFilter idList = new LongFilter();
+//            idList.setIn(subCategoryList);
+//            criteria.setProductSubCategoryId(idList);
+//        }
+
         Page<ProductsDTO> page = productsQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products-extend");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    @RequestMapping(value = "/tags", method = RequestMethod.GET, params = {"keyword"})
-    public ResponseEntity<List<String>> getProductTags(@RequestParam(value = "keyword", required = true) String keyword) {
-        log.debug("keyword:{}", keyword);
-        List<String> tagsList = productExtendedService.getProductTags(keyword);
-        return ResponseEntity.ok().body(tagsList);
     }
 
     private boolean isBlank(String param) {

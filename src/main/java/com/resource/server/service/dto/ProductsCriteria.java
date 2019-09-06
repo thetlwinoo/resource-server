@@ -63,8 +63,6 @@ public class ProductsCriteria implements Serializable {
 
     private StringFilter customFields;
 
-    private StringFilter tags;
-
     private StringFilter photo;
 
     private LocalDateFilter sellStartDate;
@@ -78,6 +76,8 @@ public class ProductsCriteria implements Serializable {
     private LocalDateFilter discontinuedDate;
 
     private IntegerFilter sellCount;
+
+    private LongFilter productReviewId;
 
     private LongFilter unitPackageId;
 
@@ -253,14 +253,6 @@ public class ProductsCriteria implements Serializable {
         this.customFields = customFields;
     }
 
-    public StringFilter getTags() {
-        return tags;
-    }
-
-    public void setTags(StringFilter tags) {
-        this.tags = tags;
-    }
-
     public StringFilter getPhoto() {
         return photo;
     }
@@ -315,6 +307,14 @@ public class ProductsCriteria implements Serializable {
 
     public void setSellCount(IntegerFilter sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public LongFilter getProductReviewId() {
+        return productReviewId;
+    }
+
+    public void setProductReviewId(LongFilter productReviewId) {
+        this.productReviewId = productReviewId;
     }
 
     public LongFilter getUnitPackageId() {
@@ -404,7 +404,6 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(classType, that.classType) &&
             Objects.equals(style, that.style) &&
             Objects.equals(customFields, that.customFields) &&
-            Objects.equals(tags, that.tags) &&
             Objects.equals(photo, that.photo) &&
             Objects.equals(sellStartDate, that.sellStartDate) &&
             Objects.equals(sellEndDate, that.sellEndDate) &&
@@ -412,6 +411,7 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(internalComments, that.internalComments) &&
             Objects.equals(discontinuedDate, that.discontinuedDate) &&
             Objects.equals(sellCount, that.sellCount) &&
+            Objects.equals(productReviewId, that.productReviewId) &&
             Objects.equals(unitPackageId, that.unitPackageId) &&
             Objects.equals(outerPackageId, that.outerPackageId) &&
             Objects.equals(supplierId, that.supplierId) &&
@@ -444,7 +444,6 @@ public class ProductsCriteria implements Serializable {
         classType,
         style,
         customFields,
-        tags,
         photo,
         sellStartDate,
         sellEndDate,
@@ -452,6 +451,7 @@ public class ProductsCriteria implements Serializable {
         internalComments,
         discontinuedDate,
         sellCount,
+        productReviewId,
         unitPackageId,
         outerPackageId,
         supplierId,
@@ -485,7 +485,6 @@ public class ProductsCriteria implements Serializable {
                 (classType != null ? "classType=" + classType + ", " : "") +
                 (style != null ? "style=" + style + ", " : "") +
                 (customFields != null ? "customFields=" + customFields + ", " : "") +
-                (tags != null ? "tags=" + tags + ", " : "") +
                 (photo != null ? "photo=" + photo + ", " : "") +
                 (sellStartDate != null ? "sellStartDate=" + sellStartDate + ", " : "") +
                 (sellEndDate != null ? "sellEndDate=" + sellEndDate + ", " : "") +
@@ -493,6 +492,7 @@ public class ProductsCriteria implements Serializable {
                 (internalComments != null ? "internalComments=" + internalComments + ", " : "") +
                 (discontinuedDate != null ? "discontinuedDate=" + discontinuedDate + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
+                (productReviewId != null ? "productReviewId=" + productReviewId + ", " : "") +
                 (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +
                 (outerPackageId != null ? "outerPackageId=" + outerPackageId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +

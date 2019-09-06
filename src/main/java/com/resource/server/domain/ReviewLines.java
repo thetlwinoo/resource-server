@@ -1,6 +1,7 @@
 package com.resource.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -50,12 +51,12 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
     @Column(name = "photo_content_type")
     private String photoContentType;
 
-    @ManyToOne
-    @JsonIgnoreProperties("reviewLines")
+    @OneToOne(mappedBy = "productReview")
+    @JsonIgnore
     private Products product;
 
-    @ManyToOne
-    @JsonIgnoreProperties("reviewLists")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("reviewLineLists")
     private Reviews review;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

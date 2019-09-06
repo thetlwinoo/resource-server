@@ -2,6 +2,7 @@ package com.resource.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the ProductSubCategory entity.
@@ -13,6 +14,10 @@ public class ProductSubCategoryDTO extends AbstractAuditingDTO implements Serial
     @NotNull
     private String productSubCategoryName;
 
+    @Lob
+    private byte[] photo;
+
+    private String photoContentType;
 
     private Long productCategoryId;
 
@@ -32,6 +37,22 @@ public class ProductSubCategoryDTO extends AbstractAuditingDTO implements Serial
 
     public void setProductSubCategoryName(String productSubCategoryName) {
         this.productSubCategoryName = productSubCategoryName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
 
     public Long getProductCategoryId() {
@@ -76,6 +97,7 @@ public class ProductSubCategoryDTO extends AbstractAuditingDTO implements Serial
         return "ProductSubCategoryDTO{" +
             "id=" + getId() +
             ", productSubCategoryName='" + getProductSubCategoryName() + "'" +
+            ", photo='" + getPhoto() + "'" +
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryProductCategoryName() + "'" +
             "}";

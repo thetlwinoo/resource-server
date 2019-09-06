@@ -18,6 +18,7 @@
             "productModelName": "Product Model Name",
             "calalogDescription": "Calalog Description",
             "instructions": "Instructions",
+            "photo": "Photo",
             "description": "Description"
         }
     }

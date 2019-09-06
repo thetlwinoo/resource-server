@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing ReviewLines.
@@ -75,10 +76,15 @@ public class ReviewLinesResource {
     /**
      * GET  /review-lines : get all the reviewLines.
      *
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of reviewLines in body
      */
     @GetMapping("/review-lines")
-    public List<ReviewLinesDTO> getAllReviewLines() {
+    public List<ReviewLinesDTO> getAllReviewLines(@RequestParam(required = false) String filter) {
+        if ("product-is-null".equals(filter)) {
+            log.debug("REST request to get all ReviewLiness where product is null");
+            return reviewLinesService.findAllWhereProductIsNull();
+        }
         log.debug("REST request to get all ReviewLines");
         return reviewLinesService.findAll();
     }

@@ -12,8 +12,8 @@ import org.mapstruct.*;
 public interface ReviewsMapper extends EntityMapper<ReviewsDTO, Reviews> {
 
 
-    @Mapping(target = "reviewLists", ignore = true)
-    @Mapping(target = "order", ignore = true)
+    @Mapping(target = "reviewLineLists", ignore = true)
+    @Mapping(target = "review", ignore = true)
     Reviews toEntity(ReviewsDTO reviewsDTO);
 
     default Reviews fromId(Long id) {

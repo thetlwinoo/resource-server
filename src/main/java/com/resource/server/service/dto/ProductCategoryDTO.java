@@ -2,6 +2,7 @@ package com.resource.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the ProductCategory entity.
@@ -13,6 +14,10 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
     @NotNull
     private String productCategoryName;
 
+    @Lob
+    private byte[] photo;
+
+    private String photoContentType;
 
     public Long getId() {
         return id;
@@ -28,6 +33,22 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
 
     public void setProductCategoryName(String productCategoryName) {
         this.productCategoryName = productCategoryName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
     }
 
     @Override
@@ -56,6 +77,7 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
         return "ProductCategoryDTO{" +
             "id=" + getId() +
             ", productCategoryName='" + getProductCategoryName() + "'" +
+            ", photo='" + getPhoto() + "'" +
             "}";
     }
 }

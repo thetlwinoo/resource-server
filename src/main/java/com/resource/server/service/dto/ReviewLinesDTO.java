@@ -27,10 +27,6 @@ public class ReviewLinesDTO extends AbstractAuditingDTO implements Serializable 
 
     private String photoContentType;
 
-    private Long productId;
-
-    private String productProductName;
-
     private Long reviewId;
 
     public Long getId() {
@@ -105,22 +101,6 @@ public class ReviewLinesDTO extends AbstractAuditingDTO implements Serializable 
         this.photoContentType = photoContentType;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
-    }
-
     public Long getReviewId() {
         return reviewId;
     }
@@ -161,8 +141,6 @@ public class ReviewLinesDTO extends AbstractAuditingDTO implements Serializable 
             ", deliveryRating=" + getDeliveryRating() +
             ", deliveryReview='" + getDeliveryReview() + "'" +
             ", photo='" + getPhoto() + "'" +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
             ", review=" + getReviewId() +
             "}";
     }

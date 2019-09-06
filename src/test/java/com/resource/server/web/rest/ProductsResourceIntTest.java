@@ -3,6 +3,7 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Products;
+import com.resource.server.domain.ReviewLines;
 import com.resource.server.domain.PackageTypes;
 import com.resource.server.domain.Suppliers;
 import com.resource.server.domain.ProductSubCategory;
@@ -109,9 +110,6 @@ public class ProductsResourceIntTest {
     private static final String DEFAULT_CUSTOM_FIELDS = "AAAAAAAAAA";
     private static final String UPDATED_CUSTOM_FIELDS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TAGS = "AAAAAAAAAA";
-    private static final String UPDATED_TAGS = "BBBBBBBBBB";
-
     private static final String DEFAULT_PHOTO = "AAAAAAAAAA";
     private static final String UPDATED_PHOTO = "BBBBBBBBBB";
 
@@ -203,7 +201,6 @@ public class ProductsResourceIntTest {
             .classType(DEFAULT_CLASS_TYPE)
             .style(DEFAULT_STYLE)
             .customFields(DEFAULT_CUSTOM_FIELDS)
-            .tags(DEFAULT_TAGS)
             .photo(DEFAULT_PHOTO)
             .sellStartDate(DEFAULT_SELL_START_DATE)
             .sellEndDate(DEFAULT_SELL_END_DATE)
@@ -254,7 +251,6 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getClassType()).isEqualTo(DEFAULT_CLASS_TYPE);
         assertThat(testProducts.getStyle()).isEqualTo(DEFAULT_STYLE);
         assertThat(testProducts.getCustomFields()).isEqualTo(DEFAULT_CUSTOM_FIELDS);
-        assertThat(testProducts.getTags()).isEqualTo(DEFAULT_TAGS);
         assertThat(testProducts.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testProducts.getSellStartDate()).isEqualTo(DEFAULT_SELL_START_DATE);
         assertThat(testProducts.getSellEndDate()).isEqualTo(DEFAULT_SELL_END_DATE);
@@ -485,35 +481,34 @@ public class ProductsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(products.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME)))
-            .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
-            .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS)))
+            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].makeFlag").value(hasItem(DEFAULT_MAKE_FLAG.booleanValue())))
             .andExpect(jsonPath("$.[*].finishedGoodsFlag").value(hasItem(DEFAULT_FINISHED_GOODS_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR)))
+            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR.toString())))
             .andExpect(jsonPath("$.[*].safetyStockLevel").value(hasItem(DEFAULT_SAFETY_STOCK_LEVEL)))
             .andExpect(jsonPath("$.[*].reorderPoint").value(hasItem(DEFAULT_REORDER_POINT)))
             .andExpect(jsonPath("$.[*].standardCost").value(hasItem(DEFAULT_STANDARD_COST.doubleValue())))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].recommendedRetailPrice").value(hasItem(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].brand").value(hasItem(DEFAULT_BRAND)))
-            .andExpect(jsonPath("$.[*].specifySize").value(hasItem(DEFAULT_SPECIFY_SIZE)))
+            .andExpect(jsonPath("$.[*].brand").value(hasItem(DEFAULT_BRAND.toString())))
+            .andExpect(jsonPath("$.[*].specifySize").value(hasItem(DEFAULT_SPECIFY_SIZE.toString())))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.doubleValue())))
             .andExpect(jsonPath("$.[*].daysToManufacture").value(hasItem(DEFAULT_DAYS_TO_MANUFACTURE)))
-            .andExpect(jsonPath("$.[*].productLine").value(hasItem(DEFAULT_PRODUCT_LINE)))
-            .andExpect(jsonPath("$.[*].classType").value(hasItem(DEFAULT_CLASS_TYPE)))
-            .andExpect(jsonPath("$.[*].style").value(hasItem(DEFAULT_STYLE)))
-            .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS)))
-            .andExpect(jsonPath("$.[*].tags").value(hasItem(DEFAULT_TAGS)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.[*].productLine").value(hasItem(DEFAULT_PRODUCT_LINE.toString())))
+            .andExpect(jsonPath("$.[*].classType").value(hasItem(DEFAULT_CLASS_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].style").value(hasItem(DEFAULT_STYLE.toString())))
+            .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS.toString())))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
             .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS)))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
+            .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS.toString())))
+            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
             .andExpect(jsonPath("$.[*].discontinuedDate").value(hasItem(DEFAULT_DISCONTINUED_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)));
     }
-
+    
     @Test
     @Transactional
     public void getProducts() throws Exception {
@@ -525,31 +520,30 @@ public class ProductsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(products.getId().intValue()))
-            .andExpect(jsonPath("$.productName").value(DEFAULT_PRODUCT_NAME))
-            .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER))
-            .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS))
+            .andExpect(jsonPath("$.productName").value(DEFAULT_PRODUCT_NAME.toString()))
+            .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER.toString()))
+            .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS.toString()))
             .andExpect(jsonPath("$.makeFlag").value(DEFAULT_MAKE_FLAG.booleanValue()))
             .andExpect(jsonPath("$.finishedGoodsFlag").value(DEFAULT_FINISHED_GOODS_FLAG.booleanValue()))
-            .andExpect(jsonPath("$.color").value(DEFAULT_COLOR))
+            .andExpect(jsonPath("$.color").value(DEFAULT_COLOR.toString()))
             .andExpect(jsonPath("$.safetyStockLevel").value(DEFAULT_SAFETY_STOCK_LEVEL))
             .andExpect(jsonPath("$.reorderPoint").value(DEFAULT_REORDER_POINT))
             .andExpect(jsonPath("$.standardCost").value(DEFAULT_STANDARD_COST.doubleValue()))
             .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.recommendedRetailPrice").value(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.brand").value(DEFAULT_BRAND))
-            .andExpect(jsonPath("$.specifySize").value(DEFAULT_SPECIFY_SIZE))
+            .andExpect(jsonPath("$.brand").value(DEFAULT_BRAND.toString()))
+            .andExpect(jsonPath("$.specifySize").value(DEFAULT_SPECIFY_SIZE.toString()))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.doubleValue()))
             .andExpect(jsonPath("$.daysToManufacture").value(DEFAULT_DAYS_TO_MANUFACTURE))
-            .andExpect(jsonPath("$.productLine").value(DEFAULT_PRODUCT_LINE))
-            .andExpect(jsonPath("$.classType").value(DEFAULT_CLASS_TYPE))
-            .andExpect(jsonPath("$.style").value(DEFAULT_STYLE))
-            .andExpect(jsonPath("$.customFields").value(DEFAULT_CUSTOM_FIELDS))
-            .andExpect(jsonPath("$.tags").value(DEFAULT_TAGS))
-            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO))
+            .andExpect(jsonPath("$.productLine").value(DEFAULT_PRODUCT_LINE.toString()))
+            .andExpect(jsonPath("$.classType").value(DEFAULT_CLASS_TYPE.toString()))
+            .andExpect(jsonPath("$.style").value(DEFAULT_STYLE.toString()))
+            .andExpect(jsonPath("$.customFields").value(DEFAULT_CUSTOM_FIELDS.toString()))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
             .andExpect(jsonPath("$.sellStartDate").value(DEFAULT_SELL_START_DATE.toString()))
             .andExpect(jsonPath("$.sellEndDate").value(DEFAULT_SELL_END_DATE.toString()))
-            .andExpect(jsonPath("$.marketingComments").value(DEFAULT_MARKETING_COMMENTS))
-            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS))
+            .andExpect(jsonPath("$.marketingComments").value(DEFAULT_MARKETING_COMMENTS.toString()))
+            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
             .andExpect(jsonPath("$.discontinuedDate").value(DEFAULT_DISCONTINUED_DATE.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT));
     }
@@ -1378,45 +1372,6 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsByTagsIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where tags equals to DEFAULT_TAGS
-        defaultProductsShouldBeFound("tags.equals=" + DEFAULT_TAGS);
-
-        // Get all the productsList where tags equals to UPDATED_TAGS
-        defaultProductsShouldNotBeFound("tags.equals=" + UPDATED_TAGS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByTagsIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where tags in DEFAULT_TAGS or UPDATED_TAGS
-        defaultProductsShouldBeFound("tags.in=" + DEFAULT_TAGS + "," + UPDATED_TAGS);
-
-        // Get all the productsList where tags equals to UPDATED_TAGS
-        defaultProductsShouldNotBeFound("tags.in=" + UPDATED_TAGS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByTagsIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where tags is not null
-        defaultProductsShouldBeFound("tags.specified=true");
-
-        // Get all the productsList where tags is null
-        defaultProductsShouldNotBeFound("tags.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllProductsByPhotoIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
@@ -1798,6 +1753,25 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllProductsByProductReviewIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ReviewLines productReview = ReviewLinesResourceIntTest.createEntity(em);
+        em.persist(productReview);
+        em.flush();
+        products.setProductReview(productReview);
+        productsRepository.saveAndFlush(products);
+        Long productReviewId = productReview.getId();
+
+        // Get all the productsList where productReview equals to productReviewId
+        defaultProductsShouldBeFound("productReviewId.equals=" + productReviewId);
+
+        // Get all the productsList where productReview equals to productReviewId + 1
+        defaultProductsShouldNotBeFound("productReviewId.equals=" + (productReviewId + 1));
+    }
+
+
+    @Test
+    @Transactional
     public void getAllProductsByUnitPackageIsEqualToSomething() throws Exception {
         // Initialize the database
         PackageTypes unitPackage = PackageTypesResourceIntTest.createEntity(em);
@@ -1955,7 +1929,6 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.[*].classType").value(hasItem(DEFAULT_CLASS_TYPE)))
             .andExpect(jsonPath("$.[*].style").value(hasItem(DEFAULT_STYLE)))
             .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS)))
-            .andExpect(jsonPath("$.[*].tags").value(hasItem(DEFAULT_TAGS)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO)))
             .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
@@ -2029,7 +2002,6 @@ public class ProductsResourceIntTest {
             .classType(UPDATED_CLASS_TYPE)
             .style(UPDATED_STYLE)
             .customFields(UPDATED_CUSTOM_FIELDS)
-            .tags(UPDATED_TAGS)
             .photo(UPDATED_PHOTO)
             .sellStartDate(UPDATED_SELL_START_DATE)
             .sellEndDate(UPDATED_SELL_END_DATE)
@@ -2067,7 +2039,6 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getClassType()).isEqualTo(UPDATED_CLASS_TYPE);
         assertThat(testProducts.getStyle()).isEqualTo(UPDATED_STYLE);
         assertThat(testProducts.getCustomFields()).isEqualTo(UPDATED_CUSTOM_FIELDS);
-        assertThat(testProducts.getTags()).isEqualTo(UPDATED_TAGS);
         assertThat(testProducts.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testProducts.getSellStartDate()).isEqualTo(UPDATED_SELL_START_DATE);
         assertThat(testProducts.getSellEndDate()).isEqualTo(UPDATED_SELL_END_DATE);

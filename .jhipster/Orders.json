@@ -65,7 +65,7 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "reviews",
-            "otherEntityRelationshipName": "order",
+            "otherEntityRelationshipName": "review",
             "relationshipName": "orderReview",
             "otherEntityField": "id",
             "ownerSide": true

@@ -81,10 +81,6 @@
                 <dd>
                     <span>{{products.customFields}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.tags">Tags</span></dt>
-                <dd>
-                    <span>{{products.tags}}</span>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.products.photo">Photo</span></dt>
                 <dd>
                     <span>{{products.photo}}</span>
@@ -112,6 +108,12 @@
                 <dt><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span></dt>
                 <dd>
                     <span>{{products.sellCount}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.productReview">Product Review</span></dt>
+                <dd>
+                    <div *ngIf="products.productReviewId">
+                        <a [routerLink]="['/review-lines', products.productReviewId, 'view']">{{products.productReviewId}}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span></dt>
                 <dd>

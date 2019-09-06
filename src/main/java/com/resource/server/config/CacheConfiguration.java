@@ -109,6 +109,9 @@ public class CacheConfiguration {
             cm.createCache(com.resource.server.domain.Compares.class.getName() + ".compareLists", jcacheConfiguration);
             cm.createCache(com.resource.server.domain.CompareProducts.class.getName(), jcacheConfiguration);
             cm.createCache(com.resource.server.domain.EntityAuditEvent.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductReview.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductTags.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.Reviews.class.getName() + ".reviewLineLists", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

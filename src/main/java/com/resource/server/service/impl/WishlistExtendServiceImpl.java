@@ -95,16 +95,25 @@ public class WishlistExtendServiceImpl implements WishlistExtendService {
 
     @Override
     public List<ProductsDTO> fetchWishlistProducts(Principal principal) {
-        People people = getUserFromPrinciple(principal);
+        try {
+            People people = getUserFromPrinciple(principal);
 
-        List<Products> productsList = new ArrayList<>();
-        Set<WishlistProducts> wishlistProductsList = people.getWishlist().getWishlistLists();
-        for (WishlistProducts wishlistProducts : wishlistProductsList) {
-            productsList.add(wishlistProducts.getProduct());
+            List<Products> productsList = new ArrayList<>();
+            Set<WishlistProducts> wishlistProductsList;
+
+            if (people.getWishlist() != null) {
+                wishlistProductsList = people.getWishlist().getWishlistLists();
+                for (WishlistProducts wishlistProducts : wishlistProductsList) {
+                    productsList.add(wishlistProducts.getProduct());
+                }
+            }
+
+            return productsList.stream()
+                .map(productsMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage());
         }
-        return productsList.stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

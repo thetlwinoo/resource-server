@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { ProductCategoryComponentsPage, ProductCategoryDeleteDialog, ProductCategoryUpdatePage } from './product-category.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('ProductCategory e2e test', () => {
     let productCategoryUpdatePage: ProductCategoryUpdatePage;
     let productCategoryComponentsPage: ProductCategoryComponentsPage;
     let productCategoryDeleteDialog: ProductCategoryDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -39,8 +43,12 @@ describe('ProductCategory e2e test', () => {
         const nbButtonsBeforeCreate = await productCategoryComponentsPage.countDeleteButtons();
 
         await productCategoryComponentsPage.clickOnCreateButton();
-        await promise.all([productCategoryUpdatePage.setProductCategoryNameInput('productCategoryName')]);
+        await promise.all([
+            productCategoryUpdatePage.setProductCategoryNameInput('productCategoryName'),
+            productCategoryUpdatePage.setPhotoInput(absolutePath)
+        ]);
         expect(await productCategoryUpdatePage.getProductCategoryNameInput()).to.eq('productCategoryName');
+        expect(await productCategoryUpdatePage.getPhotoInput()).to.endsWith(fileNameToUpload);
         await productCategoryUpdatePage.save();
         expect(await productCategoryUpdatePage.getSaveButton().isPresent()).to.be.false;
 

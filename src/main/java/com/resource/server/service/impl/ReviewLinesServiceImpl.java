@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing ReviewLines.
@@ -62,6 +63,21 @@ public class ReviewLinesServiceImpl implements ReviewLinesService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
+
+    /**
+     *  get all the reviewLines where Product is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<ReviewLinesDTO> findAllWhereProductIsNull() {
+        log.debug("Request to get all reviewLines where Product is null");
+        return StreamSupport
+            .stream(reviewLinesRepository.findAll().spliterator(), false)
+            .filter(reviewLines -> reviewLines.getProduct() == null)
+            .map(reviewLinesMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get one reviewLines by id.

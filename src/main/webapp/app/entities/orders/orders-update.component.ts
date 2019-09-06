@@ -67,7 +67,7 @@ export class OrdersUpdateComponent implements OnInit {
             this.orders = orders;
         });
         this.reviewsService
-            .query({ 'orderId.specified': 'false' })
+            .query({ 'reviewId.specified': 'false' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IReviews[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IReviews[]>) => response.body)

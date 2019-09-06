@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,11 @@ public class ProductSubCategoryResourceIntTest {
 
     private static final String DEFAULT_PRODUCT_SUB_CATEGORY_NAME = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCT_SUB_CATEGORY_NAME = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
 
     @Autowired
     private ProductSubCategoryRepository productSubCategoryRepository;
@@ -100,7 +106,9 @@ public class ProductSubCategoryResourceIntTest {
      */
     public static ProductSubCategory createEntity(EntityManager em) {
         ProductSubCategory productSubCategory = new ProductSubCategory()
-            .productSubCategoryName(DEFAULT_PRODUCT_SUB_CATEGORY_NAME);
+            .productSubCategoryName(DEFAULT_PRODUCT_SUB_CATEGORY_NAME)
+            .photo(DEFAULT_PHOTO)
+            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
         return productSubCategory;
     }
 
@@ -126,6 +134,8 @@ public class ProductSubCategoryResourceIntTest {
         assertThat(productSubCategoryList).hasSize(databaseSizeBeforeCreate + 1);
         ProductSubCategory testProductSubCategory = productSubCategoryList.get(productSubCategoryList.size() - 1);
         assertThat(testProductSubCategory.getProductSubCategoryName()).isEqualTo(DEFAULT_PRODUCT_SUB_CATEGORY_NAME);
+        assertThat(testProductSubCategory.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testProductSubCategory.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
     }
 
     @Test
@@ -178,9 +188,11 @@ public class ProductSubCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSubCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME)));
+            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME.toString())))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
     }
-
+    
     @Test
     @Transactional
     public void getProductSubCategory() throws Exception {
@@ -192,7 +204,9 @@ public class ProductSubCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productSubCategory.getId().intValue()))
-            .andExpect(jsonPath("$.productSubCategoryName").value(DEFAULT_PRODUCT_SUB_CATEGORY_NAME));
+            .andExpect(jsonPath("$.productSubCategoryName").value(DEFAULT_PRODUCT_SUB_CATEGORY_NAME.toString()))
+            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
 
     @Test
@@ -260,7 +274,9 @@ public class ProductSubCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSubCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME)));
+            .andExpect(jsonPath("$.[*].productSubCategoryName").value(hasItem(DEFAULT_PRODUCT_SUB_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
 
         // Check, that the count call also returns 1
         restProductSubCategoryMockMvc.perform(get("/api/product-sub-categories/count?sort=id,desc&" + filter))
@@ -308,7 +324,9 @@ public class ProductSubCategoryResourceIntTest {
         // Disconnect from session so that the updates on updatedProductSubCategory are not directly saved in db
         em.detach(updatedProductSubCategory);
         updatedProductSubCategory
-            .productSubCategoryName(UPDATED_PRODUCT_SUB_CATEGORY_NAME);
+            .productSubCategoryName(UPDATED_PRODUCT_SUB_CATEGORY_NAME)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
         ProductSubCategoryDTO productSubCategoryDTO = productSubCategoryMapper.toDto(updatedProductSubCategory);
 
         restProductSubCategoryMockMvc.perform(put("/api/product-sub-categories")
@@ -321,6 +339,8 @@ public class ProductSubCategoryResourceIntTest {
         assertThat(productSubCategoryList).hasSize(databaseSizeBeforeUpdate);
         ProductSubCategory testProductSubCategory = productSubCategoryList.get(productSubCategoryList.size() - 1);
         assertThat(testProductSubCategory.getProductSubCategoryName()).isEqualTo(UPDATED_PRODUCT_SUB_CATEGORY_NAME);
+        assertThat(testProductSubCategory.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testProductSubCategory.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
     }
 
     @Test

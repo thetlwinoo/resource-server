@@ -9,6 +9,15 @@
                 <dd>
                     <span>{{productSubCategory.productSubCategoryName}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.productSubCategory.photo">Photo</span></dt>
+                <dd>
+                    <div *ngIf="productSubCategory.photo">
+                        <a (click)="openFile(productSubCategory.photoContentType, productSubCategory.photo)">
+                            <img [src]="'data:' + productSubCategory.photoContentType + ';base64,' + productSubCategory.photo" style="max-width: 100%;" alt="productSubCategory image"/>
+                        </a>
+                        {{productSubCategory.photoContentType}}, {{byteSize(productSubCategory.photo)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.productSubCategory.productCategory">Product Category</span></dt>
                 <dd>
                     <div *ngIf="productSubCategory.productCategoryId">

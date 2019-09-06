@@ -5,6 +5,8 @@ export interface IProductModel {
     productModelName?: string;
     calalogDescription?: string;
     instructions?: string;
+    photoContentType?: string;
+    photo?: any;
     descriptions?: IProductDescription[];
 }
 
@@ -14,6 +16,8 @@ export class ProductModel implements IProductModel {
         public productModelName?: string,
         public calalogDescription?: string,
         public instructions?: string,
+        public photoContentType?: string,
+        public photo?: any,
         public descriptions?: IProductDescription[]
     ) {}
 }

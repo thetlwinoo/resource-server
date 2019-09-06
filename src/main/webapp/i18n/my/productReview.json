@@ -1,0 +1,26 @@
+{
+    "resourceApp": {
+        "productReview": {
+            "home": {
+                "title": "Product Reviews",
+                "createLabel": "Product Review အသစ်ထည့်မည်",
+                "createOrEditLabel": "Product Review အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Product Review အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Product Review တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Product Review တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Product Review {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Product Review"
+            },
+            "reviewerName": "Reviewer Name",
+            "reviewDate": "Review Date",
+            "emailAddress": "Email Address",
+            "rating": "Rating",
+            "comments": "Comments",
+            "product": "Product"
+        }
+    }
+}
