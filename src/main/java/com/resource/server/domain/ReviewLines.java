@@ -51,11 +51,11 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
     @Column(name = "photo_content_type")
     private String photoContentType;
 
-    @OneToOne(mappedBy = "productReview")
+    @OneToOne(mappedBy = "reviewLine")
     @JsonIgnore
     private Products product;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("reviewLineLists")
     private Reviews review;
 

@@ -29,11 +29,11 @@ public interface OrdersService {
      */
     Page<OrdersDTO> findAll(Pageable pageable);
     /**
-     * Get all the OrdersDTO where Payment is null.
+     * Get all the OrdersDTO where PaymentTransaction is null.
      *
      * @return the list of entities
      */
-    List<OrdersDTO> findAllWherePaymentIsNull();
+    List<OrdersDTO> findAllWherePaymentTransactionIsNull();
 
 
     /**

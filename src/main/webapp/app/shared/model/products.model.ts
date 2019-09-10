@@ -28,7 +28,8 @@ export interface IProducts {
     internalComments?: string;
     discontinuedDate?: Moment;
     sellCount?: number;
-    productReviewId?: number;
+    reviewLineId?: number;
+    merchantId?: number;
     unitPackagePackageTypeName?: string;
     unitPackageId?: number;
     outerPackagePackageTypeName?: string;
@@ -74,7 +75,8 @@ export class Products implements IProducts {
         public internalComments?: string,
         public discontinuedDate?: Moment,
         public sellCount?: number,
-        public productReviewId?: number,
+        public reviewLineId?: number,
+        public merchantId?: number,
         public unitPackagePackageTypeName?: string,
         public unitPackageId?: number,
         public outerPackagePackageTypeName?: string,

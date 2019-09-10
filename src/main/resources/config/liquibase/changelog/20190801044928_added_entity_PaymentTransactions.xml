@@ -24,8 +24,8 @@
             <column name="returned_completed_payment_data" type="clob">
                 <constraints nullable="false" />
             </column>
-            <column name="payment_on_order_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_payment_transactions_payment_on_order_id" />
+            <column name="order_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_payment_transactions_order_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
@@ -33,7 +33,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190902071214-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20190910084019-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="payment_transactions">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

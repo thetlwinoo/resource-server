@@ -17,7 +17,7 @@ export interface IOrders {
     deliveryInstructions?: string;
     internalComments?: string;
     pickingCompletedWhen?: Moment;
-    orderReviewId?: number;
+    reviewId?: number;
     orderLineLists?: IOrderLines[];
     customerId?: number;
     shipToAddressId?: number;
@@ -25,7 +25,7 @@ export interface IOrders {
     shipMethodShipMethodName?: string;
     shipMethodId?: number;
     currencyRateId?: number;
-    paymentId?: number;
+    paymentTransactionId?: number;
     specialDealsId?: number;
 }
 
@@ -46,7 +46,7 @@ export class Orders implements IOrders {
         public deliveryInstructions?: string,
         public internalComments?: string,
         public pickingCompletedWhen?: Moment,
-        public orderReviewId?: number,
+        public reviewId?: number,
         public orderLineLists?: IOrderLines[],
         public customerId?: number,
         public shipToAddressId?: number,
@@ -54,7 +54,7 @@ export class Orders implements IOrders {
         public shipMethodShipMethodName?: string,
         public shipMethodId?: number,
         public currencyRateId?: number,
-        public paymentId?: number,
+        public paymentTransactionId?: number,
         public specialDealsId?: number
     ) {}
 }

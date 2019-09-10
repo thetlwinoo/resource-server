@@ -4,6 +4,7 @@ import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Products;
 import com.resource.server.domain.ReviewLines;
+import com.resource.server.domain.Merchants;
 import com.resource.server.domain.PackageTypes;
 import com.resource.server.domain.Suppliers;
 import com.resource.server.domain.ProductSubCategory;
@@ -1753,20 +1754,39 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsByProductReviewIsEqualToSomething() throws Exception {
+    public void getAllProductsByReviewLineIsEqualToSomething() throws Exception {
         // Initialize the database
-        ReviewLines productReview = ReviewLinesResourceIntTest.createEntity(em);
-        em.persist(productReview);
+        ReviewLines reviewLine = ReviewLinesResourceIntTest.createEntity(em);
+        em.persist(reviewLine);
         em.flush();
-        products.setProductReview(productReview);
+        products.setReviewLine(reviewLine);
         productsRepository.saveAndFlush(products);
-        Long productReviewId = productReview.getId();
+        Long reviewLineId = reviewLine.getId();
 
-        // Get all the productsList where productReview equals to productReviewId
-        defaultProductsShouldBeFound("productReviewId.equals=" + productReviewId);
+        // Get all the productsList where reviewLine equals to reviewLineId
+        defaultProductsShouldBeFound("reviewLineId.equals=" + reviewLineId);
 
-        // Get all the productsList where productReview equals to productReviewId + 1
-        defaultProductsShouldNotBeFound("productReviewId.equals=" + (productReviewId + 1));
+        // Get all the productsList where reviewLine equals to reviewLineId + 1
+        defaultProductsShouldNotBeFound("reviewLineId.equals=" + (reviewLineId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByMerchantIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Merchants merchant = MerchantsResourceIntTest.createEntity(em);
+        em.persist(merchant);
+        em.flush();
+        products.setMerchant(merchant);
+        productsRepository.saveAndFlush(products);
+        Long merchantId = merchant.getId();
+
+        // Get all the productsList where merchant equals to merchantId
+        defaultProductsShouldBeFound("merchantId.equals=" + merchantId);
+
+        // Get all the productsList where merchant equals to merchantId + 1
+        defaultProductsShouldNotBeFound("merchantId.equals=" + (merchantId + 1));
     }
 
 

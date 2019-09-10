@@ -21,7 +21,7 @@
             "isOrderFinalized": "Is Order Finalized",
             "comments": "Comments",
             "internalComments": "Internal Comments",
-            "purchaseOrderList": "Purchase Order List",
+            "purchaseOrderLineList": "Purchase Order Line List",
             "contactPerson": "Contact Person",
             "supplier": "Supplier",
             "deliveryMethod": "Delivery Method"

@@ -167,9 +167,13 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getSellCount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellCount(), Products_.sellCount));
             }
-            if (criteria.getProductReviewId() != null) {
-                specification = specification.and(buildSpecification(criteria.getProductReviewId(),
-                    root -> root.join(Products_.productReview, JoinType.LEFT).get(ReviewLines_.id)));
+            if (criteria.getReviewLineId() != null) {
+                specification = specification.and(buildSpecification(criteria.getReviewLineId(),
+                    root -> root.join(Products_.reviewLine, JoinType.LEFT).get(ReviewLines_.id)));
+            }
+            if (criteria.getMerchantId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMerchantId(),
+                    root -> root.join(Products_.merchant, JoinType.LEFT).get(Merchants_.id)));
             }
             if (criteria.getUnitPackageId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUnitPackageId(),

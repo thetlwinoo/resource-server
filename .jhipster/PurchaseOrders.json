@@ -34,7 +34,7 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "purchaseOrderLines",
             "otherEntityRelationshipName": "purchaseOrder",
-            "relationshipName": "purchaseOrderList"
+            "relationshipName": "purchaseOrderLineList"
         },
         {
             "relationshipType": "many-to-one",

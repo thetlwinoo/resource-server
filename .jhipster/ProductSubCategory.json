@@ -26,7 +26,7 @@
     "changelogDate": "20190801044948",
     "entityTableName": "product_sub_category",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": true,
     "fluentMethods": true,

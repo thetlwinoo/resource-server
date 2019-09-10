@@ -74,6 +74,7 @@
                 "compareProducts": "Compare Products",
                 "productReview": "Product Review",
                 "productTags": "Product Tags",
+                "merchants": "Merchants",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

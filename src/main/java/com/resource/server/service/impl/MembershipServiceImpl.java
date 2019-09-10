@@ -1,7 +1,9 @@
 package com.resource.server.service.impl;
 
 import com.resource.server.domain.Customers;
+import com.resource.server.domain.Merchants;
 import com.resource.server.domain.People;
+import com.resource.server.domain.Products;
 import com.resource.server.repository.*;
 import com.resource.server.service.MembershipService;
 import org.slf4j.Logger;
@@ -19,17 +21,17 @@ public class MembershipServiceImpl implements MembershipService {
     private final Logger log = LoggerFactory.getLogger(MembershipServiceImpl.class);
     private final PeopleRepository peopleRepository;
     private final UserRepository userRepository;
-    private final CustomersRepository customersRepository;
     private final PeopleExtendRepository peopleExtendRepository;
     private final CustomersExtendRepository customersExtendRepository;
+    private final MerchantsExtendRepository merchantsExtendRepository;
 
     @Autowired
-    public MembershipServiceImpl(PeopleRepository peopleRepository, UserRepository userRepository, CustomersRepository customersRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository) {
+    public MembershipServiceImpl(PeopleRepository peopleRepository, UserRepository userRepository, PeopleExtendRepository peopleExtendRepository, CustomersExtendRepository customersExtendRepository, MerchantsExtendRepository merchantsExtendRepository) {
         this.peopleRepository = peopleRepository;
         this.userRepository = userRepository;
-        this.customersRepository = customersRepository;
         this.peopleExtendRepository = peopleExtendRepository;
         this.customersExtendRepository = customersExtendRepository;
+        this.merchantsExtendRepository = merchantsExtendRepository;
     }
 
     @Override
@@ -44,21 +46,37 @@ public class MembershipServiceImpl implements MembershipService {
             }
         }
 
-        if(peopleFromPrincipal.isIsPermittedToLogon() && peopleFromPrincipal.isIsGuestUser()){
-            Customers checkCustomer = new Customers();
-            checkCustomer = customersExtendRepository.findCustomersByPersonId(peopleFromPrincipal.getId());
+        if (peopleFromPrincipal.isIsPermittedToLogon()) {
+            if (peopleFromPrincipal.isIsGuestUser()) {
+                Customers checkCustomer = customersExtendRepository.findCustomersByPersonId(peopleFromPrincipal.getId());
 
-            if (checkCustomer == null) {
-                try {
-                    Customers customer = new Customers();
-                    customer.setPerson(peopleFromPrincipal);
-                    String accountNumber = String.format("AW%010d", peopleFromPrincipal.getId());
-                    customer.setAccountNumber(accountNumber);
-                    customersRepository.save(customer);
-                } catch (Exception ex) {
-                    throw ex;
+                if (checkCustomer == null) {
+                    try {
+                        Customers customer = new Customers();
+                        customer.setPerson(peopleFromPrincipal);
+                        String accountNumber = String.format("AW%010d", peopleFromPrincipal.getId());
+                        customer.setAccountNumber(accountNumber);
+                        customersExtendRepository.save(customer);
+                    } catch (Exception ex) {
+                        throw ex;
+                    }
+                }
+            } else if (peopleFromPrincipal.isIsSalesPerson()) {
+                Merchants checkMerchant = merchantsExtendRepository.findMerchantsByPersonId(peopleFromPrincipal.getId());
+
+                if(checkMerchant == null){
+                    try {
+//                        Merchants merchant = new Merchants();
+//                        merchant.setPerson(peopleFromPrincipal);
+//                        String accountNumber = String.format("AW%010d", peopleFromPrincipal.getId());
+//                        merchant.setAccountNumber(accountNumber);
+//                        merchantsExtendRepository.save(merchant);
+                    } catch (Exception ex) {
+                        throw ex;
+                    }
                 }
             }
+
         }
 
 

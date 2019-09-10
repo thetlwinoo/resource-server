@@ -58,9 +58,9 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewLines> reviewLineLists = new HashSet<>();
-    @OneToOne(mappedBy = "orderReview")
+    @OneToOne(mappedBy = "review")
     @JsonIgnore
-    private Orders review;
+    private Orders order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -213,17 +213,17 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
         this.reviewLineLists = reviewLines;
     }
 
-    public Orders getReview() {
-        return review;
+    public Orders getOrder() {
+        return order;
     }
 
-    public Reviews review(Orders orders) {
-        this.review = orders;
+    public Reviews order(Orders orders) {
+        this.order = orders;
         return this;
     }
 
-    public void setReview(Orders orders) {
-        this.review = orders;
+    public void setOrder(Orders orders) {
+        this.order = orders;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

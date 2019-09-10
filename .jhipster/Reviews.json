@@ -48,8 +48,8 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "orders",
-            "otherEntityRelationshipName": "orderReview",
-            "relationshipName": "review",
+            "otherEntityRelationshipName": "review",
+            "relationshipName": "order",
             "ownerSide": false
         }
     ],

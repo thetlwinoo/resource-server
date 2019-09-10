@@ -49,9 +49,9 @@ public class PurchaseOrders extends AbstractAuditingEntity implements Serializab
     @Column(name = "internal_comments")
     private String internalComments;
 
-    @OneToMany(mappedBy = "purchaseOrder")
+    @OneToMany(mappedBy = "purchaseOrder",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<PurchaseOrderLines> purchaseOrderLists = new HashSet<>();
+    private Set<PurchaseOrderLines> purchaseOrderLineLists = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("purchaseOrders")
     private People contactPerson;
@@ -151,29 +151,29 @@ public class PurchaseOrders extends AbstractAuditingEntity implements Serializab
         this.internalComments = internalComments;
     }
 
-    public Set<PurchaseOrderLines> getPurchaseOrderLists() {
-        return purchaseOrderLists;
+    public Set<PurchaseOrderLines> getPurchaseOrderLineLists() {
+        return purchaseOrderLineLists;
     }
 
-    public PurchaseOrders purchaseOrderLists(Set<PurchaseOrderLines> purchaseOrderLines) {
-        this.purchaseOrderLists = purchaseOrderLines;
+    public PurchaseOrders purchaseOrderLineLists(Set<PurchaseOrderLines> purchaseOrderLines) {
+        this.purchaseOrderLineLists = purchaseOrderLines;
         return this;
     }
 
-    public PurchaseOrders addPurchaseOrderList(PurchaseOrderLines purchaseOrderLines) {
-        this.purchaseOrderLists.add(purchaseOrderLines);
+    public PurchaseOrders addPurchaseOrderLineList(PurchaseOrderLines purchaseOrderLines) {
+        this.purchaseOrderLineLists.add(purchaseOrderLines);
         purchaseOrderLines.setPurchaseOrder(this);
         return this;
     }
 
-    public PurchaseOrders removePurchaseOrderList(PurchaseOrderLines purchaseOrderLines) {
-        this.purchaseOrderLists.remove(purchaseOrderLines);
+    public PurchaseOrders removePurchaseOrderLineList(PurchaseOrderLines purchaseOrderLines) {
+        this.purchaseOrderLineLists.remove(purchaseOrderLines);
         purchaseOrderLines.setPurchaseOrder(null);
         return this;
     }
 
-    public void setPurchaseOrderLists(Set<PurchaseOrderLines> purchaseOrderLines) {
-        this.purchaseOrderLists = purchaseOrderLines;
+    public void setPurchaseOrderLineLists(Set<PurchaseOrderLines> purchaseOrderLines) {
+        this.purchaseOrderLineLists = purchaseOrderLines;
     }
 
     public People getContactPerson() {

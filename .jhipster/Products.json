@@ -141,7 +141,15 @@
             "relationshipType": "one-to-one",
             "otherEntityName": "reviewLines",
             "otherEntityRelationshipName": "product",
-            "relationshipName": "productReview",
+            "relationshipName": "reviewLine",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "merchants",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "merchant",
             "otherEntityField": "id",
             "ownerSide": true
         },

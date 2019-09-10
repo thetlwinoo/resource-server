@@ -117,7 +117,11 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private ReviewLines productReview;
+    private ReviewLines reviewLine;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Merchants merchant;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
@@ -494,17 +498,30 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public ReviewLines getProductReview() {
-        return productReview;
+    public ReviewLines getReviewLine() {
+        return reviewLine;
     }
 
-    public Products productReview(ReviewLines reviewLines) {
-        this.productReview = reviewLines;
+    public Products reviewLine(ReviewLines reviewLines) {
+        this.reviewLine = reviewLines;
         return this;
     }
 
-    public void setProductReview(ReviewLines reviewLines) {
-        this.productReview = reviewLines;
+    public void setReviewLine(ReviewLines reviewLines) {
+        this.reviewLine = reviewLines;
+    }
+
+    public Merchants getMerchant() {
+        return merchant;
+    }
+
+    public Products merchant(Merchants merchants) {
+        this.merchant = merchants;
+        return this;
+    }
+
+    public void setMerchant(Merchants merchants) {
+        this.merchant = merchants;
     }
 
     public PackageTypes getUnitPackage() {

@@ -63,7 +63,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
             Optional<Orders> orders = ordersExtendRepository.findById(orderId);
 
             if (orders.isPresent()) {
-                orders.get().setOrderReview(reviews);
+                orders.get().setReview(reviews);
             }
         }
 
@@ -74,7 +74,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         Optional<Orders> orders = ordersExtendRepository.findById(orderId);
         Reviews reviews = new Reviews();
         if (orders.isPresent()) {
-            reviews = orders.get().getOrderReview();
+            reviews = orders.get().getReview();
             reviews.setCompletedReview(true);
             reviewsExtendRepository.save(reviews);
         }

@@ -13,7 +13,7 @@ public interface ReviewsMapper extends EntityMapper<ReviewsDTO, Reviews> {
 
 
     @Mapping(target = "reviewLineLists", ignore = true)
-    @Mapping(target = "review", ignore = true)
+    @Mapping(target = "order", ignore = true)
     Reviews toEntity(ReviewsDTO reviewsDTO);
 
     default Reviews fromId(Long id) {

@@ -77,7 +77,9 @@ public class ProductsCriteria implements Serializable {
 
     private IntegerFilter sellCount;
 
-    private LongFilter productReviewId;
+    private LongFilter reviewLineId;
+
+    private LongFilter merchantId;
 
     private LongFilter unitPackageId;
 
@@ -309,12 +311,20 @@ public class ProductsCriteria implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public LongFilter getProductReviewId() {
-        return productReviewId;
+    public LongFilter getReviewLineId() {
+        return reviewLineId;
     }
 
-    public void setProductReviewId(LongFilter productReviewId) {
-        this.productReviewId = productReviewId;
+    public void setReviewLineId(LongFilter reviewLineId) {
+        this.reviewLineId = reviewLineId;
+    }
+
+    public LongFilter getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(LongFilter merchantId) {
+        this.merchantId = merchantId;
     }
 
     public LongFilter getUnitPackageId() {
@@ -411,7 +421,8 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(internalComments, that.internalComments) &&
             Objects.equals(discontinuedDate, that.discontinuedDate) &&
             Objects.equals(sellCount, that.sellCount) &&
-            Objects.equals(productReviewId, that.productReviewId) &&
+            Objects.equals(reviewLineId, that.reviewLineId) &&
+            Objects.equals(merchantId, that.merchantId) &&
             Objects.equals(unitPackageId, that.unitPackageId) &&
             Objects.equals(outerPackageId, that.outerPackageId) &&
             Objects.equals(supplierId, that.supplierId) &&
@@ -451,7 +462,8 @@ public class ProductsCriteria implements Serializable {
         internalComments,
         discontinuedDate,
         sellCount,
-        productReviewId,
+        reviewLineId,
+        merchantId,
         unitPackageId,
         outerPackageId,
         supplierId,
@@ -492,7 +504,8 @@ public class ProductsCriteria implements Serializable {
                 (internalComments != null ? "internalComments=" + internalComments + ", " : "") +
                 (discontinuedDate != null ? "discontinuedDate=" + discontinuedDate + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
-                (productReviewId != null ? "productReviewId=" + productReviewId + ", " : "") +
+                (reviewLineId != null ? "reviewLineId=" + reviewLineId + ", " : "") +
+                (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
                 (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +
                 (outerPackageId != null ? "outerPackageId=" + outerPackageId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +

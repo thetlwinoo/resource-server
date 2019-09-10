@@ -68,15 +68,15 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     /**
-     *  get all the orders where Payment is null.
+     *  get all the orders where PaymentTransaction is null.
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<OrdersDTO> findAllWherePaymentIsNull() {
-        log.debug("Request to get all orders where Payment is null");
+    public List<OrdersDTO> findAllWherePaymentTransactionIsNull() {
+        log.debug("Request to get all orders where PaymentTransaction is null");
         return StreamSupport
             .stream(ordersRepository.findAll().spliterator(), false)
-            .filter(orders -> orders.getPayment() == null)
+            .filter(orders -> orders.getPaymentTransaction() == null)
             .map(ordersMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

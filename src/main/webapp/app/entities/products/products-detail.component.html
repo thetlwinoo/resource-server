@@ -109,10 +109,16 @@
                 <dd>
                     <span>{{products.sellCount}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.productReview">Product Review</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.reviewLine">Review Line</span></dt>
                 <dd>
-                    <div *ngIf="products.productReviewId">
-                        <a [routerLink]="['/review-lines', products.productReviewId, 'view']">{{products.productReviewId}}</a>
+                    <div *ngIf="products.reviewLineId">
+                        <a [routerLink]="['/review-lines', products.reviewLineId, 'view']">{{products.reviewLineId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.merchant">Merchant</span></dt>
+                <dd>
+                    <div *ngIf="products.merchantId">
+                        <a [routerLink]="['/merchants', products.merchantId, 'view']">{{products.merchantId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span></dt>

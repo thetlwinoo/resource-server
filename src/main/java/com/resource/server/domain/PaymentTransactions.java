@@ -32,7 +32,7 @@ public class PaymentTransactions extends AbstractAuditingEntity implements Seria
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Orders paymentOnOrder;
+    private Orders order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -56,17 +56,17 @@ public class PaymentTransactions extends AbstractAuditingEntity implements Seria
         this.returnedCompletedPaymentData = returnedCompletedPaymentData;
     }
 
-    public Orders getPaymentOnOrder() {
-        return paymentOnOrder;
+    public Orders getOrder() {
+        return order;
     }
 
-    public PaymentTransactions paymentOnOrder(Orders orders) {
-        this.paymentOnOrder = orders;
+    public PaymentTransactions order(Orders orders) {
+        this.order = orders;
         return this;
     }
 
-    public void setPaymentOnOrder(Orders orders) {
-        this.paymentOnOrder = orders;
+    public void setOrder(Orders orders) {
+        this.order = orders;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

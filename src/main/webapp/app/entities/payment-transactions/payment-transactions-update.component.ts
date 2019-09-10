@@ -17,7 +17,7 @@ export class PaymentTransactionsUpdateComponent implements OnInit {
     paymentTransactions: IPaymentTransactions;
     isSaving: boolean;
 
-    paymentonorders: IOrders[];
+    orders: IOrders[];
 
     constructor(
         protected dataUtils: JhiDataUtils,
@@ -33,24 +33,24 @@ export class PaymentTransactionsUpdateComponent implements OnInit {
             this.paymentTransactions = paymentTransactions;
         });
         this.ordersService
-            .query({ filter: 'payment-is-null' })
+            .query({ filter: 'paymenttransaction-is-null' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IOrders[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IOrders[]>) => response.body)
             )
             .subscribe(
                 (res: IOrders[]) => {
-                    if (!this.paymentTransactions.paymentOnOrderId) {
-                        this.paymentonorders = res;
+                    if (!this.paymentTransactions.orderId) {
+                        this.orders = res;
                     } else {
                         this.ordersService
-                            .find(this.paymentTransactions.paymentOnOrderId)
+                            .find(this.paymentTransactions.orderId)
                             .pipe(
                                 filter((subResMayBeOk: HttpResponse<IOrders>) => subResMayBeOk.ok),
                                 map((subResponse: HttpResponse<IOrders>) => subResponse.body)
                             )
                             .subscribe(
-                                (subRes: IOrders) => (this.paymentonorders = [subRes].concat(res)),
+                                (subRes: IOrders) => (this.orders = [subRes].concat(res)),
                                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
                             );
                     }

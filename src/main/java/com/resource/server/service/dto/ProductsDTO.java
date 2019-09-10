@@ -74,7 +74,9 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
     private Integer sellCount;
 
 
-    private Long productReviewId;
+    private Long reviewLineId;
+
+    private Long merchantId;
 
     private Long unitPackageId;
 
@@ -320,12 +322,20 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public Long getProductReviewId() {
-        return productReviewId;
+    public Long getReviewLineId() {
+        return reviewLineId;
     }
 
-    public void setProductReviewId(Long reviewLinesId) {
-        this.productReviewId = reviewLinesId;
+    public void setReviewLineId(Long reviewLinesId) {
+        this.reviewLineId = reviewLinesId;
+    }
+
+    public Long getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(Long merchantsId) {
+        this.merchantId = merchantsId;
     }
 
     public Long getUnitPackageId() {
@@ -491,7 +501,8 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
             ", internalComments='" + getInternalComments() + "'" +
             ", discontinuedDate='" + getDiscontinuedDate() + "'" +
             ", sellCount=" + getSellCount() +
-            ", productReview=" + getProductReviewId() +
+            ", reviewLine=" + getReviewLineId() +
+            ", merchant=" + getMerchantId() +
             ", unitPackage=" + getUnitPackageId() +
             ", unitPackage='" + getUnitPackagePackageTypeName() + "'" +
             ", outerPackage=" + getOuterPackageId() +

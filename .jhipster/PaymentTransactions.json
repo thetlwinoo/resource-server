@@ -14,8 +14,8 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "orders",
-            "otherEntityRelationshipName": "payment",
-            "relationshipName": "paymentOnOrder",
+            "otherEntityRelationshipName": "paymentTransaction",
+            "relationshipName": "order",
             "otherEntityField": "id",
             "ownerSide": true
         }

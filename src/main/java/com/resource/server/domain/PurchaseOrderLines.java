@@ -54,8 +54,8 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
     @JsonIgnoreProperties("purchaseOrderLines")
     private PackageTypes packageType;
 
-    @ManyToOne
-    @JsonIgnoreProperties("purchaseOrderLists")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("purchaseOrderLineLists")
     private PurchaseOrders purchaseOrder;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

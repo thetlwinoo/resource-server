@@ -45,7 +45,7 @@ describe('PaymentTransactions e2e test', () => {
         await paymentTransactionsComponentsPage.clickOnCreateButton();
         await promise.all([
             paymentTransactionsUpdatePage.setReturnedCompletedPaymentDataInput('returnedCompletedPaymentData'),
-            paymentTransactionsUpdatePage.paymentOnOrderSelectLastOption()
+            paymentTransactionsUpdatePage.orderSelectLastOption()
         ]);
         expect(await paymentTransactionsUpdatePage.getReturnedCompletedPaymentDataInput()).to.eq('returnedCompletedPaymentData');
         await paymentTransactionsUpdatePage.save();

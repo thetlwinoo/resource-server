@@ -41,7 +41,8 @@
             <th jhiSortBy="internalComments"><span jhiTranslate="resourceApp.products.internalComments">Internal Comments</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="discontinuedDate"><span jhiTranslate="resourceApp.products.discontinuedDate">Discontinued Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sellCount"><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="productReviewId"><span jhiTranslate="resourceApp.products.productReview">Product Review</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reviewLineId"><span jhiTranslate="resourceApp.products.reviewLine">Review Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="merchantId"><span jhiTranslate="resourceApp.products.merchant">Merchant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="unitPackagePackageTypeName"><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="outerPackagePackageTypeName"><span jhiTranslate="resourceApp.products.outerPackage">Outer Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="supplierSupplierName"><span jhiTranslate="resourceApp.products.supplier">Supplier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -82,8 +83,13 @@
                 <td>{{products.discontinuedDate | date:'mediumDate'}}</td>
                 <td>{{products.sellCount}}</td>
                 <td>
-                    <div *ngIf="products.productReviewId">
-                        <a [routerLink]="['../review-lines', products.productReviewId , 'view' ]" >{{products.productReviewId}}</a>
+                    <div *ngIf="products.reviewLineId">
+                        <a [routerLink]="['../review-lines', products.reviewLineId , 'view' ]" >{{products.reviewLineId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="products.merchantId">
+                        <a [routerLink]="['../merchants', products.merchantId , 'view' ]" >{{products.merchantId}}</a>
                     </div>
                 </td>
                 <td>

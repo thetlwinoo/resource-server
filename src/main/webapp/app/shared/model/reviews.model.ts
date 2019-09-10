@@ -13,7 +13,7 @@ export interface IReviews {
     reviewAsAnonymous?: boolean;
     completedReview?: boolean;
     reviewLineLists?: IReviewLines[];
-    reviewId?: number;
+    orderId?: number;
 }
 
 export class Reviews implements IReviews {
@@ -29,7 +29,7 @@ export class Reviews implements IReviews {
         public reviewAsAnonymous?: boolean,
         public completedReview?: boolean,
         public reviewLineLists?: IReviewLines[],
-        public reviewId?: number
+        public orderId?: number
     ) {
         this.reviewAsAnonymous = this.reviewAsAnonymous || false;
         this.completedReview = this.completedReview || false;

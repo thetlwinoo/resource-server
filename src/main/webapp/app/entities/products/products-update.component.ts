@@ -9,6 +9,8 @@ import { IProducts } from 'app/shared/model/products.model';
 import { ProductsService } from './products.service';
 import { IReviewLines } from 'app/shared/model/review-lines.model';
 import { ReviewLinesService } from 'app/entities/review-lines';
+import { IMerchants } from 'app/shared/model/merchants.model';
+import { MerchantsService } from 'app/entities/merchants';
 import { IPackageTypes } from 'app/shared/model/package-types.model';
 import { PackageTypesService } from 'app/entities/package-types';
 import { ISuppliers } from 'app/shared/model/suppliers.model';
@@ -28,7 +30,9 @@ export class ProductsUpdateComponent implements OnInit {
     products: IProducts;
     isSaving: boolean;
 
-    productreviews: IReviewLines[];
+    reviewlines: IReviewLines[];
+
+    merchants: IMerchants[];
 
     packagetypes: IPackageTypes[];
 
@@ -47,6 +51,7 @@ export class ProductsUpdateComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         protected productsService: ProductsService,
         protected reviewLinesService: ReviewLinesService,
+        protected merchantsService: MerchantsService,
         protected packageTypesService: PackageTypesService,
         protected suppliersService: SuppliersService,
         protected productSubCategoryService: ProductSubCategoryService,
@@ -68,17 +73,42 @@ export class ProductsUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: IReviewLines[]) => {
-                    if (!this.products.productReviewId) {
-                        this.productreviews = res;
+                    if (!this.products.reviewLineId) {
+                        this.reviewlines = res;
                     } else {
                         this.reviewLinesService
-                            .find(this.products.productReviewId)
+                            .find(this.products.reviewLineId)
                             .pipe(
                                 filter((subResMayBeOk: HttpResponse<IReviewLines>) => subResMayBeOk.ok),
                                 map((subResponse: HttpResponse<IReviewLines>) => subResponse.body)
                             )
                             .subscribe(
-                                (subRes: IReviewLines) => (this.productreviews = [subRes].concat(res)),
+                                (subRes: IReviewLines) => (this.reviewlines = [subRes].concat(res)),
+                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                            );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        this.merchantsService
+            .query({ 'productId.specified': 'false' })
+            .pipe(
+                filter((mayBeOk: HttpResponse<IMerchants[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IMerchants[]>) => response.body)
+            )
+            .subscribe(
+                (res: IMerchants[]) => {
+                    if (!this.products.merchantId) {
+                        this.merchants = res;
+                    } else {
+                        this.merchantsService
+                            .find(this.products.merchantId)
+                            .pipe(
+                                filter((subResMayBeOk: HttpResponse<IMerchants>) => subResMayBeOk.ok),
+                                map((subResponse: HttpResponse<IMerchants>) => subResponse.body)
+                            )
+                            .subscribe(
+                                (subRes: IMerchants) => (this.merchants = [subRes].concat(res)),
                                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
                             );
                     }
@@ -156,6 +186,10 @@ export class ProductsUpdateComponent implements OnInit {
     }
 
     trackReviewLinesById(index: number, item: IReviewLines) {
+        return item.id;
+    }
+
+    trackMerchantsById(index: number, item: IMerchants) {
         return item.id;
     }
 

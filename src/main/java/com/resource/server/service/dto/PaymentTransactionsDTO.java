@@ -16,7 +16,7 @@ public class PaymentTransactionsDTO extends AbstractAuditingDTO implements Seria
     private String returnedCompletedPaymentData;
 
 
-    private Long paymentOnOrderId;
+    private Long orderId;
 
     public Long getId() {
         return id;
@@ -34,12 +34,12 @@ public class PaymentTransactionsDTO extends AbstractAuditingDTO implements Seria
         this.returnedCompletedPaymentData = returnedCompletedPaymentData;
     }
 
-    public Long getPaymentOnOrderId() {
-        return paymentOnOrderId;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setPaymentOnOrderId(Long ordersId) {
-        this.paymentOnOrderId = ordersId;
+    public void setOrderId(Long ordersId) {
+        this.orderId = ordersId;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PaymentTransactionsDTO extends AbstractAuditingDTO implements Seria
         return "PaymentTransactionsDTO{" +
             "id=" + getId() +
             ", returnedCompletedPaymentData='" + getReturnedCompletedPaymentData() + "'" +
-            ", paymentOnOrder=" + getPaymentOnOrderId() +
+            ", order=" + getOrderId() +
             "}";
     }
 }

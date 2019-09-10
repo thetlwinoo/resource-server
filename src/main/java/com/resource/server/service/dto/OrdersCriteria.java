@@ -53,7 +53,7 @@ public class OrdersCriteria implements Serializable {
 
     private LocalDateFilter pickingCompletedWhen;
 
-    private LongFilter orderReviewId;
+    private LongFilter reviewId;
 
     private LongFilter orderLineListId;
 
@@ -67,7 +67,7 @@ public class OrdersCriteria implements Serializable {
 
     private LongFilter currencyRateId;
 
-    private LongFilter paymentId;
+    private LongFilter paymentTransactionId;
 
     private LongFilter specialDealsId;
 
@@ -191,12 +191,12 @@ public class OrdersCriteria implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
-    public LongFilter getOrderReviewId() {
-        return orderReviewId;
+    public LongFilter getReviewId() {
+        return reviewId;
     }
 
-    public void setOrderReviewId(LongFilter orderReviewId) {
-        this.orderReviewId = orderReviewId;
+    public void setReviewId(LongFilter reviewId) {
+        this.reviewId = reviewId;
     }
 
     public LongFilter getOrderLineListId() {
@@ -247,12 +247,12 @@ public class OrdersCriteria implements Serializable {
         this.currencyRateId = currencyRateId;
     }
 
-    public LongFilter getPaymentId() {
-        return paymentId;
+    public LongFilter getPaymentTransactionId() {
+        return paymentTransactionId;
     }
 
-    public void setPaymentId(LongFilter paymentId) {
-        this.paymentId = paymentId;
+    public void setPaymentTransactionId(LongFilter paymentTransactionId) {
+        this.paymentTransactionId = paymentTransactionId;
     }
 
     public LongFilter getSpecialDealsId() {
@@ -289,14 +289,14 @@ public class OrdersCriteria implements Serializable {
             Objects.equals(deliveryInstructions, that.deliveryInstructions) &&
             Objects.equals(internalComments, that.internalComments) &&
             Objects.equals(pickingCompletedWhen, that.pickingCompletedWhen) &&
-            Objects.equals(orderReviewId, that.orderReviewId) &&
+            Objects.equals(reviewId, that.reviewId) &&
             Objects.equals(orderLineListId, that.orderLineListId) &&
             Objects.equals(customerId, that.customerId) &&
             Objects.equals(shipToAddressId, that.shipToAddressId) &&
             Objects.equals(billToAddressId, that.billToAddressId) &&
             Objects.equals(shipMethodId, that.shipMethodId) &&
             Objects.equals(currencyRateId, that.currencyRateId) &&
-            Objects.equals(paymentId, that.paymentId) &&
+            Objects.equals(paymentTransactionId, that.paymentTransactionId) &&
             Objects.equals(specialDealsId, that.specialDealsId);
     }
 
@@ -318,14 +318,14 @@ public class OrdersCriteria implements Serializable {
         deliveryInstructions,
         internalComments,
         pickingCompletedWhen,
-        orderReviewId,
+        reviewId,
         orderLineListId,
         customerId,
         shipToAddressId,
         billToAddressId,
         shipMethodId,
         currencyRateId,
-        paymentId,
+        paymentTransactionId,
         specialDealsId
         );
     }
@@ -348,14 +348,14 @@ public class OrdersCriteria implements Serializable {
                 (deliveryInstructions != null ? "deliveryInstructions=" + deliveryInstructions + ", " : "") +
                 (internalComments != null ? "internalComments=" + internalComments + ", " : "") +
                 (pickingCompletedWhen != null ? "pickingCompletedWhen=" + pickingCompletedWhen + ", " : "") +
-                (orderReviewId != null ? "orderReviewId=" + orderReviewId + ", " : "") +
+                (reviewId != null ? "reviewId=" + reviewId + ", " : "") +
                 (orderLineListId != null ? "orderLineListId=" + orderLineListId + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
                 (shipToAddressId != null ? "shipToAddressId=" + shipToAddressId + ", " : "") +
                 (billToAddressId != null ? "billToAddressId=" + billToAddressId + ", " : "") +
                 (shipMethodId != null ? "shipMethodId=" + shipMethodId + ", " : "") +
                 (currencyRateId != null ? "currencyRateId=" + currencyRateId + ", " : "") +
-                (paymentId != null ? "paymentId=" + paymentId + ", " : "") +
+                (paymentTransactionId != null ? "paymentTransactionId=" + paymentTransactionId + ", " : "") +
                 (specialDealsId != null ? "specialDealsId=" + specialDealsId + ", " : "") +
             "}";
     }

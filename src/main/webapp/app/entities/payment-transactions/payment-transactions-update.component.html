@@ -22,10 +22,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.paymentTransactions.paymentOnOrder" for="field_paymentOnOrder">Payment On Order</label>
-                    <select class="form-control" id="field_paymentOnOrder" name="paymentOnOrder" [(ngModel)]="paymentTransactions.paymentOnOrderId">
+                    <label class="form-control-label" jhiTranslate="resourceApp.paymentTransactions.order" for="field_order">Order</label>
+                    <select class="form-control" id="field_order" name="order" [(ngModel)]="paymentTransactions.orderId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="ordersOption.id" *ngFor="let ordersOption of paymentonorders; trackBy: trackOrdersById">{{ordersOption.id}}</option>
+                        <option [ngValue]="ordersOption.id" *ngFor="let ordersOption of orders; trackBy: trackOrdersById">{{ordersOption.id}}</option>
                     </select>
                 </div>
             </div>

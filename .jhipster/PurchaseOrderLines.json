@@ -47,7 +47,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "purchaseOrders",
-            "otherEntityRelationshipName": "purchaseOrderList",
+            "otherEntityRelationshipName": "purchaseOrderLineList",
             "relationshipName": "purchaseOrder",
             "otherEntityField": "id"
         }

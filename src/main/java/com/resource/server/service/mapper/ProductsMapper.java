@@ -8,10 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Products and its DTO ProductsDTO.
  */
-@Mapper(componentModel = "spring", uses = {ReviewLinesMapper.class, PackageTypesMapper.class, SuppliersMapper.class, ProductSubCategoryMapper.class, UnitMeasureMapper.class, ProductModelMapper.class})
+@Mapper(componentModel = "spring", uses = {ReviewLinesMapper.class, MerchantsMapper.class, PackageTypesMapper.class, SuppliersMapper.class, ProductSubCategoryMapper.class, UnitMeasureMapper.class, ProductModelMapper.class})
 public interface ProductsMapper extends EntityMapper<ProductsDTO, Products> {
 
-    @Mapping(source = "productReview.id", target = "productReviewId")
+    @Mapping(source = "reviewLine.id", target = "reviewLineId")
+    @Mapping(source = "merchant.id", target = "merchantId")
     @Mapping(source = "unitPackage.id", target = "unitPackageId")
     @Mapping(source = "unitPackage.packageTypeName", target = "unitPackagePackageTypeName")
     @Mapping(source = "outerPackage.id", target = "outerPackageId")
@@ -28,7 +29,8 @@ public interface ProductsMapper extends EntityMapper<ProductsDTO, Products> {
     @Mapping(source = "productModel.productModelName", target = "productModelProductModelName")
     ProductsDTO toDto(Products products);
 
-    @Mapping(source = "productReviewId", target = "productReview")
+    @Mapping(source = "reviewLineId", target = "reviewLine")
+    @Mapping(source = "merchantId", target = "merchant")
     @Mapping(source = "unitPackageId", target = "unitPackage")
     @Mapping(source = "outerPackageId", target = "outerPackage")
     @Mapping(source = "supplierId", target = "supplier")

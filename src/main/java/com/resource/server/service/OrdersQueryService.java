@@ -131,9 +131,9 @@ public class OrdersQueryService extends QueryService<Orders> {
             if (criteria.getPickingCompletedWhen() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPickingCompletedWhen(), Orders_.pickingCompletedWhen));
             }
-            if (criteria.getOrderReviewId() != null) {
-                specification = specification.and(buildSpecification(criteria.getOrderReviewId(),
-                    root -> root.join(Orders_.orderReview, JoinType.LEFT).get(Reviews_.id)));
+            if (criteria.getReviewId() != null) {
+                specification = specification.and(buildSpecification(criteria.getReviewId(),
+                    root -> root.join(Orders_.review, JoinType.LEFT).get(Reviews_.id)));
             }
             if (criteria.getOrderLineListId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrderLineListId(),
@@ -159,9 +159,9 @@ public class OrdersQueryService extends QueryService<Orders> {
                 specification = specification.and(buildSpecification(criteria.getCurrencyRateId(),
                     root -> root.join(Orders_.currencyRate, JoinType.LEFT).get(CurrencyRate_.id)));
             }
-            if (criteria.getPaymentId() != null) {
-                specification = specification.and(buildSpecification(criteria.getPaymentId(),
-                    root -> root.join(Orders_.payment, JoinType.LEFT).get(PaymentTransactions_.id)));
+            if (criteria.getPaymentTransactionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPaymentTransactionId(),
+                    root -> root.join(Orders_.paymentTransaction, JoinType.LEFT).get(PaymentTransactions_.id)));
             }
             if (criteria.getSpecialDealsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSpecialDealsId(),
