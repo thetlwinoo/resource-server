@@ -111,10 +111,6 @@ public class MerchantsQueryService extends QueryService<Merchants> {
                 specification = specification.and(buildSpecification(criteria.getPersonId(),
                     root -> root.join(Merchants_.person, JoinType.LEFT).get(People_.id)));
             }
-            if (criteria.getProductId() != null) {
-                specification = specification.and(buildSpecification(criteria.getProductId(),
-                    root -> root.join(Merchants_.product, JoinType.LEFT).get(Products_.id)));
-            }
         }
         return specification;
     }

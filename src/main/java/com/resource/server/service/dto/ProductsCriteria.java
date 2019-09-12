@@ -79,13 +79,13 @@ public class ProductsCriteria implements Serializable {
 
     private LongFilter reviewLineId;
 
-    private LongFilter merchantId;
-
     private LongFilter unitPackageId;
 
     private LongFilter outerPackageId;
 
     private LongFilter supplierId;
+
+    private LongFilter merchantId;
 
     private LongFilter productSubCategoryId;
 
@@ -319,14 +319,6 @@ public class ProductsCriteria implements Serializable {
         this.reviewLineId = reviewLineId;
     }
 
-    public LongFilter getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(LongFilter merchantId) {
-        this.merchantId = merchantId;
-    }
-
     public LongFilter getUnitPackageId() {
         return unitPackageId;
     }
@@ -349,6 +341,14 @@ public class ProductsCriteria implements Serializable {
 
     public void setSupplierId(LongFilter supplierId) {
         this.supplierId = supplierId;
+    }
+
+    public LongFilter getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(LongFilter merchantId) {
+        this.merchantId = merchantId;
     }
 
     public LongFilter getProductSubCategoryId() {
@@ -422,10 +422,10 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(discontinuedDate, that.discontinuedDate) &&
             Objects.equals(sellCount, that.sellCount) &&
             Objects.equals(reviewLineId, that.reviewLineId) &&
-            Objects.equals(merchantId, that.merchantId) &&
             Objects.equals(unitPackageId, that.unitPackageId) &&
             Objects.equals(outerPackageId, that.outerPackageId) &&
             Objects.equals(supplierId, that.supplierId) &&
+            Objects.equals(merchantId, that.merchantId) &&
             Objects.equals(productSubCategoryId, that.productSubCategoryId) &&
             Objects.equals(sizeUnitMeasureCodeId, that.sizeUnitMeasureCodeId) &&
             Objects.equals(weightUnitMeasureCodeId, that.weightUnitMeasureCodeId) &&
@@ -463,10 +463,10 @@ public class ProductsCriteria implements Serializable {
         discontinuedDate,
         sellCount,
         reviewLineId,
-        merchantId,
         unitPackageId,
         outerPackageId,
         supplierId,
+        merchantId,
         productSubCategoryId,
         sizeUnitMeasureCodeId,
         weightUnitMeasureCodeId,
@@ -505,10 +505,10 @@ public class ProductsCriteria implements Serializable {
                 (discontinuedDate != null ? "discontinuedDate=" + discontinuedDate + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
                 (reviewLineId != null ? "reviewLineId=" + reviewLineId + ", " : "") +
-                (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
                 (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +
                 (outerPackageId != null ? "outerPackageId=" + outerPackageId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +
+                (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
                 (productSubCategoryId != null ? "productSubCategoryId=" + productSubCategoryId + ", " : "") +
                 (sizeUnitMeasureCodeId != null ? "sizeUnitMeasureCodeId=" + sizeUnitMeasureCodeId + ", " : "") +
                 (weightUnitMeasureCodeId != null ? "weightUnitMeasureCodeId=" + weightUnitMeasureCodeId + ", " : "") +

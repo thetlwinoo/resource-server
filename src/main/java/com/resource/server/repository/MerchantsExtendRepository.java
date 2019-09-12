@@ -2,6 +2,8 @@ package com.resource.server.repository;
 
 import com.resource.server.domain.Merchants;
 
+import java.util.Optional;
+
 public interface MerchantsExtendRepository extends MerchantsRepository {
-    Merchants findMerchantsByPersonId(Long personId);
+    Optional<Merchants> findMerchantsByPersonId(Long personId);
 }

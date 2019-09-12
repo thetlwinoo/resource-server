@@ -171,10 +171,6 @@ public class ProductsQueryService extends QueryService<Products> {
                 specification = specification.and(buildSpecification(criteria.getReviewLineId(),
                     root -> root.join(Products_.reviewLine, JoinType.LEFT).get(ReviewLines_.id)));
             }
-            if (criteria.getMerchantId() != null) {
-                specification = specification.and(buildSpecification(criteria.getMerchantId(),
-                    root -> root.join(Products_.merchant, JoinType.LEFT).get(Merchants_.id)));
-            }
             if (criteria.getUnitPackageId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUnitPackageId(),
                     root -> root.join(Products_.unitPackage, JoinType.LEFT).get(PackageTypes_.id)));
@@ -186,6 +182,10 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getSupplierId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSupplierId(),
                     root -> root.join(Products_.supplier, JoinType.LEFT).get(Suppliers_.id)));
+            }
+            if (criteria.getMerchantId() != null) {
+                specification = specification.and(buildSpecification(criteria.getMerchantId(),
+                    root -> root.join(Products_.merchant, JoinType.LEFT).get(Merchants_.id)));
             }
             if (criteria.getProductSubCategoryId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductSubCategoryId(),

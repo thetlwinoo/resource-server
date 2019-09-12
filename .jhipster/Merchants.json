@@ -50,13 +50,6 @@
             "otherEntityRelationshipName": "merchants",
             "relationshipName": "person",
             "otherEntityField": "fullName"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "products",
-            "otherEntityRelationshipName": "merchant",
-            "relationshipName": "product",
-            "ownerSide": false
         }
     ],
     "changelogDate": "20190910080840",

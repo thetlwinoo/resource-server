@@ -22,8 +22,7 @@
             "webServiceUrl": "Web Service Url",
             "webSiteUrl": "Web Site Url",
             "avatar": "Avatar",
-            "person": "Person",
-            "product": "Product"
+            "person": "Person"
         }
     }
 }

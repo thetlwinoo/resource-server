@@ -10,7 +10,6 @@ export interface IMerchants {
     avatar?: any;
     personFullName?: string;
     personId?: number;
-    productId?: number;
 }
 
 export class Merchants implements IMerchants {
@@ -25,8 +24,7 @@ export class Merchants implements IMerchants {
         public avatarContentType?: string,
         public avatar?: any,
         public personFullName?: string,
-        public personId?: number,
-        public productId?: number
+        public personId?: number
     ) {
         this.activeFlag = this.activeFlag || false;
     }

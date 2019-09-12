@@ -29,13 +29,14 @@ export interface IProducts {
     discontinuedDate?: Moment;
     sellCount?: number;
     reviewLineId?: number;
-    merchantId?: number;
     unitPackagePackageTypeName?: string;
     unitPackageId?: number;
     outerPackagePackageTypeName?: string;
     outerPackageId?: number;
     supplierSupplierName?: string;
     supplierId?: number;
+    merchantMerchantName?: string;
+    merchantId?: number;
     productSubCategoryProductSubCategoryName?: string;
     productSubCategoryId?: number;
     sizeUnitMeasureCodeUnitMeasureCode?: string;
@@ -76,13 +77,14 @@ export class Products implements IProducts {
         public discontinuedDate?: Moment,
         public sellCount?: number,
         public reviewLineId?: number,
-        public merchantId?: number,
         public unitPackagePackageTypeName?: string,
         public unitPackageId?: number,
         public outerPackagePackageTypeName?: string,
         public outerPackageId?: number,
         public supplierSupplierName?: string,
         public supplierId?: number,
+        public merchantMerchantName?: string,
+        public merchantId?: number,
         public productSubCategoryProductSubCategoryName?: string,
         public productSubCategoryId?: number,
         public sizeUnitMeasureCodeUnitMeasureCode?: string,

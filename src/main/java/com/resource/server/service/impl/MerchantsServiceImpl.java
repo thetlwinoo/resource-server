@@ -15,7 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing Merchants.
@@ -63,21 +62,6 @@ public class MerchantsServiceImpl implements MerchantsService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-
-
-    /**
-     *  get all the merchants where Product is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<MerchantsDTO> findAllWhereProductIsNull() {
-        log.debug("Request to get all merchants where Product is null");
-        return StreamSupport
-            .stream(merchantsRepository.findAll().spliterator(), false)
-            .filter(merchants -> merchants.getProduct() == null)
-            .map(merchantsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
 
     /**
      * Get one merchants by id.

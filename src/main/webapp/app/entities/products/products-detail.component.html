@@ -115,12 +115,6 @@
                         <a [routerLink]="['/review-lines', products.reviewLineId, 'view']">{{products.reviewLineId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.merchant">Merchant</span></dt>
-                <dd>
-                    <div *ngIf="products.merchantId">
-                        <a [routerLink]="['/merchants', products.merchantId, 'view']">{{products.merchantId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span></dt>
                 <dd>
                     <div *ngIf="products.unitPackageId">
@@ -137,6 +131,12 @@
                 <dd>
                     <div *ngIf="products.supplierId">
                         <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierSupplierName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.merchant">Merchant</span></dt>
+                <dd>
+                    <div *ngIf="products.merchantId">
+                        <a [routerLink]="['/merchants', products.merchantId, 'view']">{{products.merchantMerchantName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.productSubCategory">Product Sub Category</span></dt>

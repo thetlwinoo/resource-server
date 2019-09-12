@@ -1,7 +1,6 @@
 package com.resource.server.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -59,10 +58,6 @@ public class Merchants extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("merchants")
     private People person;
-
-    @OneToOne(mappedBy = "merchant")
-    @JsonIgnore
-    private Products product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -188,19 +183,6 @@ public class Merchants extends AbstractAuditingEntity implements Serializable {
 
     public void setPerson(People people) {
         this.person = people;
-    }
-
-    public Products getProduct() {
-        return product;
-    }
-
-    public Merchants product(Products products) {
-        this.product = products;
-        return this;
-    }
-
-    public void setProduct(Products products) {
-        this.product = products;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

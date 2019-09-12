@@ -146,14 +146,6 @@
             "ownerSide": true
         },
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "merchants",
-            "otherEntityRelationshipName": "product",
-            "relationshipName": "merchant",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "many-to-one",
             "otherEntityName": "packageTypes",
             "otherEntityRelationshipName": "products",
@@ -173,6 +165,13 @@
             "otherEntityRelationshipName": "products",
             "relationshipName": "supplier",
             "otherEntityField": "supplierName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "merchants",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "merchant",
+            "otherEntityField": "merchantName"
         },
         {
             "relationshipType": "many-to-one",

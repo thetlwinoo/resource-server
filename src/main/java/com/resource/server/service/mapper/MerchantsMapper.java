@@ -16,7 +16,6 @@ public interface MerchantsMapper extends EntityMapper<MerchantsDTO, Merchants> {
     MerchantsDTO toDto(Merchants merchants);
 
     @Mapping(source = "personId", target = "person")
-    @Mapping(target = "product", ignore = true)
     Merchants toEntity(MerchantsDTO merchantsDTO);
 
     default Merchants fromId(Long id) {

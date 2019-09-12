@@ -8,8 +8,6 @@ import { IMerchants } from 'app/shared/model/merchants.model';
 import { MerchantsService } from './merchants.service';
 import { IPeople } from 'app/shared/model/people.model';
 import { PeopleService } from 'app/entities/people';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
 
 @Component({
     selector: 'jhi-merchants-update',
@@ -21,14 +19,11 @@ export class MerchantsUpdateComponent implements OnInit {
 
     people: IPeople[];
 
-    products: IProducts[];
-
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected merchantsService: MerchantsService,
         protected peopleService: PeopleService,
-        protected productsService: ProductsService,
         protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -45,13 +40,6 @@ export class MerchantsUpdateComponent implements OnInit {
                 map((response: HttpResponse<IPeople[]>) => response.body)
             )
             .subscribe((res: IPeople[]) => (this.people = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.productsService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
-            )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -101,10 +89,6 @@ export class MerchantsUpdateComponent implements OnInit {
     }
 
     trackPeopleById(index: number, item: IPeople) {
-        return item.id;
-    }
-
-    trackProductsById(index: number, item: IProducts) {
         return item.id;
     }
 }

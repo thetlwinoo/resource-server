@@ -243,13 +243,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.merchant" for="field_merchant">Merchant</label>
-                    <select class="form-control" id="field_merchant" name="merchant" [(ngModel)]="products.merchantId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="merchantsOption.id" *ngFor="let merchantsOption of merchants; trackBy: trackMerchantsById">{{merchantsOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.unitPackage" for="field_unitPackage">Unit Package</label>
                     <select class="form-control" id="field_unitPackage" name="unitPackage" [(ngModel)]="products.unitPackageId" >
                         <option [ngValue]="null"></option>
@@ -268,6 +261,13 @@
                     <select class="form-control" id="field_supplier" name="supplier" [(ngModel)]="products.supplierId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.merchant" for="field_merchant">Merchant</label>
+                    <select class="form-control" id="field_merchant" name="merchant" [(ngModel)]="products.merchantId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="merchantsOption.id" *ngFor="let merchantsOption of merchants; trackBy: trackMerchantsById">{{merchantsOption.merchantName}}</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -76,8 +76,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long reviewLineId;
 
-    private Long merchantId;
-
     private Long unitPackageId;
 
     private String unitPackagePackageTypeName;
@@ -89,6 +87,10 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
     private Long supplierId;
 
     private String supplierSupplierName;
+
+    private Long merchantId;
+
+    private String merchantMerchantName;
 
     private Long productSubCategoryId;
 
@@ -330,14 +332,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.reviewLineId = reviewLinesId;
     }
 
-    public Long getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Long merchantsId) {
-        this.merchantId = merchantsId;
-    }
-
     public Long getUnitPackageId() {
         return unitPackageId;
     }
@@ -384,6 +378,22 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setSupplierSupplierName(String suppliersSupplierName) {
         this.supplierSupplierName = suppliersSupplierName;
+    }
+
+    public Long getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(Long merchantsId) {
+        this.merchantId = merchantsId;
+    }
+
+    public String getMerchantMerchantName() {
+        return merchantMerchantName;
+    }
+
+    public void setMerchantMerchantName(String merchantsMerchantName) {
+        this.merchantMerchantName = merchantsMerchantName;
     }
 
     public Long getProductSubCategoryId() {
@@ -502,13 +512,14 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
             ", discontinuedDate='" + getDiscontinuedDate() + "'" +
             ", sellCount=" + getSellCount() +
             ", reviewLine=" + getReviewLineId() +
-            ", merchant=" + getMerchantId() +
             ", unitPackage=" + getUnitPackageId() +
             ", unitPackage='" + getUnitPackagePackageTypeName() + "'" +
             ", outerPackage=" + getOuterPackageId() +
             ", outerPackage='" + getOuterPackagePackageTypeName() + "'" +
             ", supplier=" + getSupplierId() +
             ", supplier='" + getSupplierSupplierName() + "'" +
+            ", merchant=" + getMerchantId() +
+            ", merchant='" + getMerchantMerchantName() + "'" +
             ", productSubCategory=" + getProductSubCategoryId() +
             ", productSubCategory='" + getProductSubCategoryProductSubCategoryName() + "'" +
             ", sizeUnitMeasureCode=" + getSizeUnitMeasureCodeId() +

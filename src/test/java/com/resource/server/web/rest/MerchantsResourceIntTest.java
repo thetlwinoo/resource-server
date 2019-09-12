@@ -4,7 +4,6 @@ import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Merchants;
 import com.resource.server.domain.People;
-import com.resource.server.domain.Products;
 import com.resource.server.repository.MerchantsRepository;
 import com.resource.server.service.MerchantsService;
 import com.resource.server.service.dto.MerchantsDTO;
@@ -579,26 +578,6 @@ public class MerchantsResourceIntTest {
 
         // Get all the merchantsList where person equals to personId + 1
         defaultMerchantsShouldNotBeFound("personId.equals=" + (personId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllMerchantsByProductIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Products product = ProductsResourceIntTest.createEntity(em);
-        em.persist(product);
-        em.flush();
-        merchants.setProduct(product);
-        product.setMerchant(merchants);
-        merchantsRepository.saveAndFlush(merchants);
-        Long productId = product.getId();
-
-        // Get all the merchantsList where product equals to productId
-        defaultMerchantsShouldBeFound("productId.equals=" + productId);
-
-        // Get all the merchantsList where product equals to productId + 1
-        defaultMerchantsShouldNotBeFound("productId.equals=" + (productId + 1));
     }
 
     /**

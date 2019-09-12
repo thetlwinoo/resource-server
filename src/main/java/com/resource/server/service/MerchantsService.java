@@ -24,12 +24,6 @@ public interface MerchantsService {
      * @return the list of entities
      */
     List<MerchantsDTO> findAll();
-    /**
-     * Get all the MerchantsDTO where Product is null.
-     *
-     * @return the list of entities
-     */
-    List<MerchantsDTO> findAllWhereProductIsNull();
 
 
     /**

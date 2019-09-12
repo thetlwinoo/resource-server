@@ -68,7 +68,7 @@
     <include file="config/liquibase/changelog/20190902042828_added_entity_ProductReview.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190902042848_added_entity_ProductTags.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190910080840_added_entity_Merchants.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190910084019_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911070331_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190801044902_added_entity_constraints_Addresses.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190801044903_added_entity_constraints_BusinessEntityAddress.xml" relativeToChangelogFile="false"/>

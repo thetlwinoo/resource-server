@@ -53,10 +53,10 @@ export class ProductsUpdatePage {
     discontinuedDateInput = element(by.id('field_discontinuedDate'));
     sellCountInput = element(by.id('field_sellCount'));
     reviewLineSelect = element(by.id('field_reviewLine'));
-    merchantSelect = element(by.id('field_merchant'));
     unitPackageSelect = element(by.id('field_unitPackage'));
     outerPackageSelect = element(by.id('field_outerPackage'));
     supplierSelect = element(by.id('field_supplier'));
+    merchantSelect = element(by.id('field_merchant'));
     productSubCategorySelect = element(by.id('field_productSubCategory'));
     sizeUnitMeasureCodeSelect = element(by.id('field_sizeUnitMeasureCode'));
     weightUnitMeasureCodeSelect = element(by.id('field_weightUnitMeasureCode'));
@@ -283,25 +283,6 @@ export class ProductsUpdatePage {
         return this.reviewLineSelect.element(by.css('option:checked')).getText();
     }
 
-    async merchantSelectLastOption() {
-        await this.merchantSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async merchantSelectOption(option) {
-        await this.merchantSelect.sendKeys(option);
-    }
-
-    getMerchantSelect(): ElementFinder {
-        return this.merchantSelect;
-    }
-
-    async getMerchantSelectedOption() {
-        return this.merchantSelect.element(by.css('option:checked')).getText();
-    }
-
     async unitPackageSelectLastOption() {
         await this.unitPackageSelect
             .all(by.tagName('option'))
@@ -357,6 +338,25 @@ export class ProductsUpdatePage {
 
     async getSupplierSelectedOption() {
         return this.supplierSelect.element(by.css('option:checked')).getText();
+    }
+
+    async merchantSelectLastOption() {
+        await this.merchantSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async merchantSelectOption(option) {
+        await this.merchantSelect.sendKeys(option);
+    }
+
+    getMerchantSelect(): ElementFinder {
+        return this.merchantSelect;
+    }
+
+    async getMerchantSelectedOption() {
+        return this.merchantSelect.element(by.css('option:checked')).getText();
     }
 
     async productSubCategorySelectLastOption() {

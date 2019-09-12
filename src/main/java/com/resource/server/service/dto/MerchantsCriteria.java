@@ -38,8 +38,6 @@ public class MerchantsCriteria implements Serializable {
 
     private LongFilter personId;
 
-    private LongFilter productId;
-
     public LongFilter getId() {
         return id;
     }
@@ -104,14 +102,6 @@ public class MerchantsCriteria implements Serializable {
         this.personId = personId;
     }
 
-    public LongFilter getProductId() {
-        return productId;
-    }
-
-    public void setProductId(LongFilter productId) {
-        this.productId = productId;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -130,8 +120,7 @@ public class MerchantsCriteria implements Serializable {
             Objects.equals(activeFlag, that.activeFlag) &&
             Objects.equals(webServiceUrl, that.webServiceUrl) &&
             Objects.equals(webSiteUrl, that.webSiteUrl) &&
-            Objects.equals(personId, that.personId) &&
-            Objects.equals(productId, that.productId);
+            Objects.equals(personId, that.personId);
     }
 
     @Override
@@ -144,8 +133,7 @@ public class MerchantsCriteria implements Serializable {
         activeFlag,
         webServiceUrl,
         webSiteUrl,
-        personId,
-        productId
+        personId
         );
     }
 
@@ -160,7 +148,6 @@ public class MerchantsCriteria implements Serializable {
                 (webServiceUrl != null ? "webServiceUrl=" + webServiceUrl + ", " : "") +
                 (webSiteUrl != null ? "webSiteUrl=" + webSiteUrl + ", " : "") +
                 (personId != null ? "personId=" + personId + ", " : "") +
-                (productId != null ? "productId=" + productId + ", " : "") +
             "}";
     }
 

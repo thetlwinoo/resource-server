@@ -119,10 +119,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(unique = true)
     private ReviewLines reviewLine;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Merchants merchant;
-
     @ManyToOne
     @JsonIgnoreProperties("products")
     private PackageTypes unitPackage;
@@ -134,6 +130,10 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("products")
     private Suppliers supplier;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private Merchants merchant;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
@@ -511,19 +511,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.reviewLine = reviewLines;
     }
 
-    public Merchants getMerchant() {
-        return merchant;
-    }
-
-    public Products merchant(Merchants merchants) {
-        this.merchant = merchants;
-        return this;
-    }
-
-    public void setMerchant(Merchants merchants) {
-        this.merchant = merchants;
-    }
-
     public PackageTypes getUnitPackage() {
         return unitPackage;
     }
@@ -561,6 +548,19 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setSupplier(Suppliers suppliers) {
         this.supplier = suppliers;
+    }
+
+    public Merchants getMerchant() {
+        return merchant;
+    }
+
+    public Products merchant(Merchants merchants) {
+        this.merchant = merchants;
+        return this;
+    }
+
+    public void setMerchant(Merchants merchants) {
+        this.merchant = merchants;
     }
 
     public ProductSubCategory getProductSubCategory() {

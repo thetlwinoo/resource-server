@@ -42,10 +42,10 @@
             <th jhiSortBy="discontinuedDate"><span jhiTranslate="resourceApp.products.discontinuedDate">Discontinued Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sellCount"><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="reviewLineId"><span jhiTranslate="resourceApp.products.reviewLine">Review Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="merchantId"><span jhiTranslate="resourceApp.products.merchant">Merchant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="unitPackagePackageTypeName"><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="outerPackagePackageTypeName"><span jhiTranslate="resourceApp.products.outerPackage">Outer Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="supplierSupplierName"><span jhiTranslate="resourceApp.products.supplier">Supplier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="merchantMerchantName"><span jhiTranslate="resourceApp.products.merchant">Merchant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productSubCategoryProductSubCategoryName"><span jhiTranslate="resourceApp.products.productSubCategory">Product Sub Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sizeUnitMeasureCodeUnitMeasureCode"><span jhiTranslate="resourceApp.products.sizeUnitMeasureCode">Size Unit Measure Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="weightUnitMeasureCodeUnitMeasureCode"><span jhiTranslate="resourceApp.products.weightUnitMeasureCode">Weight Unit Measure Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -88,11 +88,6 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="products.merchantId">
-                        <a [routerLink]="['../merchants', products.merchantId , 'view' ]" >{{products.merchantId}}</a>
-                    </div>
-                </td>
-                <td>
                     <div *ngIf="products.unitPackageId">
                         <a [routerLink]="['../package-types', products.unitPackageId , 'view' ]" >{{products.unitPackagePackageTypeName}}</a>
                     </div>
@@ -105,6 +100,11 @@
                 <td>
                     <div *ngIf="products.supplierId">
                         <a [routerLink]="['../suppliers', products.supplierId , 'view' ]" >{{products.supplierSupplierName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="products.merchantId">
+                        <a [routerLink]="['../merchants', products.merchantId , 'view' ]" >{{products.merchantMerchantName}}</a>
                     </div>
                 </td>
                 <td>

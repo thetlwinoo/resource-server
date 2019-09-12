@@ -9,12 +9,12 @@ import { IProducts } from 'app/shared/model/products.model';
 import { ProductsService } from './products.service';
 import { IReviewLines } from 'app/shared/model/review-lines.model';
 import { ReviewLinesService } from 'app/entities/review-lines';
-import { IMerchants } from 'app/shared/model/merchants.model';
-import { MerchantsService } from 'app/entities/merchants';
 import { IPackageTypes } from 'app/shared/model/package-types.model';
 import { PackageTypesService } from 'app/entities/package-types';
 import { ISuppliers } from 'app/shared/model/suppliers.model';
 import { SuppliersService } from 'app/entities/suppliers';
+import { IMerchants } from 'app/shared/model/merchants.model';
+import { MerchantsService } from 'app/entities/merchants';
 import { IProductSubCategory } from 'app/shared/model/product-sub-category.model';
 import { ProductSubCategoryService } from 'app/entities/product-sub-category';
 import { IUnitMeasure } from 'app/shared/model/unit-measure.model';
@@ -32,11 +32,11 @@ export class ProductsUpdateComponent implements OnInit {
 
     reviewlines: IReviewLines[];
 
-    merchants: IMerchants[];
-
     packagetypes: IPackageTypes[];
 
     suppliers: ISuppliers[];
+
+    merchants: IMerchants[];
 
     productsubcategories: IProductSubCategory[];
 
@@ -51,9 +51,9 @@ export class ProductsUpdateComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         protected productsService: ProductsService,
         protected reviewLinesService: ReviewLinesService,
-        protected merchantsService: MerchantsService,
         protected packageTypesService: PackageTypesService,
         protected suppliersService: SuppliersService,
+        protected merchantsService: MerchantsService,
         protected productSubCategoryService: ProductSubCategoryService,
         protected unitMeasureService: UnitMeasureService,
         protected productModelService: ProductModelService,
@@ -90,31 +90,6 @@ export class ProductsUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        this.merchantsService
-            .query({ 'productId.specified': 'false' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IMerchants[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IMerchants[]>) => response.body)
-            )
-            .subscribe(
-                (res: IMerchants[]) => {
-                    if (!this.products.merchantId) {
-                        this.merchants = res;
-                    } else {
-                        this.merchantsService
-                            .find(this.products.merchantId)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IMerchants>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IMerchants>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IMerchants) => (this.merchants = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.packageTypesService
             .query()
             .pipe(
@@ -129,6 +104,13 @@ export class ProductsUpdateComponent implements OnInit {
                 map((response: HttpResponse<ISuppliers[]>) => response.body)
             )
             .subscribe((res: ISuppliers[]) => (this.suppliers = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.merchantsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IMerchants[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IMerchants[]>) => response.body)
+            )
+            .subscribe((res: IMerchants[]) => (this.merchants = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.productSubCategoryService
             .query()
             .pipe(
@@ -189,15 +171,15 @@ export class ProductsUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackMerchantsById(index: number, item: IMerchants) {
-        return item.id;
-    }
-
     trackPackageTypesById(index: number, item: IPackageTypes) {
         return item.id;
     }
 
     trackSuppliersById(index: number, item: ISuppliers) {
+        return item.id;
+    }
+
+    trackMerchantsById(index: number, item: IMerchants) {
         return item.id;
     }
 
