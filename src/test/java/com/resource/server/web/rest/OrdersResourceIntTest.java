@@ -1005,20 +1005,20 @@ public class OrdersResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllOrdersByOrderReviewIsEqualToSomething() throws Exception {
+    public void getAllOrdersByReviewIsEqualToSomething() throws Exception {
         // Initialize the database
-        Reviews orderReview = ReviewsResourceIntTest.createEntity(em);
-        em.persist(orderReview);
+        Reviews review = ReviewsResourceIntTest.createEntity(em);
+        em.persist(review);
         em.flush();
-        orders.setOrderReview(orderReview);
+        orders.setReview(review);
         ordersRepository.saveAndFlush(orders);
-        Long orderReviewId = orderReview.getId();
+        Long reviewId = review.getId();
 
-        // Get all the ordersList where orderReview equals to orderReviewId
-        defaultOrdersShouldBeFound("orderReviewId.equals=" + orderReviewId);
+        // Get all the ordersList where review equals to reviewId
+        defaultOrdersShouldBeFound("reviewId.equals=" + reviewId);
 
-        // Get all the ordersList where orderReview equals to orderReviewId + 1
-        defaultOrdersShouldNotBeFound("orderReviewId.equals=" + (orderReviewId + 1));
+        // Get all the ordersList where review equals to reviewId + 1
+        defaultOrdersShouldNotBeFound("reviewId.equals=" + (reviewId + 1));
     }
 
 
@@ -1138,21 +1138,21 @@ public class OrdersResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllOrdersByPaymentIsEqualToSomething() throws Exception {
+    public void getAllOrdersByPaymentTransactionIsEqualToSomething() throws Exception {
         // Initialize the database
-        PaymentTransactions payment = PaymentTransactionsResourceIntTest.createEntity(em);
-        em.persist(payment);
+        PaymentTransactions paymentTransaction = PaymentTransactionsResourceIntTest.createEntity(em);
+        em.persist(paymentTransaction);
         em.flush();
-        orders.setPayment(payment);
-        payment.setPaymentOnOrder(orders);
+        orders.setPaymentTransaction(paymentTransaction);
+        paymentTransaction.setPaymentOnOrder(orders);
         ordersRepository.saveAndFlush(orders);
-        Long paymentId = payment.getId();
+        Long paymentTransactionId = paymentTransaction.getId();
 
-        // Get all the ordersList where payment equals to paymentId
-        defaultOrdersShouldBeFound("paymentId.equals=" + paymentId);
+        // Get all the ordersList where paymentTransaction equals to paymentTransactionId
+        defaultOrdersShouldBeFound("paymentTransactionId.equals=" + paymentTransactionId);
 
-        // Get all the ordersList where payment equals to paymentId + 1
-        defaultOrdersShouldNotBeFound("paymentId.equals=" + (paymentId + 1));
+        // Get all the ordersList where paymentTransaction equals to paymentTransactionId + 1
+        defaultOrdersShouldNotBeFound("paymentTransactionId.equals=" + (paymentTransactionId + 1));
     }
 
 

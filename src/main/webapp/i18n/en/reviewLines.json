@@ -22,7 +22,7 @@
             "deliveryRating": "Delivery Rating",
             "deliveryReview": "Delivery Review",
             "photo": "Photo",
-            "product": "Product",
+            "stockItem": "Stock Item",
             "review": "Review"
         }
     }

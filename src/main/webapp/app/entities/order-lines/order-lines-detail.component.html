@@ -37,16 +37,16 @@
                 <dd>
                     <span>{{orderLines.pickingCompletedWhen}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.orderLines.stockItem">Stock Item</span></dt>
+                <dd>
+                    <div *ngIf="orderLines.stockItemId">
+                        <a [routerLink]="['/stock-items', orderLines.stockItemId, 'view']">{{orderLines.stockItemStockItemName}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.orderLines.packageType">Package Type</span></dt>
                 <dd>
                     <div *ngIf="orderLines.packageTypeId">
                         <a [routerLink]="['/package-types', orderLines.packageTypeId, 'view']">{{orderLines.packageTypeId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.orderLines.product">Product</span></dt>
-                <dd>
-                    <div *ngIf="orderLines.productId">
-                        <a [routerLink]="['/products', orderLines.productId, 'view']">{{orderLines.productProductName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.orderLines.order">Order</span></dt>

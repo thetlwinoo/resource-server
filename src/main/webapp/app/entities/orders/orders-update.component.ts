@@ -30,7 +30,7 @@ export class OrdersUpdateComponent implements OnInit {
     orders: IOrders;
     isSaving: boolean;
 
-    orderreviews: IReviews[];
+    reviews: IReviews[];
 
     customers: ICustomers[];
 
@@ -67,24 +67,24 @@ export class OrdersUpdateComponent implements OnInit {
             this.orders = orders;
         });
         this.reviewsService
-            .query({ 'reviewId.specified': 'false' })
+            .query({ 'orderId.specified': 'false' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IReviews[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IReviews[]>) => response.body)
             )
             .subscribe(
                 (res: IReviews[]) => {
-                    if (!this.orders.orderReviewId) {
-                        this.orderreviews = res;
+                    if (!this.orders.reviewId) {
+                        this.reviews = res;
                     } else {
                         this.reviewsService
-                            .find(this.orders.orderReviewId)
+                            .find(this.orders.reviewId)
                             .pipe(
                                 filter((subResMayBeOk: HttpResponse<IReviews>) => subResMayBeOk.ok),
                                 map((subResponse: HttpResponse<IReviews>) => subResponse.body)
                             )
                             .subscribe(
-                                (subRes: IReviews) => (this.orderreviews = [subRes].concat(res)),
+                                (subRes: IReviews) => (this.reviews = [subRes].concat(res)),
                                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
                             );
                     }

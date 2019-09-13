@@ -32,8 +32,8 @@ export class PurchaseOrderLinesUpdatePage {
     expectedUnitPricePerOuterInput = element(by.id('field_expectedUnitPricePerOuter'));
     lastReceiptDateInput = element(by.id('field_lastReceiptDate'));
     isOrderLineFinalizedInput = element(by.id('field_isOrderLineFinalized'));
-    productSelect = element(by.id('field_product'));
     packageTypeSelect = element(by.id('field_packageType'));
+    stockItemSelect = element(by.id('field_stockItem'));
     purchaseOrderSelect = element(by.id('field_purchaseOrder'));
 
     async getPageTitle() {
@@ -84,25 +84,6 @@ export class PurchaseOrderLinesUpdatePage {
         return this.isOrderLineFinalizedInput;
     }
 
-    async productSelectLastOption() {
-        await this.productSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
-    }
-
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
-    }
-
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
-    }
-
     async packageTypeSelectLastOption() {
         await this.packageTypeSelect
             .all(by.tagName('option'))
@@ -120,6 +101,25 @@ export class PurchaseOrderLinesUpdatePage {
 
     async getPackageTypeSelectedOption() {
         return this.packageTypeSelect.element(by.css('option:checked')).getText();
+    }
+
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
+    }
+
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
+    }
+
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async purchaseOrderSelectLastOption() {

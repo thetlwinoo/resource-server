@@ -46,12 +46,12 @@ describe('StockItemTransactions e2e test', () => {
         await promise.all([
             stockItemTransactionsUpdatePage.setTransactionOccurredWhenInput('2000-12-31'),
             stockItemTransactionsUpdatePage.setQuantityInput('5'),
+            stockItemTransactionsUpdatePage.stockItemSelectLastOption(),
             stockItemTransactionsUpdatePage.customerSelectLastOption(),
             stockItemTransactionsUpdatePage.invoiceSelectLastOption(),
-            stockItemTransactionsUpdatePage.purchaseOrderSelectLastOption(),
-            stockItemTransactionsUpdatePage.productSelectLastOption(),
             stockItemTransactionsUpdatePage.supplierSelectLastOption(),
-            stockItemTransactionsUpdatePage.transactionTypeSelectLastOption()
+            stockItemTransactionsUpdatePage.transactionTypeSelectLastOption(),
+            stockItemTransactionsUpdatePage.purchaseOrderSelectLastOption()
         ]);
         expect(await stockItemTransactionsUpdatePage.getTransactionOccurredWhenInput()).to.eq('2000-12-31');
         expect(await stockItemTransactionsUpdatePage.getQuantityInput()).to.eq('5');

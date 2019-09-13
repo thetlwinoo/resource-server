@@ -39,10 +39,10 @@
                         <a [routerLink]="['/package-types', invoiceLines.packageTypeId, 'view']">{{invoiceLines.packageTypePackageTypeName}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.invoiceLines.product">Product</span></dt>
+                <dt><span jhiTranslate="resourceApp.invoiceLines.stockItem">Stock Item</span></dt>
                 <dd>
-                    <div *ngIf="invoiceLines.productId">
-                        <a [routerLink]="['/products', invoiceLines.productId, 'view']">{{invoiceLines.productId}}</a>
+                    <div *ngIf="invoiceLines.stockItemId">
+                        <a [routerLink]="['/stock-items', invoiceLines.stockItemId, 'view']">{{invoiceLines.stockItemStockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.invoiceLines.invoice">Invoice</span></dt>

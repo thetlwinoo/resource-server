@@ -5,5 +5,5 @@ import com.resource.server.domain.ReviewLines;
 import java.util.List;
 
 public interface ReviewLinesExtendRepository extends ReviewLinesRepository {
-    List<ReviewLines> findAllByProductId(Long productId);
+    List<ReviewLines> findAllByStockItemId(Long stockItemId);
 }

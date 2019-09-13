@@ -63,7 +63,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
             Optional<Orders> orders = ordersExtendRepository.findById(orderId);
 
             if (orders.isPresent()) {
-                orders.get().setOrderReview(reviews);
+                orders.get().setReview(reviews);
             }
         }
 
@@ -74,7 +74,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
         Optional<Orders> orders = ordersExtendRepository.findById(orderId);
         Reviews reviews = new Reviews();
         if (orders.isPresent()) {
-            reviews = orders.get().getOrderReview();
+            reviews = orders.get().getReview();
             reviews.setCompletedReview(true);
             reviewsExtendRepository.save(reviews);
         }
@@ -102,8 +102,8 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
     }
 
     @Override
-    public List<ReviewLinesDTO> findReviewLinesByProductId(Long productId) {
-        return reviewLinesExtendRepository.findAllByProductId(productId).stream()
+    public List<ReviewLinesDTO> findReviewLinesByStockItemId(Long stockItemId) {
+        return reviewLinesExtendRepository.findAllByStockItemId(stockItemId).stream()
             .map(reviewLinesMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -113,11 +113,11 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 
 }

@@ -1,0 +1,31 @@
+{
+    "name": "ProductAttribute",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productAttributeSet",
+            "otherEntityRelationshipName": "productAttribute",
+            "relationshipName": "productAttributeSet",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190912101559",
+    "entityTableName": "product_attribute",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

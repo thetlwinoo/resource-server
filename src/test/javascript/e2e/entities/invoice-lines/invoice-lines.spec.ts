@@ -48,7 +48,7 @@ describe('InvoiceLines e2e test', () => {
             invoiceLinesUpdatePage.setLineProfitInput('5'),
             invoiceLinesUpdatePage.setExtendedPriceInput('5'),
             invoiceLinesUpdatePage.packageTypeSelectLastOption(),
-            invoiceLinesUpdatePage.productSelectLastOption(),
+            invoiceLinesUpdatePage.stockItemSelectLastOption(),
             invoiceLinesUpdatePage.invoiceSelectLastOption()
         ]);
         expect(await invoiceLinesUpdatePage.getDescriptionInput()).to.eq('description');

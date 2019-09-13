@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -53,8 +52,8 @@ public class StockItemHoldingsResourceIntTest {
     private static final Integer DEFAULT_LAST_STOCKTAKE_QUANTITY = 1;
     private static final Integer UPDATED_LAST_STOCKTAKE_QUANTITY = 2;
 
-    private static final BigDecimal DEFAULT_LAST_COST_PRICE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_LAST_COST_PRICE = new BigDecimal(2);
+    private static final Float DEFAULT_LAST_COST_PRICE = 1F;
+    private static final Float UPDATED_LAST_COST_PRICE = 2F;
 
     private static final Integer DEFAULT_REORDER_LEVEL = 1;
     private static final Integer UPDATED_REORDER_LEVEL = 2;
@@ -296,7 +295,7 @@ public class StockItemHoldingsResourceIntTest {
             .andExpect(jsonPath("$.[*].quantityOnHand").value(hasItem(DEFAULT_QUANTITY_ON_HAND)))
             .andExpect(jsonPath("$.[*].binLocation").value(hasItem(DEFAULT_BIN_LOCATION.toString())))
             .andExpect(jsonPath("$.[*].lastStocktakeQuantity").value(hasItem(DEFAULT_LAST_STOCKTAKE_QUANTITY)))
-            .andExpect(jsonPath("$.[*].lastCostPrice").value(hasItem(DEFAULT_LAST_COST_PRICE.intValue())))
+            .andExpect(jsonPath("$.[*].lastCostPrice").value(hasItem(DEFAULT_LAST_COST_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].reorderLevel").value(hasItem(DEFAULT_REORDER_LEVEL)))
             .andExpect(jsonPath("$.[*].targerStockLevel").value(hasItem(DEFAULT_TARGER_STOCK_LEVEL)));
     }
@@ -315,7 +314,7 @@ public class StockItemHoldingsResourceIntTest {
             .andExpect(jsonPath("$.quantityOnHand").value(DEFAULT_QUANTITY_ON_HAND))
             .andExpect(jsonPath("$.binLocation").value(DEFAULT_BIN_LOCATION.toString()))
             .andExpect(jsonPath("$.lastStocktakeQuantity").value(DEFAULT_LAST_STOCKTAKE_QUANTITY))
-            .andExpect(jsonPath("$.lastCostPrice").value(DEFAULT_LAST_COST_PRICE.intValue()))
+            .andExpect(jsonPath("$.lastCostPrice").value(DEFAULT_LAST_COST_PRICE.doubleValue()))
             .andExpect(jsonPath("$.reorderLevel").value(DEFAULT_REORDER_LEVEL))
             .andExpect(jsonPath("$.targerStockLevel").value(DEFAULT_TARGER_STOCK_LEVEL));
     }

@@ -16,6 +16,8 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.documentNode">Document Node</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.videoUrl">Video Url</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.highlights">Highlights</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.product">Product</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.culture">Culture</span></th>
             <th></th>
@@ -24,7 +26,12 @@
             <tbody>
             <tr *ngFor="let productDocument of productDocuments ;trackBy: trackId">
                 <td><a [routerLink]="['/product-document', productDocument.id, 'view' ]">{{productDocument.id}}</a></td>
-                <td>{{productDocument.documentNode}}</td>
+                <td>
+                    <a *ngIf="productDocument.documentNode" (click)="openFile(productDocument.documentNodeContentType, productDocument.documentNode)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="productDocument.documentNode">{{productDocument.documentNodeContentType}}, {{byteSize(productDocument.documentNode)}}</span>
+                </td>
+                <td>{{productDocument.videoUrl}}</td>
+                <td>{{productDocument.highlights}}</td>
                 <td>
                     <div *ngIf="productDocument.productId">
                         <a [routerLink]="['../products', productDocument.productId , 'view' ]" >{{productDocument.productProductName}}</a>

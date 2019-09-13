@@ -28,12 +28,12 @@ export class StockItemTransactionsUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     transactionOccurredWhenInput = element(by.id('field_transactionOccurredWhen'));
     quantityInput = element(by.id('field_quantity'));
+    stockItemSelect = element(by.id('field_stockItem'));
     customerSelect = element(by.id('field_customer'));
     invoiceSelect = element(by.id('field_invoice'));
-    purchaseOrderSelect = element(by.id('field_purchaseOrder'));
-    productSelect = element(by.id('field_product'));
     supplierSelect = element(by.id('field_supplier'));
     transactionTypeSelect = element(by.id('field_transactionType'));
+    purchaseOrderSelect = element(by.id('field_purchaseOrder'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -53,6 +53,25 @@ export class StockItemTransactionsUpdatePage {
 
     async getQuantityInput() {
         return this.quantityInput.getAttribute('value');
+    }
+
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
+    }
+
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
+    }
+
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async customerSelectLastOption() {
@@ -93,44 +112,6 @@ export class StockItemTransactionsUpdatePage {
         return this.invoiceSelect.element(by.css('option:checked')).getText();
     }
 
-    async purchaseOrderSelectLastOption() {
-        await this.purchaseOrderSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async purchaseOrderSelectOption(option) {
-        await this.purchaseOrderSelect.sendKeys(option);
-    }
-
-    getPurchaseOrderSelect(): ElementFinder {
-        return this.purchaseOrderSelect;
-    }
-
-    async getPurchaseOrderSelectedOption() {
-        return this.purchaseOrderSelect.element(by.css('option:checked')).getText();
-    }
-
-    async productSelectLastOption() {
-        await this.productSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
-    }
-
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
-    }
-
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
-    }
-
     async supplierSelectLastOption() {
         await this.supplierSelect
             .all(by.tagName('option'))
@@ -167,6 +148,25 @@ export class StockItemTransactionsUpdatePage {
 
     async getTransactionTypeSelectedOption() {
         return this.transactionTypeSelect.element(by.css('option:checked')).getText();
+    }
+
+    async purchaseOrderSelectLastOption() {
+        await this.purchaseOrderSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async purchaseOrderSelectOption(option) {
+        await this.purchaseOrderSelect.sendKeys(option);
+    }
+
+    getPurchaseOrderSelect(): ElementFinder {
+        return this.purchaseOrderSelect;
+    }
+
+    async getPurchaseOrderSelectedOption() {
+        return this.purchaseOrderSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

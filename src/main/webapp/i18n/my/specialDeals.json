@@ -27,8 +27,8 @@
             "buyingGroup": "Buying Group",
             "customerCategory": "Customer Category",
             "customer": "Customer",
-            "stockGroup": "Stock Group",
-            "product": "Product"
+            "productCategory": "Product Category",
+            "stockItem": "Stock Item"
         }
     }
 }

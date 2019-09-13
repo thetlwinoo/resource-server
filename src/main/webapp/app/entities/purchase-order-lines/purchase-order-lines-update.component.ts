@@ -7,10 +7,10 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IPurchaseOrderLines } from 'app/shared/model/purchase-order-lines.model';
 import { PurchaseOrderLinesService } from './purchase-order-lines.service';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
 import { IPackageTypes } from 'app/shared/model/package-types.model';
 import { PackageTypesService } from 'app/entities/package-types';
+import { IStockItems } from 'app/shared/model/stock-items.model';
+import { StockItemsService } from 'app/entities/stock-items';
 import { IPurchaseOrders } from 'app/shared/model/purchase-orders.model';
 import { PurchaseOrdersService } from 'app/entities/purchase-orders';
 
@@ -22,9 +22,9 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
     purchaseOrderLines: IPurchaseOrderLines;
     isSaving: boolean;
 
-    products: IProducts[];
-
     packagetypes: IPackageTypes[];
+
+    stockitems: IStockItems[];
 
     purchaseorders: IPurchaseOrders[];
     lastReceiptDateDp: any;
@@ -32,8 +32,8 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected purchaseOrderLinesService: PurchaseOrderLinesService,
-        protected productsService: ProductsService,
         protected packageTypesService: PackageTypesService,
+        protected stockItemsService: StockItemsService,
         protected purchaseOrdersService: PurchaseOrdersService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -43,13 +43,6 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ purchaseOrderLines }) => {
             this.purchaseOrderLines = purchaseOrderLines;
         });
-        this.productsService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
-            )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.packageTypesService
             .query()
             .pipe(
@@ -57,6 +50,13 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
                 map((response: HttpResponse<IPackageTypes[]>) => response.body)
             )
             .subscribe((res: IPackageTypes[]) => (this.packagetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.stockItemsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IStockItems[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStockItems[]>) => response.body)
+            )
+            .subscribe((res: IStockItems[]) => (this.stockitems = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.purchaseOrdersService
             .query()
             .pipe(
@@ -96,11 +96,11 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackPackageTypesById(index: number, item: IPackageTypes) {
         return item.id;
     }
 
-    trackPackageTypesById(index: number, item: IPackageTypes) {
+    trackStockItemsById(index: number, item: IStockItems) {
         return item.id;
     }
 

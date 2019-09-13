@@ -112,6 +112,21 @@ public class CacheConfiguration {
             cm.createCache(com.resource.server.domain.ProductReview.class.getName(), jcacheConfiguration);
             cm.createCache(com.resource.server.domain.ProductTags.class.getName(), jcacheConfiguration);
             cm.createCache(com.resource.server.domain.Reviews.class.getName() + ".reviewLineLists", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.Merchants.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.PurchaseOrders.class.getName() + ".purchaseOrderLineLists", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.StockItems.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.WarrantyTypes.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductAttribute.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductAttributeSet.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductOption.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductOptionSet.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductChoice.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductSet.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductSetDetails.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductModelDescription.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductBrand.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductCatalog.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.Photos.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

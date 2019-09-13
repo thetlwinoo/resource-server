@@ -34,8 +34,8 @@ export class OrderLinesUpdatePage {
     taxRateInput = element(by.id('field_taxRate'));
     pickedQuantityInput = element(by.id('field_pickedQuantity'));
     pickingCompletedWhenInput = element(by.id('field_pickingCompletedWhen'));
+    stockItemSelect = element(by.id('field_stockItem'));
     packageTypeSelect = element(by.id('field_packageType'));
-    productSelect = element(by.id('field_product'));
     orderSelect = element(by.id('field_order'));
 
     async getPageTitle() {
@@ -106,6 +106,25 @@ export class OrderLinesUpdatePage {
         return this.pickingCompletedWhenInput.getAttribute('value');
     }
 
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
+    }
+
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
+    }
+
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
+    }
+
     async packageTypeSelectLastOption() {
         await this.packageTypeSelect
             .all(by.tagName('option'))
@@ -123,25 +142,6 @@ export class OrderLinesUpdatePage {
 
     async getPackageTypeSelectedOption() {
         return this.packageTypeSelect.element(by.css('option:checked')).getText();
-    }
-
-    async productSelectLastOption() {
-        await this.productSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
-    }
-
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
-    }
-
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
     }
 
     async orderSelectLastOption() {

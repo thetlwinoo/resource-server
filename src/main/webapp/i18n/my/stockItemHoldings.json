@@ -21,7 +21,7 @@
             "lastCostPrice": "Last Cost Price",
             "reorderLevel": "Reorder Level",
             "targerStockLevel": "Targer Stock Level",
-            "product": "Product"
+            "stockItem": "Stock Item"
         }
     }
 }

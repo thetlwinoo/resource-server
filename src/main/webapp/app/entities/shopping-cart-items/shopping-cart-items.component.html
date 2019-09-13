@@ -16,7 +16,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="resourceApp.shoppingCartItems.quantity">Quantity</span></th>
-            <th><span jhiTranslate="resourceApp.shoppingCartItems.product">Product</span></th>
+            <th><span jhiTranslate="resourceApp.shoppingCartItems.stockItem">Stock Item</span></th>
             <th><span jhiTranslate="resourceApp.shoppingCartItems.cart">Cart</span></th>
             <th></th>
             </tr>
@@ -26,8 +26,8 @@
                 <td><a [routerLink]="['/shopping-cart-items', shoppingCartItems.id, 'view' ]">{{shoppingCartItems.id}}</a></td>
                 <td>{{shoppingCartItems.quantity}}</td>
                 <td>
-                    <div *ngIf="shoppingCartItems.productId">
-                        <a [routerLink]="['../products', shoppingCartItems.productId , 'view' ]" >{{shoppingCartItems.productProductName}}</a>
+                    <div *ngIf="shoppingCartItems.stockItemId">
+                        <a [routerLink]="['../stock-items', shoppingCartItems.stockItemId , 'view' ]" >{{shoppingCartItems.stockItemStockItemName}}</a>
                     </div>
                 </td>
                 <td>

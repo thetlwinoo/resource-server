@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,8 +42,8 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "discount_amount", precision = 10, scale = 2)
-    private BigDecimal discountAmount;
+    @Column(name = "discount_amount")
+    private Float discountAmount;
 
     @Column(name = "discount_percentage")
     private Float discountPercentage;
@@ -52,8 +51,8 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
     @Column(name = "discount_code")
     private String discountCode;
 
-    @Column(name = "unit_price", precision = 10, scale = 2)
-    private BigDecimal unitPrice;
+    @Column(name = "unit_price")
+    private Float unitPrice;
 
     @OneToMany(mappedBy = "specialDeals")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -75,11 +74,11 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
 
     @ManyToOne
     @JsonIgnoreProperties("specialDeals")
-    private StockGroups stockGroup;
+    private ProductCategory productCategory;
 
     @ManyToOne
     @JsonIgnoreProperties("specialDeals")
-    private Products product;
+    private StockItems stockItem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -129,16 +128,16 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
         this.endDate = endDate;
     }
 
-    public BigDecimal getDiscountAmount() {
+    public Float getDiscountAmount() {
         return discountAmount;
     }
 
-    public SpecialDeals discountAmount(BigDecimal discountAmount) {
+    public SpecialDeals discountAmount(Float discountAmount) {
         this.discountAmount = discountAmount;
         return this;
     }
 
-    public void setDiscountAmount(BigDecimal discountAmount) {
+    public void setDiscountAmount(Float discountAmount) {
         this.discountAmount = discountAmount;
     }
 
@@ -168,16 +167,16 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
         this.discountCode = discountCode;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Float getUnitPrice() {
         return unitPrice;
     }
 
-    public SpecialDeals unitPrice(BigDecimal unitPrice) {
+    public SpecialDeals unitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
         return this;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -270,30 +269,30 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
         this.customer = customers;
     }
 
-    public StockGroups getStockGroup() {
-        return stockGroup;
+    public ProductCategory getProductCategory() {
+        return productCategory;
     }
 
-    public SpecialDeals stockGroup(StockGroups stockGroups) {
-        this.stockGroup = stockGroups;
+    public SpecialDeals productCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
         return this;
     }
 
-    public void setStockGroup(StockGroups stockGroups) {
-        this.stockGroup = stockGroups;
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
 
-    public Products getProduct() {
-        return product;
+    public StockItems getStockItem() {
+        return stockItem;
     }
 
-    public SpecialDeals product(Products products) {
-        this.product = products;
+    public SpecialDeals stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

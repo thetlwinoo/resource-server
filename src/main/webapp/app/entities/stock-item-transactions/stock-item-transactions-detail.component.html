@@ -13,6 +13,12 @@
                 <dd>
                     <span>{{stockItemTransactions.quantity}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.stockItemTransactions.stockItem">Stock Item</span></dt>
+                <dd>
+                    <div *ngIf="stockItemTransactions.stockItemId">
+                        <a [routerLink]="['/stock-items', stockItemTransactions.stockItemId, 'view']">{{stockItemTransactions.stockItemStockItemName}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.stockItemTransactions.customer">Customer</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.customerId">
@@ -25,18 +31,6 @@
                         <a [routerLink]="['/invoices', stockItemTransactions.invoiceId, 'view']">{{stockItemTransactions.invoiceId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItemTransactions.purchaseOrder">Purchase Order</span></dt>
-                <dd>
-                    <div *ngIf="stockItemTransactions.purchaseOrderId">
-                        <a [routerLink]="['/purchase-orders', stockItemTransactions.purchaseOrderId, 'view']">{{stockItemTransactions.purchaseOrderId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.stockItemTransactions.product">Product</span></dt>
-                <dd>
-                    <div *ngIf="stockItemTransactions.productId">
-                        <a [routerLink]="['/products', stockItemTransactions.productId, 'view']">{{stockItemTransactions.productProductName}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.stockItemTransactions.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.supplierId">
@@ -46,7 +40,13 @@
                 <dt><span jhiTranslate="resourceApp.stockItemTransactions.transactionType">Transaction Type</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId, 'view']">{{stockItemTransactions.transactionTypeTransactionTypeName}}</a>
+                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId, 'view']">{{stockItemTransactions.transactionTypeId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItemTransactions.purchaseOrder">Purchase Order</span></dt>
+                <dd>
+                    <div *ngIf="stockItemTransactions.purchaseOrderId">
+                        <a [routerLink]="['/purchase-orders', stockItemTransactions.purchaseOrderId, 'view']">{{stockItemTransactions.purchaseOrderId}}</a>
                     </div>
                 </dd>
             </dl>

@@ -25,11 +25,11 @@ public interface ReviewLinesService {
      */
     List<ReviewLinesDTO> findAll();
     /**
-     * Get all the ReviewLinesDTO where Product is null.
+     * Get all the ReviewLinesDTO where StockItem is null.
      *
      * @return the list of entities
      */
-    List<ReviewLinesDTO> findAllWhereProductIsNull();
+    List<ReviewLinesDTO> findAllWhereStockItemIsNull();
 
 
     /**

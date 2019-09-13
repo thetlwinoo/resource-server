@@ -23,7 +23,7 @@
             "lineProfit": "Line Profit",
             "extendedPrice": "Extended Price",
             "packageType": "Package Type",
-            "product": "Product",
+            "stockItem": "Stock Item",
             "invoice": "Invoice"
         }
     }

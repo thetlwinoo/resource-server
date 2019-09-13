@@ -15,7 +15,8 @@
             "detail": {
                 "title": "Product Category"
             },
-            "productCategoryName": "Product Category Name",
+            "name": "Name",
+            "parentId": "Parent Id",
             "photo": "Photo"
         }
     }

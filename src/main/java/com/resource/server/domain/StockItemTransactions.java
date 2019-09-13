@@ -38,6 +38,10 @@ public class StockItemTransactions extends AbstractAuditingEntity implements Ser
 
     @ManyToOne
     @JsonIgnoreProperties("stockItemTransactions")
+    private StockItems stockItem;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItemTransactions")
     private Customers customer;
 
     @ManyToOne
@@ -46,19 +50,15 @@ public class StockItemTransactions extends AbstractAuditingEntity implements Ser
 
     @ManyToOne
     @JsonIgnoreProperties("stockItemTransactions")
-    private PurchaseOrders purchaseOrder;
-
-    @ManyToOne
-    @JsonIgnoreProperties("stockItemTransactions")
-    private Products product;
-
-    @ManyToOne
-    @JsonIgnoreProperties("stockItemTransactions")
     private Suppliers supplier;
 
     @ManyToOne
     @JsonIgnoreProperties("stockItemTransactions")
     private TransactionTypes transactionType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItemTransactions")
+    private PurchaseOrders purchaseOrder;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -95,6 +95,19 @@ public class StockItemTransactions extends AbstractAuditingEntity implements Ser
         this.quantity = quantity;
     }
 
+    public StockItems getStockItem() {
+        return stockItem;
+    }
+
+    public StockItemTransactions stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+        return this;
+    }
+
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+    }
+
     public Customers getCustomer() {
         return customer;
     }
@@ -121,32 +134,6 @@ public class StockItemTransactions extends AbstractAuditingEntity implements Ser
         this.invoice = invoices;
     }
 
-    public PurchaseOrders getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public StockItemTransactions purchaseOrder(PurchaseOrders purchaseOrders) {
-        this.purchaseOrder = purchaseOrders;
-        return this;
-    }
-
-    public void setPurchaseOrder(PurchaseOrders purchaseOrders) {
-        this.purchaseOrder = purchaseOrders;
-    }
-
-    public Products getProduct() {
-        return product;
-    }
-
-    public StockItemTransactions product(Products products) {
-        this.product = products;
-        return this;
-    }
-
-    public void setProduct(Products products) {
-        this.product = products;
-    }
-
     public Suppliers getSupplier() {
         return supplier;
     }
@@ -171,6 +158,19 @@ public class StockItemTransactions extends AbstractAuditingEntity implements Ser
 
     public void setTransactionType(TransactionTypes transactionTypes) {
         this.transactionType = transactionTypes;
+    }
+
+    public PurchaseOrders getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public StockItemTransactions purchaseOrder(PurchaseOrders purchaseOrders) {
+        this.purchaseOrder = purchaseOrders;
+        return this;
+    }
+
+    public void setPurchaseOrder(PurchaseOrders purchaseOrders) {
+        this.purchaseOrder = purchaseOrders;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

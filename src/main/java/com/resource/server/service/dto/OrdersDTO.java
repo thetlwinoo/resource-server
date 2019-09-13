@@ -41,7 +41,7 @@ public class OrdersDTO extends AbstractAuditingDTO implements Serializable {
     private LocalDate pickingCompletedWhen;
 
 
-    private Long orderReviewId;
+    private Long reviewId;
 
     private Long customerId;
 
@@ -177,12 +177,12 @@ public class OrdersDTO extends AbstractAuditingDTO implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
-    public Long getOrderReviewId() {
-        return orderReviewId;
+    public Long getReviewId() {
+        return reviewId;
     }
 
-    public void setOrderReviewId(Long reviewsId) {
-        this.orderReviewId = reviewsId;
+    public void setReviewId(Long reviewsId) {
+        this.reviewId = reviewsId;
     }
 
     public Long getCustomerId() {
@@ -280,7 +280,7 @@ public class OrdersDTO extends AbstractAuditingDTO implements Serializable {
             ", deliveryInstructions='" + getDeliveryInstructions() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
             ", pickingCompletedWhen='" + getPickingCompletedWhen() + "'" +
-            ", orderReview=" + getOrderReviewId() +
+            ", review=" + getReviewId() +
             ", customer=" + getCustomerId() +
             ", shipToAddress=" + getShipToAddressId() +
             ", billToAddress=" + getBillToAddressId() +

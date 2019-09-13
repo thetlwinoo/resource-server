@@ -19,15 +19,13 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
     private BigDecimal quantity;
 
 
+    private Long stockItemId;
+
+    private String stockItemStockItemName;
+
     private Long customerId;
 
     private Long invoiceId;
-
-    private Long purchaseOrderId;
-
-    private Long productId;
-
-    private String productProductName;
 
     private Long supplierId;
 
@@ -35,7 +33,7 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
 
     private Long transactionTypeId;
 
-    private String transactionTypeTransactionTypeName;
+    private Long purchaseOrderId;
 
     public Long getId() {
         return id;
@@ -61,6 +59,22 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
         this.quantity = quantity;
     }
 
+    public Long getStockItemId() {
+        return stockItemId;
+    }
+
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
+    }
+
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
+    }
+
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
+    }
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -75,30 +89,6 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
 
     public void setInvoiceId(Long invoicesId) {
         this.invoiceId = invoicesId;
-    }
-
-    public Long getPurchaseOrderId() {
-        return purchaseOrderId;
-    }
-
-    public void setPurchaseOrderId(Long purchaseOrdersId) {
-        this.purchaseOrderId = purchaseOrdersId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
     }
 
     public Long getSupplierId() {
@@ -125,12 +115,12 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
         this.transactionTypeId = transactionTypesId;
     }
 
-    public String getTransactionTypeTransactionTypeName() {
-        return transactionTypeTransactionTypeName;
+    public Long getPurchaseOrderId() {
+        return purchaseOrderId;
     }
 
-    public void setTransactionTypeTransactionTypeName(String transactionTypesTransactionTypeName) {
-        this.transactionTypeTransactionTypeName = transactionTypesTransactionTypeName;
+    public void setPurchaseOrderId(Long purchaseOrdersId) {
+        this.purchaseOrderId = purchaseOrdersId;
     }
 
     @Override
@@ -160,15 +150,14 @@ public class StockItemTransactionsDTO extends AbstractAuditingDTO implements Ser
             "id=" + getId() +
             ", transactionOccurredWhen='" + getTransactionOccurredWhen() + "'" +
             ", quantity=" + getQuantity() +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             ", customer=" + getCustomerId() +
             ", invoice=" + getInvoiceId() +
-            ", purchaseOrder=" + getPurchaseOrderId() +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
             ", supplier=" + getSupplierId() +
             ", supplier='" + getSupplierSupplierName() + "'" +
             ", transactionType=" + getTransactionTypeId() +
-            ", transactionType='" + getTransactionTypeTransactionTypeName() + "'" +
+            ", purchaseOrder=" + getPurchaseOrderId() +
             "}";
     }
 }

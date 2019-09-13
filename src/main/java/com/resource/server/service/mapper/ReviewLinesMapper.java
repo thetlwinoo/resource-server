@@ -14,7 +14,7 @@ public interface ReviewLinesMapper extends EntityMapper<ReviewLinesDTO, ReviewLi
     @Mapping(source = "review.id", target = "reviewId")
     ReviewLinesDTO toDto(ReviewLines reviewLines);
 
-    @Mapping(target = "product", ignore = true)
+    @Mapping(target = "stockItem", ignore = true)
     @Mapping(source = "reviewId", target = "review")
     ReviewLines toEntity(ReviewLinesDTO reviewLinesDTO);
 

@@ -1,8 +1,8 @@
 export interface IShoppingCartItems {
     id?: number;
     quantity?: number;
-    productProductName?: string;
-    productId?: number;
+    stockItemStockItemName?: string;
+    stockItemId?: number;
     cartId?: number;
 }
 
@@ -10,8 +10,8 @@ export class ShoppingCartItems implements IShoppingCartItems {
     constructor(
         public id?: number,
         public quantity?: number,
-        public productProductName?: string,
-        public productId?: number,
+        public stockItemStockItemName?: string,
+        public stockItemId?: number,
         public cartId?: number
     ) {}
 }

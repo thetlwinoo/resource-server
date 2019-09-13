@@ -17,73 +17,9 @@
                 <dd>
                     <span>{{products.searchDetails}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.makeFlag">Make Flag</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.thumbnailUrl">Thumbnail Url</span></dt>
                 <dd>
-                    <span>{{products.makeFlag}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.finishedGoodsFlag">Finished Goods Flag</span></dt>
-                <dd>
-                    <span>{{products.finishedGoodsFlag}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.color">Color</span></dt>
-                <dd>
-                    <span>{{products.color}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.safetyStockLevel">Safety Stock Level</span></dt>
-                <dd>
-                    <span>{{products.safetyStockLevel}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.reorderPoint">Reorder Point</span></dt>
-                <dd>
-                    <span>{{products.reorderPoint}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.standardCost">Standard Cost</span></dt>
-                <dd>
-                    <span>{{products.standardCost}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.unitPrice">Unit Price</span></dt>
-                <dd>
-                    <span>{{products.unitPrice}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.recommendedRetailPrice">Recommended Retail Price</span></dt>
-                <dd>
-                    <span>{{products.recommendedRetailPrice}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.brand">Brand</span></dt>
-                <dd>
-                    <span>{{products.brand}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.specifySize">Specify Size</span></dt>
-                <dd>
-                    <span>{{products.specifySize}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.weight">Weight</span></dt>
-                <dd>
-                    <span>{{products.weight}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.daysToManufacture">Days To Manufacture</span></dt>
-                <dd>
-                    <span>{{products.daysToManufacture}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.productLine">Product Line</span></dt>
-                <dd>
-                    <span>{{products.productLine}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.classType">Class Type</span></dt>
-                <dd>
-                    <span>{{products.classType}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.style">Style</span></dt>
-                <dd>
-                    <span>{{products.style}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.customFields">Custom Fields</span></dt>
-                <dd>
-                    <span>{{products.customFields}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.photo">Photo</span></dt>
-                <dd>
-                    <span>{{products.photo}}</span>
+                    <span>{{products.thumbnailUrl}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.sellStartDate">Sell Start Date</span></dt>
                 <dd>
@@ -93,26 +29,32 @@
                 <dd>
                     <span>{{products.sellEndDate}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.marketingComments">Marketing Comments</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.warrantyPeriod">Warranty Period</span></dt>
                 <dd>
-                    <span>{{products.marketingComments}}</span>
+                    <span>{{products.warrantyPeriod}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.internalComments">Internal Comments</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.warrantyPolicy">Warranty Policy</span></dt>
                 <dd>
-                    <span>{{products.internalComments}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.discontinuedDate">Discontinued Date</span></dt>
-                <dd>
-                    <span>{{products.discontinuedDate}}</span>
+                    <span>{{products.warrantyPolicy}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span></dt>
                 <dd>
                     <span>{{products.sellCount}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.productReview">Product Review</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.whatInTheBox">What In The Box</span></dt>
                 <dd>
-                    <div *ngIf="products.productReviewId">
-                        <a [routerLink]="['/review-lines', products.productReviewId, 'view']">{{products.productReviewId}}</a>
+                    <span>{{products.whatInTheBox}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.supplier">Supplier</span></dt>
+                <dd>
+                    <div *ngIf="products.supplierId">
+                        <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierSupplierName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.merchant">Merchant</span></dt>
+                <dd>
+                    <div *ngIf="products.merchantId">
+                        <a [routerLink]="['/merchants', products.merchantId, 'view']">{{products.merchantMerchantName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span></dt>
@@ -127,34 +69,28 @@
                         <a [routerLink]="['/package-types', products.outerPackageId, 'view']">{{products.outerPackagePackageTypeName}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.supplier">Supplier</span></dt>
-                <dd>
-                    <div *ngIf="products.supplierId">
-                        <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierSupplierName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.productSubCategory">Product Sub Category</span></dt>
-                <dd>
-                    <div *ngIf="products.productSubCategoryId">
-                        <a [routerLink]="['/product-sub-category', products.productSubCategoryId, 'view']">{{products.productSubCategoryProductSubCategoryName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.sizeUnitMeasureCode">Size Unit Measure Code</span></dt>
-                <dd>
-                    <div *ngIf="products.sizeUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', products.sizeUnitMeasureCodeId, 'view']">{{products.sizeUnitMeasureCodeUnitMeasureCode}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.weightUnitMeasureCode">Weight Unit Measure Code</span></dt>
-                <dd>
-                    <div *ngIf="products.weightUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', products.weightUnitMeasureCodeId, 'view']">{{products.weightUnitMeasureCodeUnitMeasureCode}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.products.productModel">Product Model</span></dt>
                 <dd>
                     <div *ngIf="products.productModelId">
                         <a [routerLink]="['/product-model', products.productModelId, 'view']">{{products.productModelProductModelName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.productCategory">Product Category</span></dt>
+                <dd>
+                    <div *ngIf="products.productCategoryId">
+                        <a [routerLink]="['/product-category', products.productCategoryId, 'view']">{{products.productCategoryName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.productBrand">Product Brand</span></dt>
+                <dd>
+                    <div *ngIf="products.productBrandId">
+                        <a [routerLink]="['/product-brand', products.productBrandId, 'view']">{{products.productBrandProductBrandName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.warrantyType">Warranty Type</span></dt>
+                <dd>
+                    <div *ngIf="products.warrantyTypeId">
+                        <a [routerLink]="['/warranty-types', products.warrantyTypeId, 'view']">{{products.warrantyTypeWarrantyTypeName}}</a>
                     </div>
                 </dd>
             </dl>

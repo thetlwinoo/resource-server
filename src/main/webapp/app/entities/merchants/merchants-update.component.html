@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-merchants-heading" jhiTranslate="resourceApp.merchants.home.createOrEditLabel">Create or edit a Merchants</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!merchants.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="merchants.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.accountNumber" for="field_accountNumber">Account Number</label>
+                    <input type="text" class="form-control" name="accountNumber" id="field_accountNumber"
+                        [(ngModel)]="merchants.accountNumber" required/>
+                    <div [hidden]="!(editForm.controls.accountNumber?.dirty && editForm.controls.accountNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.accountNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.merchantName" for="field_merchantName">Merchant Name</label>
+                    <input type="text" class="form-control" name="merchantName" id="field_merchantName"
+                        [(ngModel)]="merchants.merchantName" required/>
+                    <div [hidden]="!(editForm.controls.merchantName?.dirty && editForm.controls.merchantName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.merchantName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.creditRating" for="field_creditRating">Credit Rating</label>
+                    <input type="number" class="form-control" name="creditRating" id="field_creditRating"
+                        [(ngModel)]="merchants.creditRating" required/>
+                    <div [hidden]="!(editForm.controls.creditRating?.dirty && editForm.controls.creditRating?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.creditRating?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.creditRating?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.activeFlag" for="field_activeFlag">Active Flag</label>
+                    <input type="checkbox" class="form-control" name="activeFlag" id="field_activeFlag"
+                        [(ngModel)]="merchants.activeFlag" />
+                    <div [hidden]="!(editForm.controls.activeFlag?.dirty && editForm.controls.activeFlag?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activeFlag?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.webServiceUrl" for="field_webServiceUrl">Web Service Url</label>
+                    <input type="text" class="form-control" name="webServiceUrl" id="field_webServiceUrl"
+                        [(ngModel)]="merchants.webServiceUrl" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.webSiteUrl" for="field_webSiteUrl">Web Site Url</label>
+                    <input type="text" class="form-control" name="webSiteUrl" id="field_webSiteUrl"
+                        [(ngModel)]="merchants.webSiteUrl" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.avatar" for="field_avatar">Avatar</label>
+                    <div>
+                        <img [src]="'data:' + merchants.avatarContentType + ';base64,' + merchants.avatar" style="max-height: 100px;" *ngIf="merchants.avatar" alt="merchants image"/>
+                        <div *ngIf="merchants.avatar" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{merchants.avatarContentType}}, {{byteSize(merchants.avatar)}}</span>
+                            <button type="button" (click)="clearInputImage('avatar', 'avatarContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_avatar" (change)="setFileData($event, merchants, 'avatar', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="avatar" id="field_avatar"
+                        [(ngModel)]="merchants.avatar" />
+                    <input type="hidden" class="form-control" name="avatarContentType" id="field_avatarContentType"
+                        [(ngModel)]="merchants.avatarContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.merchants.person" for="field_person">Person</label>
+                    <select class="form-control" id="field_person" name="person" [(ngModel)]="merchants.personId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="peopleOption.id" *ngFor="let peopleOption of people; trackBy: trackPeopleById">{{peopleOption.fullName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

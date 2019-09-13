@@ -29,7 +29,7 @@ public class WishlistProducts extends AbstractAuditingEntity implements Serializ
     @JsonIgnoreProperties("wishlistProducts")
     private Products product;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("wishlistLists")
     private Wishlists wishlist;
 

@@ -26,8 +26,11 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
     private Long id;
 
     @NotNull
-    @Column(name = "product_category_name", nullable = false)
-    private String productCategoryName;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "parent_id")
+    private Long parentId;
 
     @Lob
     @Column(name = "photo")
@@ -45,17 +48,30 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
         this.id = id;
     }
 
-    public String getProductCategoryName() {
-        return productCategoryName;
+    public String getName() {
+        return name;
     }
 
-    public ProductCategory productCategoryName(String productCategoryName) {
-        this.productCategoryName = productCategoryName;
+    public ProductCategory name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setProductCategoryName(String productCategoryName) {
-        this.productCategoryName = productCategoryName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public ProductCategory parentId(Long parentId) {
+        this.parentId = parentId;
+        return this;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public byte[] getPhoto() {
@@ -109,7 +125,8 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
     public String toString() {
         return "ProductCategory{" +
             "id=" + getId() +
-            ", productCategoryName='" + getProductCategoryName() + "'" +
+            ", name='" + getName() + "'" +
+            ", parentId=" + getParentId() +
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
             "}";

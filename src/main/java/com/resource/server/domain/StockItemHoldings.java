@@ -1,7 +1,6 @@
 package com.resource.server.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -40,8 +38,8 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
     private Integer lastStocktakeQuantity;
 
     @NotNull
-    @Column(name = "last_cost_price", precision = 10, scale = 2, nullable = false)
-    private BigDecimal lastCostPrice;
+    @Column(name = "last_cost_price", nullable = false)
+    private Float lastCostPrice;
 
     @NotNull
     @Column(name = "reorder_level", nullable = false)
@@ -51,9 +49,9 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
     @Column(name = "targer_stock_level", nullable = false)
     private Integer targerStockLevel;
 
-    @ManyToOne
-    @JsonIgnoreProperties("stockItemHoldings")
-    private Products product;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private StockItems stockItem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -103,16 +101,16 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
         this.lastStocktakeQuantity = lastStocktakeQuantity;
     }
 
-    public BigDecimal getLastCostPrice() {
+    public Float getLastCostPrice() {
         return lastCostPrice;
     }
 
-    public StockItemHoldings lastCostPrice(BigDecimal lastCostPrice) {
+    public StockItemHoldings lastCostPrice(Float lastCostPrice) {
         this.lastCostPrice = lastCostPrice;
         return this;
     }
 
-    public void setLastCostPrice(BigDecimal lastCostPrice) {
+    public void setLastCostPrice(Float lastCostPrice) {
         this.lastCostPrice = lastCostPrice;
     }
 
@@ -142,17 +140,17 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
         this.targerStockLevel = targerStockLevel;
     }
 
-    public Products getProduct() {
-        return product;
+    public StockItems getStockItem() {
+        return stockItem;
     }
 
-    public StockItemHoldings product(Products products) {
-        this.product = products;
+    public StockItemHoldings stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

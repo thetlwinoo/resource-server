@@ -3,12 +3,13 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Products;
-import com.resource.server.domain.ReviewLines;
-import com.resource.server.domain.PackageTypes;
 import com.resource.server.domain.Suppliers;
-import com.resource.server.domain.ProductSubCategory;
-import com.resource.server.domain.UnitMeasure;
+import com.resource.server.domain.Merchants;
+import com.resource.server.domain.PackageTypes;
 import com.resource.server.domain.ProductModel;
+import com.resource.server.domain.ProductCategory;
+import com.resource.server.domain.ProductBrand;
+import com.resource.server.domain.WarrantyTypes;
 import com.resource.server.repository.ProductsRepository;
 import com.resource.server.service.ProductsService;
 import com.resource.server.service.dto.ProductsDTO;
@@ -62,56 +63,8 @@ public class ProductsResourceIntTest {
     private static final String DEFAULT_SEARCH_DETAILS = "AAAAAAAAAA";
     private static final String UPDATED_SEARCH_DETAILS = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_MAKE_FLAG = false;
-    private static final Boolean UPDATED_MAKE_FLAG = true;
-
-    private static final Boolean DEFAULT_FINISHED_GOODS_FLAG = false;
-    private static final Boolean UPDATED_FINISHED_GOODS_FLAG = true;
-
-    private static final String DEFAULT_COLOR = "AAAAAAAAAA";
-    private static final String UPDATED_COLOR = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_SAFETY_STOCK_LEVEL = 1;
-    private static final Integer UPDATED_SAFETY_STOCK_LEVEL = 2;
-
-    private static final Integer DEFAULT_REORDER_POINT = 1;
-    private static final Integer UPDATED_REORDER_POINT = 2;
-
-    private static final Float DEFAULT_STANDARD_COST = 1F;
-    private static final Float UPDATED_STANDARD_COST = 2F;
-
-    private static final Float DEFAULT_UNIT_PRICE = 1F;
-    private static final Float UPDATED_UNIT_PRICE = 2F;
-
-    private static final Float DEFAULT_RECOMMENDED_RETAIL_PRICE = 1F;
-    private static final Float UPDATED_RECOMMENDED_RETAIL_PRICE = 2F;
-
-    private static final String DEFAULT_BRAND = "AAAAAAAAAA";
-    private static final String UPDATED_BRAND = "BBBBBBBBBB";
-
-    private static final String DEFAULT_SPECIFY_SIZE = "AAAAAAAAAA";
-    private static final String UPDATED_SPECIFY_SIZE = "BBBBBBBBBB";
-
-    private static final Float DEFAULT_WEIGHT = 1F;
-    private static final Float UPDATED_WEIGHT = 2F;
-
-    private static final Integer DEFAULT_DAYS_TO_MANUFACTURE = 1;
-    private static final Integer UPDATED_DAYS_TO_MANUFACTURE = 2;
-
-    private static final String DEFAULT_PRODUCT_LINE = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_LINE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CLASS_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_CLASS_TYPE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STYLE = "AAAAAAAAAA";
-    private static final String UPDATED_STYLE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CUSTOM_FIELDS = "AAAAAAAAAA";
-    private static final String UPDATED_CUSTOM_FIELDS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PHOTO = "AAAAAAAAAA";
-    private static final String UPDATED_PHOTO = "BBBBBBBBBB";
+    private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_SELL_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_SELL_START_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -119,17 +72,17 @@ public class ProductsResourceIntTest {
     private static final LocalDate DEFAULT_SELL_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_SELL_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_MARKETING_COMMENTS = "AAAAAAAAAA";
-    private static final String UPDATED_MARKETING_COMMENTS = "BBBBBBBBBB";
+    private static final String DEFAULT_WARRANTY_PERIOD = "AAAAAAAAAA";
+    private static final String UPDATED_WARRANTY_PERIOD = "BBBBBBBBBB";
 
-    private static final String DEFAULT_INTERNAL_COMMENTS = "AAAAAAAAAA";
-    private static final String UPDATED_INTERNAL_COMMENTS = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_DISCONTINUED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DISCONTINUED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_WARRANTY_POLICY = "AAAAAAAAAA";
+    private static final String UPDATED_WARRANTY_POLICY = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_SELL_COUNT = 1;
     private static final Integer UPDATED_SELL_COUNT = 2;
+
+    private static final String DEFAULT_WHAT_IN_THE_BOX = "AAAAAAAAAA";
+    private static final String UPDATED_WHAT_IN_THE_BOX = "BBBBBBBBBB";
 
     @Autowired
     private ProductsRepository productsRepository;
@@ -185,29 +138,13 @@ public class ProductsResourceIntTest {
             .productName(DEFAULT_PRODUCT_NAME)
             .productNumber(DEFAULT_PRODUCT_NUMBER)
             .searchDetails(DEFAULT_SEARCH_DETAILS)
-            .makeFlag(DEFAULT_MAKE_FLAG)
-            .finishedGoodsFlag(DEFAULT_FINISHED_GOODS_FLAG)
-            .color(DEFAULT_COLOR)
-            .safetyStockLevel(DEFAULT_SAFETY_STOCK_LEVEL)
-            .reorderPoint(DEFAULT_REORDER_POINT)
-            .standardCost(DEFAULT_STANDARD_COST)
-            .unitPrice(DEFAULT_UNIT_PRICE)
-            .recommendedRetailPrice(DEFAULT_RECOMMENDED_RETAIL_PRICE)
-            .brand(DEFAULT_BRAND)
-            .specifySize(DEFAULT_SPECIFY_SIZE)
-            .weight(DEFAULT_WEIGHT)
-            .daysToManufacture(DEFAULT_DAYS_TO_MANUFACTURE)
-            .productLine(DEFAULT_PRODUCT_LINE)
-            .classType(DEFAULT_CLASS_TYPE)
-            .style(DEFAULT_STYLE)
-            .customFields(DEFAULT_CUSTOM_FIELDS)
-            .photo(DEFAULT_PHOTO)
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
             .sellStartDate(DEFAULT_SELL_START_DATE)
             .sellEndDate(DEFAULT_SELL_END_DATE)
-            .marketingComments(DEFAULT_MARKETING_COMMENTS)
-            .internalComments(DEFAULT_INTERNAL_COMMENTS)
-            .discontinuedDate(DEFAULT_DISCONTINUED_DATE)
-            .sellCount(DEFAULT_SELL_COUNT);
+            .warrantyPeriod(DEFAULT_WARRANTY_PERIOD)
+            .warrantyPolicy(DEFAULT_WARRANTY_POLICY)
+            .sellCount(DEFAULT_SELL_COUNT)
+            .whatInTheBox(DEFAULT_WHAT_IN_THE_BOX);
         return products;
     }
 
@@ -235,29 +172,13 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getProductName()).isEqualTo(DEFAULT_PRODUCT_NAME);
         assertThat(testProducts.getProductNumber()).isEqualTo(DEFAULT_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(DEFAULT_SEARCH_DETAILS);
-        assertThat(testProducts.isMakeFlag()).isEqualTo(DEFAULT_MAKE_FLAG);
-        assertThat(testProducts.isFinishedGoodsFlag()).isEqualTo(DEFAULT_FINISHED_GOODS_FLAG);
-        assertThat(testProducts.getColor()).isEqualTo(DEFAULT_COLOR);
-        assertThat(testProducts.getSafetyStockLevel()).isEqualTo(DEFAULT_SAFETY_STOCK_LEVEL);
-        assertThat(testProducts.getReorderPoint()).isEqualTo(DEFAULT_REORDER_POINT);
-        assertThat(testProducts.getStandardCost()).isEqualTo(DEFAULT_STANDARD_COST);
-        assertThat(testProducts.getUnitPrice()).isEqualTo(DEFAULT_UNIT_PRICE);
-        assertThat(testProducts.getRecommendedRetailPrice()).isEqualTo(DEFAULT_RECOMMENDED_RETAIL_PRICE);
-        assertThat(testProducts.getBrand()).isEqualTo(DEFAULT_BRAND);
-        assertThat(testProducts.getSpecifySize()).isEqualTo(DEFAULT_SPECIFY_SIZE);
-        assertThat(testProducts.getWeight()).isEqualTo(DEFAULT_WEIGHT);
-        assertThat(testProducts.getDaysToManufacture()).isEqualTo(DEFAULT_DAYS_TO_MANUFACTURE);
-        assertThat(testProducts.getProductLine()).isEqualTo(DEFAULT_PRODUCT_LINE);
-        assertThat(testProducts.getClassType()).isEqualTo(DEFAULT_CLASS_TYPE);
-        assertThat(testProducts.getStyle()).isEqualTo(DEFAULT_STYLE);
-        assertThat(testProducts.getCustomFields()).isEqualTo(DEFAULT_CUSTOM_FIELDS);
-        assertThat(testProducts.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testProducts.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
         assertThat(testProducts.getSellStartDate()).isEqualTo(DEFAULT_SELL_START_DATE);
         assertThat(testProducts.getSellEndDate()).isEqualTo(DEFAULT_SELL_END_DATE);
-        assertThat(testProducts.getMarketingComments()).isEqualTo(DEFAULT_MARKETING_COMMENTS);
-        assertThat(testProducts.getInternalComments()).isEqualTo(DEFAULT_INTERNAL_COMMENTS);
-        assertThat(testProducts.getDiscontinuedDate()).isEqualTo(DEFAULT_DISCONTINUED_DATE);
+        assertThat(testProducts.getWarrantyPeriod()).isEqualTo(DEFAULT_WARRANTY_PERIOD);
+        assertThat(testProducts.getWarrantyPolicy()).isEqualTo(DEFAULT_WARRANTY_POLICY);
         assertThat(testProducts.getSellCount()).isEqualTo(DEFAULT_SELL_COUNT);
+        assertThat(testProducts.getWhatInTheBox()).isEqualTo(DEFAULT_WHAT_IN_THE_BOX);
     }
 
     @Test
@@ -320,143 +241,29 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMakeFlagIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setMakeFlag(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkFinishedGoodsFlagIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setFinishedGoodsFlag(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkSafetyStockLevelIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setSafetyStockLevel(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkReorderPointIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setReorderPoint(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkStandardCostIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setStandardCost(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkUnitPriceIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setUnitPrice(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDaysToManufactureIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setDaysToManufacture(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkSellStartDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = productsRepository.findAll().size();
         // set the field null
         products.setSellStartDate(null);
+
+        // Create the Products, which fails.
+        ProductsDTO productsDTO = productsMapper.toDto(products);
+
+        restProductsMockMvc.perform(post("/api/products")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Products> productsList = productsRepository.findAll();
+        assertThat(productsList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkWhatInTheBoxIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productsRepository.findAll().size();
+        // set the field null
+        products.setWhatInTheBox(null);
 
         // Create the Products, which fails.
         ProductsDTO productsDTO = productsMapper.toDto(products);
@@ -484,29 +291,13 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME.toString())))
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
-            .andExpect(jsonPath("$.[*].makeFlag").value(hasItem(DEFAULT_MAKE_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].finishedGoodsFlag").value(hasItem(DEFAULT_FINISHED_GOODS_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR.toString())))
-            .andExpect(jsonPath("$.[*].safetyStockLevel").value(hasItem(DEFAULT_SAFETY_STOCK_LEVEL)))
-            .andExpect(jsonPath("$.[*].reorderPoint").value(hasItem(DEFAULT_REORDER_POINT)))
-            .andExpect(jsonPath("$.[*].standardCost").value(hasItem(DEFAULT_STANDARD_COST.doubleValue())))
-            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].recommendedRetailPrice").value(hasItem(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].brand").value(hasItem(DEFAULT_BRAND.toString())))
-            .andExpect(jsonPath("$.[*].specifySize").value(hasItem(DEFAULT_SPECIFY_SIZE.toString())))
-            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.doubleValue())))
-            .andExpect(jsonPath("$.[*].daysToManufacture").value(hasItem(DEFAULT_DAYS_TO_MANUFACTURE)))
-            .andExpect(jsonPath("$.[*].productLine").value(hasItem(DEFAULT_PRODUCT_LINE.toString())))
-            .andExpect(jsonPath("$.[*].classType").value(hasItem(DEFAULT_CLASS_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].style").value(hasItem(DEFAULT_STYLE.toString())))
-            .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS.toString())))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL.toString())))
             .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS.toString())))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
-            .andExpect(jsonPath("$.[*].discontinuedDate").value(hasItem(DEFAULT_DISCONTINUED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)));
+            .andExpect(jsonPath("$.[*].warrantyPeriod").value(hasItem(DEFAULT_WARRANTY_PERIOD.toString())))
+            .andExpect(jsonPath("$.[*].warrantyPolicy").value(hasItem(DEFAULT_WARRANTY_POLICY.toString())))
+            .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
+            .andExpect(jsonPath("$.[*].whatInTheBox").value(hasItem(DEFAULT_WHAT_IN_THE_BOX.toString())));
     }
     
     @Test
@@ -523,29 +314,13 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.productName").value(DEFAULT_PRODUCT_NAME.toString()))
             .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER.toString()))
             .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS.toString()))
-            .andExpect(jsonPath("$.makeFlag").value(DEFAULT_MAKE_FLAG.booleanValue()))
-            .andExpect(jsonPath("$.finishedGoodsFlag").value(DEFAULT_FINISHED_GOODS_FLAG.booleanValue()))
-            .andExpect(jsonPath("$.color").value(DEFAULT_COLOR.toString()))
-            .andExpect(jsonPath("$.safetyStockLevel").value(DEFAULT_SAFETY_STOCK_LEVEL))
-            .andExpect(jsonPath("$.reorderPoint").value(DEFAULT_REORDER_POINT))
-            .andExpect(jsonPath("$.standardCost").value(DEFAULT_STANDARD_COST.doubleValue()))
-            .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.recommendedRetailPrice").value(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.brand").value(DEFAULT_BRAND.toString()))
-            .andExpect(jsonPath("$.specifySize").value(DEFAULT_SPECIFY_SIZE.toString()))
-            .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.doubleValue()))
-            .andExpect(jsonPath("$.daysToManufacture").value(DEFAULT_DAYS_TO_MANUFACTURE))
-            .andExpect(jsonPath("$.productLine").value(DEFAULT_PRODUCT_LINE.toString()))
-            .andExpect(jsonPath("$.classType").value(DEFAULT_CLASS_TYPE.toString()))
-            .andExpect(jsonPath("$.style").value(DEFAULT_STYLE.toString()))
-            .andExpect(jsonPath("$.customFields").value(DEFAULT_CUSTOM_FIELDS.toString()))
-            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL.toString()))
             .andExpect(jsonPath("$.sellStartDate").value(DEFAULT_SELL_START_DATE.toString()))
             .andExpect(jsonPath("$.sellEndDate").value(DEFAULT_SELL_END_DATE.toString()))
-            .andExpect(jsonPath("$.marketingComments").value(DEFAULT_MARKETING_COMMENTS.toString()))
-            .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
-            .andExpect(jsonPath("$.discontinuedDate").value(DEFAULT_DISCONTINUED_DATE.toString()))
-            .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT));
+            .andExpect(jsonPath("$.warrantyPeriod").value(DEFAULT_WARRANTY_PERIOD.toString()))
+            .andExpect(jsonPath("$.warrantyPolicy").value(DEFAULT_WARRANTY_POLICY.toString()))
+            .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
+            .andExpect(jsonPath("$.whatInTheBox").value(DEFAULT_WHAT_IN_THE_BOX.toString()));
     }
 
     @Test
@@ -667,746 +442,41 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsByMakeFlagIsEqualToSomething() throws Exception {
+    public void getAllProductsByThumbnailUrlIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where makeFlag equals to DEFAULT_MAKE_FLAG
-        defaultProductsShouldBeFound("makeFlag.equals=" + DEFAULT_MAKE_FLAG);
+        // Get all the productsList where thumbnailUrl equals to DEFAULT_THUMBNAIL_URL
+        defaultProductsShouldBeFound("thumbnailUrl.equals=" + DEFAULT_THUMBNAIL_URL);
 
-        // Get all the productsList where makeFlag equals to UPDATED_MAKE_FLAG
-        defaultProductsShouldNotBeFound("makeFlag.equals=" + UPDATED_MAKE_FLAG);
+        // Get all the productsList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductsShouldNotBeFound("thumbnailUrl.equals=" + UPDATED_THUMBNAIL_URL);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByMakeFlagIsInShouldWork() throws Exception {
+    public void getAllProductsByThumbnailUrlIsInShouldWork() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where makeFlag in DEFAULT_MAKE_FLAG or UPDATED_MAKE_FLAG
-        defaultProductsShouldBeFound("makeFlag.in=" + DEFAULT_MAKE_FLAG + "," + UPDATED_MAKE_FLAG);
+        // Get all the productsList where thumbnailUrl in DEFAULT_THUMBNAIL_URL or UPDATED_THUMBNAIL_URL
+        defaultProductsShouldBeFound("thumbnailUrl.in=" + DEFAULT_THUMBNAIL_URL + "," + UPDATED_THUMBNAIL_URL);
 
-        // Get all the productsList where makeFlag equals to UPDATED_MAKE_FLAG
-        defaultProductsShouldNotBeFound("makeFlag.in=" + UPDATED_MAKE_FLAG);
+        // Get all the productsList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductsShouldNotBeFound("thumbnailUrl.in=" + UPDATED_THUMBNAIL_URL);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByMakeFlagIsNullOrNotNull() throws Exception {
+    public void getAllProductsByThumbnailUrlIsNullOrNotNull() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where makeFlag is not null
-        defaultProductsShouldBeFound("makeFlag.specified=true");
-
-        // Get all the productsList where makeFlag is null
-        defaultProductsShouldNotBeFound("makeFlag.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByFinishedGoodsFlagIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where finishedGoodsFlag equals to DEFAULT_FINISHED_GOODS_FLAG
-        defaultProductsShouldBeFound("finishedGoodsFlag.equals=" + DEFAULT_FINISHED_GOODS_FLAG);
-
-        // Get all the productsList where finishedGoodsFlag equals to UPDATED_FINISHED_GOODS_FLAG
-        defaultProductsShouldNotBeFound("finishedGoodsFlag.equals=" + UPDATED_FINISHED_GOODS_FLAG);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByFinishedGoodsFlagIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where finishedGoodsFlag in DEFAULT_FINISHED_GOODS_FLAG or UPDATED_FINISHED_GOODS_FLAG
-        defaultProductsShouldBeFound("finishedGoodsFlag.in=" + DEFAULT_FINISHED_GOODS_FLAG + "," + UPDATED_FINISHED_GOODS_FLAG);
-
-        // Get all the productsList where finishedGoodsFlag equals to UPDATED_FINISHED_GOODS_FLAG
-        defaultProductsShouldNotBeFound("finishedGoodsFlag.in=" + UPDATED_FINISHED_GOODS_FLAG);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByFinishedGoodsFlagIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where finishedGoodsFlag is not null
-        defaultProductsShouldBeFound("finishedGoodsFlag.specified=true");
-
-        // Get all the productsList where finishedGoodsFlag is null
-        defaultProductsShouldNotBeFound("finishedGoodsFlag.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByColorIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where color equals to DEFAULT_COLOR
-        defaultProductsShouldBeFound("color.equals=" + DEFAULT_COLOR);
-
-        // Get all the productsList where color equals to UPDATED_COLOR
-        defaultProductsShouldNotBeFound("color.equals=" + UPDATED_COLOR);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByColorIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where color in DEFAULT_COLOR or UPDATED_COLOR
-        defaultProductsShouldBeFound("color.in=" + DEFAULT_COLOR + "," + UPDATED_COLOR);
-
-        // Get all the productsList where color equals to UPDATED_COLOR
-        defaultProductsShouldNotBeFound("color.in=" + UPDATED_COLOR);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByColorIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where color is not null
-        defaultProductsShouldBeFound("color.specified=true");
-
-        // Get all the productsList where color is null
-        defaultProductsShouldNotBeFound("color.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySafetyStockLevelIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where safetyStockLevel equals to DEFAULT_SAFETY_STOCK_LEVEL
-        defaultProductsShouldBeFound("safetyStockLevel.equals=" + DEFAULT_SAFETY_STOCK_LEVEL);
-
-        // Get all the productsList where safetyStockLevel equals to UPDATED_SAFETY_STOCK_LEVEL
-        defaultProductsShouldNotBeFound("safetyStockLevel.equals=" + UPDATED_SAFETY_STOCK_LEVEL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySafetyStockLevelIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where safetyStockLevel in DEFAULT_SAFETY_STOCK_LEVEL or UPDATED_SAFETY_STOCK_LEVEL
-        defaultProductsShouldBeFound("safetyStockLevel.in=" + DEFAULT_SAFETY_STOCK_LEVEL + "," + UPDATED_SAFETY_STOCK_LEVEL);
-
-        // Get all the productsList where safetyStockLevel equals to UPDATED_SAFETY_STOCK_LEVEL
-        defaultProductsShouldNotBeFound("safetyStockLevel.in=" + UPDATED_SAFETY_STOCK_LEVEL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySafetyStockLevelIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where safetyStockLevel is not null
-        defaultProductsShouldBeFound("safetyStockLevel.specified=true");
-
-        // Get all the productsList where safetyStockLevel is null
-        defaultProductsShouldNotBeFound("safetyStockLevel.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySafetyStockLevelIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where safetyStockLevel greater than or equals to DEFAULT_SAFETY_STOCK_LEVEL
-        defaultProductsShouldBeFound("safetyStockLevel.greaterOrEqualThan=" + DEFAULT_SAFETY_STOCK_LEVEL);
-
-        // Get all the productsList where safetyStockLevel greater than or equals to UPDATED_SAFETY_STOCK_LEVEL
-        defaultProductsShouldNotBeFound("safetyStockLevel.greaterOrEqualThan=" + UPDATED_SAFETY_STOCK_LEVEL);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySafetyStockLevelIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where safetyStockLevel less than or equals to DEFAULT_SAFETY_STOCK_LEVEL
-        defaultProductsShouldNotBeFound("safetyStockLevel.lessThan=" + DEFAULT_SAFETY_STOCK_LEVEL);
-
-        // Get all the productsList where safetyStockLevel less than or equals to UPDATED_SAFETY_STOCK_LEVEL
-        defaultProductsShouldBeFound("safetyStockLevel.lessThan=" + UPDATED_SAFETY_STOCK_LEVEL);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsByReorderPointIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where reorderPoint equals to DEFAULT_REORDER_POINT
-        defaultProductsShouldBeFound("reorderPoint.equals=" + DEFAULT_REORDER_POINT);
-
-        // Get all the productsList where reorderPoint equals to UPDATED_REORDER_POINT
-        defaultProductsShouldNotBeFound("reorderPoint.equals=" + UPDATED_REORDER_POINT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByReorderPointIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where reorderPoint in DEFAULT_REORDER_POINT or UPDATED_REORDER_POINT
-        defaultProductsShouldBeFound("reorderPoint.in=" + DEFAULT_REORDER_POINT + "," + UPDATED_REORDER_POINT);
-
-        // Get all the productsList where reorderPoint equals to UPDATED_REORDER_POINT
-        defaultProductsShouldNotBeFound("reorderPoint.in=" + UPDATED_REORDER_POINT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByReorderPointIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where reorderPoint is not null
-        defaultProductsShouldBeFound("reorderPoint.specified=true");
-
-        // Get all the productsList where reorderPoint is null
-        defaultProductsShouldNotBeFound("reorderPoint.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByReorderPointIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where reorderPoint greater than or equals to DEFAULT_REORDER_POINT
-        defaultProductsShouldBeFound("reorderPoint.greaterOrEqualThan=" + DEFAULT_REORDER_POINT);
-
-        // Get all the productsList where reorderPoint greater than or equals to UPDATED_REORDER_POINT
-        defaultProductsShouldNotBeFound("reorderPoint.greaterOrEqualThan=" + UPDATED_REORDER_POINT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByReorderPointIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where reorderPoint less than or equals to DEFAULT_REORDER_POINT
-        defaultProductsShouldNotBeFound("reorderPoint.lessThan=" + DEFAULT_REORDER_POINT);
-
-        // Get all the productsList where reorderPoint less than or equals to UPDATED_REORDER_POINT
-        defaultProductsShouldBeFound("reorderPoint.lessThan=" + UPDATED_REORDER_POINT);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsByStandardCostIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where standardCost equals to DEFAULT_STANDARD_COST
-        defaultProductsShouldBeFound("standardCost.equals=" + DEFAULT_STANDARD_COST);
-
-        // Get all the productsList where standardCost equals to UPDATED_STANDARD_COST
-        defaultProductsShouldNotBeFound("standardCost.equals=" + UPDATED_STANDARD_COST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByStandardCostIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where standardCost in DEFAULT_STANDARD_COST or UPDATED_STANDARD_COST
-        defaultProductsShouldBeFound("standardCost.in=" + DEFAULT_STANDARD_COST + "," + UPDATED_STANDARD_COST);
-
-        // Get all the productsList where standardCost equals to UPDATED_STANDARD_COST
-        defaultProductsShouldNotBeFound("standardCost.in=" + UPDATED_STANDARD_COST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByStandardCostIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where standardCost is not null
-        defaultProductsShouldBeFound("standardCost.specified=true");
-
-        // Get all the productsList where standardCost is null
-        defaultProductsShouldNotBeFound("standardCost.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByUnitPriceIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where unitPrice equals to DEFAULT_UNIT_PRICE
-        defaultProductsShouldBeFound("unitPrice.equals=" + DEFAULT_UNIT_PRICE);
-
-        // Get all the productsList where unitPrice equals to UPDATED_UNIT_PRICE
-        defaultProductsShouldNotBeFound("unitPrice.equals=" + UPDATED_UNIT_PRICE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByUnitPriceIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where unitPrice in DEFAULT_UNIT_PRICE or UPDATED_UNIT_PRICE
-        defaultProductsShouldBeFound("unitPrice.in=" + DEFAULT_UNIT_PRICE + "," + UPDATED_UNIT_PRICE);
-
-        // Get all the productsList where unitPrice equals to UPDATED_UNIT_PRICE
-        defaultProductsShouldNotBeFound("unitPrice.in=" + UPDATED_UNIT_PRICE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByUnitPriceIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where unitPrice is not null
-        defaultProductsShouldBeFound("unitPrice.specified=true");
-
-        // Get all the productsList where unitPrice is null
-        defaultProductsShouldNotBeFound("unitPrice.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByRecommendedRetailPriceIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where recommendedRetailPrice equals to DEFAULT_RECOMMENDED_RETAIL_PRICE
-        defaultProductsShouldBeFound("recommendedRetailPrice.equals=" + DEFAULT_RECOMMENDED_RETAIL_PRICE);
-
-        // Get all the productsList where recommendedRetailPrice equals to UPDATED_RECOMMENDED_RETAIL_PRICE
-        defaultProductsShouldNotBeFound("recommendedRetailPrice.equals=" + UPDATED_RECOMMENDED_RETAIL_PRICE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByRecommendedRetailPriceIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where recommendedRetailPrice in DEFAULT_RECOMMENDED_RETAIL_PRICE or UPDATED_RECOMMENDED_RETAIL_PRICE
-        defaultProductsShouldBeFound("recommendedRetailPrice.in=" + DEFAULT_RECOMMENDED_RETAIL_PRICE + "," + UPDATED_RECOMMENDED_RETAIL_PRICE);
-
-        // Get all the productsList where recommendedRetailPrice equals to UPDATED_RECOMMENDED_RETAIL_PRICE
-        defaultProductsShouldNotBeFound("recommendedRetailPrice.in=" + UPDATED_RECOMMENDED_RETAIL_PRICE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByRecommendedRetailPriceIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where recommendedRetailPrice is not null
-        defaultProductsShouldBeFound("recommendedRetailPrice.specified=true");
-
-        // Get all the productsList where recommendedRetailPrice is null
-        defaultProductsShouldNotBeFound("recommendedRetailPrice.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByBrandIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where brand equals to DEFAULT_BRAND
-        defaultProductsShouldBeFound("brand.equals=" + DEFAULT_BRAND);
-
-        // Get all the productsList where brand equals to UPDATED_BRAND
-        defaultProductsShouldNotBeFound("brand.equals=" + UPDATED_BRAND);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByBrandIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where brand in DEFAULT_BRAND or UPDATED_BRAND
-        defaultProductsShouldBeFound("brand.in=" + DEFAULT_BRAND + "," + UPDATED_BRAND);
-
-        // Get all the productsList where brand equals to UPDATED_BRAND
-        defaultProductsShouldNotBeFound("brand.in=" + UPDATED_BRAND);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByBrandIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where brand is not null
-        defaultProductsShouldBeFound("brand.specified=true");
-
-        // Get all the productsList where brand is null
-        defaultProductsShouldNotBeFound("brand.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySpecifySizeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where specifySize equals to DEFAULT_SPECIFY_SIZE
-        defaultProductsShouldBeFound("specifySize.equals=" + DEFAULT_SPECIFY_SIZE);
-
-        // Get all the productsList where specifySize equals to UPDATED_SPECIFY_SIZE
-        defaultProductsShouldNotBeFound("specifySize.equals=" + UPDATED_SPECIFY_SIZE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySpecifySizeIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where specifySize in DEFAULT_SPECIFY_SIZE or UPDATED_SPECIFY_SIZE
-        defaultProductsShouldBeFound("specifySize.in=" + DEFAULT_SPECIFY_SIZE + "," + UPDATED_SPECIFY_SIZE);
-
-        // Get all the productsList where specifySize equals to UPDATED_SPECIFY_SIZE
-        defaultProductsShouldNotBeFound("specifySize.in=" + UPDATED_SPECIFY_SIZE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySpecifySizeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where specifySize is not null
-        defaultProductsShouldBeFound("specifySize.specified=true");
-
-        // Get all the productsList where specifySize is null
-        defaultProductsShouldNotBeFound("specifySize.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByWeightIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where weight equals to DEFAULT_WEIGHT
-        defaultProductsShouldBeFound("weight.equals=" + DEFAULT_WEIGHT);
-
-        // Get all the productsList where weight equals to UPDATED_WEIGHT
-        defaultProductsShouldNotBeFound("weight.equals=" + UPDATED_WEIGHT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByWeightIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where weight in DEFAULT_WEIGHT or UPDATED_WEIGHT
-        defaultProductsShouldBeFound("weight.in=" + DEFAULT_WEIGHT + "," + UPDATED_WEIGHT);
-
-        // Get all the productsList where weight equals to UPDATED_WEIGHT
-        defaultProductsShouldNotBeFound("weight.in=" + UPDATED_WEIGHT);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByWeightIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where weight is not null
-        defaultProductsShouldBeFound("weight.specified=true");
-
-        // Get all the productsList where weight is null
-        defaultProductsShouldNotBeFound("weight.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDaysToManufactureIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where daysToManufacture equals to DEFAULT_DAYS_TO_MANUFACTURE
-        defaultProductsShouldBeFound("daysToManufacture.equals=" + DEFAULT_DAYS_TO_MANUFACTURE);
-
-        // Get all the productsList where daysToManufacture equals to UPDATED_DAYS_TO_MANUFACTURE
-        defaultProductsShouldNotBeFound("daysToManufacture.equals=" + UPDATED_DAYS_TO_MANUFACTURE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDaysToManufactureIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where daysToManufacture in DEFAULT_DAYS_TO_MANUFACTURE or UPDATED_DAYS_TO_MANUFACTURE
-        defaultProductsShouldBeFound("daysToManufacture.in=" + DEFAULT_DAYS_TO_MANUFACTURE + "," + UPDATED_DAYS_TO_MANUFACTURE);
-
-        // Get all the productsList where daysToManufacture equals to UPDATED_DAYS_TO_MANUFACTURE
-        defaultProductsShouldNotBeFound("daysToManufacture.in=" + UPDATED_DAYS_TO_MANUFACTURE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDaysToManufactureIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where daysToManufacture is not null
-        defaultProductsShouldBeFound("daysToManufacture.specified=true");
-
-        // Get all the productsList where daysToManufacture is null
-        defaultProductsShouldNotBeFound("daysToManufacture.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDaysToManufactureIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where daysToManufacture greater than or equals to DEFAULT_DAYS_TO_MANUFACTURE
-        defaultProductsShouldBeFound("daysToManufacture.greaterOrEqualThan=" + DEFAULT_DAYS_TO_MANUFACTURE);
-
-        // Get all the productsList where daysToManufacture greater than or equals to UPDATED_DAYS_TO_MANUFACTURE
-        defaultProductsShouldNotBeFound("daysToManufacture.greaterOrEqualThan=" + UPDATED_DAYS_TO_MANUFACTURE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDaysToManufactureIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where daysToManufacture less than or equals to DEFAULT_DAYS_TO_MANUFACTURE
-        defaultProductsShouldNotBeFound("daysToManufacture.lessThan=" + DEFAULT_DAYS_TO_MANUFACTURE);
-
-        // Get all the productsList where daysToManufacture less than or equals to UPDATED_DAYS_TO_MANUFACTURE
-        defaultProductsShouldBeFound("daysToManufacture.lessThan=" + UPDATED_DAYS_TO_MANUFACTURE);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsByProductLineIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where productLine equals to DEFAULT_PRODUCT_LINE
-        defaultProductsShouldBeFound("productLine.equals=" + DEFAULT_PRODUCT_LINE);
-
-        // Get all the productsList where productLine equals to UPDATED_PRODUCT_LINE
-        defaultProductsShouldNotBeFound("productLine.equals=" + UPDATED_PRODUCT_LINE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByProductLineIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where productLine in DEFAULT_PRODUCT_LINE or UPDATED_PRODUCT_LINE
-        defaultProductsShouldBeFound("productLine.in=" + DEFAULT_PRODUCT_LINE + "," + UPDATED_PRODUCT_LINE);
-
-        // Get all the productsList where productLine equals to UPDATED_PRODUCT_LINE
-        defaultProductsShouldNotBeFound("productLine.in=" + UPDATED_PRODUCT_LINE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByProductLineIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where productLine is not null
-        defaultProductsShouldBeFound("productLine.specified=true");
-
-        // Get all the productsList where productLine is null
-        defaultProductsShouldNotBeFound("productLine.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByClassTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where classType equals to DEFAULT_CLASS_TYPE
-        defaultProductsShouldBeFound("classType.equals=" + DEFAULT_CLASS_TYPE);
-
-        // Get all the productsList where classType equals to UPDATED_CLASS_TYPE
-        defaultProductsShouldNotBeFound("classType.equals=" + UPDATED_CLASS_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByClassTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where classType in DEFAULT_CLASS_TYPE or UPDATED_CLASS_TYPE
-        defaultProductsShouldBeFound("classType.in=" + DEFAULT_CLASS_TYPE + "," + UPDATED_CLASS_TYPE);
-
-        // Get all the productsList where classType equals to UPDATED_CLASS_TYPE
-        defaultProductsShouldNotBeFound("classType.in=" + UPDATED_CLASS_TYPE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByClassTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where classType is not null
-        defaultProductsShouldBeFound("classType.specified=true");
-
-        // Get all the productsList where classType is null
-        defaultProductsShouldNotBeFound("classType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByStyleIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where style equals to DEFAULT_STYLE
-        defaultProductsShouldBeFound("style.equals=" + DEFAULT_STYLE);
-
-        // Get all the productsList where style equals to UPDATED_STYLE
-        defaultProductsShouldNotBeFound("style.equals=" + UPDATED_STYLE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByStyleIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where style in DEFAULT_STYLE or UPDATED_STYLE
-        defaultProductsShouldBeFound("style.in=" + DEFAULT_STYLE + "," + UPDATED_STYLE);
-
-        // Get all the productsList where style equals to UPDATED_STYLE
-        defaultProductsShouldNotBeFound("style.in=" + UPDATED_STYLE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByStyleIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where style is not null
-        defaultProductsShouldBeFound("style.specified=true");
-
-        // Get all the productsList where style is null
-        defaultProductsShouldNotBeFound("style.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByCustomFieldsIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where customFields equals to DEFAULT_CUSTOM_FIELDS
-        defaultProductsShouldBeFound("customFields.equals=" + DEFAULT_CUSTOM_FIELDS);
-
-        // Get all the productsList where customFields equals to UPDATED_CUSTOM_FIELDS
-        defaultProductsShouldNotBeFound("customFields.equals=" + UPDATED_CUSTOM_FIELDS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByCustomFieldsIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where customFields in DEFAULT_CUSTOM_FIELDS or UPDATED_CUSTOM_FIELDS
-        defaultProductsShouldBeFound("customFields.in=" + DEFAULT_CUSTOM_FIELDS + "," + UPDATED_CUSTOM_FIELDS);
-
-        // Get all the productsList where customFields equals to UPDATED_CUSTOM_FIELDS
-        defaultProductsShouldNotBeFound("customFields.in=" + UPDATED_CUSTOM_FIELDS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByCustomFieldsIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where customFields is not null
-        defaultProductsShouldBeFound("customFields.specified=true");
-
-        // Get all the productsList where customFields is null
-        defaultProductsShouldNotBeFound("customFields.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByPhotoIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where photo equals to DEFAULT_PHOTO
-        defaultProductsShouldBeFound("photo.equals=" + DEFAULT_PHOTO);
-
-        // Get all the productsList where photo equals to UPDATED_PHOTO
-        defaultProductsShouldNotBeFound("photo.equals=" + UPDATED_PHOTO);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByPhotoIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where photo in DEFAULT_PHOTO or UPDATED_PHOTO
-        defaultProductsShouldBeFound("photo.in=" + DEFAULT_PHOTO + "," + UPDATED_PHOTO);
-
-        // Get all the productsList where photo equals to UPDATED_PHOTO
-        defaultProductsShouldNotBeFound("photo.in=" + UPDATED_PHOTO);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByPhotoIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where photo is not null
-        defaultProductsShouldBeFound("photo.specified=true");
-
-        // Get all the productsList where photo is null
-        defaultProductsShouldNotBeFound("photo.specified=false");
+        // Get all the productsList where thumbnailUrl is not null
+        defaultProductsShouldBeFound("thumbnailUrl.specified=true");
+
+        // Get all the productsList where thumbnailUrl is null
+        defaultProductsShouldNotBeFound("thumbnailUrl.specified=false");
     }
 
     @Test
@@ -1543,147 +613,81 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsByMarketingCommentsIsEqualToSomething() throws Exception {
+    public void getAllProductsByWarrantyPeriodIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where marketingComments equals to DEFAULT_MARKETING_COMMENTS
-        defaultProductsShouldBeFound("marketingComments.equals=" + DEFAULT_MARKETING_COMMENTS);
+        // Get all the productsList where warrantyPeriod equals to DEFAULT_WARRANTY_PERIOD
+        defaultProductsShouldBeFound("warrantyPeriod.equals=" + DEFAULT_WARRANTY_PERIOD);
 
-        // Get all the productsList where marketingComments equals to UPDATED_MARKETING_COMMENTS
-        defaultProductsShouldNotBeFound("marketingComments.equals=" + UPDATED_MARKETING_COMMENTS);
+        // Get all the productsList where warrantyPeriod equals to UPDATED_WARRANTY_PERIOD
+        defaultProductsShouldNotBeFound("warrantyPeriod.equals=" + UPDATED_WARRANTY_PERIOD);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByMarketingCommentsIsInShouldWork() throws Exception {
+    public void getAllProductsByWarrantyPeriodIsInShouldWork() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where marketingComments in DEFAULT_MARKETING_COMMENTS or UPDATED_MARKETING_COMMENTS
-        defaultProductsShouldBeFound("marketingComments.in=" + DEFAULT_MARKETING_COMMENTS + "," + UPDATED_MARKETING_COMMENTS);
+        // Get all the productsList where warrantyPeriod in DEFAULT_WARRANTY_PERIOD or UPDATED_WARRANTY_PERIOD
+        defaultProductsShouldBeFound("warrantyPeriod.in=" + DEFAULT_WARRANTY_PERIOD + "," + UPDATED_WARRANTY_PERIOD);
 
-        // Get all the productsList where marketingComments equals to UPDATED_MARKETING_COMMENTS
-        defaultProductsShouldNotBeFound("marketingComments.in=" + UPDATED_MARKETING_COMMENTS);
+        // Get all the productsList where warrantyPeriod equals to UPDATED_WARRANTY_PERIOD
+        defaultProductsShouldNotBeFound("warrantyPeriod.in=" + UPDATED_WARRANTY_PERIOD);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByMarketingCommentsIsNullOrNotNull() throws Exception {
+    public void getAllProductsByWarrantyPeriodIsNullOrNotNull() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where marketingComments is not null
-        defaultProductsShouldBeFound("marketingComments.specified=true");
+        // Get all the productsList where warrantyPeriod is not null
+        defaultProductsShouldBeFound("warrantyPeriod.specified=true");
 
-        // Get all the productsList where marketingComments is null
-        defaultProductsShouldNotBeFound("marketingComments.specified=false");
+        // Get all the productsList where warrantyPeriod is null
+        defaultProductsShouldNotBeFound("warrantyPeriod.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllProductsByInternalCommentsIsEqualToSomething() throws Exception {
+    public void getAllProductsByWarrantyPolicyIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where internalComments equals to DEFAULT_INTERNAL_COMMENTS
-        defaultProductsShouldBeFound("internalComments.equals=" + DEFAULT_INTERNAL_COMMENTS);
+        // Get all the productsList where warrantyPolicy equals to DEFAULT_WARRANTY_POLICY
+        defaultProductsShouldBeFound("warrantyPolicy.equals=" + DEFAULT_WARRANTY_POLICY);
 
-        // Get all the productsList where internalComments equals to UPDATED_INTERNAL_COMMENTS
-        defaultProductsShouldNotBeFound("internalComments.equals=" + UPDATED_INTERNAL_COMMENTS);
+        // Get all the productsList where warrantyPolicy equals to UPDATED_WARRANTY_POLICY
+        defaultProductsShouldNotBeFound("warrantyPolicy.equals=" + UPDATED_WARRANTY_POLICY);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByInternalCommentsIsInShouldWork() throws Exception {
+    public void getAllProductsByWarrantyPolicyIsInShouldWork() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where internalComments in DEFAULT_INTERNAL_COMMENTS or UPDATED_INTERNAL_COMMENTS
-        defaultProductsShouldBeFound("internalComments.in=" + DEFAULT_INTERNAL_COMMENTS + "," + UPDATED_INTERNAL_COMMENTS);
+        // Get all the productsList where warrantyPolicy in DEFAULT_WARRANTY_POLICY or UPDATED_WARRANTY_POLICY
+        defaultProductsShouldBeFound("warrantyPolicy.in=" + DEFAULT_WARRANTY_POLICY + "," + UPDATED_WARRANTY_POLICY);
 
-        // Get all the productsList where internalComments equals to UPDATED_INTERNAL_COMMENTS
-        defaultProductsShouldNotBeFound("internalComments.in=" + UPDATED_INTERNAL_COMMENTS);
+        // Get all the productsList where warrantyPolicy equals to UPDATED_WARRANTY_POLICY
+        defaultProductsShouldNotBeFound("warrantyPolicy.in=" + UPDATED_WARRANTY_POLICY);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByInternalCommentsIsNullOrNotNull() throws Exception {
+    public void getAllProductsByWarrantyPolicyIsNullOrNotNull() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where internalComments is not null
-        defaultProductsShouldBeFound("internalComments.specified=true");
+        // Get all the productsList where warrantyPolicy is not null
+        defaultProductsShouldBeFound("warrantyPolicy.specified=true");
 
-        // Get all the productsList where internalComments is null
-        defaultProductsShouldNotBeFound("internalComments.specified=false");
+        // Get all the productsList where warrantyPolicy is null
+        defaultProductsShouldNotBeFound("warrantyPolicy.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDiscontinuedDateIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where discontinuedDate equals to DEFAULT_DISCONTINUED_DATE
-        defaultProductsShouldBeFound("discontinuedDate.equals=" + DEFAULT_DISCONTINUED_DATE);
-
-        // Get all the productsList where discontinuedDate equals to UPDATED_DISCONTINUED_DATE
-        defaultProductsShouldNotBeFound("discontinuedDate.equals=" + UPDATED_DISCONTINUED_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDiscontinuedDateIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where discontinuedDate in DEFAULT_DISCONTINUED_DATE or UPDATED_DISCONTINUED_DATE
-        defaultProductsShouldBeFound("discontinuedDate.in=" + DEFAULT_DISCONTINUED_DATE + "," + UPDATED_DISCONTINUED_DATE);
-
-        // Get all the productsList where discontinuedDate equals to UPDATED_DISCONTINUED_DATE
-        defaultProductsShouldNotBeFound("discontinuedDate.in=" + UPDATED_DISCONTINUED_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDiscontinuedDateIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where discontinuedDate is not null
-        defaultProductsShouldBeFound("discontinuedDate.specified=true");
-
-        // Get all the productsList where discontinuedDate is null
-        defaultProductsShouldNotBeFound("discontinuedDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDiscontinuedDateIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where discontinuedDate greater than or equals to DEFAULT_DISCONTINUED_DATE
-        defaultProductsShouldBeFound("discontinuedDate.greaterOrEqualThan=" + DEFAULT_DISCONTINUED_DATE);
-
-        // Get all the productsList where discontinuedDate greater than or equals to UPDATED_DISCONTINUED_DATE
-        defaultProductsShouldNotBeFound("discontinuedDate.greaterOrEqualThan=" + UPDATED_DISCONTINUED_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByDiscontinuedDateIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where discontinuedDate less than or equals to DEFAULT_DISCONTINUED_DATE
-        defaultProductsShouldNotBeFound("discontinuedDate.lessThan=" + DEFAULT_DISCONTINUED_DATE);
-
-        // Get all the productsList where discontinuedDate less than or equals to UPDATED_DISCONTINUED_DATE
-        defaultProductsShouldBeFound("discontinuedDate.lessThan=" + UPDATED_DISCONTINUED_DATE);
-    }
-
 
     @Test
     @Transactional
@@ -1753,20 +757,78 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsByProductReviewIsEqualToSomething() throws Exception {
+    public void getAllProductsByWhatInTheBoxIsEqualToSomething() throws Exception {
         // Initialize the database
-        ReviewLines productReview = ReviewLinesResourceIntTest.createEntity(em);
-        em.persist(productReview);
-        em.flush();
-        products.setProductReview(productReview);
         productsRepository.saveAndFlush(products);
-        Long productReviewId = productReview.getId();
 
-        // Get all the productsList where productReview equals to productReviewId
-        defaultProductsShouldBeFound("productReviewId.equals=" + productReviewId);
+        // Get all the productsList where whatInTheBox equals to DEFAULT_WHAT_IN_THE_BOX
+        defaultProductsShouldBeFound("whatInTheBox.equals=" + DEFAULT_WHAT_IN_THE_BOX);
 
-        // Get all the productsList where productReview equals to productReviewId + 1
-        defaultProductsShouldNotBeFound("productReviewId.equals=" + (productReviewId + 1));
+        // Get all the productsList where whatInTheBox equals to UPDATED_WHAT_IN_THE_BOX
+        defaultProductsShouldNotBeFound("whatInTheBox.equals=" + UPDATED_WHAT_IN_THE_BOX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByWhatInTheBoxIsInShouldWork() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where whatInTheBox in DEFAULT_WHAT_IN_THE_BOX or UPDATED_WHAT_IN_THE_BOX
+        defaultProductsShouldBeFound("whatInTheBox.in=" + DEFAULT_WHAT_IN_THE_BOX + "," + UPDATED_WHAT_IN_THE_BOX);
+
+        // Get all the productsList where whatInTheBox equals to UPDATED_WHAT_IN_THE_BOX
+        defaultProductsShouldNotBeFound("whatInTheBox.in=" + UPDATED_WHAT_IN_THE_BOX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByWhatInTheBoxIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where whatInTheBox is not null
+        defaultProductsShouldBeFound("whatInTheBox.specified=true");
+
+        // Get all the productsList where whatInTheBox is null
+        defaultProductsShouldNotBeFound("whatInTheBox.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsBySupplierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Suppliers supplier = SuppliersResourceIntTest.createEntity(em);
+        em.persist(supplier);
+        em.flush();
+        products.setSupplier(supplier);
+        productsRepository.saveAndFlush(products);
+        Long supplierId = supplier.getId();
+
+        // Get all the productsList where supplier equals to supplierId
+        defaultProductsShouldBeFound("supplierId.equals=" + supplierId);
+
+        // Get all the productsList where supplier equals to supplierId + 1
+        defaultProductsShouldNotBeFound("supplierId.equals=" + (supplierId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByMerchantIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Merchants merchant = MerchantsResourceIntTest.createEntity(em);
+        em.persist(merchant);
+        em.flush();
+        products.setMerchant(merchant);
+        productsRepository.saveAndFlush(products);
+        Long merchantId = merchant.getId();
+
+        // Get all the productsList where merchant equals to merchantId
+        defaultProductsShouldBeFound("merchantId.equals=" + merchantId);
+
+        // Get all the productsList where merchant equals to merchantId + 1
+        defaultProductsShouldNotBeFound("merchantId.equals=" + (merchantId + 1));
     }
 
 
@@ -1810,82 +872,6 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductsBySupplierIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Suppliers supplier = SuppliersResourceIntTest.createEntity(em);
-        em.persist(supplier);
-        em.flush();
-        products.setSupplier(supplier);
-        productsRepository.saveAndFlush(products);
-        Long supplierId = supplier.getId();
-
-        // Get all the productsList where supplier equals to supplierId
-        defaultProductsShouldBeFound("supplierId.equals=" + supplierId);
-
-        // Get all the productsList where supplier equals to supplierId + 1
-        defaultProductsShouldNotBeFound("supplierId.equals=" + (supplierId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsByProductSubCategoryIsEqualToSomething() throws Exception {
-        // Initialize the database
-        ProductSubCategory productSubCategory = ProductSubCategoryResourceIntTest.createEntity(em);
-        em.persist(productSubCategory);
-        em.flush();
-        products.setProductSubCategory(productSubCategory);
-        productsRepository.saveAndFlush(products);
-        Long productSubCategoryId = productSubCategory.getId();
-
-        // Get all the productsList where productSubCategory equals to productSubCategoryId
-        defaultProductsShouldBeFound("productSubCategoryId.equals=" + productSubCategoryId);
-
-        // Get all the productsList where productSubCategory equals to productSubCategoryId + 1
-        defaultProductsShouldNotBeFound("productSubCategoryId.equals=" + (productSubCategoryId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsBySizeUnitMeasureCodeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        UnitMeasure sizeUnitMeasureCode = UnitMeasureResourceIntTest.createEntity(em);
-        em.persist(sizeUnitMeasureCode);
-        em.flush();
-        products.setSizeUnitMeasureCode(sizeUnitMeasureCode);
-        productsRepository.saveAndFlush(products);
-        Long sizeUnitMeasureCodeId = sizeUnitMeasureCode.getId();
-
-        // Get all the productsList where sizeUnitMeasureCode equals to sizeUnitMeasureCodeId
-        defaultProductsShouldBeFound("sizeUnitMeasureCodeId.equals=" + sizeUnitMeasureCodeId);
-
-        // Get all the productsList where sizeUnitMeasureCode equals to sizeUnitMeasureCodeId + 1
-        defaultProductsShouldNotBeFound("sizeUnitMeasureCodeId.equals=" + (sizeUnitMeasureCodeId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsByWeightUnitMeasureCodeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        UnitMeasure weightUnitMeasureCode = UnitMeasureResourceIntTest.createEntity(em);
-        em.persist(weightUnitMeasureCode);
-        em.flush();
-        products.setWeightUnitMeasureCode(weightUnitMeasureCode);
-        productsRepository.saveAndFlush(products);
-        Long weightUnitMeasureCodeId = weightUnitMeasureCode.getId();
-
-        // Get all the productsList where weightUnitMeasureCode equals to weightUnitMeasureCodeId
-        defaultProductsShouldBeFound("weightUnitMeasureCodeId.equals=" + weightUnitMeasureCodeId);
-
-        // Get all the productsList where weightUnitMeasureCode equals to weightUnitMeasureCodeId + 1
-        defaultProductsShouldNotBeFound("weightUnitMeasureCodeId.equals=" + (weightUnitMeasureCodeId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllProductsByProductModelIsEqualToSomething() throws Exception {
         // Initialize the database
         ProductModel productModel = ProductModelResourceIntTest.createEntity(em);
@@ -1902,6 +888,63 @@ public class ProductsResourceIntTest {
         defaultProductsShouldNotBeFound("productModelId.equals=" + (productModelId + 1));
     }
 
+
+    @Test
+    @Transactional
+    public void getAllProductsByProductCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductCategory productCategory = ProductCategoryResourceIntTest.createEntity(em);
+        em.persist(productCategory);
+        em.flush();
+        products.setProductCategory(productCategory);
+        productsRepository.saveAndFlush(products);
+        Long productCategoryId = productCategory.getId();
+
+        // Get all the productsList where productCategory equals to productCategoryId
+        defaultProductsShouldBeFound("productCategoryId.equals=" + productCategoryId);
+
+        // Get all the productsList where productCategory equals to productCategoryId + 1
+        defaultProductsShouldNotBeFound("productCategoryId.equals=" + (productCategoryId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByProductBrandIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductBrand productBrand = ProductBrandResourceIntTest.createEntity(em);
+        em.persist(productBrand);
+        em.flush();
+        products.setProductBrand(productBrand);
+        productsRepository.saveAndFlush(products);
+        Long productBrandId = productBrand.getId();
+
+        // Get all the productsList where productBrand equals to productBrandId
+        defaultProductsShouldBeFound("productBrandId.equals=" + productBrandId);
+
+        // Get all the productsList where productBrand equals to productBrandId + 1
+        defaultProductsShouldNotBeFound("productBrandId.equals=" + (productBrandId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByWarrantyTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        WarrantyTypes warrantyType = WarrantyTypesResourceIntTest.createEntity(em);
+        em.persist(warrantyType);
+        em.flush();
+        products.setWarrantyType(warrantyType);
+        productsRepository.saveAndFlush(products);
+        Long warrantyTypeId = warrantyType.getId();
+
+        // Get all the productsList where warrantyType equals to warrantyTypeId
+        defaultProductsShouldBeFound("warrantyTypeId.equals=" + warrantyTypeId);
+
+        // Get all the productsList where warrantyType equals to warrantyTypeId + 1
+        defaultProductsShouldNotBeFound("warrantyTypeId.equals=" + (warrantyTypeId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -1913,29 +956,13 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME)))
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS)))
-            .andExpect(jsonPath("$.[*].makeFlag").value(hasItem(DEFAULT_MAKE_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].finishedGoodsFlag").value(hasItem(DEFAULT_FINISHED_GOODS_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR)))
-            .andExpect(jsonPath("$.[*].safetyStockLevel").value(hasItem(DEFAULT_SAFETY_STOCK_LEVEL)))
-            .andExpect(jsonPath("$.[*].reorderPoint").value(hasItem(DEFAULT_REORDER_POINT)))
-            .andExpect(jsonPath("$.[*].standardCost").value(hasItem(DEFAULT_STANDARD_COST.doubleValue())))
-            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].recommendedRetailPrice").value(hasItem(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].brand").value(hasItem(DEFAULT_BRAND)))
-            .andExpect(jsonPath("$.[*].specifySize").value(hasItem(DEFAULT_SPECIFY_SIZE)))
-            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.doubleValue())))
-            .andExpect(jsonPath("$.[*].daysToManufacture").value(hasItem(DEFAULT_DAYS_TO_MANUFACTURE)))
-            .andExpect(jsonPath("$.[*].productLine").value(hasItem(DEFAULT_PRODUCT_LINE)))
-            .andExpect(jsonPath("$.[*].classType").value(hasItem(DEFAULT_CLASS_TYPE)))
-            .andExpect(jsonPath("$.[*].style").value(hasItem(DEFAULT_STYLE)))
-            .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS)))
-            .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
-            .andExpect(jsonPath("$.[*].discontinuedDate").value(hasItem(DEFAULT_DISCONTINUED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)));
+            .andExpect(jsonPath("$.[*].warrantyPeriod").value(hasItem(DEFAULT_WARRANTY_PERIOD)))
+            .andExpect(jsonPath("$.[*].warrantyPolicy").value(hasItem(DEFAULT_WARRANTY_POLICY)))
+            .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
+            .andExpect(jsonPath("$.[*].whatInTheBox").value(hasItem(DEFAULT_WHAT_IN_THE_BOX)));
 
         // Check, that the count call also returns 1
         restProductsMockMvc.perform(get("/api/products/count?sort=id,desc&" + filter))
@@ -1986,29 +1013,13 @@ public class ProductsResourceIntTest {
             .productName(UPDATED_PRODUCT_NAME)
             .productNumber(UPDATED_PRODUCT_NUMBER)
             .searchDetails(UPDATED_SEARCH_DETAILS)
-            .makeFlag(UPDATED_MAKE_FLAG)
-            .finishedGoodsFlag(UPDATED_FINISHED_GOODS_FLAG)
-            .color(UPDATED_COLOR)
-            .safetyStockLevel(UPDATED_SAFETY_STOCK_LEVEL)
-            .reorderPoint(UPDATED_REORDER_POINT)
-            .standardCost(UPDATED_STANDARD_COST)
-            .unitPrice(UPDATED_UNIT_PRICE)
-            .recommendedRetailPrice(UPDATED_RECOMMENDED_RETAIL_PRICE)
-            .brand(UPDATED_BRAND)
-            .specifySize(UPDATED_SPECIFY_SIZE)
-            .weight(UPDATED_WEIGHT)
-            .daysToManufacture(UPDATED_DAYS_TO_MANUFACTURE)
-            .productLine(UPDATED_PRODUCT_LINE)
-            .classType(UPDATED_CLASS_TYPE)
-            .style(UPDATED_STYLE)
-            .customFields(UPDATED_CUSTOM_FIELDS)
-            .photo(UPDATED_PHOTO)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .sellStartDate(UPDATED_SELL_START_DATE)
             .sellEndDate(UPDATED_SELL_END_DATE)
-            .marketingComments(UPDATED_MARKETING_COMMENTS)
-            .internalComments(UPDATED_INTERNAL_COMMENTS)
-            .discontinuedDate(UPDATED_DISCONTINUED_DATE)
-            .sellCount(UPDATED_SELL_COUNT);
+            .warrantyPeriod(UPDATED_WARRANTY_PERIOD)
+            .warrantyPolicy(UPDATED_WARRANTY_POLICY)
+            .sellCount(UPDATED_SELL_COUNT)
+            .whatInTheBox(UPDATED_WHAT_IN_THE_BOX);
         ProductsDTO productsDTO = productsMapper.toDto(updatedProducts);
 
         restProductsMockMvc.perform(put("/api/products")
@@ -2023,29 +1034,13 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getProductName()).isEqualTo(UPDATED_PRODUCT_NAME);
         assertThat(testProducts.getProductNumber()).isEqualTo(UPDATED_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(UPDATED_SEARCH_DETAILS);
-        assertThat(testProducts.isMakeFlag()).isEqualTo(UPDATED_MAKE_FLAG);
-        assertThat(testProducts.isFinishedGoodsFlag()).isEqualTo(UPDATED_FINISHED_GOODS_FLAG);
-        assertThat(testProducts.getColor()).isEqualTo(UPDATED_COLOR);
-        assertThat(testProducts.getSafetyStockLevel()).isEqualTo(UPDATED_SAFETY_STOCK_LEVEL);
-        assertThat(testProducts.getReorderPoint()).isEqualTo(UPDATED_REORDER_POINT);
-        assertThat(testProducts.getStandardCost()).isEqualTo(UPDATED_STANDARD_COST);
-        assertThat(testProducts.getUnitPrice()).isEqualTo(UPDATED_UNIT_PRICE);
-        assertThat(testProducts.getRecommendedRetailPrice()).isEqualTo(UPDATED_RECOMMENDED_RETAIL_PRICE);
-        assertThat(testProducts.getBrand()).isEqualTo(UPDATED_BRAND);
-        assertThat(testProducts.getSpecifySize()).isEqualTo(UPDATED_SPECIFY_SIZE);
-        assertThat(testProducts.getWeight()).isEqualTo(UPDATED_WEIGHT);
-        assertThat(testProducts.getDaysToManufacture()).isEqualTo(UPDATED_DAYS_TO_MANUFACTURE);
-        assertThat(testProducts.getProductLine()).isEqualTo(UPDATED_PRODUCT_LINE);
-        assertThat(testProducts.getClassType()).isEqualTo(UPDATED_CLASS_TYPE);
-        assertThat(testProducts.getStyle()).isEqualTo(UPDATED_STYLE);
-        assertThat(testProducts.getCustomFields()).isEqualTo(UPDATED_CUSTOM_FIELDS);
-        assertThat(testProducts.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testProducts.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
         assertThat(testProducts.getSellStartDate()).isEqualTo(UPDATED_SELL_START_DATE);
         assertThat(testProducts.getSellEndDate()).isEqualTo(UPDATED_SELL_END_DATE);
-        assertThat(testProducts.getMarketingComments()).isEqualTo(UPDATED_MARKETING_COMMENTS);
-        assertThat(testProducts.getInternalComments()).isEqualTo(UPDATED_INTERNAL_COMMENTS);
-        assertThat(testProducts.getDiscontinuedDate()).isEqualTo(UPDATED_DISCONTINUED_DATE);
+        assertThat(testProducts.getWarrantyPeriod()).isEqualTo(UPDATED_WARRANTY_PERIOD);
+        assertThat(testProducts.getWarrantyPolicy()).isEqualTo(UPDATED_WARRANTY_POLICY);
         assertThat(testProducts.getSellCount()).isEqualTo(UPDATED_SELL_COUNT);
+        assertThat(testProducts.getWhatInTheBox()).isEqualTo(UPDATED_WHAT_IN_THE_BOX);
     }
 
     @Test

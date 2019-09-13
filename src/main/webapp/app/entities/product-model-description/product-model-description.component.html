@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.productModelDescription.home.title">Product Model Descriptions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product-model-description" [routerLink]="['/product-model-description/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.productModelDescription.home.createLabel">
+            Create new Product Model Description
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="productModelDescriptions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.productModelDescription.description">Description</span></th>
+            <th><span jhiTranslate="resourceApp.productModelDescription.language">Language</span></th>
+            <th><span jhiTranslate="resourceApp.productModelDescription.productModel">Product Model</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let productModelDescription of productModelDescriptions ;trackBy: trackId">
+                <td><a [routerLink]="['/product-model-description', productModelDescription.id, 'view' ]">{{productModelDescription.id}}</a></td>
+                <td>{{productModelDescription.description}}</td>
+                <td jhiTranslate="{{'resourceApp.Language.' + productModelDescription.language}}">{{productModelDescription.language}}</td>
+                <td>
+                    <div *ngIf="productModelDescription.productModelId">
+                        <a [routerLink]="['../product-model', productModelDescription.productModelId , 'view' ]" >{{productModelDescription.productModelId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/product-model-description', productModelDescription.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/product-model-description', productModelDescription.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'product-model-description', { outlets: { popup: productModelDescription.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

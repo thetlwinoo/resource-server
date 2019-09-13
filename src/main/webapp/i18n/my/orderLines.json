@@ -23,8 +23,8 @@
             "taxRate": "Tax Rate",
             "pickedQuantity": "Picked Quantity",
             "pickingCompletedWhen": "Picking Completed When",
+            "stockItem": "Stock Item",
             "packageType": "Package Type",
-            "product": "Product",
             "order": "Order"
         }
     }

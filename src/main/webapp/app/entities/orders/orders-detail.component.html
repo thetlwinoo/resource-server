@@ -61,10 +61,10 @@
                 <dd>
                     <span>{{orders.pickingCompletedWhen}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.orders.orderReview">Order Review</span></dt>
+                <dt><span jhiTranslate="resourceApp.orders.review">Review</span></dt>
                 <dd>
-                    <div *ngIf="orders.orderReviewId">
-                        <a [routerLink]="['/reviews', orders.orderReviewId, 'view']">{{orders.orderReviewId}}</a>
+                    <div *ngIf="orders.reviewId">
+                        <a [routerLink]="['/reviews', orders.reviewId, 'view']">{{orders.reviewId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.orders.customer">Customer</span></dt>

@@ -13,17 +13,19 @@
     <div class="table-responsive" *ngIf="productCategories">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="resourceApp.productCategory.productCategoryName">Product Category Name</span></th>
-            <th><span jhiTranslate="resourceApp.productCategory.photo">Photo</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="resourceApp.productCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parentId"><span jhiTranslate="resourceApp.productCategory.parentId">Parent Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="photo"><span jhiTranslate="resourceApp.productCategory.photo">Photo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let productCategory of productCategories ;trackBy: trackId">
                 <td><a [routerLink]="['/product-category', productCategory.id, 'view' ]">{{productCategory.id}}</a></td>
-                <td>{{productCategory.productCategoryName}}</td>
+                <td>{{productCategory.name}}</td>
+                <td>{{productCategory.parentId}}</td>
                 <td>
                     <a *ngIf="productCategory.photo" (click)="openFile(productCategory.photoContentType, productCategory.photo)">
                         <img [src]="'data:' + productCategory.photoContentType + ';base64,' + productCategory.photo" style="max-height: 30px;" alt="productCategory image"/>

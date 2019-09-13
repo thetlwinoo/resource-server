@@ -23,8 +23,8 @@ public class PriceServiceImpl implements PriceService {
 
         for (ShoppingCartItems i : cart.getCartItemLists()) {
             System.out.println("amount " + i.getQuantity());
-            totalPrice = totalPrice + (((i.getProduct().getUnitPrice() + i.getProduct().getRecommendedRetailPrice()) * i.getQuantity()));
-            totalCargoPrice = totalCargoPrice + (i.getProduct().getRecommendedRetailPrice() * i.getQuantity());
+            totalPrice = totalPrice + (((i.getStockItem().getUnitPrice() + i.getStockItem().getRecommendedRetailPrice()) * i.getQuantity()));
+            totalCargoPrice = totalCargoPrice + (i.getStockItem().getRecommendedRetailPrice() * i.getQuantity());
         }
 
         //Applying discount percent if exists

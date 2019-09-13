@@ -72,7 +72,8 @@ class ProductCategoryGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productCategoryName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
+                , "parentId":null
                 , "photo":null
                 }""")).asJSON
             .check(status.is(201))

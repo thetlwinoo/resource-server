@@ -13,7 +13,14 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
 
     
     @Lob
-    private String documentNode;
+    private byte[] documentNode;
+
+    private String documentNodeContentType;
+    private String videoUrl;
+
+    
+    @Lob
+    private String highlights;
 
 
     private Long productId;
@@ -32,12 +39,36 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
         this.id = id;
     }
 
-    public String getDocumentNode() {
+    public byte[] getDocumentNode() {
         return documentNode;
     }
 
-    public void setDocumentNode(String documentNode) {
+    public void setDocumentNode(byte[] documentNode) {
         this.documentNode = documentNode;
+    }
+
+    public String getDocumentNodeContentType() {
+        return documentNodeContentType;
+    }
+
+    public void setDocumentNodeContentType(String documentNodeContentType) {
+        this.documentNodeContentType = documentNodeContentType;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getHighlights() {
+        return highlights;
+    }
+
+    public void setHighlights(String highlights) {
+        this.highlights = highlights;
     }
 
     public Long getProductId() {
@@ -98,6 +129,8 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
         return "ProductDocumentDTO{" +
             "id=" + getId() +
             ", documentNode='" + getDocumentNode() + "'" +
+            ", videoUrl='" + getVideoUrl() + "'" +
+            ", highlights='" + getHighlights() + "'" +
             ", product=" + getProductId() +
             ", product='" + getProductProductName() + "'" +
             ", culture=" + getCultureId() +

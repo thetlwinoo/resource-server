@@ -81,9 +81,9 @@ public class ReviewLinesResource {
      */
     @GetMapping("/review-lines")
     public List<ReviewLinesDTO> getAllReviewLines(@RequestParam(required = false) String filter) {
-        if ("product-is-null".equals(filter)) {
-            log.debug("REST request to get all ReviewLiness where product is null");
-            return reviewLinesService.findAllWhereProductIsNull();
+        if ("stockitem-is-null".equals(filter)) {
+            log.debug("REST request to get all ReviewLiness where stockItem is null");
+            return reviewLinesService.findAllWhereStockItemIsNull();
         }
         log.debug("REST request to get all ReviewLines");
         return reviewLinesService.findAll();

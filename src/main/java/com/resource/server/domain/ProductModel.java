@@ -47,7 +47,7 @@ public class ProductModel extends AbstractAuditingEntity implements Serializable
 
     @OneToMany(mappedBy = "productModel")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ProductDescription> descriptions = new HashSet<>();
+    private Set<ProductModelDescription> descriptions = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -122,29 +122,29 @@ public class ProductModel extends AbstractAuditingEntity implements Serializable
         this.photoContentType = photoContentType;
     }
 
-    public Set<ProductDescription> getDescriptions() {
+    public Set<ProductModelDescription> getDescriptions() {
         return descriptions;
     }
 
-    public ProductModel descriptions(Set<ProductDescription> productDescriptions) {
-        this.descriptions = productDescriptions;
+    public ProductModel descriptions(Set<ProductModelDescription> productModelDescriptions) {
+        this.descriptions = productModelDescriptions;
         return this;
     }
 
-    public ProductModel addDescription(ProductDescription productDescription) {
-        this.descriptions.add(productDescription);
-        productDescription.setProductModel(this);
+    public ProductModel addDescription(ProductModelDescription productModelDescription) {
+        this.descriptions.add(productModelDescription);
+        productModelDescription.setProductModel(this);
         return this;
     }
 
-    public ProductModel removeDescription(ProductDescription productDescription) {
-        this.descriptions.remove(productDescription);
-        productDescription.setProductModel(null);
+    public ProductModel removeDescription(ProductModelDescription productModelDescription) {
+        this.descriptions.remove(productModelDescription);
+        productModelDescription.setProductModel(null);
         return this;
     }
 
-    public void setDescriptions(Set<ProductDescription> productDescriptions) {
-        this.descriptions = productDescriptions;
+    public void setDescriptions(Set<ProductModelDescription> productModelDescriptions) {
+        this.descriptions = productModelDescriptions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

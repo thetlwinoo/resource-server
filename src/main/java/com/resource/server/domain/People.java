@@ -96,15 +96,15 @@ public class People extends AbstractAuditingEntity implements Serializable {
     @Column(name = "valid_to", nullable = false)
     private LocalDate validTo;
 
-    @OneToOne(mappedBy = "cartUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "cartUser")
     @JsonIgnore
     private ShoppingCarts cart;
 
-    @OneToOne(mappedBy = "wishlistUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "wishlistUser")
     @JsonIgnore
     private Wishlists wishlist;
 
-    @OneToOne(mappedBy = "compareUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "compareUser")
     @JsonIgnore
     private Compares compare;
 

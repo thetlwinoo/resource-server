@@ -25,13 +25,13 @@ public class PurchaseOrderLinesDTO extends AbstractAuditingDTO implements Serial
     private Boolean isOrderLineFinalized;
 
 
-    private Long productId;
-
-    private String productProductName;
-
     private Long packageTypeId;
 
     private String packageTypePackageTypeName;
+
+    private Long stockItemId;
+
+    private String stockItemStockItemName;
 
     private Long purchaseOrderId;
 
@@ -91,22 +91,6 @@ public class PurchaseOrderLinesDTO extends AbstractAuditingDTO implements Serial
         this.isOrderLineFinalized = isOrderLineFinalized;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
-    }
-
     public Long getPackageTypeId() {
         return packageTypeId;
     }
@@ -121,6 +105,22 @@ public class PurchaseOrderLinesDTO extends AbstractAuditingDTO implements Serial
 
     public void setPackageTypePackageTypeName(String packageTypesPackageTypeName) {
         this.packageTypePackageTypeName = packageTypesPackageTypeName;
+    }
+
+    public Long getStockItemId() {
+        return stockItemId;
+    }
+
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
+    }
+
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
+    }
+
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
     }
 
     public Long getPurchaseOrderId() {
@@ -162,10 +162,10 @@ public class PurchaseOrderLinesDTO extends AbstractAuditingDTO implements Serial
             ", expectedUnitPricePerOuter=" + getExpectedUnitPricePerOuter() +
             ", lastReceiptDate='" + getLastReceiptDate() + "'" +
             ", isOrderLineFinalized='" + isIsOrderLineFinalized() + "'" +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
             ", packageType=" + getPackageTypeId() +
             ", packageType='" + getPackageTypePackageTypeName() + "'" +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             ", purchaseOrder=" + getPurchaseOrderId() +
             "}";
     }

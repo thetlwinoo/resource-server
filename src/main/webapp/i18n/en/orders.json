@@ -29,14 +29,14 @@
             "deliveryInstructions": "Delivery Instructions",
             "internalComments": "Internal Comments",
             "pickingCompletedWhen": "Picking Completed When",
-            "orderReview": "Order Review",
+            "review": "Review",
             "orderLineList": "Order Line List",
             "customer": "Customer",
             "shipToAddress": "Ship To Address",
             "billToAddress": "Bill To Address",
             "shipMethod": "Ship Method",
             "currencyRate": "Currency Rate",
-            "payment": "Payment",
+            "paymentTransaction": "Payment Transaction",
             "specialDeals": "Special Deals"
         }
     }

@@ -10,9 +10,9 @@ export interface IOrderLines {
     taxRate?: number;
     pickedQuantity?: number;
     pickingCompletedWhen?: Moment;
+    stockItemStockItemName?: string;
+    stockItemId?: number;
     packageTypeId?: number;
-    productProductName?: string;
-    productId?: number;
     orderId?: number;
 }
 
@@ -27,9 +27,9 @@ export class OrderLines implements IOrderLines {
         public taxRate?: number,
         public pickedQuantity?: number,
         public pickingCompletedWhen?: Moment,
+        public stockItemStockItemName?: string,
+        public stockItemId?: number,
         public packageTypeId?: number,
-        public productProductName?: string,
-        public productId?: number,
         public orderId?: number
     ) {}
 }

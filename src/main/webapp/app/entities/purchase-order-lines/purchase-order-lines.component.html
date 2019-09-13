@@ -21,8 +21,8 @@
             <th><span jhiTranslate="resourceApp.purchaseOrderLines.expectedUnitPricePerOuter">Expected Unit Price Per Outer</span></th>
             <th><span jhiTranslate="resourceApp.purchaseOrderLines.lastReceiptDate">Last Receipt Date</span></th>
             <th><span jhiTranslate="resourceApp.purchaseOrderLines.isOrderLineFinalized">Is Order Line Finalized</span></th>
-            <th><span jhiTranslate="resourceApp.purchaseOrderLines.product">Product</span></th>
             <th><span jhiTranslate="resourceApp.purchaseOrderLines.packageType">Package Type</span></th>
+            <th><span jhiTranslate="resourceApp.purchaseOrderLines.stockItem">Stock Item</span></th>
             <th><span jhiTranslate="resourceApp.purchaseOrderLines.purchaseOrder">Purchase Order</span></th>
             <th></th>
             </tr>
@@ -37,13 +37,13 @@
                 <td>{{purchaseOrderLines.lastReceiptDate | date:'mediumDate'}}</td>
                 <td>{{purchaseOrderLines.isOrderLineFinalized}}</td>
                 <td>
-                    <div *ngIf="purchaseOrderLines.productId">
-                        <a [routerLink]="['../products', purchaseOrderLines.productId , 'view' ]" >{{purchaseOrderLines.productProductName}}</a>
+                    <div *ngIf="purchaseOrderLines.packageTypeId">
+                        <a [routerLink]="['../package-types', purchaseOrderLines.packageTypeId , 'view' ]" >{{purchaseOrderLines.packageTypePackageTypeName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="purchaseOrderLines.packageTypeId">
-                        <a [routerLink]="['../package-types', purchaseOrderLines.packageTypeId , 'view' ]" >{{purchaseOrderLines.packageTypePackageTypeName}}</a>
+                    <div *ngIf="purchaseOrderLines.stockItemId">
+                        <a [routerLink]="['../stock-items', purchaseOrderLines.stockItemId , 'view' ]" >{{purchaseOrderLines.stockItemStockItemName}}</a>
                     </div>
                 </td>
                 <td>

@@ -36,7 +36,9 @@ public class InvoiceLinesDTO extends AbstractAuditingDTO implements Serializable
 
     private String packageTypePackageTypeName;
 
-    private Long productId;
+    private Long stockItemId;
+
+    private String stockItemStockItemName;
 
     private Long invoiceId;
 
@@ -120,12 +122,20 @@ public class InvoiceLinesDTO extends AbstractAuditingDTO implements Serializable
         this.packageTypePackageTypeName = packageTypesPackageTypeName;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getStockItemId() {
+        return stockItemId;
     }
 
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
+    }
+
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
+    }
+
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
     }
 
     public Long getInvoiceId() {
@@ -170,7 +180,8 @@ public class InvoiceLinesDTO extends AbstractAuditingDTO implements Serializable
             ", extendedPrice=" + getExtendedPrice() +
             ", packageType=" + getPackageTypeId() +
             ", packageType='" + getPackageTypePackageTypeName() + "'" +
-            ", product=" + getProductId() +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             ", invoice=" + getInvoiceId() +
             "}";
     }

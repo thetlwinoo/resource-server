@@ -75,29 +75,13 @@ class ProductsGatlingTest extends Simulation {
                 , "productName":"SAMPLE_TEXT"
                 , "productNumber":"SAMPLE_TEXT"
                 , "searchDetails":"SAMPLE_TEXT"
-                , "makeFlag":null
-                , "finishedGoodsFlag":null
-                , "color":"SAMPLE_TEXT"
-                , "safetyStockLevel":"0"
-                , "reorderPoint":"0"
-                , "standardCost":null
-                , "unitPrice":null
-                , "recommendedRetailPrice":null
-                , "brand":"SAMPLE_TEXT"
-                , "specifySize":"SAMPLE_TEXT"
-                , "weight":null
-                , "daysToManufacture":"0"
-                , "productLine":"SAMPLE_TEXT"
-                , "classType":"SAMPLE_TEXT"
-                , "style":"SAMPLE_TEXT"
-                , "customFields":"SAMPLE_TEXT"
-                , "photo":"SAMPLE_TEXT"
+                , "thumbnailUrl":"SAMPLE_TEXT"
                 , "sellStartDate":"2020-01-01T00:00:00.000Z"
                 , "sellEndDate":"2020-01-01T00:00:00.000Z"
-                , "marketingComments":"SAMPLE_TEXT"
-                , "internalComments":"SAMPLE_TEXT"
-                , "discontinuedDate":"2020-01-01T00:00:00.000Z"
+                , "warrantyPeriod":"SAMPLE_TEXT"
+                , "warrantyPolicy":"SAMPLE_TEXT"
                 , "sellCount":"0"
+                , "whatInTheBox":"SAMPLE_TEXT"
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_products_url"))).exitHereIfFailed

@@ -48,14 +48,14 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
 
     @ManyToOne
     @JsonIgnoreProperties("purchaseOrderLines")
-    private Products product;
-
-    @ManyToOne
-    @JsonIgnoreProperties("purchaseOrderLines")
     private PackageTypes packageType;
 
     @ManyToOne
-    @JsonIgnoreProperties("purchaseOrderLists")
+    @JsonIgnoreProperties("purchaseOrderLines")
+    private StockItems stockItem;
+
+    @ManyToOne
+    @JsonIgnoreProperties("purchaseOrderLineLists")
     private PurchaseOrders purchaseOrder;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -145,19 +145,6 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
         this.isOrderLineFinalized = isOrderLineFinalized;
     }
 
-    public Products getProduct() {
-        return product;
-    }
-
-    public PurchaseOrderLines product(Products products) {
-        this.product = products;
-        return this;
-    }
-
-    public void setProduct(Products products) {
-        this.product = products;
-    }
-
     public PackageTypes getPackageType() {
         return packageType;
     }
@@ -169,6 +156,19 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
 
     public void setPackageType(PackageTypes packageTypes) {
         this.packageType = packageTypes;
+    }
+
+    public StockItems getStockItem() {
+        return stockItem;
+    }
+
+    public PurchaseOrderLines stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+        return this;
+    }
+
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
 
     public PurchaseOrders getPurchaseOrder() {

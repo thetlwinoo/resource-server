@@ -54,13 +54,13 @@ public class OrderLines extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("orderLines")
-    private PackageTypes packageType;
+    private StockItems stockItem;
 
     @ManyToOne
     @JsonIgnoreProperties("orderLines")
-    private Products product;
+    private PackageTypes packageType;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("orderLineLists")
     private Orders order;
 
@@ -177,6 +177,19 @@ public class OrderLines extends AbstractAuditingEntity implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
+    public StockItems getStockItem() {
+        return stockItem;
+    }
+
+    public OrderLines stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+        return this;
+    }
+
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+    }
+
     public PackageTypes getPackageType() {
         return packageType;
     }
@@ -188,19 +201,6 @@ public class OrderLines extends AbstractAuditingEntity implements Serializable {
 
     public void setPackageType(PackageTypes packageTypes) {
         this.packageType = packageTypes;
-    }
-
-    public Products getProduct() {
-        return product;
-    }
-
-    public OrderLines product(Products products) {
-        this.product = products;
-        return this;
-    }
-
-    public void setProduct(Products products) {
-        this.product = products;
     }
 
     public Orders getOrder() {

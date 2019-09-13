@@ -26,19 +26,28 @@ export class ProductCategoryUpdatePage {
     pageTitle = element(by.id('jhi-product-category-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    productCategoryNameInput = element(by.id('field_productCategoryName'));
+    nameInput = element(by.id('field_name'));
+    parentIdInput = element(by.id('field_parentId'));
     photoInput = element(by.id('file_photo'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    async setProductCategoryNameInput(productCategoryName) {
-        await this.productCategoryNameInput.sendKeys(productCategoryName);
+    async setNameInput(name) {
+        await this.nameInput.sendKeys(name);
     }
 
-    async getProductCategoryNameInput() {
-        return this.productCategoryNameInput.getAttribute('value');
+    async getNameInput() {
+        return this.nameInput.getAttribute('value');
+    }
+
+    async setParentIdInput(parentId) {
+        await this.parentIdInput.sendKeys(parentId);
+    }
+
+    async getParentIdInput() {
+        return this.parentIdInput.getAttribute('value');
     }
 
     async setPhotoInput(photo) {

@@ -6,8 +6,7 @@ export interface IStockItemHoldings {
     lastCostPrice?: number;
     reorderLevel?: number;
     targerStockLevel?: number;
-    productProductName?: string;
-    productId?: number;
+    stockItemId?: number;
 }
 
 export class StockItemHoldings implements IStockItemHoldings {
@@ -19,7 +18,6 @@ export class StockItemHoldings implements IStockItemHoldings {
         public lastCostPrice?: number,
         public reorderLevel?: number,
         public targerStockLevel?: number,
-        public productProductName?: string,
-        public productId?: number
+        public stockItemId?: number
     ) {}
 }

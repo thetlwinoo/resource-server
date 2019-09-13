@@ -43,76 +43,32 @@ describe('Products e2e test', () => {
             productsUpdatePage.setProductNameInput('productName'),
             productsUpdatePage.setProductNumberInput('productNumber'),
             productsUpdatePage.setSearchDetailsInput('searchDetails'),
-            productsUpdatePage.setColorInput('color'),
-            productsUpdatePage.setSafetyStockLevelInput('5'),
-            productsUpdatePage.setReorderPointInput('5'),
-            productsUpdatePage.setStandardCostInput('5'),
-            productsUpdatePage.setUnitPriceInput('5'),
-            productsUpdatePage.setRecommendedRetailPriceInput('5'),
-            productsUpdatePage.setBrandInput('brand'),
-            productsUpdatePage.setSpecifySizeInput('specifySize'),
-            productsUpdatePage.setWeightInput('5'),
-            productsUpdatePage.setDaysToManufactureInput('5'),
-            productsUpdatePage.setProductLineInput('productLine'),
-            productsUpdatePage.setClassTypeInput('classType'),
-            productsUpdatePage.setStyleInput('style'),
-            productsUpdatePage.setCustomFieldsInput('customFields'),
-            productsUpdatePage.setPhotoInput('photo'),
+            productsUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
             productsUpdatePage.setSellStartDateInput('2000-12-31'),
             productsUpdatePage.setSellEndDateInput('2000-12-31'),
-            productsUpdatePage.setMarketingCommentsInput('marketingComments'),
-            productsUpdatePage.setInternalCommentsInput('internalComments'),
-            productsUpdatePage.setDiscontinuedDateInput('2000-12-31'),
+            productsUpdatePage.setWarrantyPeriodInput('warrantyPeriod'),
+            productsUpdatePage.setWarrantyPolicyInput('warrantyPolicy'),
             productsUpdatePage.setSellCountInput('5'),
-            productsUpdatePage.productReviewSelectLastOption(),
+            productsUpdatePage.setWhatInTheBoxInput('whatInTheBox'),
+            productsUpdatePage.supplierSelectLastOption(),
+            productsUpdatePage.merchantSelectLastOption(),
             productsUpdatePage.unitPackageSelectLastOption(),
             productsUpdatePage.outerPackageSelectLastOption(),
-            productsUpdatePage.supplierSelectLastOption(),
-            productsUpdatePage.productSubCategorySelectLastOption(),
-            productsUpdatePage.sizeUnitMeasureCodeSelectLastOption(),
-            productsUpdatePage.weightUnitMeasureCodeSelectLastOption(),
-            productsUpdatePage.productModelSelectLastOption()
+            productsUpdatePage.productModelSelectLastOption(),
+            productsUpdatePage.productCategorySelectLastOption(),
+            productsUpdatePage.productBrandSelectLastOption(),
+            productsUpdatePage.warrantyTypeSelectLastOption()
         ]);
         expect(await productsUpdatePage.getProductNameInput()).to.eq('productName');
         expect(await productsUpdatePage.getProductNumberInput()).to.eq('productNumber');
         expect(await productsUpdatePage.getSearchDetailsInput()).to.eq('searchDetails');
-        const selectedMakeFlag = productsUpdatePage.getMakeFlagInput();
-        if (await selectedMakeFlag.isSelected()) {
-            await productsUpdatePage.getMakeFlagInput().click();
-            expect(await productsUpdatePage.getMakeFlagInput().isSelected()).to.be.false;
-        } else {
-            await productsUpdatePage.getMakeFlagInput().click();
-            expect(await productsUpdatePage.getMakeFlagInput().isSelected()).to.be.true;
-        }
-        const selectedFinishedGoodsFlag = productsUpdatePage.getFinishedGoodsFlagInput();
-        if (await selectedFinishedGoodsFlag.isSelected()) {
-            await productsUpdatePage.getFinishedGoodsFlagInput().click();
-            expect(await productsUpdatePage.getFinishedGoodsFlagInput().isSelected()).to.be.false;
-        } else {
-            await productsUpdatePage.getFinishedGoodsFlagInput().click();
-            expect(await productsUpdatePage.getFinishedGoodsFlagInput().isSelected()).to.be.true;
-        }
-        expect(await productsUpdatePage.getColorInput()).to.eq('color');
-        expect(await productsUpdatePage.getSafetyStockLevelInput()).to.eq('5');
-        expect(await productsUpdatePage.getReorderPointInput()).to.eq('5');
-        expect(await productsUpdatePage.getStandardCostInput()).to.eq('5');
-        expect(await productsUpdatePage.getUnitPriceInput()).to.eq('5');
-        expect(await productsUpdatePage.getRecommendedRetailPriceInput()).to.eq('5');
-        expect(await productsUpdatePage.getBrandInput()).to.eq('brand');
-        expect(await productsUpdatePage.getSpecifySizeInput()).to.eq('specifySize');
-        expect(await productsUpdatePage.getWeightInput()).to.eq('5');
-        expect(await productsUpdatePage.getDaysToManufactureInput()).to.eq('5');
-        expect(await productsUpdatePage.getProductLineInput()).to.eq('productLine');
-        expect(await productsUpdatePage.getClassTypeInput()).to.eq('classType');
-        expect(await productsUpdatePage.getStyleInput()).to.eq('style');
-        expect(await productsUpdatePage.getCustomFieldsInput()).to.eq('customFields');
-        expect(await productsUpdatePage.getPhotoInput()).to.eq('photo');
+        expect(await productsUpdatePage.getThumbnailUrlInput()).to.eq('thumbnailUrl');
         expect(await productsUpdatePage.getSellStartDateInput()).to.eq('2000-12-31');
         expect(await productsUpdatePage.getSellEndDateInput()).to.eq('2000-12-31');
-        expect(await productsUpdatePage.getMarketingCommentsInput()).to.eq('marketingComments');
-        expect(await productsUpdatePage.getInternalCommentsInput()).to.eq('internalComments');
-        expect(await productsUpdatePage.getDiscontinuedDateInput()).to.eq('2000-12-31');
+        expect(await productsUpdatePage.getWarrantyPeriodInput()).to.eq('warrantyPeriod');
+        expect(await productsUpdatePage.getWarrantyPolicyInput()).to.eq('warrantyPolicy');
         expect(await productsUpdatePage.getSellCountInput()).to.eq('5');
+        expect(await productsUpdatePage.getWhatInTheBoxInput()).to.eq('whatInTheBox');
         await productsUpdatePage.save();
         expect(await productsUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -29,37 +29,21 @@ export class ProductsUpdatePage {
     productNameInput = element(by.id('field_productName'));
     productNumberInput = element(by.id('field_productNumber'));
     searchDetailsInput = element(by.id('field_searchDetails'));
-    makeFlagInput = element(by.id('field_makeFlag'));
-    finishedGoodsFlagInput = element(by.id('field_finishedGoodsFlag'));
-    colorInput = element(by.id('field_color'));
-    safetyStockLevelInput = element(by.id('field_safetyStockLevel'));
-    reorderPointInput = element(by.id('field_reorderPoint'));
-    standardCostInput = element(by.id('field_standardCost'));
-    unitPriceInput = element(by.id('field_unitPrice'));
-    recommendedRetailPriceInput = element(by.id('field_recommendedRetailPrice'));
-    brandInput = element(by.id('field_brand'));
-    specifySizeInput = element(by.id('field_specifySize'));
-    weightInput = element(by.id('field_weight'));
-    daysToManufactureInput = element(by.id('field_daysToManufacture'));
-    productLineInput = element(by.id('field_productLine'));
-    classTypeInput = element(by.id('field_classType'));
-    styleInput = element(by.id('field_style'));
-    customFieldsInput = element(by.id('field_customFields'));
-    photoInput = element(by.id('field_photo'));
+    thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
     sellStartDateInput = element(by.id('field_sellStartDate'));
     sellEndDateInput = element(by.id('field_sellEndDate'));
-    marketingCommentsInput = element(by.id('field_marketingComments'));
-    internalCommentsInput = element(by.id('field_internalComments'));
-    discontinuedDateInput = element(by.id('field_discontinuedDate'));
+    warrantyPeriodInput = element(by.id('field_warrantyPeriod'));
+    warrantyPolicyInput = element(by.id('field_warrantyPolicy'));
     sellCountInput = element(by.id('field_sellCount'));
-    productReviewSelect = element(by.id('field_productReview'));
+    whatInTheBoxInput = element(by.id('field_whatInTheBox'));
+    supplierSelect = element(by.id('field_supplier'));
+    merchantSelect = element(by.id('field_merchant'));
     unitPackageSelect = element(by.id('field_unitPackage'));
     outerPackageSelect = element(by.id('field_outerPackage'));
-    supplierSelect = element(by.id('field_supplier'));
-    productSubCategorySelect = element(by.id('field_productSubCategory'));
-    sizeUnitMeasureCodeSelect = element(by.id('field_sizeUnitMeasureCode'));
-    weightUnitMeasureCodeSelect = element(by.id('field_weightUnitMeasureCode'));
     productModelSelect = element(by.id('field_productModel'));
+    productCategorySelect = element(by.id('field_productCategory'));
+    productBrandSelect = element(by.id('field_productBrand'));
+    warrantyTypeSelect = element(by.id('field_warrantyType'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -89,130 +73,12 @@ export class ProductsUpdatePage {
         return this.searchDetailsInput.getAttribute('value');
     }
 
-    getMakeFlagInput() {
-        return this.makeFlagInput;
-    }
-    getFinishedGoodsFlagInput() {
-        return this.finishedGoodsFlagInput;
-    }
-    async setColorInput(color) {
-        await this.colorInput.sendKeys(color);
+    async setThumbnailUrlInput(thumbnailUrl) {
+        await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
     }
 
-    async getColorInput() {
-        return this.colorInput.getAttribute('value');
-    }
-
-    async setSafetyStockLevelInput(safetyStockLevel) {
-        await this.safetyStockLevelInput.sendKeys(safetyStockLevel);
-    }
-
-    async getSafetyStockLevelInput() {
-        return this.safetyStockLevelInput.getAttribute('value');
-    }
-
-    async setReorderPointInput(reorderPoint) {
-        await this.reorderPointInput.sendKeys(reorderPoint);
-    }
-
-    async getReorderPointInput() {
-        return this.reorderPointInput.getAttribute('value');
-    }
-
-    async setStandardCostInput(standardCost) {
-        await this.standardCostInput.sendKeys(standardCost);
-    }
-
-    async getStandardCostInput() {
-        return this.standardCostInput.getAttribute('value');
-    }
-
-    async setUnitPriceInput(unitPrice) {
-        await this.unitPriceInput.sendKeys(unitPrice);
-    }
-
-    async getUnitPriceInput() {
-        return this.unitPriceInput.getAttribute('value');
-    }
-
-    async setRecommendedRetailPriceInput(recommendedRetailPrice) {
-        await this.recommendedRetailPriceInput.sendKeys(recommendedRetailPrice);
-    }
-
-    async getRecommendedRetailPriceInput() {
-        return this.recommendedRetailPriceInput.getAttribute('value');
-    }
-
-    async setBrandInput(brand) {
-        await this.brandInput.sendKeys(brand);
-    }
-
-    async getBrandInput() {
-        return this.brandInput.getAttribute('value');
-    }
-
-    async setSpecifySizeInput(specifySize) {
-        await this.specifySizeInput.sendKeys(specifySize);
-    }
-
-    async getSpecifySizeInput() {
-        return this.specifySizeInput.getAttribute('value');
-    }
-
-    async setWeightInput(weight) {
-        await this.weightInput.sendKeys(weight);
-    }
-
-    async getWeightInput() {
-        return this.weightInput.getAttribute('value');
-    }
-
-    async setDaysToManufactureInput(daysToManufacture) {
-        await this.daysToManufactureInput.sendKeys(daysToManufacture);
-    }
-
-    async getDaysToManufactureInput() {
-        return this.daysToManufactureInput.getAttribute('value');
-    }
-
-    async setProductLineInput(productLine) {
-        await this.productLineInput.sendKeys(productLine);
-    }
-
-    async getProductLineInput() {
-        return this.productLineInput.getAttribute('value');
-    }
-
-    async setClassTypeInput(classType) {
-        await this.classTypeInput.sendKeys(classType);
-    }
-
-    async getClassTypeInput() {
-        return this.classTypeInput.getAttribute('value');
-    }
-
-    async setStyleInput(style) {
-        await this.styleInput.sendKeys(style);
-    }
-
-    async getStyleInput() {
-        return this.styleInput.getAttribute('value');
-    }
-
-    async setCustomFieldsInput(customFields) {
-        await this.customFieldsInput.sendKeys(customFields);
-    }
-
-    async getCustomFieldsInput() {
-        return this.customFieldsInput.getAttribute('value');
-    }
-
-    async setPhotoInput(photo) {
-        await this.photoInput.sendKeys(photo);
-    }
-
-    async getPhotoInput() {
-        return this.photoInput.getAttribute('value');
+    async getThumbnailUrlInput() {
+        return this.thumbnailUrlInput.getAttribute('value');
     }
 
     async setSellStartDateInput(sellStartDate) {
@@ -231,28 +97,20 @@ export class ProductsUpdatePage {
         return this.sellEndDateInput.getAttribute('value');
     }
 
-    async setMarketingCommentsInput(marketingComments) {
-        await this.marketingCommentsInput.sendKeys(marketingComments);
+    async setWarrantyPeriodInput(warrantyPeriod) {
+        await this.warrantyPeriodInput.sendKeys(warrantyPeriod);
     }
 
-    async getMarketingCommentsInput() {
-        return this.marketingCommentsInput.getAttribute('value');
+    async getWarrantyPeriodInput() {
+        return this.warrantyPeriodInput.getAttribute('value');
     }
 
-    async setInternalCommentsInput(internalComments) {
-        await this.internalCommentsInput.sendKeys(internalComments);
+    async setWarrantyPolicyInput(warrantyPolicy) {
+        await this.warrantyPolicyInput.sendKeys(warrantyPolicy);
     }
 
-    async getInternalCommentsInput() {
-        return this.internalCommentsInput.getAttribute('value');
-    }
-
-    async setDiscontinuedDateInput(discontinuedDate) {
-        await this.discontinuedDateInput.sendKeys(discontinuedDate);
-    }
-
-    async getDiscontinuedDateInput() {
-        return this.discontinuedDateInput.getAttribute('value');
+    async getWarrantyPolicyInput() {
+        return this.warrantyPolicyInput.getAttribute('value');
     }
 
     async setSellCountInput(sellCount) {
@@ -263,23 +121,50 @@ export class ProductsUpdatePage {
         return this.sellCountInput.getAttribute('value');
     }
 
-    async productReviewSelectLastOption() {
-        await this.productReviewSelect
+    async setWhatInTheBoxInput(whatInTheBox) {
+        await this.whatInTheBoxInput.sendKeys(whatInTheBox);
+    }
+
+    async getWhatInTheBoxInput() {
+        return this.whatInTheBoxInput.getAttribute('value');
+    }
+
+    async supplierSelectLastOption() {
+        await this.supplierSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async productReviewSelectOption(option) {
-        await this.productReviewSelect.sendKeys(option);
+    async supplierSelectOption(option) {
+        await this.supplierSelect.sendKeys(option);
     }
 
-    getProductReviewSelect(): ElementFinder {
-        return this.productReviewSelect;
+    getSupplierSelect(): ElementFinder {
+        return this.supplierSelect;
     }
 
-    async getProductReviewSelectedOption() {
-        return this.productReviewSelect.element(by.css('option:checked')).getText();
+    async getSupplierSelectedOption() {
+        return this.supplierSelect.element(by.css('option:checked')).getText();
+    }
+
+    async merchantSelectLastOption() {
+        await this.merchantSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async merchantSelectOption(option) {
+        await this.merchantSelect.sendKeys(option);
+    }
+
+    getMerchantSelect(): ElementFinder {
+        return this.merchantSelect;
+    }
+
+    async getMerchantSelectedOption() {
+        return this.merchantSelect.element(by.css('option:checked')).getText();
     }
 
     async unitPackageSelectLastOption() {
@@ -320,82 +205,6 @@ export class ProductsUpdatePage {
         return this.outerPackageSelect.element(by.css('option:checked')).getText();
     }
 
-    async supplierSelectLastOption() {
-        await this.supplierSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async supplierSelectOption(option) {
-        await this.supplierSelect.sendKeys(option);
-    }
-
-    getSupplierSelect(): ElementFinder {
-        return this.supplierSelect;
-    }
-
-    async getSupplierSelectedOption() {
-        return this.supplierSelect.element(by.css('option:checked')).getText();
-    }
-
-    async productSubCategorySelectLastOption() {
-        await this.productSubCategorySelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSubCategorySelectOption(option) {
-        await this.productSubCategorySelect.sendKeys(option);
-    }
-
-    getProductSubCategorySelect(): ElementFinder {
-        return this.productSubCategorySelect;
-    }
-
-    async getProductSubCategorySelectedOption() {
-        return this.productSubCategorySelect.element(by.css('option:checked')).getText();
-    }
-
-    async sizeUnitMeasureCodeSelectLastOption() {
-        await this.sizeUnitMeasureCodeSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async sizeUnitMeasureCodeSelectOption(option) {
-        await this.sizeUnitMeasureCodeSelect.sendKeys(option);
-    }
-
-    getSizeUnitMeasureCodeSelect(): ElementFinder {
-        return this.sizeUnitMeasureCodeSelect;
-    }
-
-    async getSizeUnitMeasureCodeSelectedOption() {
-        return this.sizeUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
-    }
-
-    async weightUnitMeasureCodeSelectLastOption() {
-        await this.weightUnitMeasureCodeSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async weightUnitMeasureCodeSelectOption(option) {
-        await this.weightUnitMeasureCodeSelect.sendKeys(option);
-    }
-
-    getWeightUnitMeasureCodeSelect(): ElementFinder {
-        return this.weightUnitMeasureCodeSelect;
-    }
-
-    async getWeightUnitMeasureCodeSelectedOption() {
-        return this.weightUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
-    }
-
     async productModelSelectLastOption() {
         await this.productModelSelect
             .all(by.tagName('option'))
@@ -413,6 +222,63 @@ export class ProductsUpdatePage {
 
     async getProductModelSelectedOption() {
         return this.productModelSelect.element(by.css('option:checked')).getText();
+    }
+
+    async productCategorySelectLastOption() {
+        await this.productCategorySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async productCategorySelectOption(option) {
+        await this.productCategorySelect.sendKeys(option);
+    }
+
+    getProductCategorySelect(): ElementFinder {
+        return this.productCategorySelect;
+    }
+
+    async getProductCategorySelectedOption() {
+        return this.productCategorySelect.element(by.css('option:checked')).getText();
+    }
+
+    async productBrandSelectLastOption() {
+        await this.productBrandSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async productBrandSelectOption(option) {
+        await this.productBrandSelect.sendKeys(option);
+    }
+
+    getProductBrandSelect(): ElementFinder {
+        return this.productBrandSelect;
+    }
+
+    async getProductBrandSelectedOption() {
+        return this.productBrandSelect.element(by.css('option:checked')).getText();
+    }
+
+    async warrantyTypeSelectLastOption() {
+        await this.warrantyTypeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async warrantyTypeSelectOption(option) {
+        await this.warrantyTypeSelect.sendKeys(option);
+    }
+
+    getWarrantyTypeSelect(): ElementFinder {
+        return this.warrantyTypeSelect;
+    }
+
+    async getWarrantyTypeSelectedOption() {
+        return this.warrantyTypeSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

@@ -38,63 +38,8 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "search_details", nullable = false)
     private String searchDetails;
 
-    @NotNull
-    @Column(name = "make_flag", nullable = false)
-    private Boolean makeFlag;
-
-    @NotNull
-    @Column(name = "finished_goods_flag", nullable = false)
-    private Boolean finishedGoodsFlag;
-
-    @Column(name = "color")
-    private String color;
-
-    @NotNull
-    @Column(name = "safety_stock_level", nullable = false)
-    private Integer safetyStockLevel;
-
-    @NotNull
-    @Column(name = "reorder_point", nullable = false)
-    private Integer reorderPoint;
-
-    @NotNull
-    @Column(name = "standard_cost", nullable = false)
-    private Float standardCost;
-
-    @NotNull
-    @Column(name = "unit_price", nullable = false)
-    private Float unitPrice;
-
-    @Column(name = "recommended_retail_price")
-    private Float recommendedRetailPrice;
-
-    @Column(name = "brand")
-    private String brand;
-
-    @Column(name = "specify_size")
-    private String specifySize;
-
-    @Column(name = "weight")
-    private Float weight;
-
-    @NotNull
-    @Column(name = "days_to_manufacture", nullable = false)
-    private Integer daysToManufacture;
-
-    @Column(name = "product_line")
-    private String productLine;
-
-    @Column(name = "class_type")
-    private String classType;
-
-    @Column(name = "style")
-    private String style;
-
-    @Column(name = "custom_fields")
-    private String customFields;
-
-    @Column(name = "photo")
-    private String photo;
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @NotNull
     @Column(name = "sell_start_date", nullable = false)
@@ -103,21 +48,26 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "sell_end_date")
     private LocalDate sellEndDate;
 
-    @Column(name = "marketing_comments")
-    private String marketingComments;
+    @Column(name = "warranty_period")
+    private String warrantyPeriod;
 
-    @Column(name = "internal_comments")
-    private String internalComments;
-
-    @Column(name = "discontinued_date")
-    private LocalDate discontinuedDate;
+    @Column(name = "warranty_policy")
+    private String warrantyPolicy;
 
     @Column(name = "sell_count")
     private Integer sellCount;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ReviewLines productReview;
+    @NotNull
+    @Column(name = "what_in_the_box", nullable = false)
+    private String whatInTheBox;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private Suppliers supplier;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private Merchants merchant;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
@@ -129,23 +79,19 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("products")
-    private Suppliers supplier;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private ProductSubCategory productSubCategory;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private UnitMeasure sizeUnitMeasureCode;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private UnitMeasure weightUnitMeasureCode;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
     private ProductModel productModel;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private ProductCategory productCategory;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private ProductBrand productBrand;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private WarrantyTypes warrantyType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -195,225 +141,17 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.searchDetails = searchDetails;
     }
 
-    public Boolean isMakeFlag() {
-        return makeFlag;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public Products makeFlag(Boolean makeFlag) {
-        this.makeFlag = makeFlag;
+    public Products thumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
-    public void setMakeFlag(Boolean makeFlag) {
-        this.makeFlag = makeFlag;
-    }
-
-    public Boolean isFinishedGoodsFlag() {
-        return finishedGoodsFlag;
-    }
-
-    public Products finishedGoodsFlag(Boolean finishedGoodsFlag) {
-        this.finishedGoodsFlag = finishedGoodsFlag;
-        return this;
-    }
-
-    public void setFinishedGoodsFlag(Boolean finishedGoodsFlag) {
-        this.finishedGoodsFlag = finishedGoodsFlag;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public Products color(String color) {
-        this.color = color;
-        return this;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public Integer getSafetyStockLevel() {
-        return safetyStockLevel;
-    }
-
-    public Products safetyStockLevel(Integer safetyStockLevel) {
-        this.safetyStockLevel = safetyStockLevel;
-        return this;
-    }
-
-    public void setSafetyStockLevel(Integer safetyStockLevel) {
-        this.safetyStockLevel = safetyStockLevel;
-    }
-
-    public Integer getReorderPoint() {
-        return reorderPoint;
-    }
-
-    public Products reorderPoint(Integer reorderPoint) {
-        this.reorderPoint = reorderPoint;
-        return this;
-    }
-
-    public void setReorderPoint(Integer reorderPoint) {
-        this.reorderPoint = reorderPoint;
-    }
-
-    public Float getStandardCost() {
-        return standardCost;
-    }
-
-    public Products standardCost(Float standardCost) {
-        this.standardCost = standardCost;
-        return this;
-    }
-
-    public void setStandardCost(Float standardCost) {
-        this.standardCost = standardCost;
-    }
-
-    public Float getUnitPrice() {
-        return unitPrice;
-    }
-
-    public Products unitPrice(Float unitPrice) {
-        this.unitPrice = unitPrice;
-        return this;
-    }
-
-    public void setUnitPrice(Float unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Float getRecommendedRetailPrice() {
-        return recommendedRetailPrice;
-    }
-
-    public Products recommendedRetailPrice(Float recommendedRetailPrice) {
-        this.recommendedRetailPrice = recommendedRetailPrice;
-        return this;
-    }
-
-    public void setRecommendedRetailPrice(Float recommendedRetailPrice) {
-        this.recommendedRetailPrice = recommendedRetailPrice;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public Products brand(String brand) {
-        this.brand = brand;
-        return this;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getSpecifySize() {
-        return specifySize;
-    }
-
-    public Products specifySize(String specifySize) {
-        this.specifySize = specifySize;
-        return this;
-    }
-
-    public void setSpecifySize(String specifySize) {
-        this.specifySize = specifySize;
-    }
-
-    public Float getWeight() {
-        return weight;
-    }
-
-    public Products weight(Float weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    public void setWeight(Float weight) {
-        this.weight = weight;
-    }
-
-    public Integer getDaysToManufacture() {
-        return daysToManufacture;
-    }
-
-    public Products daysToManufacture(Integer daysToManufacture) {
-        this.daysToManufacture = daysToManufacture;
-        return this;
-    }
-
-    public void setDaysToManufacture(Integer daysToManufacture) {
-        this.daysToManufacture = daysToManufacture;
-    }
-
-    public String getProductLine() {
-        return productLine;
-    }
-
-    public Products productLine(String productLine) {
-        this.productLine = productLine;
-        return this;
-    }
-
-    public void setProductLine(String productLine) {
-        this.productLine = productLine;
-    }
-
-    public String getClassType() {
-        return classType;
-    }
-
-    public Products classType(String classType) {
-        this.classType = classType;
-        return this;
-    }
-
-    public void setClassType(String classType) {
-        this.classType = classType;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public Products style(String style) {
-        this.style = style;
-        return this;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getCustomFields() {
-        return customFields;
-    }
-
-    public Products customFields(String customFields) {
-        this.customFields = customFields;
-        return this;
-    }
-
-    public void setCustomFields(String customFields) {
-        this.customFields = customFields;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public Products photo(String photo) {
-        this.photo = photo;
-        return this;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public LocalDate getSellStartDate() {
@@ -442,43 +180,30 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.sellEndDate = sellEndDate;
     }
 
-    public String getMarketingComments() {
-        return marketingComments;
+    public String getWarrantyPeriod() {
+        return warrantyPeriod;
     }
 
-    public Products marketingComments(String marketingComments) {
-        this.marketingComments = marketingComments;
+    public Products warrantyPeriod(String warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
         return this;
     }
 
-    public void setMarketingComments(String marketingComments) {
-        this.marketingComments = marketingComments;
+    public void setWarrantyPeriod(String warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
     }
 
-    public String getInternalComments() {
-        return internalComments;
+    public String getWarrantyPolicy() {
+        return warrantyPolicy;
     }
 
-    public Products internalComments(String internalComments) {
-        this.internalComments = internalComments;
+    public Products warrantyPolicy(String warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
         return this;
     }
 
-    public void setInternalComments(String internalComments) {
-        this.internalComments = internalComments;
-    }
-
-    public LocalDate getDiscontinuedDate() {
-        return discontinuedDate;
-    }
-
-    public Products discontinuedDate(LocalDate discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
-        return this;
-    }
-
-    public void setDiscontinuedDate(LocalDate discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
+    public void setWarrantyPolicy(String warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
     }
 
     public Integer getSellCount() {
@@ -494,17 +219,43 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public ReviewLines getProductReview() {
-        return productReview;
+    public String getWhatInTheBox() {
+        return whatInTheBox;
     }
 
-    public Products productReview(ReviewLines reviewLines) {
-        this.productReview = reviewLines;
+    public Products whatInTheBox(String whatInTheBox) {
+        this.whatInTheBox = whatInTheBox;
         return this;
     }
 
-    public void setProductReview(ReviewLines reviewLines) {
-        this.productReview = reviewLines;
+    public void setWhatInTheBox(String whatInTheBox) {
+        this.whatInTheBox = whatInTheBox;
+    }
+
+    public Suppliers getSupplier() {
+        return supplier;
+    }
+
+    public Products supplier(Suppliers suppliers) {
+        this.supplier = suppliers;
+        return this;
+    }
+
+    public void setSupplier(Suppliers suppliers) {
+        this.supplier = suppliers;
+    }
+
+    public Merchants getMerchant() {
+        return merchant;
+    }
+
+    public Products merchant(Merchants merchants) {
+        this.merchant = merchants;
+        return this;
+    }
+
+    public void setMerchant(Merchants merchants) {
+        this.merchant = merchants;
     }
 
     public PackageTypes getUnitPackage() {
@@ -533,58 +284,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.outerPackage = packageTypes;
     }
 
-    public Suppliers getSupplier() {
-        return supplier;
-    }
-
-    public Products supplier(Suppliers suppliers) {
-        this.supplier = suppliers;
-        return this;
-    }
-
-    public void setSupplier(Suppliers suppliers) {
-        this.supplier = suppliers;
-    }
-
-    public ProductSubCategory getProductSubCategory() {
-        return productSubCategory;
-    }
-
-    public Products productSubCategory(ProductSubCategory productSubCategory) {
-        this.productSubCategory = productSubCategory;
-        return this;
-    }
-
-    public void setProductSubCategory(ProductSubCategory productSubCategory) {
-        this.productSubCategory = productSubCategory;
-    }
-
-    public UnitMeasure getSizeUnitMeasureCode() {
-        return sizeUnitMeasureCode;
-    }
-
-    public Products sizeUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.sizeUnitMeasureCode = unitMeasure;
-        return this;
-    }
-
-    public void setSizeUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.sizeUnitMeasureCode = unitMeasure;
-    }
-
-    public UnitMeasure getWeightUnitMeasureCode() {
-        return weightUnitMeasureCode;
-    }
-
-    public Products weightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.weightUnitMeasureCode = unitMeasure;
-        return this;
-    }
-
-    public void setWeightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.weightUnitMeasureCode = unitMeasure;
-    }
-
     public ProductModel getProductModel() {
         return productModel;
     }
@@ -596,6 +295,45 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public Products productCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+        return this;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public ProductBrand getProductBrand() {
+        return productBrand;
+    }
+
+    public Products productBrand(ProductBrand productBrand) {
+        this.productBrand = productBrand;
+        return this;
+    }
+
+    public void setProductBrand(ProductBrand productBrand) {
+        this.productBrand = productBrand;
+    }
+
+    public WarrantyTypes getWarrantyType() {
+        return warrantyType;
+    }
+
+    public Products warrantyType(WarrantyTypes warrantyTypes) {
+        this.warrantyType = warrantyTypes;
+        return this;
+    }
+
+    public void setWarrantyType(WarrantyTypes warrantyTypes) {
+        this.warrantyType = warrantyTypes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -626,29 +364,13 @@ public class Products extends AbstractAuditingEntity implements Serializable {
             ", productName='" + getProductName() + "'" +
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
-            ", makeFlag='" + isMakeFlag() + "'" +
-            ", finishedGoodsFlag='" + isFinishedGoodsFlag() + "'" +
-            ", color='" + getColor() + "'" +
-            ", safetyStockLevel=" + getSafetyStockLevel() +
-            ", reorderPoint=" + getReorderPoint() +
-            ", standardCost=" + getStandardCost() +
-            ", unitPrice=" + getUnitPrice() +
-            ", recommendedRetailPrice=" + getRecommendedRetailPrice() +
-            ", brand='" + getBrand() + "'" +
-            ", specifySize='" + getSpecifySize() + "'" +
-            ", weight=" + getWeight() +
-            ", daysToManufacture=" + getDaysToManufacture() +
-            ", productLine='" + getProductLine() + "'" +
-            ", classType='" + getClassType() + "'" +
-            ", style='" + getStyle() + "'" +
-            ", customFields='" + getCustomFields() + "'" +
-            ", photo='" + getPhoto() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", sellStartDate='" + getSellStartDate() + "'" +
             ", sellEndDate='" + getSellEndDate() + "'" +
-            ", marketingComments='" + getMarketingComments() + "'" +
-            ", internalComments='" + getInternalComments() + "'" +
-            ", discontinuedDate='" + getDiscontinuedDate() + "'" +
+            ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
+            ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", sellCount=" + getSellCount() +
+            ", whatInTheBox='" + getWhatInTheBox() + "'" +
             "}";
     }
 }

@@ -9,7 +9,7 @@ export interface IPurchaseOrders {
     isOrderFinalized?: boolean;
     comments?: string;
     internalComments?: string;
-    purchaseOrderLists?: IPurchaseOrderLines[];
+    purchaseOrderLineLists?: IPurchaseOrderLines[];
     contactPersonFullName?: string;
     contactPersonId?: number;
     supplierSupplierName?: string;
@@ -27,7 +27,7 @@ export class PurchaseOrders implements IPurchaseOrders {
         public isOrderFinalized?: boolean,
         public comments?: string,
         public internalComments?: string,
-        public purchaseOrderLists?: IPurchaseOrderLines[],
+        public purchaseOrderLineLists?: IPurchaseOrderLines[],
         public contactPersonFullName?: string,
         public contactPersonId?: number,
         public supplierSupplierName?: string,

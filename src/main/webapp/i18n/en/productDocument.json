@@ -16,6 +16,8 @@
                 "title": "Product Document"
             },
             "documentNode": "Document Node",
+            "videoUrl": "Video Url",
+            "highlights": "Highlights",
             "product": "Product",
             "culture": "Culture"
         }

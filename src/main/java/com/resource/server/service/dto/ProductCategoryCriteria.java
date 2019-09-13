@@ -24,7 +24,9 @@ public class ProductCategoryCriteria implements Serializable {
 
     private LongFilter id;
 
-    private StringFilter productCategoryName;
+    private StringFilter name;
+
+    private LongFilter parentId;
 
     public LongFilter getId() {
         return id;
@@ -34,12 +36,20 @@ public class ProductCategoryCriteria implements Serializable {
         this.id = id;
     }
 
-    public StringFilter getProductCategoryName() {
-        return productCategoryName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setProductCategoryName(StringFilter productCategoryName) {
-        this.productCategoryName = productCategoryName;
+    public void setName(StringFilter name) {
+        this.name = name;
+    }
+
+    public LongFilter getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(LongFilter parentId) {
+        this.parentId = parentId;
     }
 
 
@@ -54,14 +64,16 @@ public class ProductCategoryCriteria implements Serializable {
         final ProductCategoryCriteria that = (ProductCategoryCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productCategoryName, that.productCategoryName);
+            Objects.equals(name, that.name) &&
+            Objects.equals(parentId, that.parentId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        productCategoryName
+        name,
+        parentId
         );
     }
 
@@ -69,7 +81,8 @@ public class ProductCategoryCriteria implements Serializable {
     public String toString() {
         return "ProductCategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productCategoryName != null ? "productCategoryName=" + productCategoryName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
+                (parentId != null ? "parentId=" + parentId + ", " : "") +
             "}";
     }
 

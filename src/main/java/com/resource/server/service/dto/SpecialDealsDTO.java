@@ -2,7 +2,6 @@ package com.resource.server.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -21,13 +20,13 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
     @NotNull
     private LocalDate endDate;
 
-    private BigDecimal discountAmount;
+    private Float discountAmount;
 
     private Float discountPercentage;
 
     private String discountCode;
 
-    private BigDecimal unitPrice;
+    private Float unitPrice;
 
 
     private Long buyingGroupId;
@@ -40,13 +39,13 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
 
     private Long customerId;
 
-    private Long stockGroupId;
+    private Long productCategoryId;
 
-    private String stockGroupStockGroupName;
+    private String productCategoryName;
 
-    private Long productId;
+    private Long stockItemId;
 
-    private String productProductName;
+    private String stockItemStockItemName;
 
     public Long getId() {
         return id;
@@ -80,11 +79,11 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
         this.endDate = endDate;
     }
 
-    public BigDecimal getDiscountAmount() {
+    public Float getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(BigDecimal discountAmount) {
+    public void setDiscountAmount(Float discountAmount) {
         this.discountAmount = discountAmount;
     }
 
@@ -104,11 +103,11 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
         this.discountCode = discountCode;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -152,36 +151,36 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
         this.customerId = customersId;
     }
 
-    public Long getStockGroupId() {
-        return stockGroupId;
+    public Long getProductCategoryId() {
+        return productCategoryId;
     }
 
-    public void setStockGroupId(Long stockGroupsId) {
-        this.stockGroupId = stockGroupsId;
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
-    public String getStockGroupStockGroupName() {
-        return stockGroupStockGroupName;
+    public String getProductCategoryName() {
+        return productCategoryName;
     }
 
-    public void setStockGroupStockGroupName(String stockGroupsStockGroupName) {
-        this.stockGroupStockGroupName = stockGroupsStockGroupName;
+    public void setProductCategoryName(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getStockItemId() {
+        return stockItemId;
     }
 
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
     }
 
     @Override
@@ -221,10 +220,10 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
             ", customerCategory=" + getCustomerCategoryId() +
             ", customerCategory='" + getCustomerCategoryCustomerCategoryName() + "'" +
             ", customer=" + getCustomerId() +
-            ", stockGroup=" + getStockGroupId() +
-            ", stockGroup='" + getStockGroupStockGroupName() + "'" +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", productCategory=" + getProductCategoryId() +
+            ", productCategory='" + getProductCategoryName() + "'" +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             "}";
     }
 }

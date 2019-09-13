@@ -9,10 +9,10 @@
                 <dd>
                     <span>{{shoppingCartItems.quantity}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.shoppingCartItems.product">Product</span></dt>
+                <dt><span jhiTranslate="resourceApp.shoppingCartItems.stockItem">Stock Item</span></dt>
                 <dd>
-                    <div *ngIf="shoppingCartItems.productId">
-                        <a [routerLink]="['/products', shoppingCartItems.productId, 'view']">{{shoppingCartItems.productProductName}}</a>
+                    <div *ngIf="shoppingCartItems.stockItemId">
+                        <a [routerLink]="['/stock-items', shoppingCartItems.stockItemId, 'view']">{{shoppingCartItems.stockItemStockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.shoppingCartItems.cart">Cart</span></dt>

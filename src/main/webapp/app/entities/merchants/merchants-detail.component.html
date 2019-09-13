@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="merchants">
+            <h2><span jhiTranslate="resourceApp.merchants.detail.title">Merchants</span> {{merchants.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.merchants.accountNumber">Account Number</span></dt>
+                <dd>
+                    <span>{{merchants.accountNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.merchantName">Merchant Name</span></dt>
+                <dd>
+                    <span>{{merchants.merchantName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.creditRating">Credit Rating</span></dt>
+                <dd>
+                    <span>{{merchants.creditRating}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.activeFlag">Active Flag</span></dt>
+                <dd>
+                    <span>{{merchants.activeFlag}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.webServiceUrl">Web Service Url</span></dt>
+                <dd>
+                    <span>{{merchants.webServiceUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.webSiteUrl">Web Site Url</span></dt>
+                <dd>
+                    <span>{{merchants.webSiteUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="merchants.avatar">
+                        <a (click)="openFile(merchants.avatarContentType, merchants.avatar)">
+                            <img [src]="'data:' + merchants.avatarContentType + ';base64,' + merchants.avatar" style="max-width: 100%;" alt="merchants image"/>
+                        </a>
+                        {{merchants.avatarContentType}}, {{byteSize(merchants.avatar)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.merchants.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="merchants.personId">
+                        <a [routerLink]="['/people', merchants.personId, 'view']">{{merchants.personFullName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/merchants', merchants.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

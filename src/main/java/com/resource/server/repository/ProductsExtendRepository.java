@@ -1,17 +1,13 @@
 package com.resource.server.repository;
 
-import com.resource.server.domain.ProductSubCategory;
 import com.resource.server.domain.Products;
-import com.resource.server.service.dto.ProductSubCategoryDTO;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface ProductsExtendRepository extends PagingAndSortingRepository<Products, Long> {
-    List<Products> findAllByProductSubCategoryId(Pageable pageable, Long productSubCategoryId);
+    List<Products> findAllByProductCategoryId(Pageable pageable, Long productCategoryId);
 
     List<Products> findTop12ByOrderByCreatedDateDesc();
 
@@ -19,9 +15,9 @@ public interface ProductsExtendRepository extends PagingAndSortingRepository<Pro
 
     List<Products> findTop12ByOrderBySellCountDesc();
 
-    List<Products> findTop12ByProductSubCategoryIdAndIdIsNotOrderBySellCountDesc(Long productSubCategoryId, Long id);
+    List<Products> findTop12ByProductCategoryIdAndIdIsNotOrderBySellCountDesc(Long productCategoryId, Long id);
 
-    List<Products> findAllByProductSubCategoryIdIsNotOrderBySellCountDesc(Long productSubCategoryId, Pageable pageable);
+    List<Products> findAllByProductCategoryIdIsNotOrderBySellCountDesc(Long productCategoryId, Pageable pageable);
 
     List<Products> findAllByProductNameContainingIgnoreCase(String name, Pageable pageable);
 

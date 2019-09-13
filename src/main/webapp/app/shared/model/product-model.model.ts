@@ -1,4 +1,4 @@
-import { IProductDescription } from 'app/shared/model/product-description.model';
+import { IProductModelDescription } from 'app/shared/model/product-model-description.model';
 
 export interface IProductModel {
     id?: number;
@@ -7,7 +7,7 @@ export interface IProductModel {
     instructions?: string;
     photoContentType?: string;
     photo?: any;
-    descriptions?: IProductDescription[];
+    descriptions?: IProductModelDescription[];
 }
 
 export class ProductModel implements IProductModel {
@@ -18,6 +18,6 @@ export class ProductModel implements IProductModel {
         public instructions?: string,
         public photoContentType?: string,
         public photo?: any,
-        public descriptions?: IProductDescription[]
+        public descriptions?: IProductModelDescription[]
     ) {}
 }

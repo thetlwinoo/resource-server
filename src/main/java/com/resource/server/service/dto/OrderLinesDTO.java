@@ -29,11 +29,11 @@ public class OrderLinesDTO extends AbstractAuditingDTO implements Serializable {
     private LocalDate pickingCompletedWhen;
 
 
+    private Long stockItemId;
+
+    private String stockItemStockItemName;
+
     private Long packageTypeId;
-
-    private Long productId;
-
-    private String productProductName;
 
     private Long orderId;
 
@@ -109,28 +109,28 @@ public class OrderLinesDTO extends AbstractAuditingDTO implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
+    public Long getStockItemId() {
+        return stockItemId;
+    }
+
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
+    }
+
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
+    }
+
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
+    }
+
     public Long getPackageTypeId() {
         return packageTypeId;
     }
 
     public void setPackageTypeId(Long packageTypesId) {
         this.packageTypeId = packageTypesId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
     }
 
     public Long getOrderId() {
@@ -174,9 +174,9 @@ public class OrderLinesDTO extends AbstractAuditingDTO implements Serializable {
             ", taxRate=" + getTaxRate() +
             ", pickedQuantity=" + getPickedQuantity() +
             ", pickingCompletedWhen='" + getPickingCompletedWhen() + "'" +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             ", packageType=" + getPackageTypeId() +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
             ", order=" + getOrderId() +
             "}";
     }

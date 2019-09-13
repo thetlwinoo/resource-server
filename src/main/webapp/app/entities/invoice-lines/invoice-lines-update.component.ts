@@ -8,8 +8,8 @@ import { IInvoiceLines } from 'app/shared/model/invoice-lines.model';
 import { InvoiceLinesService } from './invoice-lines.service';
 import { IPackageTypes } from 'app/shared/model/package-types.model';
 import { PackageTypesService } from 'app/entities/package-types';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
+import { IStockItems } from 'app/shared/model/stock-items.model';
+import { StockItemsService } from 'app/entities/stock-items';
 import { IInvoices } from 'app/shared/model/invoices.model';
 import { InvoicesService } from 'app/entities/invoices';
 
@@ -23,7 +23,7 @@ export class InvoiceLinesUpdateComponent implements OnInit {
 
     packagetypes: IPackageTypes[];
 
-    products: IProducts[];
+    stockitems: IStockItems[];
 
     invoices: IInvoices[];
 
@@ -31,7 +31,7 @@ export class InvoiceLinesUpdateComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         protected invoiceLinesService: InvoiceLinesService,
         protected packageTypesService: PackageTypesService,
-        protected productsService: ProductsService,
+        protected stockItemsService: StockItemsService,
         protected invoicesService: InvoicesService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -48,13 +48,13 @@ export class InvoiceLinesUpdateComponent implements OnInit {
                 map((response: HttpResponse<IPackageTypes[]>) => response.body)
             )
             .subscribe((res: IPackageTypes[]) => (this.packagetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.productsService
+        this.stockItemsService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IStockItems[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStockItems[]>) => response.body)
             )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: IStockItems[]) => (this.stockitems = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.invoicesService
             .query()
             .pipe(
@@ -98,7 +98,7 @@ export class InvoiceLinesUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackStockItemsById(index: number, item: IStockItems) {
         return item.id;
     }
 

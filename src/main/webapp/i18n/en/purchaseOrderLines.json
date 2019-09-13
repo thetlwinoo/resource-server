@@ -21,8 +21,8 @@
             "expectedUnitPricePerOuter": "Expected Unit Price Per Outer",
             "lastReceiptDate": "Last Receipt Date",
             "isOrderLineFinalized": "Is Order Line Finalized",
-            "product": "Product",
             "packageType": "Package Type",
+            "stockItem": "Stock Item",
             "purchaseOrder": "Purchase Order"
         }
     }

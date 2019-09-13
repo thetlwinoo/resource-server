@@ -65,8 +65,8 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "reviews",
-            "otherEntityRelationshipName": "review",
-            "relationshipName": "orderReview",
+            "otherEntityRelationshipName": "order",
+            "relationshipName": "review",
             "otherEntityField": "id",
             "ownerSide": true
         },
@@ -115,7 +115,7 @@
             "relationshipType": "one-to-one",
             "otherEntityName": "paymentTransactions",
             "otherEntityRelationshipName": "paymentOnOrder",
-            "relationshipName": "payment",
+            "relationshipName": "paymentTransaction",
             "ownerSide": false
         },
         {

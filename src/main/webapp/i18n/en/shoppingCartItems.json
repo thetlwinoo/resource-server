@@ -16,7 +16,7 @@
                 "title": "Shopping Cart Items"
             },
             "quantity": "Quantity",
-            "product": "Product",
+            "stockItem": "Stock Item",
             "cart": "Cart"
         }
     }

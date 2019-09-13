@@ -23,7 +23,7 @@
             <th><span jhiTranslate="resourceApp.invoiceLines.lineProfit">Line Profit</span></th>
             <th><span jhiTranslate="resourceApp.invoiceLines.extendedPrice">Extended Price</span></th>
             <th><span jhiTranslate="resourceApp.invoiceLines.packageType">Package Type</span></th>
-            <th><span jhiTranslate="resourceApp.invoiceLines.product">Product</span></th>
+            <th><span jhiTranslate="resourceApp.invoiceLines.stockItem">Stock Item</span></th>
             <th><span jhiTranslate="resourceApp.invoiceLines.invoice">Invoice</span></th>
             <th></th>
             </tr>
@@ -44,8 +44,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="invoiceLines.productId">
-                        <a [routerLink]="['../products', invoiceLines.productId , 'view' ]" >{{invoiceLines.productId}}</a>
+                    <div *ngIf="invoiceLines.stockItemId">
+                        <a [routerLink]="['../stock-items', invoiceLines.stockItemId , 'view' ]" >{{invoiceLines.stockItemStockItemName}}</a>
                     </div>
                 </td>
                 <td>

@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -94,13 +95,13 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
 
         for (ShoppingCartItems i : cartItems) {
             //increase sell count on the product
-            i.getProduct().setSellCount(i.getProduct().getSellCount() + i.getQuantity());
+            i.getStockItem().setSellCount(i.getStockItem().getSellCount() + i.getQuantity());
 
             OrderLines orderLines = new OrderLines();
             orderLines.setQuantity(i.getQuantity());
             orderLines.setOrder(saveOrder);
-            orderLines.setProduct(i.getProduct());
-            orderLines.setUnitPrice(i.getProduct().getUnitPrice());
+            orderLines.setStockItem(i.getStockItem());
+            orderLines.setUnitPrice(i.getStockItem().getUnitPrice());
             saveOrder.getOrderLineLists().add(orderLines);
         }
 
@@ -125,11 +126,11 @@ public class OrdersExtendServiceImpl implements OrdersExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendedRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        Optional<People> people = peopleExtendedRepository.findPeopleByLogonName(principal.getName());
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 
 }

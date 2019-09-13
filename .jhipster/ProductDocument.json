@@ -4,6 +4,18 @@
         {
             "fieldName": "documentNode",
             "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "videoUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "highlights",
+            "fieldType": "byte[]",
             "fieldTypeBlobContent": "text",
             "fieldValidateRules": [
                 "required"

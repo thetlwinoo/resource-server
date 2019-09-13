@@ -1,7 +1,6 @@
 package com.resource.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -21,7 +20,7 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
     private Integer lastStocktakeQuantity;
 
     @NotNull
-    private BigDecimal lastCostPrice;
+    private Float lastCostPrice;
 
     @NotNull
     private Integer reorderLevel;
@@ -30,9 +29,7 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
     private Integer targerStockLevel;
 
 
-    private Long productId;
-
-    private String productProductName;
+    private Long stockItemId;
 
     public Long getId() {
         return id;
@@ -66,11 +63,11 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
         this.lastStocktakeQuantity = lastStocktakeQuantity;
     }
 
-    public BigDecimal getLastCostPrice() {
+    public Float getLastCostPrice() {
         return lastCostPrice;
     }
 
-    public void setLastCostPrice(BigDecimal lastCostPrice) {
+    public void setLastCostPrice(Float lastCostPrice) {
         this.lastCostPrice = lastCostPrice;
     }
 
@@ -90,20 +87,12 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
         this.targerStockLevel = targerStockLevel;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getStockItemId() {
+        return stockItemId;
     }
 
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
     }
 
     @Override
@@ -137,8 +126,7 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
             ", lastCostPrice=" + getLastCostPrice() +
             ", reorderLevel=" + getReorderLevel() +
             ", targerStockLevel=" + getTargerStockLevel() +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", stockItem=" + getStockItemId() +
             "}";
     }
 }

@@ -2,7 +2,6 @@ package com.resource.server.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -19,7 +18,7 @@ public class ColdRoomTemperaturesDTO extends AbstractAuditingDTO implements Seri
     private LocalDate recordedWhen;
 
     @NotNull
-    private BigDecimal temperature;
+    private Float temperature;
 
     @NotNull
     private LocalDate validFrom;
@@ -52,11 +51,11 @@ public class ColdRoomTemperaturesDTO extends AbstractAuditingDTO implements Seri
         this.recordedWhen = recordedWhen;
     }
 
-    public BigDecimal getTemperature() {
+    public Float getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(BigDecimal temperature) {
+    public void setTemperature(Float temperature) {
         this.temperature = temperature;
     }
 

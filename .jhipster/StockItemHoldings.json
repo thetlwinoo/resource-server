@@ -24,7 +24,7 @@
         },
         {
             "fieldName": "lastCostPrice",
-            "fieldType": "BigDecimal",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]
@@ -46,11 +46,12 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "products",
-            "otherEntityRelationshipName": "stockItemHoldings",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
+            "relationshipType": "one-to-one",
+            "otherEntityName": "stockItems",
+            "otherEntityRelationshipName": "stockItemHolding",
+            "relationshipName": "stockItem",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190801044939",

@@ -29,7 +29,18 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
     
     @Lob
     @Column(name = "document_node", nullable = false)
-    private String documentNode;
+    private byte[] documentNode;
+
+    @Column(name = "document_node_content_type", nullable = false)
+    private String documentNodeContentType;
+
+    @Column(name = "video_url")
+    private String videoUrl;
+
+    
+    @Lob
+    @Column(name = "highlights", nullable = false)
+    private String highlights;
 
     @ManyToOne
     @JsonIgnoreProperties("productDocuments")
@@ -48,17 +59,56 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
         this.id = id;
     }
 
-    public String getDocumentNode() {
+    public byte[] getDocumentNode() {
         return documentNode;
     }
 
-    public ProductDocument documentNode(String documentNode) {
+    public ProductDocument documentNode(byte[] documentNode) {
         this.documentNode = documentNode;
         return this;
     }
 
-    public void setDocumentNode(String documentNode) {
+    public void setDocumentNode(byte[] documentNode) {
         this.documentNode = documentNode;
+    }
+
+    public String getDocumentNodeContentType() {
+        return documentNodeContentType;
+    }
+
+    public ProductDocument documentNodeContentType(String documentNodeContentType) {
+        this.documentNodeContentType = documentNodeContentType;
+        return this;
+    }
+
+    public void setDocumentNodeContentType(String documentNodeContentType) {
+        this.documentNodeContentType = documentNodeContentType;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public ProductDocument videoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+        return this;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getHighlights() {
+        return highlights;
+    }
+
+    public ProductDocument highlights(String highlights) {
+        this.highlights = highlights;
+        return this;
+    }
+
+    public void setHighlights(String highlights) {
+        this.highlights = highlights;
     }
 
     public Products getProduct() {
@@ -113,6 +163,9 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
         return "ProductDocument{" +
             "id=" + getId() +
             ", documentNode='" + getDocumentNode() + "'" +
+            ", documentNodeContentType='" + getDocumentNodeContentType() + "'" +
+            ", videoUrl='" + getVideoUrl() + "'" +
+            ", highlights='" + getHighlights() + "'" +
             "}";
     }
 }

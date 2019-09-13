@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.merchants.home.title">Merchants</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-merchants" [routerLink]="['/merchants/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.merchants.home.createLabel">
+            Create new Merchants
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="merchants">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.accountNumber">Account Number</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.merchantName">Merchant Name</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.creditRating">Credit Rating</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.activeFlag">Active Flag</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.webServiceUrl">Web Service Url</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.webSiteUrl">Web Site Url</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.avatar">Avatar</span></th>
+            <th><span jhiTranslate="resourceApp.merchants.person">Person</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let merchants of merchants ;trackBy: trackId">
+                <td><a [routerLink]="['/merchants', merchants.id, 'view' ]">{{merchants.id}}</a></td>
+                <td>{{merchants.accountNumber}}</td>
+                <td>{{merchants.merchantName}}</td>
+                <td>{{merchants.creditRating}}</td>
+                <td>{{merchants.activeFlag}}</td>
+                <td>{{merchants.webServiceUrl}}</td>
+                <td>{{merchants.webSiteUrl}}</td>
+                <td>
+                    <a *ngIf="merchants.avatar" (click)="openFile(merchants.avatarContentType, merchants.avatar)">
+                        <img [src]="'data:' + merchants.avatarContentType + ';base64,' + merchants.avatar" style="max-height: 30px;" alt="merchants image"/>
+                    </a>
+                    <span *ngIf="merchants.avatar">{{merchants.avatarContentType}}, {{byteSize(merchants.avatar)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="merchants.personId">
+                        <a [routerLink]="['../people', merchants.personId , 'view' ]" >{{merchants.personFullName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/merchants', merchants.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/merchants', merchants.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'merchants', { outlets: { popup: merchants.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

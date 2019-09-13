@@ -60,9 +60,9 @@ public class InvoiceLines extends AbstractAuditingEntity implements Serializable
 
     @ManyToOne
     @JsonIgnoreProperties("invoiceLines")
-    private Products product;
+    private StockItems stockItem;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("invoiceLineLists")
     private Invoices invoice;
 
@@ -179,17 +179,17 @@ public class InvoiceLines extends AbstractAuditingEntity implements Serializable
         this.packageType = packageTypes;
     }
 
-    public Products getProduct() {
-        return product;
+    public StockItems getStockItem() {
+        return stockItem;
     }
 
-    public InvoiceLines product(Products products) {
-        this.product = products;
+    public InvoiceLines stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
 
     public Invoices getInvoice() {

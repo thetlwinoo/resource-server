@@ -1,0 +1,139 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="stockItems">
+            <h2><span jhiTranslate="resourceApp.stockItems.detail.title">Stock Items</span> {{stockItems.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.stockItems.stockItemName">Stock Item Name</span></dt>
+                <dd>
+                    <span>{{stockItems.stockItemName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.sellerSKU">Seller SKU</span></dt>
+                <dd>
+                    <span>{{stockItems.sellerSKU}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.generatedSKU">Generated SKU</span></dt>
+                <dd>
+                    <span>{{stockItems.generatedSKU}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.barcode">Barcode</span></dt>
+                <dd>
+                    <span>{{stockItems.barcode}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.unitPrice">Unit Price</span></dt>
+                <dd>
+                    <span>{{stockItems.unitPrice}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.recommendedRetailPrice">Recommended Retail Price</span></dt>
+                <dd>
+                    <span>{{stockItems.recommendedRetailPrice}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.quantityPerOuter">Quantity Per Outer</span></dt>
+                <dd>
+                    <span>{{stockItems.quantityPerOuter}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.typicalWeightPerUnit">Typical Weight Per Unit</span></dt>
+                <dd>
+                    <span>{{stockItems.typicalWeightPerUnit}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.typicalLengthPerUnit">Typical Length Per Unit</span></dt>
+                <dd>
+                    <span>{{stockItems.typicalLengthPerUnit}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.typicalWidthPerUnit">Typical Width Per Unit</span></dt>
+                <dd>
+                    <span>{{stockItems.typicalWidthPerUnit}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.typicalHeightPerUnit">Typical Height Per Unit</span></dt>
+                <dd>
+                    <span>{{stockItems.typicalHeightPerUnit}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.marketingComments">Marketing Comments</span></dt>
+                <dd>
+                    <span>{{stockItems.marketingComments}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.internalComments">Internal Comments</span></dt>
+                <dd>
+                    <span>{{stockItems.internalComments}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.discontinuedDate">Discontinued Date</span></dt>
+                <dd>
+                    <span>{{stockItems.discontinuedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.sellCount">Sell Count</span></dt>
+                <dd>
+                    <span>{{stockItems.sellCount}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.customFields">Custom Fields</span></dt>
+                <dd>
+                    <span>{{stockItems.customFields}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.thumbnailUrl">Thumbnail Url</span></dt>
+                <dd>
+                    <span>{{stockItems.thumbnailUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.reviewLine">Review Line</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.reviewLineId">
+                        <a [routerLink]="['/review-lines', stockItems.reviewLineId, 'view']">{{stockItems.reviewLineId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.productId">
+                        <a [routerLink]="['/products', stockItems.productId, 'view']">{{stockItems.productProductName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.lengthUnitMeasureCode">Length Unit Measure Code</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.lengthUnitMeasureCodeId">
+                        <a [routerLink]="['/unit-measure', stockItems.lengthUnitMeasureCodeId, 'view']">{{stockItems.lengthUnitMeasureCodeUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.weightUnitMeasureCode">Weight Unit Measure Code</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.weightUnitMeasureCodeId">
+                        <a [routerLink]="['/unit-measure', stockItems.weightUnitMeasureCodeId, 'view']">{{stockItems.weightUnitMeasureCodeUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.widthUnitMeasureCode">Width Unit Measure Code</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.widthUnitMeasureCodeId">
+                        <a [routerLink]="['/unit-measure', stockItems.widthUnitMeasureCodeId, 'view']">{{stockItems.widthUnitMeasureCodeUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.heightUnitMeasureCode">Height Unit Measure Code</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.heightUnitMeasureCodeId">
+                        <a [routerLink]="['/unit-measure', stockItems.heightUnitMeasureCodeId, 'view']">{{stockItems.heightUnitMeasureCodeUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.productAttribute">Product Attribute</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.productAttributeId">
+                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId, 'view']">{{stockItems.productAttributeValue}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.productOption">Product Option</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.productOptionId">
+                        <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionValue}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/stock-items', stockItems.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

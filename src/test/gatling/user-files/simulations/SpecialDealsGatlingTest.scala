@@ -75,10 +75,10 @@ class SpecialDealsGatlingTest extends Simulation {
                 , "dealDescription":"SAMPLE_TEXT"
                 , "startDate":"2020-01-01T00:00:00.000Z"
                 , "endDate":"2020-01-01T00:00:00.000Z"
-                , "discountAmount":"0"
+                , "discountAmount":null
                 , "discountPercentage":null
                 , "discountCode":"SAMPLE_TEXT"
-                , "unitPrice":"0"
+                , "unitPrice":null
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_specialDeals_url"))).exitHereIfFailed

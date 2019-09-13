@@ -25,11 +25,11 @@ public interface ReviewsService {
      */
     List<ReviewsDTO> findAll();
     /**
-     * Get all the ReviewsDTO where Review is null.
+     * Get all the ReviewsDTO where Order is null.
      *
      * @return the list of entities
      */
-    List<ReviewsDTO> findAllWhereReviewIsNull();
+    List<ReviewsDTO> findAllWhereOrderIsNull();
 
 
     /**

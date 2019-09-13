@@ -33,7 +33,7 @@ export class PaymentTransactionsUpdateComponent implements OnInit {
             this.paymentTransactions = paymentTransactions;
         });
         this.ordersService
-            .query({ filter: 'payment-is-null' })
+            .query({ filter: 'paymenttransaction-is-null' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IOrders[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IOrders[]>) => response.body)

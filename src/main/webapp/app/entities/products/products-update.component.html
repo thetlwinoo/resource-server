@@ -37,151 +37,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.makeFlag" for="field_makeFlag">Make Flag</label>
-                    <input type="checkbox" class="form-control" name="makeFlag" id="field_makeFlag"
-                        [(ngModel)]="products.makeFlag" />
-                    <div [hidden]="!(editForm.controls.makeFlag?.dirty && editForm.controls.makeFlag?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.makeFlag?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.finishedGoodsFlag" for="field_finishedGoodsFlag">Finished Goods Flag</label>
-                    <input type="checkbox" class="form-control" name="finishedGoodsFlag" id="field_finishedGoodsFlag"
-                        [(ngModel)]="products.finishedGoodsFlag" />
-                    <div [hidden]="!(editForm.controls.finishedGoodsFlag?.dirty && editForm.controls.finishedGoodsFlag?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.finishedGoodsFlag?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.color" for="field_color">Color</label>
-                    <input type="text" class="form-control" name="color" id="field_color"
-                        [(ngModel)]="products.color" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.safetyStockLevel" for="field_safetyStockLevel">Safety Stock Level</label>
-                    <input type="number" class="form-control" name="safetyStockLevel" id="field_safetyStockLevel"
-                        [(ngModel)]="products.safetyStockLevel" required/>
-                    <div [hidden]="!(editForm.controls.safetyStockLevel?.dirty && editForm.controls.safetyStockLevel?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.safetyStockLevel?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.safetyStockLevel?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.reorderPoint" for="field_reorderPoint">Reorder Point</label>
-                    <input type="number" class="form-control" name="reorderPoint" id="field_reorderPoint"
-                        [(ngModel)]="products.reorderPoint" required/>
-                    <div [hidden]="!(editForm.controls.reorderPoint?.dirty && editForm.controls.reorderPoint?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.reorderPoint?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.reorderPoint?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.standardCost" for="field_standardCost">Standard Cost</label>
-                    <input type="number" class="form-control" name="standardCost" id="field_standardCost"
-                        [(ngModel)]="products.standardCost" required/>
-                    <div [hidden]="!(editForm.controls.standardCost?.dirty && editForm.controls.standardCost?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.standardCost?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.standardCost?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.unitPrice" for="field_unitPrice">Unit Price</label>
-                    <input type="number" class="form-control" name="unitPrice" id="field_unitPrice"
-                        [(ngModel)]="products.unitPrice" required/>
-                    <div [hidden]="!(editForm.controls.unitPrice?.dirty && editForm.controls.unitPrice?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.unitPrice?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.unitPrice?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.recommendedRetailPrice" for="field_recommendedRetailPrice">Recommended Retail Price</label>
-                    <input type="number" class="form-control" name="recommendedRetailPrice" id="field_recommendedRetailPrice"
-                        [(ngModel)]="products.recommendedRetailPrice" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.brand" for="field_brand">Brand</label>
-                    <input type="text" class="form-control" name="brand" id="field_brand"
-                        [(ngModel)]="products.brand" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.specifySize" for="field_specifySize">Specify Size</label>
-                    <input type="text" class="form-control" name="specifySize" id="field_specifySize"
-                        [(ngModel)]="products.specifySize" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.weight" for="field_weight">Weight</label>
-                    <input type="number" class="form-control" name="weight" id="field_weight"
-                        [(ngModel)]="products.weight" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.daysToManufacture" for="field_daysToManufacture">Days To Manufacture</label>
-                    <input type="number" class="form-control" name="daysToManufacture" id="field_daysToManufacture"
-                        [(ngModel)]="products.daysToManufacture" required/>
-                    <div [hidden]="!(editForm.controls.daysToManufacture?.dirty && editForm.controls.daysToManufacture?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.daysToManufacture?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.daysToManufacture?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.productLine" for="field_productLine">Product Line</label>
-                    <input type="text" class="form-control" name="productLine" id="field_productLine"
-                        [(ngModel)]="products.productLine" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.classType" for="field_classType">Class Type</label>
-                    <input type="text" class="form-control" name="classType" id="field_classType"
-                        [(ngModel)]="products.classType" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.style" for="field_style">Style</label>
-                    <input type="text" class="form-control" name="style" id="field_style"
-                        [(ngModel)]="products.style" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.customFields" for="field_customFields">Custom Fields</label>
-                    <input type="text" class="form-control" name="customFields" id="field_customFields"
-                        [(ngModel)]="products.customFields" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.photo" for="field_photo">Photo</label>
-                    <input type="text" class="form-control" name="photo" id="field_photo"
-                        [(ngModel)]="products.photo" />
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.thumbnailUrl" for="field_thumbnailUrl">Thumbnail Url</label>
+                    <input type="text" class="form-control" name="thumbnailUrl" id="field_thumbnailUrl"
+                        [(ngModel)]="products.thumbnailUrl" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.sellStartDate" for="field_sellStartDate">Sell Start Date</label>
@@ -210,36 +68,44 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.marketingComments" for="field_marketingComments">Marketing Comments</label>
-                    <input type="text" class="form-control" name="marketingComments" id="field_marketingComments"
-                        [(ngModel)]="products.marketingComments" />
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.warrantyPeriod" for="field_warrantyPeriod">Warranty Period</label>
+                    <input type="text" class="form-control" name="warrantyPeriod" id="field_warrantyPeriod"
+                        [(ngModel)]="products.warrantyPeriod" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.internalComments" for="field_internalComments">Internal Comments</label>
-                    <input type="text" class="form-control" name="internalComments" id="field_internalComments"
-                        [(ngModel)]="products.internalComments" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.discontinuedDate" for="field_discontinuedDate">Discontinued Date</label>
-                    <div class="input-group">
-                        <input id="field_discontinuedDate" type="text" class="form-control" name="discontinuedDate" ngbDatepicker  #discontinuedDateDp="ngbDatepicker" [(ngModel)]="products.discontinuedDate"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="discontinuedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.warrantyPolicy" for="field_warrantyPolicy">Warranty Policy</label>
+                    <input type="text" class="form-control" name="warrantyPolicy" id="field_warrantyPolicy"
+                        [(ngModel)]="products.warrantyPolicy" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.sellCount" for="field_sellCount">Sell Count</label>
                     <input type="number" class="form-control" name="sellCount" id="field_sellCount"
                         [(ngModel)]="products.sellCount" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.whatInTheBox" for="field_whatInTheBox">What In The Box</label>
+                    <input type="text" class="form-control" name="whatInTheBox" id="field_whatInTheBox"
+                        [(ngModel)]="products.whatInTheBox" required/>
+                    <div [hidden]="!(editForm.controls.whatInTheBox?.dirty && editForm.controls.whatInTheBox?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.whatInTheBox?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.productReview" for="field_productReview">Product Review</label>
-                    <select class="form-control" id="field_productReview" name="productReview" [(ngModel)]="products.productReviewId">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.supplier" for="field_supplier">Supplier</label>
+                    <select class="form-control" id="field_supplier" name="supplier" [(ngModel)]="products.supplierId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="reviewLinesOption.id" *ngFor="let reviewLinesOption of productreviews; trackBy: trackReviewLinesById">{{reviewLinesOption.id}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.merchant" for="field_merchant">Merchant</label>
+                    <select class="form-control" id="field_merchant" name="merchant" [(ngModel)]="products.merchantId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="merchantsOption.id" *ngFor="let merchantsOption of merchants; trackBy: trackMerchantsById">{{merchantsOption.merchantName}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -257,38 +123,31 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.supplier" for="field_supplier">Supplier</label>
-                    <select class="form-control" id="field_supplier" name="supplier" [(ngModel)]="products.supplierId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.productSubCategory" for="field_productSubCategory">Product Sub Category</label>
-                    <select class="form-control" id="field_productSubCategory" name="productSubCategory" [(ngModel)]="products.productSubCategoryId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="productSubCategoryOption.id" *ngFor="let productSubCategoryOption of productsubcategories; trackBy: trackProductSubCategoryById">{{productSubCategoryOption.productSubCategoryName}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.sizeUnitMeasureCode" for="field_sizeUnitMeasureCode">Size Unit Measure Code</label>
-                    <select class="form-control" id="field_sizeUnitMeasureCode" name="sizeUnitMeasureCode" [(ngModel)]="products.sizeUnitMeasureCodeId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.weightUnitMeasureCode" for="field_weightUnitMeasureCode">Weight Unit Measure Code</label>
-                    <select class="form-control" id="field_weightUnitMeasureCode" name="weightUnitMeasureCode" [(ngModel)]="products.weightUnitMeasureCodeId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.productModel" for="field_productModel">Product Model</label>
                     <select class="form-control" id="field_productModel" name="productModel" [(ngModel)]="products.productModelId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="productModelOption.id" *ngFor="let productModelOption of productmodels; trackBy: trackProductModelById">{{productModelOption.productModelName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.productCategory" for="field_productCategory">Product Category</label>
+                    <select class="form-control" id="field_productCategory" name="productCategory" [(ngModel)]="products.productCategoryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productCategoryOption.id" *ngFor="let productCategoryOption of productcategories; trackBy: trackProductCategoryById">{{productCategoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.productBrand" for="field_productBrand">Product Brand</label>
+                    <select class="form-control" id="field_productBrand" name="productBrand" [(ngModel)]="products.productBrandId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productBrandOption.id" *ngFor="let productBrandOption of productbrands; trackBy: trackProductBrandById">{{productBrandOption.productBrandName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.products.warrantyType" for="field_warrantyType">Warranty Type</label>
+                    <select class="form-control" id="field_warrantyType" name="warrantyType" [(ngModel)]="products.warrantyTypeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="warrantyTypesOption.id" *ngFor="let warrantyTypesOption of warrantytypes; trackBy: trackWarrantyTypesById">{{warrantyTypesOption.warrantyTypeName}}</option>
                     </select>
                 </div>
             </div>

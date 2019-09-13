@@ -36,8 +36,8 @@ export class SpecialDealsUpdatePage {
     buyingGroupSelect = element(by.id('field_buyingGroup'));
     customerCategorySelect = element(by.id('field_customerCategory'));
     customerSelect = element(by.id('field_customer'));
-    stockGroupSelect = element(by.id('field_stockGroup'));
-    productSelect = element(by.id('field_product'));
+    productCategorySelect = element(by.id('field_productCategory'));
+    stockItemSelect = element(by.id('field_stockItem'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -156,42 +156,42 @@ export class SpecialDealsUpdatePage {
         return this.customerSelect.element(by.css('option:checked')).getText();
     }
 
-    async stockGroupSelectLastOption() {
-        await this.stockGroupSelect
+    async productCategorySelectLastOption() {
+        await this.productCategorySelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async stockGroupSelectOption(option) {
-        await this.stockGroupSelect.sendKeys(option);
+    async productCategorySelectOption(option) {
+        await this.productCategorySelect.sendKeys(option);
     }
 
-    getStockGroupSelect(): ElementFinder {
-        return this.stockGroupSelect;
+    getProductCategorySelect(): ElementFinder {
+        return this.productCategorySelect;
     }
 
-    async getStockGroupSelectedOption() {
-        return this.stockGroupSelect.element(by.css('option:checked')).getText();
+    async getProductCategorySelectedOption() {
+        return this.productCategorySelect.element(by.css('option:checked')).getText();
     }
 
-    async productSelectLastOption() {
-        await this.productSelect
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
     }
 
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
     }
 
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

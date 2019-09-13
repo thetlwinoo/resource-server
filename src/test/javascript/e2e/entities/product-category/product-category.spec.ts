@@ -44,10 +44,12 @@ describe('ProductCategory e2e test', () => {
 
         await productCategoryComponentsPage.clickOnCreateButton();
         await promise.all([
-            productCategoryUpdatePage.setProductCategoryNameInput('productCategoryName'),
+            productCategoryUpdatePage.setNameInput('name'),
+            productCategoryUpdatePage.setParentIdInput('5'),
             productCategoryUpdatePage.setPhotoInput(absolutePath)
         ]);
-        expect(await productCategoryUpdatePage.getProductCategoryNameInput()).to.eq('productCategoryName');
+        expect(await productCategoryUpdatePage.getNameInput()).to.eq('name');
+        expect(await productCategoryUpdatePage.getParentIdInput()).to.eq('5');
         expect(await productCategoryUpdatePage.getPhotoInput()).to.endsWith(fileNameToUpload);
         await productCategoryUpdatePage.save();
         expect(await productCategoryUpdatePage.getSaveButton().isPresent()).to.be.false;

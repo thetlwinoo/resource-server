@@ -58,10 +58,10 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "products",
+            "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "invoiceLines",
-            "relationshipName": "product",
-            "otherEntityField": "id"
+            "relationshipName": "stockItem",
+            "otherEntityField": "stockItemName"
         },
         {
             "relationshipType": "many-to-one",

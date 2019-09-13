@@ -75,9 +75,9 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Reviews orderReview;
+    private Reviews review;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "order")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrderLines> orderLineLists = new HashSet<>();
     @ManyToOne
@@ -100,9 +100,9 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("orders")
     private CurrencyRate currencyRate;
 
-    @OneToOne(mappedBy = "paymentOnOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "paymentOnOrder")
     @JsonIgnore
-    private PaymentTransactions payment;
+    private PaymentTransactions paymentTransaction;
 
     @ManyToOne
     @JsonIgnoreProperties("orderDiscounts")
@@ -299,17 +299,17 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
-    public Reviews getOrderReview() {
-        return orderReview;
+    public Reviews getReview() {
+        return review;
     }
 
-    public Orders orderReview(Reviews reviews) {
-        this.orderReview = reviews;
+    public Orders review(Reviews reviews) {
+        this.review = reviews;
         return this;
     }
 
-    public void setOrderReview(Reviews reviews) {
-        this.orderReview = reviews;
+    public void setReview(Reviews reviews) {
+        this.review = reviews;
     }
 
     public Set<OrderLines> getOrderLineLists() {
@@ -402,17 +402,17 @@ public class Orders extends AbstractAuditingEntity implements Serializable {
         this.currencyRate = currencyRate;
     }
 
-    public PaymentTransactions getPayment() {
-        return payment;
+    public PaymentTransactions getPaymentTransaction() {
+        return paymentTransaction;
     }
 
-    public Orders payment(PaymentTransactions paymentTransactions) {
-        this.payment = paymentTransactions;
+    public Orders paymentTransaction(PaymentTransactions paymentTransactions) {
+        this.paymentTransaction = paymentTransactions;
         return this;
     }
 
-    public void setPayment(PaymentTransactions paymentTransactions) {
-        this.payment = paymentTransactions;
+    public void setPaymentTransaction(PaymentTransactions paymentTransactions) {
+        this.paymentTransaction = paymentTransactions;
     }
 
     public SpecialDeals getSpecialDeals() {

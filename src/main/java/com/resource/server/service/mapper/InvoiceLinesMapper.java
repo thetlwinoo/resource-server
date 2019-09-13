@@ -8,17 +8,18 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity InvoiceLines and its DTO InvoiceLinesDTO.
  */
-@Mapper(componentModel = "spring", uses = {PackageTypesMapper.class, ProductsMapper.class, InvoicesMapper.class})
+@Mapper(componentModel = "spring", uses = {PackageTypesMapper.class, StockItemsMapper.class, InvoicesMapper.class})
 public interface InvoiceLinesMapper extends EntityMapper<InvoiceLinesDTO, InvoiceLines> {
 
     @Mapping(source = "packageType.id", target = "packageTypeId")
     @Mapping(source = "packageType.packageTypeName", target = "packageTypePackageTypeName")
-    @Mapping(source = "product.id", target = "productId")
+    @Mapping(source = "stockItem.id", target = "stockItemId")
+    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
     @Mapping(source = "invoice.id", target = "invoiceId")
     InvoiceLinesDTO toDto(InvoiceLines invoiceLines);
 
     @Mapping(source = "packageTypeId", target = "packageType")
-    @Mapping(source = "productId", target = "product")
+    @Mapping(source = "stockItemId", target = "stockItem")
     @Mapping(source = "invoiceId", target = "invoice")
     InvoiceLines toEntity(InvoiceLinesDTO invoiceLinesDTO);
 

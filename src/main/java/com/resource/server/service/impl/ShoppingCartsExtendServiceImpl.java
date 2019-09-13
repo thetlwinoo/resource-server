@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -25,10 +26,10 @@ public class ShoppingCartsExtendServiceImpl implements ShoppingCartsExtendServic
     private final PeopleExtendRepository peopleExtendRepository;
     private final PeopleRepository peopleRepository;
     private final CustomersExtendRepository customersExtendRepository;
-    private final ProductsRepository productsRepository;
+    private final StockItemsRepository stockItemsRepository;
 
     @Autowired
-    public ShoppingCartsExtendServiceImpl(ShoppingCartsRepository shoppingCartsRepository, ShoppingCartItemsRepository shoppingCartItemsRepository, PriceService priceService, UserRepository userRepository, PeopleExtendRepository peopleExtendRepository, PeopleRepository peopleRepository, CustomersExtendRepository customersExtendRepository, ProductsRepository productsRepository) {
+    public ShoppingCartsExtendServiceImpl(ShoppingCartsRepository shoppingCartsRepository, ShoppingCartItemsRepository shoppingCartItemsRepository, PriceService priceService, UserRepository userRepository, PeopleExtendRepository peopleExtendRepository, PeopleRepository peopleRepository, CustomersExtendRepository customersExtendRepository, StockItemsRepository stockItemsRepository) {
         this.shoppingCartsRepository = shoppingCartsRepository;
         this.shoppingCartItemsRepository = shoppingCartItemsRepository;
         this.priceService = priceService;
@@ -36,7 +37,7 @@ public class ShoppingCartsExtendServiceImpl implements ShoppingCartsExtendServic
         this.peopleExtendRepository = peopleExtendRepository;
         this.peopleRepository = peopleRepository;
         this.customersExtendRepository = customersExtendRepository;
-        this.productsRepository = productsRepository;
+        this.stockItemsRepository = stockItemsRepository;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ShoppingCartsExtendServiceImpl implements ShoppingCartsExtendServic
                 //usersRepository.save(user); deleted because it caused the cart to be saved twice
             } else if (cart.getCartItemLists() != null || !cart.getCartItemLists().isEmpty()) {
                 for (ShoppingCartItems i : cart.getCartItemLists()) {
-                    if (i.getProduct().getId().equals(id)) {
+                    if (i.getStockItem().getId().equals(id)) {
                         i.setQuantity(i.getQuantity() + quantity);
 //                CartItem ct = shoppingCartItemsRepository.save(i);
                         ShoppingCarts returnCart = priceService.calculatePrice(cart);
@@ -69,10 +70,10 @@ public class ShoppingCartsExtendServiceImpl implements ShoppingCartsExtendServic
                 }
             }
 
-            Products product = productsRepository.getOne(id);
+            StockItems stockItems = stockItemsRepository.getOne(id);
             ShoppingCartItems cartItem = new ShoppingCartItems();
             cartItem.setQuantity(quantity);
-            cartItem.setProduct(product);
+            cartItem.setStockItem(stockItems);
 
             //this will save the cart object as well because there is cascading from cartItem
             cartItem.setCart(cart);
@@ -234,11 +235,11 @@ public class ShoppingCartsExtendServiceImpl implements ShoppingCartsExtendServic
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
         if (people == null) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 
 }
