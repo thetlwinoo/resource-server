@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -69,11 +70,11 @@ public class MembershipServiceImpl implements MembershipService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
 //        if (people == null) {
 //            throw new IllegalArgumentException("User not found");
 //        }
-        return people;
+        return people.get();
     }
 
 }

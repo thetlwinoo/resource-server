@@ -18,10 +18,10 @@ export interface ISpecialDeals {
     customerCategoryCustomerCategoryName?: string;
     customerCategoryId?: number;
     customerId?: number;
-    stockGroupStockGroupName?: string;
-    stockGroupId?: number;
-    productProductName?: string;
-    productId?: number;
+    productCategoryName?: string;
+    productCategoryId?: number;
+    stockItemStockItemName?: string;
+    stockItemId?: number;
 }
 
 export class SpecialDeals implements ISpecialDeals {
@@ -41,9 +41,9 @@ export class SpecialDeals implements ISpecialDeals {
         public customerCategoryCustomerCategoryName?: string,
         public customerCategoryId?: number,
         public customerId?: number,
-        public stockGroupStockGroupName?: string,
-        public stockGroupId?: number,
-        public productProductName?: string,
-        public productId?: number
+        public productCategoryName?: string,
+        public productCategoryId?: number,
+        public stockItemStockItemName?: string,
+        public stockItemId?: number
     ) {}
 }

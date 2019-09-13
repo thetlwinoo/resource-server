@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity StockItems.
+    -->
+    <changeSet id="20190913063627-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="review_line_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_review_line_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="review_lines"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="products"/>
+
+        <addForeignKeyConstraint baseColumnNames="length_unit_measure_code_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_length_unit_measure_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="weight_unit_measure_code_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_weight_unit_measure_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="width_unit_measure_code_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_width_unit_measure_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="height_unit_measure_code_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_height_unit_measure_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_attribute_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_product_attribute_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_attribute"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_option_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_product_option_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_option"/>
+
+    </changeSet>
+</databaseChangeLog>

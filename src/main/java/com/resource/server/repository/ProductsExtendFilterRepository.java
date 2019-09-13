@@ -1,5 +1,6 @@
 package com.resource.server.repository;
 
+import com.resource.server.domain.ProductCategory;
 import com.resource.server.domain.ProductSubCategory;
 import com.resource.server.domain.Products;
 import org.hibernate.annotations.Entity;
@@ -22,8 +23,8 @@ public interface ProductsExtendFilterRepository extends JpaRepository<ProductSub
     @Query(value = "SELECT DISTINCT trim(tags) FROM products p WHERE p.tags <> '' AND p.tags LIKE %:keyword%", nativeQuery = true)
     List<String> getProductTags(@Param("keyword") String keyword);
 
-    @Query(value = "SELECT DISTINCT A.* FROM product_sub_category A LEFT JOIN products B ON A.id = B.product_sub_category_id LEFT JOIN product_tags C ON B.id = C.product_id WHERE (:keyword = '' OR C.tag_name ILIKE :keyword) AND (:category = 0 OR A.product_category_id = :category)", nativeQuery = true)
-    List<ProductSubCategory> selectCategoriesByTags(@Param("keyword") String keyword, @Param("category") Long category);
+    @Query(value = "SELECT DISTINCT A.* FROM product_category A LEFT JOIN products B ON A.id = B.product_category_id LEFT JOIN product_tags C ON B.id = C.product_id WHERE (:keyword = '' OR C.tag_name ILIKE :keyword) AND (:category = 0 OR A.product_category_id = :category)", nativeQuery = true)
+    List<ProductCategory> selectCategoriesByTags(@Param("keyword") String keyword, @Param("category") Long category);
 
     @Query(value = "SELECT DISTINCT B.Color FROM product_sub_category A LEFT JOIN products B ON A.id = B.product_sub_category_id LEFT JOIN product_tags C ON B.id = C.product_id WHERE B.Color IS NOT NULL AND B.Color <> '' AND (:keyword = '' OR C.tag_name ILIKE :keyword) AND (:category = 0 OR A.product_category_id = :category)", nativeQuery = true)
     List<String> selectColorsByTags(@Param("keyword") String keyword, @Param("category") Long category);

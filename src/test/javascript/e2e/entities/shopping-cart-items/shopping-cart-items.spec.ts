@@ -45,7 +45,7 @@ describe('ShoppingCartItems e2e test', () => {
         await shoppingCartItemsComponentsPage.clickOnCreateButton();
         await promise.all([
             shoppingCartItemsUpdatePage.setQuantityInput('5'),
-            shoppingCartItemsUpdatePage.productSelectLastOption(),
+            shoppingCartItemsUpdatePage.stockItemSelectLastOption(),
             shoppingCartItemsUpdatePage.cartSelectLastOption()
         ]);
         expect(await shoppingCartItemsUpdatePage.getQuantityInput()).to.eq('5');

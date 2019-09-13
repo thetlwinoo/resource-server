@@ -6,8 +6,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IStockItemHoldings } from 'app/shared/model/stock-item-holdings.model';
 import { StockItemHoldingsService } from './stock-item-holdings.service';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
+import { IStockItems } from 'app/shared/model/stock-items.model';
+import { StockItemsService } from 'app/entities/stock-items';
 
 @Component({
     selector: 'jhi-stock-item-holdings-update',
@@ -17,12 +17,12 @@ export class StockItemHoldingsUpdateComponent implements OnInit {
     stockItemHoldings: IStockItemHoldings;
     isSaving: boolean;
 
-    products: IProducts[];
+    stockitems: IStockItems[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected stockItemHoldingsService: StockItemHoldingsService,
-        protected productsService: ProductsService,
+        protected stockItemsService: StockItemsService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -31,13 +31,31 @@ export class StockItemHoldingsUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ stockItemHoldings }) => {
             this.stockItemHoldings = stockItemHoldings;
         });
-        this.productsService
-            .query()
+        this.stockItemsService
+            .query({ filter: 'stockitemholding-is-null' })
             .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IStockItems[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStockItems[]>) => response.body)
             )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe(
+                (res: IStockItems[]) => {
+                    if (!this.stockItemHoldings.stockItemId) {
+                        this.stockitems = res;
+                    } else {
+                        this.stockItemsService
+                            .find(this.stockItemHoldings.stockItemId)
+                            .pipe(
+                                filter((subResMayBeOk: HttpResponse<IStockItems>) => subResMayBeOk.ok),
+                                map((subResponse: HttpResponse<IStockItems>) => subResponse.body)
+                            )
+                            .subscribe(
+                                (subRes: IStockItems) => (this.stockitems = [subRes].concat(res)),
+                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                            );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     previousState() {
@@ -70,7 +88,7 @@ export class StockItemHoldingsUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackStockItemsById(index: number, item: IStockItems) {
         return item.id;
     }
 }

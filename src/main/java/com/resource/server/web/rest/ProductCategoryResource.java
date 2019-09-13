@@ -2,12 +2,17 @@ package com.resource.server.web.rest;
 import com.resource.server.service.ProductCategoryService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
+import com.resource.server.web.rest.util.PaginationUtil;
 import com.resource.server.service.dto.ProductCategoryDTO;
 import com.resource.server.service.dto.ProductCategoryCriteria;
 import com.resource.server.service.ProductCategoryQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,14 +86,16 @@ public class ProductCategoryResource {
     /**
      * GET  /product-categories : get all the productCategories.
      *
+     * @param pageable the pagination information
      * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of productCategories in body
      */
     @GetMapping("/product-categories")
-    public ResponseEntity<List<ProductCategoryDTO>> getAllProductCategories(ProductCategoryCriteria criteria) {
+    public ResponseEntity<List<ProductCategoryDTO>> getAllProductCategories(ProductCategoryCriteria criteria, Pageable pageable) {
         log.debug("REST request to get ProductCategories by criteria: {}", criteria);
-        List<ProductCategoryDTO> entityList = productCategoryQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
+        Page<ProductCategoryDTO> page = productCategoryQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/product-categories");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

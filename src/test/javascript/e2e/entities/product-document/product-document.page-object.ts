@@ -26,7 +26,9 @@ export class ProductDocumentUpdatePage {
     pageTitle = element(by.id('jhi-product-document-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    documentNodeInput = element(by.id('field_documentNode'));
+    documentNodeInput = element(by.id('file_documentNode'));
+    videoUrlInput = element(by.id('field_videoUrl'));
+    highlightsInput = element(by.id('field_highlights'));
     productSelect = element(by.id('field_product'));
     cultureSelect = element(by.id('field_culture'));
 
@@ -40,6 +42,22 @@ export class ProductDocumentUpdatePage {
 
     async getDocumentNodeInput() {
         return this.documentNodeInput.getAttribute('value');
+    }
+
+    async setVideoUrlInput(videoUrl) {
+        await this.videoUrlInput.sendKeys(videoUrl);
+    }
+
+    async getVideoUrlInput() {
+        return this.videoUrlInput.getAttribute('value');
+    }
+
+    async setHighlightsInput(highlights) {
+        await this.highlightsInput.sendKeys(highlights);
+    }
+
+    async getHighlightsInput() {
+        return this.highlightsInput.getAttribute('value');
     }
 
     async productSelectLastOption() {

@@ -8,10 +8,10 @@ export interface IPurchaseOrderLines {
     expectedUnitPricePerOuter?: number;
     lastReceiptDate?: Moment;
     isOrderLineFinalized?: boolean;
-    productProductName?: string;
-    productId?: number;
     packageTypePackageTypeName?: string;
     packageTypeId?: number;
+    stockItemStockItemName?: string;
+    stockItemId?: number;
     purchaseOrderId?: number;
 }
 
@@ -24,10 +24,10 @@ export class PurchaseOrderLines implements IPurchaseOrderLines {
         public expectedUnitPricePerOuter?: number,
         public lastReceiptDate?: Moment,
         public isOrderLineFinalized?: boolean,
-        public productProductName?: string,
-        public productId?: number,
         public packageTypePackageTypeName?: string,
         public packageTypeId?: number,
+        public stockItemStockItemName?: string,
+        public stockItemId?: number,
         public purchaseOrderId?: number
     ) {
         this.isOrderLineFinalized = this.isOrderLineFinalized || false;

@@ -31,69 +31,35 @@ public class ProductsCriteria implements Serializable {
 
     private StringFilter searchDetails;
 
-    private BooleanFilter makeFlag;
-
-    private BooleanFilter finishedGoodsFlag;
-
-    private StringFilter color;
-
-    private IntegerFilter safetyStockLevel;
-
-    private IntegerFilter reorderPoint;
-
-    private FloatFilter standardCost;
-
-    private FloatFilter unitPrice;
-
-    private FloatFilter recommendedRetailPrice;
-
-    private StringFilter brand;
-
-    private StringFilter specifySize;
-
-    private FloatFilter weight;
-
-    private IntegerFilter daysToManufacture;
-
-    private StringFilter productLine;
-
-    private StringFilter classType;
-
-    private StringFilter style;
-
-    private StringFilter customFields;
-
-    private StringFilter photo;
+    private StringFilter thumbnailUrl;
 
     private LocalDateFilter sellStartDate;
 
     private LocalDateFilter sellEndDate;
 
-    private StringFilter marketingComments;
+    private StringFilter warrantyPeriod;
 
-    private StringFilter internalComments;
-
-    private LocalDateFilter discontinuedDate;
+    private StringFilter warrantyPolicy;
 
     private IntegerFilter sellCount;
 
-    private LongFilter reviewLineId;
-
-    private LongFilter unitPackageId;
-
-    private LongFilter outerPackageId;
+    private StringFilter whatInTheBox;
 
     private LongFilter supplierId;
 
     private LongFilter merchantId;
 
-    private LongFilter productSubCategoryId;
+    private LongFilter unitPackageId;
 
-    private LongFilter sizeUnitMeasureCodeId;
-
-    private LongFilter weightUnitMeasureCodeId;
+    private LongFilter outerPackageId;
 
     private LongFilter productModelId;
+
+    private LongFilter productCategoryId;
+
+    private LongFilter productBrandId;
+
+    private LongFilter warrantyTypeId;
 
     public LongFilter getId() {
         return id;
@@ -127,140 +93,12 @@ public class ProductsCriteria implements Serializable {
         this.searchDetails = searchDetails;
     }
 
-    public BooleanFilter getMakeFlag() {
-        return makeFlag;
+    public StringFilter getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setMakeFlag(BooleanFilter makeFlag) {
-        this.makeFlag = makeFlag;
-    }
-
-    public BooleanFilter getFinishedGoodsFlag() {
-        return finishedGoodsFlag;
-    }
-
-    public void setFinishedGoodsFlag(BooleanFilter finishedGoodsFlag) {
-        this.finishedGoodsFlag = finishedGoodsFlag;
-    }
-
-    public StringFilter getColor() {
-        return color;
-    }
-
-    public void setColor(StringFilter color) {
-        this.color = color;
-    }
-
-    public IntegerFilter getSafetyStockLevel() {
-        return safetyStockLevel;
-    }
-
-    public void setSafetyStockLevel(IntegerFilter safetyStockLevel) {
-        this.safetyStockLevel = safetyStockLevel;
-    }
-
-    public IntegerFilter getReorderPoint() {
-        return reorderPoint;
-    }
-
-    public void setReorderPoint(IntegerFilter reorderPoint) {
-        this.reorderPoint = reorderPoint;
-    }
-
-    public FloatFilter getStandardCost() {
-        return standardCost;
-    }
-
-    public void setStandardCost(FloatFilter standardCost) {
-        this.standardCost = standardCost;
-    }
-
-    public FloatFilter getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(FloatFilter unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public FloatFilter getRecommendedRetailPrice() {
-        return recommendedRetailPrice;
-    }
-
-    public void setRecommendedRetailPrice(FloatFilter recommendedRetailPrice) {
-        this.recommendedRetailPrice = recommendedRetailPrice;
-    }
-
-    public StringFilter getBrand() {
-        return brand;
-    }
-
-    public void setBrand(StringFilter brand) {
-        this.brand = brand;
-    }
-
-    public StringFilter getSpecifySize() {
-        return specifySize;
-    }
-
-    public void setSpecifySize(StringFilter specifySize) {
-        this.specifySize = specifySize;
-    }
-
-    public FloatFilter getWeight() {
-        return weight;
-    }
-
-    public void setWeight(FloatFilter weight) {
-        this.weight = weight;
-    }
-
-    public IntegerFilter getDaysToManufacture() {
-        return daysToManufacture;
-    }
-
-    public void setDaysToManufacture(IntegerFilter daysToManufacture) {
-        this.daysToManufacture = daysToManufacture;
-    }
-
-    public StringFilter getProductLine() {
-        return productLine;
-    }
-
-    public void setProductLine(StringFilter productLine) {
-        this.productLine = productLine;
-    }
-
-    public StringFilter getClassType() {
-        return classType;
-    }
-
-    public void setClassType(StringFilter classType) {
-        this.classType = classType;
-    }
-
-    public StringFilter getStyle() {
-        return style;
-    }
-
-    public void setStyle(StringFilter style) {
-        this.style = style;
-    }
-
-    public StringFilter getCustomFields() {
-        return customFields;
-    }
-
-    public void setCustomFields(StringFilter customFields) {
-        this.customFields = customFields;
-    }
-
-    public StringFilter getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(StringFilter photo) {
-        this.photo = photo;
+    public void setThumbnailUrl(StringFilter thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public LocalDateFilter getSellStartDate() {
@@ -279,28 +117,20 @@ public class ProductsCriteria implements Serializable {
         this.sellEndDate = sellEndDate;
     }
 
-    public StringFilter getMarketingComments() {
-        return marketingComments;
+    public StringFilter getWarrantyPeriod() {
+        return warrantyPeriod;
     }
 
-    public void setMarketingComments(StringFilter marketingComments) {
-        this.marketingComments = marketingComments;
+    public void setWarrantyPeriod(StringFilter warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
     }
 
-    public StringFilter getInternalComments() {
-        return internalComments;
+    public StringFilter getWarrantyPolicy() {
+        return warrantyPolicy;
     }
 
-    public void setInternalComments(StringFilter internalComments) {
-        this.internalComments = internalComments;
-    }
-
-    public LocalDateFilter getDiscontinuedDate() {
-        return discontinuedDate;
-    }
-
-    public void setDiscontinuedDate(LocalDateFilter discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
+    public void setWarrantyPolicy(StringFilter warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
     }
 
     public IntegerFilter getSellCount() {
@@ -311,28 +141,12 @@ public class ProductsCriteria implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public LongFilter getReviewLineId() {
-        return reviewLineId;
+    public StringFilter getWhatInTheBox() {
+        return whatInTheBox;
     }
 
-    public void setReviewLineId(LongFilter reviewLineId) {
-        this.reviewLineId = reviewLineId;
-    }
-
-    public LongFilter getUnitPackageId() {
-        return unitPackageId;
-    }
-
-    public void setUnitPackageId(LongFilter unitPackageId) {
-        this.unitPackageId = unitPackageId;
-    }
-
-    public LongFilter getOuterPackageId() {
-        return outerPackageId;
-    }
-
-    public void setOuterPackageId(LongFilter outerPackageId) {
-        this.outerPackageId = outerPackageId;
+    public void setWhatInTheBox(StringFilter whatInTheBox) {
+        this.whatInTheBox = whatInTheBox;
     }
 
     public LongFilter getSupplierId() {
@@ -351,28 +165,20 @@ public class ProductsCriteria implements Serializable {
         this.merchantId = merchantId;
     }
 
-    public LongFilter getProductSubCategoryId() {
-        return productSubCategoryId;
+    public LongFilter getUnitPackageId() {
+        return unitPackageId;
     }
 
-    public void setProductSubCategoryId(LongFilter productSubCategoryId) {
-        this.productSubCategoryId = productSubCategoryId;
+    public void setUnitPackageId(LongFilter unitPackageId) {
+        this.unitPackageId = unitPackageId;
     }
 
-    public LongFilter getSizeUnitMeasureCodeId() {
-        return sizeUnitMeasureCodeId;
+    public LongFilter getOuterPackageId() {
+        return outerPackageId;
     }
 
-    public void setSizeUnitMeasureCodeId(LongFilter sizeUnitMeasureCodeId) {
-        this.sizeUnitMeasureCodeId = sizeUnitMeasureCodeId;
-    }
-
-    public LongFilter getWeightUnitMeasureCodeId() {
-        return weightUnitMeasureCodeId;
-    }
-
-    public void setWeightUnitMeasureCodeId(LongFilter weightUnitMeasureCodeId) {
-        this.weightUnitMeasureCodeId = weightUnitMeasureCodeId;
+    public void setOuterPackageId(LongFilter outerPackageId) {
+        this.outerPackageId = outerPackageId;
     }
 
     public LongFilter getProductModelId() {
@@ -381,6 +187,30 @@ public class ProductsCriteria implements Serializable {
 
     public void setProductModelId(LongFilter productModelId) {
         this.productModelId = productModelId;
+    }
+
+    public LongFilter getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(LongFilter productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
+    public LongFilter getProductBrandId() {
+        return productBrandId;
+    }
+
+    public void setProductBrandId(LongFilter productBrandId) {
+        this.productBrandId = productBrandId;
+    }
+
+    public LongFilter getWarrantyTypeId() {
+        return warrantyTypeId;
+    }
+
+    public void setWarrantyTypeId(LongFilter warrantyTypeId) {
+        this.warrantyTypeId = warrantyTypeId;
     }
 
 
@@ -398,38 +228,21 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(productName, that.productName) &&
             Objects.equals(productNumber, that.productNumber) &&
             Objects.equals(searchDetails, that.searchDetails) &&
-            Objects.equals(makeFlag, that.makeFlag) &&
-            Objects.equals(finishedGoodsFlag, that.finishedGoodsFlag) &&
-            Objects.equals(color, that.color) &&
-            Objects.equals(safetyStockLevel, that.safetyStockLevel) &&
-            Objects.equals(reorderPoint, that.reorderPoint) &&
-            Objects.equals(standardCost, that.standardCost) &&
-            Objects.equals(unitPrice, that.unitPrice) &&
-            Objects.equals(recommendedRetailPrice, that.recommendedRetailPrice) &&
-            Objects.equals(brand, that.brand) &&
-            Objects.equals(specifySize, that.specifySize) &&
-            Objects.equals(weight, that.weight) &&
-            Objects.equals(daysToManufacture, that.daysToManufacture) &&
-            Objects.equals(productLine, that.productLine) &&
-            Objects.equals(classType, that.classType) &&
-            Objects.equals(style, that.style) &&
-            Objects.equals(customFields, that.customFields) &&
-            Objects.equals(photo, that.photo) &&
+            Objects.equals(thumbnailUrl, that.thumbnailUrl) &&
             Objects.equals(sellStartDate, that.sellStartDate) &&
             Objects.equals(sellEndDate, that.sellEndDate) &&
-            Objects.equals(marketingComments, that.marketingComments) &&
-            Objects.equals(internalComments, that.internalComments) &&
-            Objects.equals(discontinuedDate, that.discontinuedDate) &&
+            Objects.equals(warrantyPeriod, that.warrantyPeriod) &&
+            Objects.equals(warrantyPolicy, that.warrantyPolicy) &&
             Objects.equals(sellCount, that.sellCount) &&
-            Objects.equals(reviewLineId, that.reviewLineId) &&
-            Objects.equals(unitPackageId, that.unitPackageId) &&
-            Objects.equals(outerPackageId, that.outerPackageId) &&
+            Objects.equals(whatInTheBox, that.whatInTheBox) &&
             Objects.equals(supplierId, that.supplierId) &&
             Objects.equals(merchantId, that.merchantId) &&
-            Objects.equals(productSubCategoryId, that.productSubCategoryId) &&
-            Objects.equals(sizeUnitMeasureCodeId, that.sizeUnitMeasureCodeId) &&
-            Objects.equals(weightUnitMeasureCodeId, that.weightUnitMeasureCodeId) &&
-            Objects.equals(productModelId, that.productModelId);
+            Objects.equals(unitPackageId, that.unitPackageId) &&
+            Objects.equals(outerPackageId, that.outerPackageId) &&
+            Objects.equals(productModelId, that.productModelId) &&
+            Objects.equals(productCategoryId, that.productCategoryId) &&
+            Objects.equals(productBrandId, that.productBrandId) &&
+            Objects.equals(warrantyTypeId, that.warrantyTypeId);
     }
 
     @Override
@@ -439,38 +252,21 @@ public class ProductsCriteria implements Serializable {
         productName,
         productNumber,
         searchDetails,
-        makeFlag,
-        finishedGoodsFlag,
-        color,
-        safetyStockLevel,
-        reorderPoint,
-        standardCost,
-        unitPrice,
-        recommendedRetailPrice,
-        brand,
-        specifySize,
-        weight,
-        daysToManufacture,
-        productLine,
-        classType,
-        style,
-        customFields,
-        photo,
+        thumbnailUrl,
         sellStartDate,
         sellEndDate,
-        marketingComments,
-        internalComments,
-        discontinuedDate,
+        warrantyPeriod,
+        warrantyPolicy,
         sellCount,
-        reviewLineId,
-        unitPackageId,
-        outerPackageId,
+        whatInTheBox,
         supplierId,
         merchantId,
-        productSubCategoryId,
-        sizeUnitMeasureCodeId,
-        weightUnitMeasureCodeId,
-        productModelId
+        unitPackageId,
+        outerPackageId,
+        productModelId,
+        productCategoryId,
+        productBrandId,
+        warrantyTypeId
         );
     }
 
@@ -481,38 +277,21 @@ public class ProductsCriteria implements Serializable {
                 (productName != null ? "productName=" + productName + ", " : "") +
                 (productNumber != null ? "productNumber=" + productNumber + ", " : "") +
                 (searchDetails != null ? "searchDetails=" + searchDetails + ", " : "") +
-                (makeFlag != null ? "makeFlag=" + makeFlag + ", " : "") +
-                (finishedGoodsFlag != null ? "finishedGoodsFlag=" + finishedGoodsFlag + ", " : "") +
-                (color != null ? "color=" + color + ", " : "") +
-                (safetyStockLevel != null ? "safetyStockLevel=" + safetyStockLevel + ", " : "") +
-                (reorderPoint != null ? "reorderPoint=" + reorderPoint + ", " : "") +
-                (standardCost != null ? "standardCost=" + standardCost + ", " : "") +
-                (unitPrice != null ? "unitPrice=" + unitPrice + ", " : "") +
-                (recommendedRetailPrice != null ? "recommendedRetailPrice=" + recommendedRetailPrice + ", " : "") +
-                (brand != null ? "brand=" + brand + ", " : "") +
-                (specifySize != null ? "specifySize=" + specifySize + ", " : "") +
-                (weight != null ? "weight=" + weight + ", " : "") +
-                (daysToManufacture != null ? "daysToManufacture=" + daysToManufacture + ", " : "") +
-                (productLine != null ? "productLine=" + productLine + ", " : "") +
-                (classType != null ? "classType=" + classType + ", " : "") +
-                (style != null ? "style=" + style + ", " : "") +
-                (customFields != null ? "customFields=" + customFields + ", " : "") +
-                (photo != null ? "photo=" + photo + ", " : "") +
+                (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
                 (sellStartDate != null ? "sellStartDate=" + sellStartDate + ", " : "") +
                 (sellEndDate != null ? "sellEndDate=" + sellEndDate + ", " : "") +
-                (marketingComments != null ? "marketingComments=" + marketingComments + ", " : "") +
-                (internalComments != null ? "internalComments=" + internalComments + ", " : "") +
-                (discontinuedDate != null ? "discontinuedDate=" + discontinuedDate + ", " : "") +
+                (warrantyPeriod != null ? "warrantyPeriod=" + warrantyPeriod + ", " : "") +
+                (warrantyPolicy != null ? "warrantyPolicy=" + warrantyPolicy + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
-                (reviewLineId != null ? "reviewLineId=" + reviewLineId + ", " : "") +
-                (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +
-                (outerPackageId != null ? "outerPackageId=" + outerPackageId + ", " : "") +
+                (whatInTheBox != null ? "whatInTheBox=" + whatInTheBox + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +
                 (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
-                (productSubCategoryId != null ? "productSubCategoryId=" + productSubCategoryId + ", " : "") +
-                (sizeUnitMeasureCodeId != null ? "sizeUnitMeasureCodeId=" + sizeUnitMeasureCodeId + ", " : "") +
-                (weightUnitMeasureCodeId != null ? "weightUnitMeasureCodeId=" + weightUnitMeasureCodeId + ", " : "") +
+                (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +
+                (outerPackageId != null ? "outerPackageId=" + outerPackageId + ", " : "") +
                 (productModelId != null ? "productModelId=" + productModelId + ", " : "") +
+                (productCategoryId != null ? "productCategoryId=" + productCategoryId + ", " : "") +
+                (productBrandId != null ? "productBrandId=" + productBrandId + ", " : "") +
+                (warrantyTypeId != null ? "warrantyTypeId=" + warrantyTypeId + ", " : "") +
             "}";
     }
 

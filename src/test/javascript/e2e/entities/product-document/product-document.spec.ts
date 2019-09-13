@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { ProductDocumentComponentsPage, ProductDocumentDeleteDialog, ProductDocumentUpdatePage } from './product-document.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('ProductDocument e2e test', () => {
     let productDocumentUpdatePage: ProductDocumentUpdatePage;
     let productDocumentComponentsPage: ProductDocumentComponentsPage;
     let productDocumentDeleteDialog: ProductDocumentDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -40,11 +44,15 @@ describe('ProductDocument e2e test', () => {
 
         await productDocumentComponentsPage.clickOnCreateButton();
         await promise.all([
-            productDocumentUpdatePage.setDocumentNodeInput('documentNode'),
+            productDocumentUpdatePage.setDocumentNodeInput(absolutePath),
+            productDocumentUpdatePage.setVideoUrlInput('videoUrl'),
+            productDocumentUpdatePage.setHighlightsInput('highlights'),
             productDocumentUpdatePage.productSelectLastOption(),
             productDocumentUpdatePage.cultureSelectLastOption()
         ]);
-        expect(await productDocumentUpdatePage.getDocumentNodeInput()).to.eq('documentNode');
+        expect(await productDocumentUpdatePage.getDocumentNodeInput()).to.endsWith(fileNameToUpload);
+        expect(await productDocumentUpdatePage.getVideoUrlInput()).to.eq('videoUrl');
+        expect(await productDocumentUpdatePage.getHighlightsInput()).to.eq('highlights');
         await productDocumentUpdatePage.save();
         expect(await productDocumentUpdatePage.getSaveButton().isPresent()).to.be.false;
 

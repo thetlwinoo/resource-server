@@ -27,7 +27,7 @@ export class ShoppingCartItemsUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     quantityInput = element(by.id('field_quantity'));
-    productSelect = element(by.id('field_product'));
+    stockItemSelect = element(by.id('field_stockItem'));
     cartSelect = element(by.id('field_cart'));
 
     async getPageTitle() {
@@ -42,23 +42,23 @@ export class ShoppingCartItemsUpdatePage {
         return this.quantityInput.getAttribute('value');
     }
 
-    async productSelectLastOption() {
-        await this.productSelect
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
     }
 
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
     }
 
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async cartSelectLastOption() {

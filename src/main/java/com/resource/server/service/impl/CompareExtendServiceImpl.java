@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -130,11 +131,11 @@ public class CompareExtendServiceImpl implements CompareExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 
 }

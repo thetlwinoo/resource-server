@@ -20,92 +20,7 @@
             ]
         },
         {
-            "fieldName": "makeFlag",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "finishedGoodsFlag",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "color",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "safetyStockLevel",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "reorderPoint",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "standardCost",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "unitPrice",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "recommendedRetailPrice",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "brand",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "specifySize",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "weight",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "daysToManufacture",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "productLine",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "classType",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "style",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "customFields",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "photo",
+            "fieldName": "thumbnailUrl",
             "fieldType": "String"
         },
         {
@@ -120,30 +35,39 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "marketingComments",
+            "fieldName": "warrantyPeriod",
             "fieldType": "String"
         },
         {
-            "fieldName": "internalComments",
+            "fieldName": "warrantyPolicy",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "discontinuedDate",
-            "fieldType": "LocalDate"
         },
         {
             "fieldName": "sellCount",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "whatInTheBox",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "reviewLines",
-            "otherEntityRelationshipName": "product",
-            "relationshipName": "reviewLine",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipType": "many-to-one",
+            "otherEntityName": "suppliers",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "supplier",
+            "otherEntityField": "supplierName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "merchants",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "merchant",
+            "otherEntityField": "merchantName"
         },
         {
             "relationshipType": "many-to-one",
@@ -161,45 +85,31 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "suppliers",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "merchants",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "merchant",
-            "otherEntityField": "merchantName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "productSubCategory",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "productSubCategory",
-            "otherEntityField": "productSubCategoryName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "unitMeasure",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "sizeUnitMeasureCode",
-            "otherEntityField": "unitMeasureCode"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "unitMeasure",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "weightUnitMeasureCode",
-            "otherEntityField": "unitMeasureCode"
-        },
-        {
-            "relationshipType": "many-to-one",
             "otherEntityName": "productModel",
             "otherEntityRelationshipName": "products",
             "relationshipName": "productModel",
             "otherEntityField": "productModelName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productCategory",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "productCategory",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productBrand",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "productBrand",
+            "otherEntityField": "productBrandName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "warrantyTypes",
+            "otherEntityRelationshipName": "products",
+            "relationshipName": "warrantyType",
+            "otherEntityField": "warrantyTypeName"
         }
     ],
     "changelogDate": "20190801044940",

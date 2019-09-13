@@ -66,15 +66,15 @@ public class ReviewLinesServiceImpl implements ReviewLinesService {
 
 
     /**
-     *  get all the reviewLines where Product is null.
+     *  get all the reviewLines where StockItem is null.
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<ReviewLinesDTO> findAllWhereProductIsNull() {
-        log.debug("Request to get all reviewLines where Product is null");
+    public List<ReviewLinesDTO> findAllWhereStockItemIsNull() {
+        log.debug("Request to get all reviewLines where StockItem is null");
         return StreamSupport
             .stream(reviewLinesRepository.findAll().spliterator(), false)
-            .filter(reviewLines -> reviewLines.getProduct() == null)
+            .filter(reviewLines -> reviewLines.getStockItem() == null)
             .map(reviewLinesMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

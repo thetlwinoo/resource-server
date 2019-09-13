@@ -25,7 +25,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "productDescription",
+            "otherEntityName": "productModelDescription",
             "otherEntityRelationshipName": "productModel",
             "relationshipName": "description"
         }

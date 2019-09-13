@@ -1,7 +1,7 @@
 package com.resource.server.service;
 
 import com.resource.server.domain.Products;
-import com.resource.server.service.dto.ProductSubCategoryDTO;
+import com.resource.server.service.dto.ProductCategoryDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public interface ProductsExtendService {
 
     List<Long> getSubCategoryList(Long categoryId);
 
-    List<ProductSubCategoryDTO> getRelatedCategories(String keyword, Long category);
+    List<ProductCategoryDTO> getRelatedCategories(String keyword, Long category);
 
     List<String> getRelatedColors(String keyword, Long category);
 

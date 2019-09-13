@@ -27,7 +27,7 @@ export class PaymentTransactionsUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     returnedCompletedPaymentDataInput = element(by.id('field_returnedCompletedPaymentData'));
-    orderSelect = element(by.id('field_order'));
+    paymentOnOrderSelect = element(by.id('field_paymentOnOrder'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -41,23 +41,23 @@ export class PaymentTransactionsUpdatePage {
         return this.returnedCompletedPaymentDataInput.getAttribute('value');
     }
 
-    async orderSelectLastOption() {
-        await this.orderSelect
+    async paymentOnOrderSelectLastOption() {
+        await this.paymentOnOrderSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async orderSelectOption(option) {
-        await this.orderSelect.sendKeys(option);
+    async paymentOnOrderSelectOption(option) {
+        await this.paymentOnOrderSelect.sendKeys(option);
     }
 
-    getOrderSelect(): ElementFinder {
-        return this.orderSelect;
+    getPaymentOnOrderSelect(): ElementFinder {
+        return this.paymentOnOrderSelect;
     }
 
-    async getOrderSelectedOption() {
-        return this.orderSelect.element(by.css('option:checked')).getText();
+    async getPaymentOnOrderSelectedOption() {
+        return this.paymentOnOrderSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

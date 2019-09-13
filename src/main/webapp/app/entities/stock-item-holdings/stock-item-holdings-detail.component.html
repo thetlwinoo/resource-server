@@ -29,10 +29,10 @@
                 <dd>
                     <span>{{stockItemHoldings.targerStockLevel}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItemHoldings.product">Product</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItemHoldings.stockItem">Stock Item</span></dt>
                 <dd>
-                    <div *ngIf="stockItemHoldings.productId">
-                        <a [routerLink]="['/products', stockItemHoldings.productId, 'view']">{{stockItemHoldings.productProductName}}</a>
+                    <div *ngIf="stockItemHoldings.stockItemId">
+                        <a [routerLink]="['/stock-items', stockItemHoldings.stockItemId, 'view']">{{stockItemHoldings.stockItemId}}</a>
                     </div>
                 </dd>
             </dl>

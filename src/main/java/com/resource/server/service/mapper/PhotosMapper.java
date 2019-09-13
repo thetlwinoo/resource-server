@@ -1,0 +1,29 @@
+package com.resource.server.service.mapper;
+
+import com.resource.server.domain.*;
+import com.resource.server.service.dto.PhotosDTO;
+
+import org.mapstruct.*;
+
+/**
+ * Mapper for the entity Photos and its DTO PhotosDTO.
+ */
+@Mapper(componentModel = "spring", uses = {StockItemsMapper.class})
+public interface PhotosMapper extends EntityMapper<PhotosDTO, Photos> {
+
+    @Mapping(source = "stockItem.id", target = "stockItemId")
+    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
+    PhotosDTO toDto(Photos photos);
+
+    @Mapping(source = "stockItemId", target = "stockItem")
+    Photos toEntity(PhotosDTO photosDTO);
+
+    default Photos fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        Photos photos = new Photos();
+        photos.setId(id);
+        return photos;
+    }
+}

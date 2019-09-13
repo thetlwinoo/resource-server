@@ -12,9 +12,9 @@ public class ShoppingCartItemsDTO extends AbstractAuditingDTO implements Seriali
     private Integer quantity;
 
 
-    private Long productId;
+    private Long stockItemId;
 
-    private String productProductName;
+    private String stockItemStockItemName;
 
     private Long cartId;
 
@@ -34,20 +34,20 @@ public class ShoppingCartItemsDTO extends AbstractAuditingDTO implements Seriali
         this.quantity = quantity;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getStockItemId() {
+        return stockItemId;
     }
 
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
+    public void setStockItemId(Long stockItemsId) {
+        this.stockItemId = stockItemsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getStockItemStockItemName() {
+        return stockItemStockItemName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setStockItemStockItemName(String stockItemsStockItemName) {
+        this.stockItemStockItemName = stockItemsStockItemName;
     }
 
     public Long getCartId() {
@@ -84,8 +84,8 @@ public class ShoppingCartItemsDTO extends AbstractAuditingDTO implements Seriali
         return "ShoppingCartItemsDTO{" +
             "id=" + getId() +
             ", quantity=" + getQuantity() +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", stockItem=" + getStockItemId() +
+            ", stockItem='" + getStockItemStockItemName() + "'" +
             ", cart=" + getCartId() +
             "}";
     }

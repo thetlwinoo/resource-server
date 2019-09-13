@@ -19,6 +19,13 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
+            "otherEntityName": "stockItems",
+            "otherEntityRelationshipName": "stockItemTransactions",
+            "relationshipName": "stockItem",
+            "otherEntityField": "stockItemName"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "customers",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "customer",
@@ -33,20 +40,6 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "purchaseOrders",
-            "otherEntityRelationshipName": "stockItemTransactions",
-            "relationshipName": "purchaseOrder",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "products",
-            "otherEntityRelationshipName": "stockItemTransactions",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
-        },
-        {
-            "relationshipType": "many-to-one",
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "supplier",
@@ -57,7 +50,14 @@
             "otherEntityName": "transactionTypes",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "transactionType",
-            "otherEntityField": "transactionTypeName"
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "purchaseOrders",
+            "otherEntityRelationshipName": "stockItemTransactions",
+            "relationshipName": "purchaseOrder",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190801044952",

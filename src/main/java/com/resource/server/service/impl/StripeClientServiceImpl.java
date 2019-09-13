@@ -63,7 +63,7 @@ public class StripeClientServiceImpl implements StripeClientService {
             if (charge != null) {
                 PaymentTransactionsDTO paymentTransactionsDTO = new PaymentTransactionsDTO();
                 paymentTransactionsDTO.setReturnedCompletedPaymentData(createdPaymentJSON);
-                paymentTransactionsDTO.setOrderId(orderId.longValue());
+                paymentTransactionsDTO.setPaymentOnOrderId(orderId.longValue());
                 paymentTransactionsService.save(paymentTransactionsDTO);
 
                 Orders orders = ordersRepository.getOne(orderId.longValue());

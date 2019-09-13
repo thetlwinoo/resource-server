@@ -43,10 +43,11 @@ public class MerchantsExtendServiceImpl implements MerchantsExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        String username = principal.getName();
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(username);
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 }

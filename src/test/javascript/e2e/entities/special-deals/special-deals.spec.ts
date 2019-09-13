@@ -50,8 +50,8 @@ describe('SpecialDeals e2e test', () => {
             specialDealsUpdatePage.buyingGroupSelectLastOption(),
             specialDealsUpdatePage.customerCategorySelectLastOption(),
             specialDealsUpdatePage.customerSelectLastOption(),
-            specialDealsUpdatePage.stockGroupSelectLastOption(),
-            specialDealsUpdatePage.productSelectLastOption()
+            specialDealsUpdatePage.productCategorySelectLastOption(),
+            specialDealsUpdatePage.stockItemSelectLastOption()
         ]);
         expect(await specialDealsUpdatePage.getDealDescriptionInput()).to.eq('dealDescription');
         expect(await specialDealsUpdatePage.getStartDateInput()).to.eq('2000-12-31');

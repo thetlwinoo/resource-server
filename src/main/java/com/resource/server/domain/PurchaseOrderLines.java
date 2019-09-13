@@ -48,13 +48,13 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
 
     @ManyToOne
     @JsonIgnoreProperties("purchaseOrderLines")
-    private Products product;
+    private PackageTypes packageType;
 
     @ManyToOne
     @JsonIgnoreProperties("purchaseOrderLines")
-    private PackageTypes packageType;
+    private StockItems stockItem;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("purchaseOrderLineLists")
     private PurchaseOrders purchaseOrder;
 
@@ -145,19 +145,6 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
         this.isOrderLineFinalized = isOrderLineFinalized;
     }
 
-    public Products getProduct() {
-        return product;
-    }
-
-    public PurchaseOrderLines product(Products products) {
-        this.product = products;
-        return this;
-    }
-
-    public void setProduct(Products products) {
-        this.product = products;
-    }
-
     public PackageTypes getPackageType() {
         return packageType;
     }
@@ -169,6 +156,19 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
 
     public void setPackageType(PackageTypes packageTypes) {
         this.packageType = packageTypes;
+    }
+
+    public StockItems getStockItem() {
+        return stockItem;
+    }
+
+    public PurchaseOrderLines stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
+        return this;
+    }
+
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
 
     public PurchaseOrders getPurchaseOrder() {

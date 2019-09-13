@@ -13,10 +13,10 @@ import { ICustomerCategories } from 'app/shared/model/customer-categories.model'
 import { CustomerCategoriesService } from 'app/entities/customer-categories';
 import { ICustomers } from 'app/shared/model/customers.model';
 import { CustomersService } from 'app/entities/customers';
-import { IStockGroups } from 'app/shared/model/stock-groups.model';
-import { StockGroupsService } from 'app/entities/stock-groups';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
+import { IProductCategory } from 'app/shared/model/product-category.model';
+import { ProductCategoryService } from 'app/entities/product-category';
+import { IStockItems } from 'app/shared/model/stock-items.model';
+import { StockItemsService } from 'app/entities/stock-items';
 
 @Component({
     selector: 'jhi-special-deals-update',
@@ -32,9 +32,9 @@ export class SpecialDealsUpdateComponent implements OnInit {
 
     customers: ICustomers[];
 
-    stockgroups: IStockGroups[];
+    productcategories: IProductCategory[];
 
-    products: IProducts[];
+    stockitems: IStockItems[];
     startDateDp: any;
     endDateDp: any;
 
@@ -44,8 +44,8 @@ export class SpecialDealsUpdateComponent implements OnInit {
         protected buyingGroupsService: BuyingGroupsService,
         protected customerCategoriesService: CustomerCategoriesService,
         protected customersService: CustomersService,
-        protected stockGroupsService: StockGroupsService,
-        protected productsService: ProductsService,
+        protected productCategoryService: ProductCategoryService,
+        protected stockItemsService: StockItemsService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -78,20 +78,20 @@ export class SpecialDealsUpdateComponent implements OnInit {
                 map((response: HttpResponse<ICustomers[]>) => response.body)
             )
             .subscribe((res: ICustomers[]) => (this.customers = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.stockGroupsService
+        this.productCategoryService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IStockGroups[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IStockGroups[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IProductCategory[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProductCategory[]>) => response.body)
             )
-            .subscribe((res: IStockGroups[]) => (this.stockgroups = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.productsService
+            .subscribe((res: IProductCategory[]) => (this.productcategories = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.stockItemsService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IStockItems[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStockItems[]>) => response.body)
             )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: IStockItems[]) => (this.stockitems = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -136,11 +136,11 @@ export class SpecialDealsUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackStockGroupsById(index: number, item: IStockGroups) {
+    trackProductCategoryById(index: number, item: IProductCategory) {
         return item.id;
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackStockItemsById(index: number, item: IStockItems) {
         return item.id;
     }
 }

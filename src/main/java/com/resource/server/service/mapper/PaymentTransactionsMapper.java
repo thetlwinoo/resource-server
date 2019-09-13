@@ -11,10 +11,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {OrdersMapper.class})
 public interface PaymentTransactionsMapper extends EntityMapper<PaymentTransactionsDTO, PaymentTransactions> {
 
-    @Mapping(source = "order.id", target = "orderId")
+    @Mapping(source = "paymentOnOrder.id", target = "paymentOnOrderId")
     PaymentTransactionsDTO toDto(PaymentTransactions paymentTransactions);
 
-    @Mapping(source = "orderId", target = "order")
+    @Mapping(source = "paymentOnOrderId", target = "paymentOnOrder")
     PaymentTransactions toEntity(PaymentTransactionsDTO paymentTransactionsDTO);
 
     default PaymentTransactions fromId(Long id) {

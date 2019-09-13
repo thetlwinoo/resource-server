@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ProductDocumentService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new ProductDocument(0, 'AAAAAAA');
+            elemDefault = new ProductDocument(0, 'image/png', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -55,7 +55,9 @@ describe('Service Tests', () => {
             it('should update a ProductDocument', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        documentNode: 'BBBBBB'
+                        documentNode: 'BBBBBB',
+                        videoUrl: 'BBBBBB',
+                        highlights: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -72,7 +74,9 @@ describe('Service Tests', () => {
             it('should return a list of ProductDocument', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        documentNode: 'BBBBBB'
+                        documentNode: 'BBBBBB',
+                        videoUrl: 'BBBBBB',
+                        highlights: 'BBBBBB'
                     },
                     elemDefault
                 );

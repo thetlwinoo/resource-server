@@ -6,8 +6,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IReviewLines } from 'app/shared/model/review-lines.model';
 import { ReviewLinesService } from './review-lines.service';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
+import { IStockItems } from 'app/shared/model/stock-items.model';
+import { StockItemsService } from 'app/entities/stock-items';
 import { IReviews } from 'app/shared/model/reviews.model';
 import { ReviewsService } from 'app/entities/reviews';
 
@@ -19,7 +19,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
     reviewLines: IReviewLines;
     isSaving: boolean;
 
-    products: IProducts[];
+    stockitems: IStockItems[];
 
     reviews: IReviews[];
 
@@ -27,7 +27,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected reviewLinesService: ReviewLinesService,
-        protected productsService: ProductsService,
+        protected stockItemsService: StockItemsService,
         protected reviewsService: ReviewsService,
         protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
@@ -38,13 +38,13 @@ export class ReviewLinesUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ reviewLines }) => {
             this.reviewLines = reviewLines;
         });
-        this.productsService
+        this.stockItemsService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IStockItems[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStockItems[]>) => response.body)
             )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: IStockItems[]) => (this.stockitems = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.reviewsService
             .query()
             .pipe(
@@ -100,7 +100,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackStockItemsById(index: number, item: IStockItems) {
         return item.id;
     }
 

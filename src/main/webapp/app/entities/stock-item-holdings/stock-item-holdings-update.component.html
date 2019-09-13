@@ -97,10 +97,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemHoldings.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="stockItemHoldings.productId" >
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemHoldings.stockItem" for="field_stockItem">Stock Item</label>
+                    <select class="form-control" id="field_stockItem" name="stockItem" [(ngModel)]="stockItemHoldings.stockItemId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.id}}</option>
                     </select>
                 </div>
             </div>

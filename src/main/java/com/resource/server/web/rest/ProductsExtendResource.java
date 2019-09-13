@@ -4,11 +4,10 @@ import com.resource.server.service.ProductPhotoService;
 import com.resource.server.service.ProductsExtendService;
 import com.resource.server.service.ProductsQueryService;
 import com.resource.server.service.ProductsService;
-import com.resource.server.service.dto.ProductSubCategoryDTO;
+import com.resource.server.service.dto.ProductCategoryDTO;
 import com.resource.server.service.dto.ProductsCriteria;
 import com.resource.server.service.dto.ProductsDTO;
 import com.resource.server.web.rest.util.PaginationUtil;
-import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,15 +59,15 @@ public class ProductsExtendResource {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<List>(productExtendService.getRelatedProducts(productsDTO.getProductSubCategoryId(), id), HttpStatus.OK);
+        return new ResponseEntity<List>(productExtendService.getRelatedProducts(productsDTO.getProductCategoryId(), id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/related/categories", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductSubCategoryDTO>> getRelatedCategories(
+    public ResponseEntity<List<ProductCategoryDTO>> getRelatedCategories(
         @RequestParam(value = "keyword", required = false) String keyword,
         @RequestParam(value = "category", required = false) Long category
     ) {
-        List<ProductSubCategoryDTO> entityList = this.productExtendService.getRelatedCategories(keyword, category);
+        List<ProductCategoryDTO> entityList = this.productExtendService.getRelatedCategories(keyword, category);
         return ResponseEntity.ok().body(entityList);
     }
 

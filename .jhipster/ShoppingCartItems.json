@@ -9,10 +9,10 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "products",
+            "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "shoppingCartItems",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
+            "relationshipName": "stockItem",
+            "otherEntityField": "stockItemName"
         },
         {
             "relationshipType": "many-to-one",

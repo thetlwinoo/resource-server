@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -52,8 +51,8 @@ public class ColdRoomTemperaturesResourceIntTest {
     private static final LocalDate DEFAULT_RECORDED_WHEN = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_RECORDED_WHEN = LocalDate.now(ZoneId.systemDefault());
 
-    private static final BigDecimal DEFAULT_TEMPERATURE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_TEMPERATURE = new BigDecimal(2);
+    private static final Float DEFAULT_TEMPERATURE = 1F;
+    private static final Float UPDATED_TEMPERATURE = 2F;
 
     private static final LocalDate DEFAULT_VALID_FROM = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_VALID_FROM = LocalDate.now(ZoneId.systemDefault());
@@ -273,7 +272,7 @@ public class ColdRoomTemperaturesResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(coldRoomTemperatures.getId().intValue())))
             .andExpect(jsonPath("$.[*].coldRoomSensorNumber").value(hasItem(DEFAULT_COLD_ROOM_SENSOR_NUMBER)))
             .andExpect(jsonPath("$.[*].recordedWhen").value(hasItem(DEFAULT_RECORDED_WHEN.toString())))
-            .andExpect(jsonPath("$.[*].temperature").value(hasItem(DEFAULT_TEMPERATURE.intValue())))
+            .andExpect(jsonPath("$.[*].temperature").value(hasItem(DEFAULT_TEMPERATURE.doubleValue())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -291,7 +290,7 @@ public class ColdRoomTemperaturesResourceIntTest {
             .andExpect(jsonPath("$.id").value(coldRoomTemperatures.getId().intValue()))
             .andExpect(jsonPath("$.coldRoomSensorNumber").value(DEFAULT_COLD_ROOM_SENSOR_NUMBER))
             .andExpect(jsonPath("$.recordedWhen").value(DEFAULT_RECORDED_WHEN.toString()))
-            .andExpect(jsonPath("$.temperature").value(DEFAULT_TEMPERATURE.intValue()))
+            .andExpect(jsonPath("$.temperature").value(DEFAULT_TEMPERATURE.doubleValue()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }

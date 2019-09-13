@@ -48,8 +48,8 @@ describe('OrderLines e2e test', () => {
             orderLinesUpdatePage.setTaxRateInput('5'),
             orderLinesUpdatePage.setPickedQuantityInput('5'),
             orderLinesUpdatePage.setPickingCompletedWhenInput('2000-12-31'),
+            orderLinesUpdatePage.stockItemSelectLastOption(),
             orderLinesUpdatePage.packageTypeSelectLastOption(),
-            orderLinesUpdatePage.productSelectLastOption(),
             orderLinesUpdatePage.orderSelectLastOption()
         ]);
         expect(await orderLinesUpdatePage.getCarrierTrackingNumberInput()).to.eq('carrierTrackingNumber');

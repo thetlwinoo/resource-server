@@ -34,7 +34,7 @@ export class InvoiceLinesUpdatePage {
     lineProfitInput = element(by.id('field_lineProfit'));
     extendedPriceInput = element(by.id('field_extendedPrice'));
     packageTypeSelect = element(by.id('field_packageType'));
-    productSelect = element(by.id('field_product'));
+    stockItemSelect = element(by.id('field_stockItem'));
     invoiceSelect = element(by.id('field_invoice'));
 
     async getPageTitle() {
@@ -116,23 +116,23 @@ export class InvoiceLinesUpdatePage {
         return this.packageTypeSelect.element(by.css('option:checked')).getText();
     }
 
-    async productSelectLastOption() {
-        await this.productSelect
+    async stockItemSelectLastOption() {
+        await this.stockItemSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
+    async stockItemSelectOption(option) {
+        await this.stockItemSelect.sendKeys(option);
     }
 
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
+    getStockItemSelect(): ElementFinder {
+        return this.stockItemSelect;
     }
 
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
+    async getStockItemSelectedOption() {
+        return this.stockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async invoiceSelectLastOption() {

@@ -9,7 +9,8 @@ export interface IInvoiceLines {
     extendedPrice?: number;
     packageTypePackageTypeName?: string;
     packageTypeId?: number;
-    productId?: number;
+    stockItemStockItemName?: string;
+    stockItemId?: number;
     invoiceId?: number;
 }
 
@@ -25,7 +26,8 @@ export class InvoiceLines implements IInvoiceLines {
         public extendedPrice?: number,
         public packageTypePackageTypeName?: string,
         public packageTypeId?: number,
-        public productId?: number,
+        public stockItemStockItemName?: string,
+        public stockItemId?: number,
         public invoiceId?: number
     ) {}
 }

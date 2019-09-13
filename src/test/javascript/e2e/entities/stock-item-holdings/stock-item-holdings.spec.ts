@@ -50,7 +50,7 @@ describe('StockItemHoldings e2e test', () => {
             stockItemHoldingsUpdatePage.setLastCostPriceInput('5'),
             stockItemHoldingsUpdatePage.setReorderLevelInput('5'),
             stockItemHoldingsUpdatePage.setTargerStockLevelInput('5'),
-            stockItemHoldingsUpdatePage.productSelectLastOption()
+            stockItemHoldingsUpdatePage.stockItemSelectLastOption()
         ]);
         expect(await stockItemHoldingsUpdatePage.getQuantityOnHandInput()).to.eq('5');
         expect(await stockItemHoldingsUpdatePage.getBinLocationInput()).to.eq('binLocation');

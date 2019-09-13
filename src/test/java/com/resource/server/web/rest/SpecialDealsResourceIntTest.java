@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -55,8 +54,8 @@ public class SpecialDealsResourceIntTest {
     private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final BigDecimal DEFAULT_DISCOUNT_AMOUNT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_DISCOUNT_AMOUNT = new BigDecimal(2);
+    private static final Float DEFAULT_DISCOUNT_AMOUNT = 1F;
+    private static final Float UPDATED_DISCOUNT_AMOUNT = 2F;
 
     private static final Float DEFAULT_DISCOUNT_PERCENTAGE = 1F;
     private static final Float UPDATED_DISCOUNT_PERCENTAGE = 2F;
@@ -64,8 +63,8 @@ public class SpecialDealsResourceIntTest {
     private static final String DEFAULT_DISCOUNT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_DISCOUNT_CODE = "BBBBBBBBBB";
 
-    private static final BigDecimal DEFAULT_UNIT_PRICE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_UNIT_PRICE = new BigDecimal(2);
+    private static final Float DEFAULT_UNIT_PRICE = 1F;
+    private static final Float UPDATED_UNIT_PRICE = 2F;
 
     @Autowired
     private SpecialDealsRepository specialDealsRepository;
@@ -246,10 +245,10 @@ public class SpecialDealsResourceIntTest {
             .andExpect(jsonPath("$.[*].dealDescription").value(hasItem(DEFAULT_DEAL_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].discountAmount").value(hasItem(DEFAULT_DISCOUNT_AMOUNT.intValue())))
+            .andExpect(jsonPath("$.[*].discountAmount").value(hasItem(DEFAULT_DISCOUNT_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].discountPercentage").value(hasItem(DEFAULT_DISCOUNT_PERCENTAGE.doubleValue())))
             .andExpect(jsonPath("$.[*].discountCode").value(hasItem(DEFAULT_DISCOUNT_CODE.toString())))
-            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.intValue())));
+            .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())));
     }
     
     @Test
@@ -266,10 +265,10 @@ public class SpecialDealsResourceIntTest {
             .andExpect(jsonPath("$.dealDescription").value(DEFAULT_DEAL_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.discountAmount").value(DEFAULT_DISCOUNT_AMOUNT.intValue()))
+            .andExpect(jsonPath("$.discountAmount").value(DEFAULT_DISCOUNT_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.discountPercentage").value(DEFAULT_DISCOUNT_PERCENTAGE.doubleValue()))
             .andExpect(jsonPath("$.discountCode").value(DEFAULT_DISCOUNT_CODE.toString()))
-            .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.intValue()));
+            .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()));
     }
 
     @Test

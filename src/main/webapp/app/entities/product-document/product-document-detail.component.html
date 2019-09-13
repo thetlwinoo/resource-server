@@ -7,7 +7,18 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="resourceApp.productDocument.documentNode">Document Node</span></dt>
                 <dd>
-                    <span>{{productDocument.documentNode}}</span>
+                    <div *ngIf="productDocument.documentNode">
+                        <a (click)="openFile(productDocument.documentNodeContentType, productDocument.documentNode)" jhiTranslate="entity.action.open">open</a>
+                        {{productDocument.documentNodeContentType}}, {{byteSize(productDocument.documentNode)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.videoUrl">Video Url</span></dt>
+                <dd>
+                    <span>{{productDocument.videoUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.highlights">Highlights</span></dt>
+                <dd>
+                    <span>{{productDocument.highlights}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.productDocument.product">Product</span></dt>
                 <dd>

@@ -53,7 +53,7 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
 
     @OneToOne(mappedBy = "reviewLine")
     @JsonIgnore
-    private Products product;
+    private StockItems stockItem;
 
     @ManyToOne
     @JsonIgnoreProperties("reviewLineLists")
@@ -172,17 +172,17 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
         this.photoContentType = photoContentType;
     }
 
-    public Products getProduct() {
-        return product;
+    public StockItems getStockItem() {
+        return stockItem;
     }
 
-    public ReviewLines product(Products products) {
-        this.product = products;
+    public ReviewLines stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
 
     public Reviews getReview() {

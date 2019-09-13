@@ -8,7 +8,7 @@ export interface IReviewLines {
     deliveryReview?: string;
     photoContentType?: string;
     photo?: any;
-    productId?: number;
+    stockItemId?: number;
     reviewId?: number;
 }
 
@@ -23,7 +23,7 @@ export class ReviewLines implements IReviewLines {
         public deliveryReview?: string,
         public photoContentType?: string,
         public photo?: any,
-        public productId?: number,
+        public stockItemId?: number,
         public reviewId?: number
     ) {}
 }

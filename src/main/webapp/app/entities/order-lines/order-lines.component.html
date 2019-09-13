@@ -23,8 +23,8 @@
             <th><span jhiTranslate="resourceApp.orderLines.taxRate">Tax Rate</span></th>
             <th><span jhiTranslate="resourceApp.orderLines.pickedQuantity">Picked Quantity</span></th>
             <th><span jhiTranslate="resourceApp.orderLines.pickingCompletedWhen">Picking Completed When</span></th>
+            <th><span jhiTranslate="resourceApp.orderLines.stockItem">Stock Item</span></th>
             <th><span jhiTranslate="resourceApp.orderLines.packageType">Package Type</span></th>
-            <th><span jhiTranslate="resourceApp.orderLines.product">Product</span></th>
             <th><span jhiTranslate="resourceApp.orderLines.order">Order</span></th>
             <th></th>
             </tr>
@@ -41,13 +41,13 @@
                 <td>{{orderLines.pickedQuantity}}</td>
                 <td>{{orderLines.pickingCompletedWhen | date:'mediumDate'}}</td>
                 <td>
-                    <div *ngIf="orderLines.packageTypeId">
-                        <a [routerLink]="['../package-types', orderLines.packageTypeId , 'view' ]" >{{orderLines.packageTypeId}}</a>
+                    <div *ngIf="orderLines.stockItemId">
+                        <a [routerLink]="['../stock-items', orderLines.stockItemId , 'view' ]" >{{orderLines.stockItemStockItemName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="orderLines.productId">
-                        <a [routerLink]="['../products', orderLines.productId , 'view' ]" >{{orderLines.productProductName}}</a>
+                    <div *ngIf="orderLines.packageTypeId">
+                        <a [routerLink]="['../package-types', orderLines.packageTypeId , 'view' ]" >{{orderLines.packageTypeId}}</a>
                     </div>
                 </td>
                 <td>

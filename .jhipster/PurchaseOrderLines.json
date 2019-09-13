@@ -32,17 +32,17 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "products",
-            "otherEntityRelationshipName": "purchaseOrderLines",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
-        },
-        {
-            "relationshipType": "many-to-one",
             "otherEntityName": "packageTypes",
             "otherEntityRelationshipName": "purchaseOrderLines",
             "relationshipName": "packageType",
             "otherEntityField": "packageTypeName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "stockItems",
+            "otherEntityRelationshipName": "purchaseOrderLines",
+            "relationshipName": "stockItem",
+            "otherEntityField": "stockItemName"
         },
         {
             "relationshipType": "many-to-one",

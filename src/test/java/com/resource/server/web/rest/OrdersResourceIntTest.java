@@ -1144,7 +1144,7 @@ public class OrdersResourceIntTest {
         em.persist(paymentTransaction);
         em.flush();
         orders.setPaymentTransaction(paymentTransaction);
-        paymentTransaction.setOrder(orders);
+        paymentTransaction.setPaymentOnOrder(orders);
         ordersRepository.saveAndFlush(orders);
         Long paymentTransactionId = paymentTransaction.getId();
 

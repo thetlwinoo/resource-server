@@ -31,7 +31,7 @@ public class Wishlists extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(unique = true)
     private People wishlistUser;
 
-    @OneToMany(mappedBy = "wishlist",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "wishlist")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<WishlistProducts> wishlistLists = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

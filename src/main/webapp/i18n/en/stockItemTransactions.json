@@ -17,12 +17,12 @@
             },
             "transactionOccurredWhen": "Transaction Occurred When",
             "quantity": "Quantity",
+            "stockItem": "Stock Item",
             "customer": "Customer",
             "invoice": "Invoice",
-            "purchaseOrder": "Purchase Order",
-            "product": "Product",
             "supplier": "Supplier",
-            "transactionType": "Transaction Type"
+            "transactionType": "Transaction Type",
+            "purchaseOrder": "Purchase Order"
         }
     }
 }

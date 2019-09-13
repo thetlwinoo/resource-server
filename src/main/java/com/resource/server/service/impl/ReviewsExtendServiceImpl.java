@@ -102,8 +102,8 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
     }
 
     @Override
-    public List<ReviewLinesDTO> findReviewLinesByProductId(Long productId) {
-        return reviewLinesExtendRepository.findAllByProductId(productId).stream()
+    public List<ReviewLinesDTO> findReviewLinesByStockItemId(Long stockItemId) {
+        return reviewLinesExtendRepository.findAllByStockItemId(stockItemId).stream()
             .map(reviewLinesMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -113,11 +113,11 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("User not found");
         }
-        return people;
+        return people.get();
     }
 
 }

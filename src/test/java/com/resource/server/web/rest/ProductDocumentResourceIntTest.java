@@ -44,8 +44,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductDocumentResourceIntTest {
 
-    private static final String DEFAULT_DOCUMENT_NODE = "AAAAAAAAAA";
-    private static final String UPDATED_DOCUMENT_NODE = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_DOCUMENT_NODE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_DOCUMENT_NODE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_DOCUMENT_NODE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_DOCUMENT_NODE_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_VIDEO_URL = "AAAAAAAAAA";
+    private static final String UPDATED_VIDEO_URL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_HIGHLIGHTS = "AAAAAAAAAA";
+    private static final String UPDATED_HIGHLIGHTS = "BBBBBBBBBB";
 
     @Autowired
     private ProductDocumentRepository productDocumentRepository;
@@ -95,7 +103,10 @@ public class ProductDocumentResourceIntTest {
      */
     public static ProductDocument createEntity(EntityManager em) {
         ProductDocument productDocument = new ProductDocument()
-            .documentNode(DEFAULT_DOCUMENT_NODE);
+            .documentNode(DEFAULT_DOCUMENT_NODE)
+            .documentNodeContentType(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE)
+            .videoUrl(DEFAULT_VIDEO_URL)
+            .highlights(DEFAULT_HIGHLIGHTS);
         return productDocument;
     }
 
@@ -121,6 +132,9 @@ public class ProductDocumentResourceIntTest {
         assertThat(productDocumentList).hasSize(databaseSizeBeforeCreate + 1);
         ProductDocument testProductDocument = productDocumentList.get(productDocumentList.size() - 1);
         assertThat(testProductDocument.getDocumentNode()).isEqualTo(DEFAULT_DOCUMENT_NODE);
+        assertThat(testProductDocument.getDocumentNodeContentType()).isEqualTo(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE);
+        assertThat(testProductDocument.getVideoUrl()).isEqualTo(DEFAULT_VIDEO_URL);
+        assertThat(testProductDocument.getHighlights()).isEqualTo(DEFAULT_HIGHLIGHTS);
     }
 
     @Test
@@ -154,7 +168,10 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productDocument.getId().intValue())))
-            .andExpect(jsonPath("$.[*].documentNode").value(hasItem(DEFAULT_DOCUMENT_NODE.toString())));
+            .andExpect(jsonPath("$.[*].documentNodeContentType").value(hasItem(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].documentNode").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENT_NODE))))
+            .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL.toString())))
+            .andExpect(jsonPath("$.[*].highlights").value(hasItem(DEFAULT_HIGHLIGHTS.toString())));
     }
     
     @Test
@@ -168,7 +185,10 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productDocument.getId().intValue()))
-            .andExpect(jsonPath("$.documentNode").value(DEFAULT_DOCUMENT_NODE.toString()));
+            .andExpect(jsonPath("$.documentNodeContentType").value(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.documentNode").value(Base64Utils.encodeToString(DEFAULT_DOCUMENT_NODE)))
+            .andExpect(jsonPath("$.videoUrl").value(DEFAULT_VIDEO_URL.toString()))
+            .andExpect(jsonPath("$.highlights").value(DEFAULT_HIGHLIGHTS.toString()));
     }
 
     @Test
@@ -192,7 +212,10 @@ public class ProductDocumentResourceIntTest {
         // Disconnect from session so that the updates on updatedProductDocument are not directly saved in db
         em.detach(updatedProductDocument);
         updatedProductDocument
-            .documentNode(UPDATED_DOCUMENT_NODE);
+            .documentNode(UPDATED_DOCUMENT_NODE)
+            .documentNodeContentType(UPDATED_DOCUMENT_NODE_CONTENT_TYPE)
+            .videoUrl(UPDATED_VIDEO_URL)
+            .highlights(UPDATED_HIGHLIGHTS);
         ProductDocumentDTO productDocumentDTO = productDocumentMapper.toDto(updatedProductDocument);
 
         restProductDocumentMockMvc.perform(put("/api/product-documents")
@@ -205,6 +228,9 @@ public class ProductDocumentResourceIntTest {
         assertThat(productDocumentList).hasSize(databaseSizeBeforeUpdate);
         ProductDocument testProductDocument = productDocumentList.get(productDocumentList.size() - 1);
         assertThat(testProductDocument.getDocumentNode()).isEqualTo(UPDATED_DOCUMENT_NODE);
+        assertThat(testProductDocument.getDocumentNodeContentType()).isEqualTo(UPDATED_DOCUMENT_NODE_CONTENT_TYPE);
+        assertThat(testProductDocument.getVideoUrl()).isEqualTo(UPDATED_VIDEO_URL);
+        assertThat(testProductDocument.getHighlights()).isEqualTo(UPDATED_HIGHLIGHTS);
     }
 
     @Test

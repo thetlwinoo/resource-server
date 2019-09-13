@@ -16,7 +16,7 @@
                 "title": "Payment Transactions"
             },
             "returnedCompletedPaymentData": "Returned Completed Payment Data",
-            "order": "Order"
+            "paymentOnOrder": "Payment On Order"
         }
     }
 }

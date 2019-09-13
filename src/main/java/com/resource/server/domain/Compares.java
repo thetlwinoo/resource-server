@@ -31,7 +31,7 @@ public class Compares extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(unique = true)
     private People compareUser;
 
-    @OneToMany(mappedBy = "compare",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "compare")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CompareProducts> compareLists = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

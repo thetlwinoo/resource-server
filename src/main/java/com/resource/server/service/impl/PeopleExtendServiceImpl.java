@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,17 +33,17 @@ public class PeopleExtendServiceImpl implements PeopleExtendService {
 
     @Override
     public People findPeopleByEmailAddress(String email) {
-        return peopleExtendRepository.findPeopleByEmailAddress(email);
+        return peopleExtendRepository.findPeopleByEmailAddress(email).get();
     }
 
     @Override
     public People findPeopleByLogonName(String name) {
-        return peopleExtendRepository.findPeopleByLogonName(name);
+        return peopleExtendRepository.findPeopleByLogonName(name).get();
     }
 
     @Override
     public People findPeopleByEmailAddressOrLogonName(String email, String name) {
-        return peopleExtendRepository.findPeopleByEmailAddressOrLogonName(email, name);
+        return peopleExtendRepository.findPeopleByEmailAddressOrLogonName(email, name).get();
     }
 
     private People getUserFromPrinciple(Principal principal) {
@@ -50,11 +51,11 @@ public class PeopleExtendServiceImpl implements PeopleExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
 //        if (people == null) {
 //            throw new IllegalArgumentException("User not found");
 //        }
-        return people;
+        return people.get();
     }
 
 }

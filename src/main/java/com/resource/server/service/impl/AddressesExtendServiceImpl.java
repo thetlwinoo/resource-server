@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -95,11 +96,11 @@ public class AddressesExtendServiceImpl implements AddressesExtendService {
             throw new IllegalArgumentException("Invalid access");
         }
 
-        People people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
-        if (people == null) {
+        Optional<People> people = peopleExtendRepository.findPeopleByLogonName(principal.getName());
+        if (!people.isPresent()) {
             throw new IllegalArgumentException("People not found");
         }
-        return people;
+        return people.get();
     }
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -36,8 +35,8 @@ public class ColdRoomTemperatures extends AbstractAuditingEntity implements Seri
     private LocalDate recordedWhen;
 
     @NotNull
-    @Column(name = "temperature", precision = 10, scale = 2, nullable = false)
-    private BigDecimal temperature;
+    @Column(name = "temperature", nullable = false)
+    private Float temperature;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -82,16 +81,16 @@ public class ColdRoomTemperatures extends AbstractAuditingEntity implements Seri
         this.recordedWhen = recordedWhen;
     }
 
-    public BigDecimal getTemperature() {
+    public Float getTemperature() {
         return temperature;
     }
 
-    public ColdRoomTemperatures temperature(BigDecimal temperature) {
+    public ColdRoomTemperatures temperature(Float temperature) {
         this.temperature = temperature;
         return this;
     }
 
-    public void setTemperature(BigDecimal temperature) {
+    public void setTemperature(Float temperature) {
         this.temperature = temperature;
     }
 

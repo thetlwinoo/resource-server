@@ -24,7 +24,7 @@
         },
         {
             "fieldName": "discountAmount",
-            "fieldType": "BigDecimal"
+            "fieldType": "Float"
         },
         {
             "fieldName": "discountPercentage",
@@ -36,7 +36,7 @@
         },
         {
             "fieldName": "unitPrice",
-            "fieldType": "BigDecimal"
+            "fieldType": "Float"
         }
     ],
     "relationships": [
@@ -75,17 +75,17 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "stockGroups",
+            "otherEntityName": "productCategory",
             "otherEntityRelationshipName": "specialDeals",
-            "relationshipName": "stockGroup",
-            "otherEntityField": "stockGroupName"
+            "relationshipName": "productCategory",
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "products",
+            "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "specialDeals",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
+            "relationshipName": "stockItem",
+            "otherEntityField": "stockItemName"
         }
     ],
     "changelogDate": "20190801044935",

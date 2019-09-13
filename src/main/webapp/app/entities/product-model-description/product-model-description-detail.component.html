@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productModelDescription">
+            <h2><span jhiTranslate="resourceApp.productModelDescription.detail.title">Product Model Description</span> {{productModelDescription.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.productModelDescription.description">Description</span></dt>
+                <dd>
+                    <span>{{productModelDescription.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productModelDescription.language">Language</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'resourceApp.Language.' + productModelDescription.language}}">{{productModelDescription.language}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productModelDescription.productModel">Product Model</span></dt>
+                <dd>
+                    <div *ngIf="productModelDescription.productModelId">
+                        <a [routerLink]="['/product-model', productModelDescription.productModelId, 'view']">{{productModelDescription.productModelId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-model-description', productModelDescription.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

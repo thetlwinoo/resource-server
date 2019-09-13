@@ -8,13 +8,12 @@ import com.resource.server.service.mapper.ProductCategoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing ProductCategory.
@@ -51,15 +50,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     /**
      * Get all the productCategories.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ProductCategoryDTO> findAll() {
+    public Page<ProductCategoryDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ProductCategories");
-        return productCategoryRepository.findAll().stream()
-            .map(productCategoryMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return productCategoryRepository.findAll(pageable)
+            .map(productCategoryMapper::toDto);
     }
 
 

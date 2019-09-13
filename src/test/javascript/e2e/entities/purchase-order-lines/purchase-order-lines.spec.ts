@@ -49,8 +49,8 @@ describe('PurchaseOrderLines e2e test', () => {
             purchaseOrderLinesUpdatePage.setReceivedOutersInput('5'),
             purchaseOrderLinesUpdatePage.setExpectedUnitPricePerOuterInput('5'),
             purchaseOrderLinesUpdatePage.setLastReceiptDateInput('2000-12-31'),
-            purchaseOrderLinesUpdatePage.productSelectLastOption(),
             purchaseOrderLinesUpdatePage.packageTypeSelectLastOption(),
+            purchaseOrderLinesUpdatePage.stockItemSelectLastOption(),
             purchaseOrderLinesUpdatePage.purchaseOrderSelectLastOption()
         ]);
         expect(await purchaseOrderLinesUpdatePage.getOrdersOutersInput()).to.eq('5');

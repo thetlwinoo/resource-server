@@ -51,16 +51,16 @@
                         <a [routerLink]="['/customers', specialDeals.customerId, 'view']">{{specialDeals.customerId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.specialDeals.stockGroup">Stock Group</span></dt>
+                <dt><span jhiTranslate="resourceApp.specialDeals.productCategory">Product Category</span></dt>
                 <dd>
-                    <div *ngIf="specialDeals.stockGroupId">
-                        <a [routerLink]="['/stock-groups', specialDeals.stockGroupId, 'view']">{{specialDeals.stockGroupStockGroupName}}</a>
+                    <div *ngIf="specialDeals.productCategoryId">
+                        <a [routerLink]="['/product-category', specialDeals.productCategoryId, 'view']">{{specialDeals.productCategoryName}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.specialDeals.product">Product</span></dt>
+                <dt><span jhiTranslate="resourceApp.specialDeals.stockItem">Stock Item</span></dt>
                 <dd>
-                    <div *ngIf="specialDeals.productId">
-                        <a [routerLink]="['/products', specialDeals.productId, 'view']">{{specialDeals.productProductName}}</a>
+                    <div *ngIf="specialDeals.stockItemId">
+                        <a [routerLink]="['/stock-items', specialDeals.stockItemId, 'view']">{{specialDeals.stockItemStockItemName}}</a>
                     </div>
                 </dd>
             </dl>

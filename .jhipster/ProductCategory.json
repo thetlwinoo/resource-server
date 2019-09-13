@@ -2,11 +2,15 @@
     "name": "ProductCategory",
     "fields": [
         {
-            "fieldName": "productCategoryName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "parentId",
+            "fieldType": "Long"
         },
         {
             "fieldName": "photo",
@@ -18,7 +22,7 @@
     "changelogDate": "20190801044947",
     "entityTableName": "product_category",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "infinite-scroll",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": true,
     "fluentMethods": true,

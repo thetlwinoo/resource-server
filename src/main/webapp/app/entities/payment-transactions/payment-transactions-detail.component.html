@@ -9,10 +9,10 @@
                 <dd>
                     <span>{{paymentTransactions.returnedCompletedPaymentData}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.paymentTransactions.order">Order</span></dt>
+                <dt><span jhiTranslate="resourceApp.paymentTransactions.paymentOnOrder">Payment On Order</span></dt>
                 <dd>
-                    <div *ngIf="paymentTransactions.orderId">
-                        <a [routerLink]="['/orders', paymentTransactions.orderId, 'view']">{{paymentTransactions.orderId}}</a>
+                    <div *ngIf="paymentTransactions.paymentOnOrderId">
+                        <a [routerLink]="['/orders', paymentTransactions.paymentOnOrderId, 'view']">{{paymentTransactions.paymentOnOrderId}}</a>
                     </div>
                 </dd>
             </dl>

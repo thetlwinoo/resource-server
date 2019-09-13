@@ -30,9 +30,9 @@ public class ShoppingCartItems extends AbstractAuditingEntity implements Seriali
 
     @ManyToOne
     @JsonIgnoreProperties("shoppingCartItems")
-    private Products product;
+    private StockItems stockItem;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("cartItemLists")
     private ShoppingCarts cart;
 
@@ -58,17 +58,17 @@ public class ShoppingCartItems extends AbstractAuditingEntity implements Seriali
         this.quantity = quantity;
     }
 
-    public Products getProduct() {
-        return product;
+    public StockItems getStockItem() {
+        return stockItem;
     }
 
-    public ShoppingCartItems product(Products products) {
-        this.product = products;
+    public ShoppingCartItems stockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setStockItem(StockItems stockItems) {
+        this.stockItem = stockItems;
     }
 
     public ShoppingCarts getCart() {

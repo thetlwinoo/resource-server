@@ -74,7 +74,7 @@ class ColdRoomTemperaturesGatlingTest extends Simulation {
                 "id":null
                 , "coldRoomSensorNumber":"0"
                 , "recordedWhen":"2020-01-01T00:00:00.000Z"
-                , "temperature":"0"
+                , "temperature":null
                 , "validFrom":"2020-01-01T00:00:00.000Z"
                 , "validTo":"2020-01-01T00:00:00.000Z"
                 }""")).asJSON

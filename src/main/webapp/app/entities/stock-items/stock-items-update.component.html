@@ -1,0 +1,196 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-stock-items-heading" jhiTranslate="resourceApp.stockItems.home.createOrEditLabel">Create or edit a Stock Items</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!stockItems.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="stockItems.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.stockItemName" for="field_stockItemName">Stock Item Name</label>
+                    <input type="text" class="form-control" name="stockItemName" id="field_stockItemName"
+                        [(ngModel)]="stockItems.stockItemName" required/>
+                    <div [hidden]="!(editForm.controls.stockItemName?.dirty && editForm.controls.stockItemName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.stockItemName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.sellerSKU" for="field_sellerSKU">Seller SKU</label>
+                    <input type="text" class="form-control" name="sellerSKU" id="field_sellerSKU"
+                        [(ngModel)]="stockItems.sellerSKU" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.generatedSKU" for="field_generatedSKU">Generated SKU</label>
+                    <input type="text" class="form-control" name="generatedSKU" id="field_generatedSKU"
+                        [(ngModel)]="stockItems.generatedSKU" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.barcode" for="field_barcode">Barcode</label>
+                    <input type="text" class="form-control" name="barcode" id="field_barcode"
+                        [(ngModel)]="stockItems.barcode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.unitPrice" for="field_unitPrice">Unit Price</label>
+                    <input type="number" class="form-control" name="unitPrice" id="field_unitPrice"
+                        [(ngModel)]="stockItems.unitPrice" required/>
+                    <div [hidden]="!(editForm.controls.unitPrice?.dirty && editForm.controls.unitPrice?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.unitPrice?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.unitPrice?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.recommendedRetailPrice" for="field_recommendedRetailPrice">Recommended Retail Price</label>
+                    <input type="number" class="form-control" name="recommendedRetailPrice" id="field_recommendedRetailPrice"
+                        [(ngModel)]="stockItems.recommendedRetailPrice" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.quantityPerOuter" for="field_quantityPerOuter">Quantity Per Outer</label>
+                    <input type="number" class="form-control" name="quantityPerOuter" id="field_quantityPerOuter"
+                        [(ngModel)]="stockItems.quantityPerOuter" required/>
+                    <div [hidden]="!(editForm.controls.quantityPerOuter?.dirty && editForm.controls.quantityPerOuter?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.quantityPerOuter?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.quantityPerOuter?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.typicalWeightPerUnit" for="field_typicalWeightPerUnit">Typical Weight Per Unit</label>
+                    <input type="number" class="form-control" name="typicalWeightPerUnit" id="field_typicalWeightPerUnit"
+                        [(ngModel)]="stockItems.typicalWeightPerUnit" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.typicalLengthPerUnit" for="field_typicalLengthPerUnit">Typical Length Per Unit</label>
+                    <input type="number" class="form-control" name="typicalLengthPerUnit" id="field_typicalLengthPerUnit"
+                        [(ngModel)]="stockItems.typicalLengthPerUnit" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.typicalWidthPerUnit" for="field_typicalWidthPerUnit">Typical Width Per Unit</label>
+                    <input type="number" class="form-control" name="typicalWidthPerUnit" id="field_typicalWidthPerUnit"
+                        [(ngModel)]="stockItems.typicalWidthPerUnit" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.typicalHeightPerUnit" for="field_typicalHeightPerUnit">Typical Height Per Unit</label>
+                    <input type="number" class="form-control" name="typicalHeightPerUnit" id="field_typicalHeightPerUnit"
+                        [(ngModel)]="stockItems.typicalHeightPerUnit" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.marketingComments" for="field_marketingComments">Marketing Comments</label>
+                    <input type="text" class="form-control" name="marketingComments" id="field_marketingComments"
+                        [(ngModel)]="stockItems.marketingComments" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.internalComments" for="field_internalComments">Internal Comments</label>
+                    <input type="text" class="form-control" name="internalComments" id="field_internalComments"
+                        [(ngModel)]="stockItems.internalComments" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.discontinuedDate" for="field_discontinuedDate">Discontinued Date</label>
+                    <div class="input-group">
+                        <input id="field_discontinuedDate" type="text" class="form-control" name="discontinuedDate" ngbDatepicker  #discontinuedDateDp="ngbDatepicker" [(ngModel)]="stockItems.discontinuedDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="discontinuedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.sellCount" for="field_sellCount">Sell Count</label>
+                    <input type="number" class="form-control" name="sellCount" id="field_sellCount"
+                        [(ngModel)]="stockItems.sellCount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.customFields" for="field_customFields">Custom Fields</label>
+                    <input type="text" class="form-control" name="customFields" id="field_customFields"
+                        [(ngModel)]="stockItems.customFields" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.thumbnailUrl" for="field_thumbnailUrl">Thumbnail Url</label>
+                    <input type="text" class="form-control" name="thumbnailUrl" id="field_thumbnailUrl"
+                        [(ngModel)]="stockItems.thumbnailUrl" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.reviewLine" for="field_reviewLine">Review Line</label>
+                    <select class="form-control" id="field_reviewLine" name="reviewLine" [(ngModel)]="stockItems.reviewLineId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="reviewLinesOption.id" *ngFor="let reviewLinesOption of reviewlines; trackBy: trackReviewLinesById">{{reviewLinesOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="stockItems.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.lengthUnitMeasureCode" for="field_lengthUnitMeasureCode">Length Unit Measure Code</label>
+                    <select class="form-control" id="field_lengthUnitMeasureCode" name="lengthUnitMeasureCode" [(ngModel)]="stockItems.lengthUnitMeasureCodeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.weightUnitMeasureCode" for="field_weightUnitMeasureCode">Weight Unit Measure Code</label>
+                    <select class="form-control" id="field_weightUnitMeasureCode" name="weightUnitMeasureCode" [(ngModel)]="stockItems.weightUnitMeasureCodeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.widthUnitMeasureCode" for="field_widthUnitMeasureCode">Width Unit Measure Code</label>
+                    <select class="form-control" id="field_widthUnitMeasureCode" name="widthUnitMeasureCode" [(ngModel)]="stockItems.widthUnitMeasureCodeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.heightUnitMeasureCode" for="field_heightUnitMeasureCode">Height Unit Measure Code</label>
+                    <select class="form-control" id="field_heightUnitMeasureCode" name="heightUnitMeasureCode" [(ngModel)]="stockItems.heightUnitMeasureCodeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.productAttribute" for="field_productAttribute">Product Attribute</label>
+                    <select class="form-control" id="field_productAttribute" name="productAttribute" [(ngModel)]="stockItems.productAttributeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productAttributeOption.id" *ngFor="let productAttributeOption of productattributes; trackBy: trackProductAttributeById">{{productAttributeOption.value}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.productOption" for="field_productOption">Product Option</label>
+                    <select class="form-control" id="field_productOption" name="productOption" [(ngModel)]="stockItems.productOptionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productOptionOption.id" *ngFor="let productOptionOption of productoptions; trackBy: trackProductOptionById">{{productOptionOption.value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

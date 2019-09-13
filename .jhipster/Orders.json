@@ -114,7 +114,7 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "paymentTransactions",
-            "otherEntityRelationshipName": "order",
+            "otherEntityRelationshipName": "paymentOnOrder",
             "relationshipName": "paymentTransaction",
             "ownerSide": false
         },

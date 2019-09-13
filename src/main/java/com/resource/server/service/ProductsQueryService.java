@@ -98,56 +98,8 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getSearchDetails() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSearchDetails(), Products_.searchDetails));
             }
-            if (criteria.getMakeFlag() != null) {
-                specification = specification.and(buildSpecification(criteria.getMakeFlag(), Products_.makeFlag));
-            }
-            if (criteria.getFinishedGoodsFlag() != null) {
-                specification = specification.and(buildSpecification(criteria.getFinishedGoodsFlag(), Products_.finishedGoodsFlag));
-            }
-            if (criteria.getColor() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getColor(), Products_.color));
-            }
-            if (criteria.getSafetyStockLevel() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSafetyStockLevel(), Products_.safetyStockLevel));
-            }
-            if (criteria.getReorderPoint() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getReorderPoint(), Products_.reorderPoint));
-            }
-            if (criteria.getStandardCost() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getStandardCost(), Products_.standardCost));
-            }
-            if (criteria.getUnitPrice() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getUnitPrice(), Products_.unitPrice));
-            }
-            if (criteria.getRecommendedRetailPrice() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRecommendedRetailPrice(), Products_.recommendedRetailPrice));
-            }
-            if (criteria.getBrand() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getBrand(), Products_.brand));
-            }
-            if (criteria.getSpecifySize() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getSpecifySize(), Products_.specifySize));
-            }
-            if (criteria.getWeight() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getWeight(), Products_.weight));
-            }
-            if (criteria.getDaysToManufacture() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDaysToManufacture(), Products_.daysToManufacture));
-            }
-            if (criteria.getProductLine() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProductLine(), Products_.productLine));
-            }
-            if (criteria.getClassType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getClassType(), Products_.classType));
-            }
-            if (criteria.getStyle() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStyle(), Products_.style));
-            }
-            if (criteria.getCustomFields() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCustomFields(), Products_.customFields));
-            }
-            if (criteria.getPhoto() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPhoto(), Products_.photo));
+            if (criteria.getThumbnailUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), Products_.thumbnailUrl));
             }
             if (criteria.getSellStartDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellStartDate(), Products_.sellStartDate));
@@ -155,29 +107,17 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getSellEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellEndDate(), Products_.sellEndDate));
             }
-            if (criteria.getMarketingComments() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getMarketingComments(), Products_.marketingComments));
+            if (criteria.getWarrantyPeriod() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWarrantyPeriod(), Products_.warrantyPeriod));
             }
-            if (criteria.getInternalComments() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getInternalComments(), Products_.internalComments));
-            }
-            if (criteria.getDiscontinuedDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDiscontinuedDate(), Products_.discontinuedDate));
+            if (criteria.getWarrantyPolicy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWarrantyPolicy(), Products_.warrantyPolicy));
             }
             if (criteria.getSellCount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellCount(), Products_.sellCount));
             }
-            if (criteria.getReviewLineId() != null) {
-                specification = specification.and(buildSpecification(criteria.getReviewLineId(),
-                    root -> root.join(Products_.reviewLine, JoinType.LEFT).get(ReviewLines_.id)));
-            }
-            if (criteria.getUnitPackageId() != null) {
-                specification = specification.and(buildSpecification(criteria.getUnitPackageId(),
-                    root -> root.join(Products_.unitPackage, JoinType.LEFT).get(PackageTypes_.id)));
-            }
-            if (criteria.getOuterPackageId() != null) {
-                specification = specification.and(buildSpecification(criteria.getOuterPackageId(),
-                    root -> root.join(Products_.outerPackage, JoinType.LEFT).get(PackageTypes_.id)));
+            if (criteria.getWhatInTheBox() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getWhatInTheBox(), Products_.whatInTheBox));
             }
             if (criteria.getSupplierId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSupplierId(),
@@ -187,21 +127,29 @@ public class ProductsQueryService extends QueryService<Products> {
                 specification = specification.and(buildSpecification(criteria.getMerchantId(),
                     root -> root.join(Products_.merchant, JoinType.LEFT).get(Merchants_.id)));
             }
-            if (criteria.getProductSubCategoryId() != null) {
-                specification = specification.and(buildSpecification(criteria.getProductSubCategoryId(),
-                    root -> root.join(Products_.productSubCategory, JoinType.LEFT).get(ProductSubCategory_.id)));
+            if (criteria.getUnitPackageId() != null) {
+                specification = specification.and(buildSpecification(criteria.getUnitPackageId(),
+                    root -> root.join(Products_.unitPackage, JoinType.LEFT).get(PackageTypes_.id)));
             }
-            if (criteria.getSizeUnitMeasureCodeId() != null) {
-                specification = specification.and(buildSpecification(criteria.getSizeUnitMeasureCodeId(),
-                    root -> root.join(Products_.sizeUnitMeasureCode, JoinType.LEFT).get(UnitMeasure_.id)));
-            }
-            if (criteria.getWeightUnitMeasureCodeId() != null) {
-                specification = specification.and(buildSpecification(criteria.getWeightUnitMeasureCodeId(),
-                    root -> root.join(Products_.weightUnitMeasureCode, JoinType.LEFT).get(UnitMeasure_.id)));
+            if (criteria.getOuterPackageId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOuterPackageId(),
+                    root -> root.join(Products_.outerPackage, JoinType.LEFT).get(PackageTypes_.id)));
             }
             if (criteria.getProductModelId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductModelId(),
                     root -> root.join(Products_.productModel, JoinType.LEFT).get(ProductModel_.id)));
+            }
+            if (criteria.getProductCategoryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getProductCategoryId(),
+                    root -> root.join(Products_.productCategory, JoinType.LEFT).get(ProductCategory_.id)));
+            }
+            if (criteria.getProductBrandId() != null) {
+                specification = specification.and(buildSpecification(criteria.getProductBrandId(),
+                    root -> root.join(Products_.productBrand, JoinType.LEFT).get(ProductBrand_.id)));
+            }
+            if (criteria.getWarrantyTypeId() != null) {
+                specification = specification.and(buildSpecification(criteria.getWarrantyTypeId(),
+                    root -> root.join(Products_.warrantyType, JoinType.LEFT).get(WarrantyTypes_.id)));
             }
         }
         return specification;

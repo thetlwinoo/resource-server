@@ -17,7 +17,7 @@
         },
         {
             "fieldName": "temperature",
-            "fieldType": "BigDecimal",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]

@@ -1,0 +1,232 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-photos-heading" jhiTranslate="resourceApp.photos.home.createOrEditLabel">Create or edit a Photos</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!photos.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="photos.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.thumbnailPhoto" for="field_thumbnailPhoto">Thumbnail Photo</label>
+                    <input type="text" class="form-control" name="thumbnailPhoto" id="field_thumbnailPhoto"
+                        [(ngModel)]="photos.thumbnailPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.originalPhoto" for="field_originalPhoto">Original Photo</label>
+                    <input type="text" class="form-control" name="originalPhoto" id="field_originalPhoto"
+                        [(ngModel)]="photos.originalPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.bannerTallPhoto" for="field_bannerTallPhoto">Banner Tall Photo</label>
+                    <input type="text" class="form-control" name="bannerTallPhoto" id="field_bannerTallPhoto"
+                        [(ngModel)]="photos.bannerTallPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.bannerWidePhoto" for="field_bannerWidePhoto">Banner Wide Photo</label>
+                    <input type="text" class="form-control" name="bannerWidePhoto" id="field_bannerWidePhoto"
+                        [(ngModel)]="photos.bannerWidePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.circlePhoto" for="field_circlePhoto">Circle Photo</label>
+                    <input type="text" class="form-control" name="circlePhoto" id="field_circlePhoto"
+                        [(ngModel)]="photos.circlePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.sharpenedPhoto" for="field_sharpenedPhoto">Sharpened Photo</label>
+                    <input type="text" class="form-control" name="sharpenedPhoto" id="field_sharpenedPhoto"
+                        [(ngModel)]="photos.sharpenedPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.squarePhoto" for="field_squarePhoto">Square Photo</label>
+                    <input type="text" class="form-control" name="squarePhoto" id="field_squarePhoto"
+                        [(ngModel)]="photos.squarePhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.watermarkPhoto" for="field_watermarkPhoto">Watermark Photo</label>
+                    <input type="text" class="form-control" name="watermarkPhoto" id="field_watermarkPhoto"
+                        [(ngModel)]="photos.watermarkPhoto" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.thumbnailPhotoBlob" for="field_thumbnailPhotoBlob">Thumbnail Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.thumbnailPhotoBlobContentType + ';base64,' + photos.thumbnailPhotoBlob" style="max-height: 100px;" *ngIf="photos.thumbnailPhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.thumbnailPhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.thumbnailPhotoBlobContentType}}, {{byteSize(photos.thumbnailPhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('thumbnailPhotoBlob', 'thumbnailPhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_thumbnailPhotoBlob" (change)="setFileData($event, photos, 'thumbnailPhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnailPhotoBlob" id="field_thumbnailPhotoBlob"
+                        [(ngModel)]="photos.thumbnailPhotoBlob" />
+                    <input type="hidden" class="form-control" name="thumbnailPhotoBlobContentType" id="field_thumbnailPhotoBlobContentType"
+                        [(ngModel)]="photos.thumbnailPhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.originalPhotoBlob" for="field_originalPhotoBlob">Original Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.originalPhotoBlobContentType + ';base64,' + photos.originalPhotoBlob" style="max-height: 100px;" *ngIf="photos.originalPhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.originalPhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.originalPhotoBlobContentType}}, {{byteSize(photos.originalPhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('originalPhotoBlob', 'originalPhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_originalPhotoBlob" (change)="setFileData($event, photos, 'originalPhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="originalPhotoBlob" id="field_originalPhotoBlob"
+                        [(ngModel)]="photos.originalPhotoBlob" />
+                    <input type="hidden" class="form-control" name="originalPhotoBlobContentType" id="field_originalPhotoBlobContentType"
+                        [(ngModel)]="photos.originalPhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.bannerTallPhotoBlob" for="field_bannerTallPhotoBlob">Banner Tall Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.bannerTallPhotoBlobContentType + ';base64,' + photos.bannerTallPhotoBlob" style="max-height: 100px;" *ngIf="photos.bannerTallPhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.bannerTallPhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.bannerTallPhotoBlobContentType}}, {{byteSize(photos.bannerTallPhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('bannerTallPhotoBlob', 'bannerTallPhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_bannerTallPhotoBlob" (change)="setFileData($event, photos, 'bannerTallPhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="bannerTallPhotoBlob" id="field_bannerTallPhotoBlob"
+                        [(ngModel)]="photos.bannerTallPhotoBlob" />
+                    <input type="hidden" class="form-control" name="bannerTallPhotoBlobContentType" id="field_bannerTallPhotoBlobContentType"
+                        [(ngModel)]="photos.bannerTallPhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.bannerWidePhotoBlob" for="field_bannerWidePhotoBlob">Banner Wide Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.bannerWidePhotoBlobContentType + ';base64,' + photos.bannerWidePhotoBlob" style="max-height: 100px;" *ngIf="photos.bannerWidePhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.bannerWidePhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.bannerWidePhotoBlobContentType}}, {{byteSize(photos.bannerWidePhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('bannerWidePhotoBlob', 'bannerWidePhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_bannerWidePhotoBlob" (change)="setFileData($event, photos, 'bannerWidePhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="bannerWidePhotoBlob" id="field_bannerWidePhotoBlob"
+                        [(ngModel)]="photos.bannerWidePhotoBlob" />
+                    <input type="hidden" class="form-control" name="bannerWidePhotoBlobContentType" id="field_bannerWidePhotoBlobContentType"
+                        [(ngModel)]="photos.bannerWidePhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.circlePhotoBlob" for="field_circlePhotoBlob">Circle Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.circlePhotoBlobContentType + ';base64,' + photos.circlePhotoBlob" style="max-height: 100px;" *ngIf="photos.circlePhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.circlePhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.circlePhotoBlobContentType}}, {{byteSize(photos.circlePhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('circlePhotoBlob', 'circlePhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_circlePhotoBlob" (change)="setFileData($event, photos, 'circlePhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="circlePhotoBlob" id="field_circlePhotoBlob"
+                        [(ngModel)]="photos.circlePhotoBlob" />
+                    <input type="hidden" class="form-control" name="circlePhotoBlobContentType" id="field_circlePhotoBlobContentType"
+                        [(ngModel)]="photos.circlePhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.sharpenedPhotoBlob" for="field_sharpenedPhotoBlob">Sharpened Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.sharpenedPhotoBlobContentType + ';base64,' + photos.sharpenedPhotoBlob" style="max-height: 100px;" *ngIf="photos.sharpenedPhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.sharpenedPhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.sharpenedPhotoBlobContentType}}, {{byteSize(photos.sharpenedPhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('sharpenedPhotoBlob', 'sharpenedPhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_sharpenedPhotoBlob" (change)="setFileData($event, photos, 'sharpenedPhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="sharpenedPhotoBlob" id="field_sharpenedPhotoBlob"
+                        [(ngModel)]="photos.sharpenedPhotoBlob" />
+                    <input type="hidden" class="form-control" name="sharpenedPhotoBlobContentType" id="field_sharpenedPhotoBlobContentType"
+                        [(ngModel)]="photos.sharpenedPhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.squarePhotoBlob" for="field_squarePhotoBlob">Square Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.squarePhotoBlobContentType + ';base64,' + photos.squarePhotoBlob" style="max-height: 100px;" *ngIf="photos.squarePhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.squarePhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.squarePhotoBlobContentType}}, {{byteSize(photos.squarePhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('squarePhotoBlob', 'squarePhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_squarePhotoBlob" (change)="setFileData($event, photos, 'squarePhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="squarePhotoBlob" id="field_squarePhotoBlob"
+                        [(ngModel)]="photos.squarePhotoBlob" />
+                    <input type="hidden" class="form-control" name="squarePhotoBlobContentType" id="field_squarePhotoBlobContentType"
+                        [(ngModel)]="photos.squarePhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.watermarkPhotoBlob" for="field_watermarkPhotoBlob">Watermark Photo Blob</label>
+                    <div>
+                        <img [src]="'data:' + photos.watermarkPhotoBlobContentType + ';base64,' + photos.watermarkPhotoBlob" style="max-height: 100px;" *ngIf="photos.watermarkPhotoBlob" alt="photos image"/>
+                        <div *ngIf="photos.watermarkPhotoBlob" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{photos.watermarkPhotoBlobContentType}}, {{byteSize(photos.watermarkPhotoBlob)}}</span>
+                            <button type="button" (click)="clearInputImage('watermarkPhotoBlob', 'watermarkPhotoBlobContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_watermarkPhotoBlob" (change)="setFileData($event, photos, 'watermarkPhotoBlob', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="watermarkPhotoBlob" id="field_watermarkPhotoBlob"
+                        [(ngModel)]="photos.watermarkPhotoBlob" />
+                    <input type="hidden" class="form-control" name="watermarkPhotoBlobContentType" id="field_watermarkPhotoBlobContentType"
+                        [(ngModel)]="photos.watermarkPhotoBlobContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.priority" for="field_priority">Priority</label>
+                    <input type="number" class="form-control" name="priority" id="field_priority"
+                        [(ngModel)]="photos.priority" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.defaultInd" for="field_defaultInd">Default Ind</label>
+                    <input type="checkbox" class="form-control" name="defaultInd" id="field_defaultInd"
+                        [(ngModel)]="photos.defaultInd" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.deleteToken" for="field_deleteToken">Delete Token</label>
+                    <input type="text" class="form-control" name="deleteToken" id="field_deleteToken"
+                        [(ngModel)]="photos.deleteToken" minlength="1" maxlength="1024"/>
+                    <div [hidden]="!(editForm.controls.deleteToken?.dirty && editForm.controls.deleteToken?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.deleteToken?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                        This field is required to be at least 1 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.deleteToken?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1024 }">
+                        This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.photos.stockItem" for="field_stockItem">Stock Item</label>
+                    <select class="form-control" id="field_stockItem" name="stockItem" [(ngModel)]="photos.stockItemId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.stockItemName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

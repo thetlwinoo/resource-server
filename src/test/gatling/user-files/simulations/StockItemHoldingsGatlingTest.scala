@@ -75,7 +75,7 @@ class StockItemHoldingsGatlingTest extends Simulation {
                 , "quantityOnHand":"0"
                 , "binLocation":"SAMPLE_TEXT"
                 , "lastStocktakeQuantity":"0"
-                , "lastCostPrice":"0"
+                , "lastCostPrice":null
                 , "reorderLevel":"0"
                 , "targerStockLevel":"0"
                 }""")).asJSON

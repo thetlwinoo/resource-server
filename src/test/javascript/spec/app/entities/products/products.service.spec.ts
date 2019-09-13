@@ -30,29 +30,13 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
-                false,
-                false,
-                'AAAAAAA',
-                0,
-                0,
-                0,
-                0,
-                0,
-                'AAAAAAA',
-                'AAAAAAA',
-                0,
-                0,
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
                 'AAAAAAA',
                 currentDate,
                 currentDate,
                 'AAAAAAA',
                 'AAAAAAA',
-                currentDate,
-                0
+                0,
+                'AAAAAAA'
             );
         });
 
@@ -61,8 +45,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT),
-                        discontinuedDate: currentDate.format(DATE_FORMAT)
+                        sellEndDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
@@ -80,16 +63,14 @@ describe('Service Tests', () => {
                     {
                         id: 0,
                         sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT),
-                        discontinuedDate: currentDate.format(DATE_FORMAT)
+                        sellEndDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
                         sellStartDate: currentDate,
-                        sellEndDate: currentDate,
-                        discontinuedDate: currentDate
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );
@@ -107,29 +88,13 @@ describe('Service Tests', () => {
                         productName: 'BBBBBB',
                         productNumber: 'BBBBBB',
                         searchDetails: 'BBBBBB',
-                        makeFlag: true,
-                        finishedGoodsFlag: true,
-                        color: 'BBBBBB',
-                        safetyStockLevel: 1,
-                        reorderPoint: 1,
-                        standardCost: 1,
-                        unitPrice: 1,
-                        recommendedRetailPrice: 1,
-                        brand: 'BBBBBB',
-                        specifySize: 'BBBBBB',
-                        weight: 1,
-                        daysToManufacture: 1,
-                        productLine: 'BBBBBB',
-                        classType: 'BBBBBB',
-                        style: 'BBBBBB',
-                        customFields: 'BBBBBB',
-                        photo: 'BBBBBB',
+                        thumbnailUrl: 'BBBBBB',
                         sellStartDate: currentDate.format(DATE_FORMAT),
                         sellEndDate: currentDate.format(DATE_FORMAT),
-                        marketingComments: 'BBBBBB',
-                        internalComments: 'BBBBBB',
-                        discontinuedDate: currentDate.format(DATE_FORMAT),
-                        sellCount: 1
+                        warrantyPeriod: 'BBBBBB',
+                        warrantyPolicy: 'BBBBBB',
+                        sellCount: 1,
+                        whatInTheBox: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -137,8 +102,7 @@ describe('Service Tests', () => {
                 const expected = Object.assign(
                     {
                         sellStartDate: currentDate,
-                        sellEndDate: currentDate,
-                        discontinuedDate: currentDate
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );
@@ -156,37 +120,20 @@ describe('Service Tests', () => {
                         productName: 'BBBBBB',
                         productNumber: 'BBBBBB',
                         searchDetails: 'BBBBBB',
-                        makeFlag: true,
-                        finishedGoodsFlag: true,
-                        color: 'BBBBBB',
-                        safetyStockLevel: 1,
-                        reorderPoint: 1,
-                        standardCost: 1,
-                        unitPrice: 1,
-                        recommendedRetailPrice: 1,
-                        brand: 'BBBBBB',
-                        specifySize: 'BBBBBB',
-                        weight: 1,
-                        daysToManufacture: 1,
-                        productLine: 'BBBBBB',
-                        classType: 'BBBBBB',
-                        style: 'BBBBBB',
-                        customFields: 'BBBBBB',
-                        photo: 'BBBBBB',
+                        thumbnailUrl: 'BBBBBB',
                         sellStartDate: currentDate.format(DATE_FORMAT),
                         sellEndDate: currentDate.format(DATE_FORMAT),
-                        marketingComments: 'BBBBBB',
-                        internalComments: 'BBBBBB',
-                        discontinuedDate: currentDate.format(DATE_FORMAT),
-                        sellCount: 1
+                        warrantyPeriod: 'BBBBBB',
+                        warrantyPolicy: 'BBBBBB',
+                        sellCount: 1,
+                        whatInTheBox: 'BBBBBB'
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
                         sellStartDate: currentDate,
-                        sellEndDate: currentDate,
-                        discontinuedDate: currentDate
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );

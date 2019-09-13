@@ -55,7 +55,7 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @Column(name = "completed_review")
     private Boolean completedReview;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "review")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewLines> reviewLineLists = new HashSet<>();
     @OneToOne(mappedBy = "review")

@@ -73,6 +73,8 @@ class ProductDocumentGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "documentNode":null
+                , "videoUrl":"SAMPLE_TEXT"
+                , "highlights":null
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productDocument_url"))).exitHereIfFailed

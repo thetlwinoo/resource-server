@@ -42,6 +42,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.stockItem" for="field_stockItem">Stock Item</label>
+                    <select class="form-control" id="field_stockItem" name="stockItem" [(ngModel)]="stockItemTransactions.stockItemId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.stockItemName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.customer" for="field_customer">Customer</label>
                     <select class="form-control" id="field_customer" name="customer" [(ngModel)]="stockItemTransactions.customerId" >
                         <option [ngValue]="null"></option>
@@ -56,20 +63,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.purchaseOrder" for="field_purchaseOrder">Purchase Order</label>
-                    <select class="form-control" id="field_purchaseOrder" name="purchaseOrder" [(ngModel)]="stockItemTransactions.purchaseOrderId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="purchaseOrdersOption.id" *ngFor="let purchaseOrdersOption of purchaseorders; trackBy: trackPurchaseOrdersById">{{purchaseOrdersOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="stockItemTransactions.productId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" [(ngModel)]="stockItemTransactions.supplierId" >
                         <option [ngValue]="null"></option>
@@ -80,7 +73,14 @@
                     <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.transactionType" for="field_transactionType">Transaction Type</label>
                     <select class="form-control" id="field_transactionType" name="transactionType" [(ngModel)]="stockItemTransactions.transactionTypeId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.transactionTypeName}}</option>
+                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItemTransactions.purchaseOrder" for="field_purchaseOrder">Purchase Order</label>
+                    <select class="form-control" id="field_purchaseOrder" name="purchaseOrder" [(ngModel)]="stockItemTransactions.purchaseOrderId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="purchaseOrdersOption.id" *ngFor="let purchaseOrdersOption of purchaseorders; trackBy: trackPurchaseOrdersById">{{purchaseOrdersOption.id}}</option>
                     </select>
                 </div>
             </div>

@@ -1,0 +1,158 @@
+{
+    "name": "StockItems",
+    "fields": [
+        {
+            "fieldName": "stockItemName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sellerSKU",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "generatedSKU",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "barcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "unitPrice",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "recommendedRetailPrice",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "quantityPerOuter",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "typicalWeightPerUnit",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "typicalLengthPerUnit",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "typicalWidthPerUnit",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "typicalHeightPerUnit",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "marketingComments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "internalComments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "discontinuedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sellCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "customFields",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "thumbnailUrl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "reviewLines",
+            "otherEntityRelationshipName": "stockItem",
+            "relationshipName": "reviewLine",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "product",
+            "otherEntityField": "productName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unitMeasure",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "lengthUnitMeasureCode",
+            "otherEntityField": "unitMeasureCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unitMeasure",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "weightUnitMeasureCode",
+            "otherEntityField": "unitMeasureCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unitMeasure",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "widthUnitMeasureCode",
+            "otherEntityField": "unitMeasureCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unitMeasure",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "heightUnitMeasureCode",
+            "otherEntityField": "unitMeasureCode"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productAttribute",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "productAttribute",
+            "otherEntityField": "value"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productOption",
+            "otherEntityRelationshipName": "stockItems",
+            "relationshipName": "productOption",
+            "otherEntityField": "value"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "stockItemHoldings",
+            "otherEntityRelationshipName": "stockItem",
+            "relationshipName": "stockItemHolding",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190912101555",
+    "entityTableName": "stock_items",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}
