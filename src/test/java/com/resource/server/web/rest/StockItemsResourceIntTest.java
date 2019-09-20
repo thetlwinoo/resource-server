@@ -84,8 +84,11 @@ public class StockItemsResourceIntTest {
     private static final String DEFAULT_INTERNAL_COMMENTS = "AAAAAAAAAA";
     private static final String UPDATED_INTERNAL_COMMENTS = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DISCONTINUED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DISCONTINUED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_SELL_START_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_SELL_START_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_SELL_END_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_SELL_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Integer DEFAULT_SELL_COUNT = 1;
     private static final Integer UPDATED_SELL_COUNT = 2;
@@ -157,7 +160,8 @@ public class StockItemsResourceIntTest {
             .typicalHeightPerUnit(DEFAULT_TYPICAL_HEIGHT_PER_UNIT)
             .marketingComments(DEFAULT_MARKETING_COMMENTS)
             .internalComments(DEFAULT_INTERNAL_COMMENTS)
-            .discontinuedDate(DEFAULT_DISCONTINUED_DATE)
+            .sellStartDate(DEFAULT_SELL_START_DATE)
+            .sellEndDate(DEFAULT_SELL_END_DATE)
             .sellCount(DEFAULT_SELL_COUNT)
             .customFields(DEFAULT_CUSTOM_FIELDS)
             .thumbnailUrl(DEFAULT_THUMBNAIL_URL);
@@ -198,7 +202,8 @@ public class StockItemsResourceIntTest {
         assertThat(testStockItems.getTypicalHeightPerUnit()).isEqualTo(DEFAULT_TYPICAL_HEIGHT_PER_UNIT);
         assertThat(testStockItems.getMarketingComments()).isEqualTo(DEFAULT_MARKETING_COMMENTS);
         assertThat(testStockItems.getInternalComments()).isEqualTo(DEFAULT_INTERNAL_COMMENTS);
-        assertThat(testStockItems.getDiscontinuedDate()).isEqualTo(DEFAULT_DISCONTINUED_DATE);
+        assertThat(testStockItems.getSellStartDate()).isEqualTo(DEFAULT_SELL_START_DATE);
+        assertThat(testStockItems.getSellEndDate()).isEqualTo(DEFAULT_SELL_END_DATE);
         assertThat(testStockItems.getSellCount()).isEqualTo(DEFAULT_SELL_COUNT);
         assertThat(testStockItems.getCustomFields()).isEqualTo(DEFAULT_CUSTOM_FIELDS);
         assertThat(testStockItems.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
@@ -305,7 +310,8 @@ public class StockItemsResourceIntTest {
             .andExpect(jsonPath("$.[*].typicalHeightPerUnit").value(hasItem(DEFAULT_TYPICAL_HEIGHT_PER_UNIT)))
             .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS.toString())))
             .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
-            .andExpect(jsonPath("$.[*].discontinuedDate").value(hasItem(DEFAULT_DISCONTINUED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
             .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS.toString())))
             .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL.toString())));
@@ -335,7 +341,8 @@ public class StockItemsResourceIntTest {
             .andExpect(jsonPath("$.typicalHeightPerUnit").value(DEFAULT_TYPICAL_HEIGHT_PER_UNIT))
             .andExpect(jsonPath("$.marketingComments").value(DEFAULT_MARKETING_COMMENTS.toString()))
             .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
-            .andExpect(jsonPath("$.discontinuedDate").value(DEFAULT_DISCONTINUED_DATE.toString()))
+            .andExpect(jsonPath("$.sellStartDate").value(DEFAULT_SELL_START_DATE.toString()))
+            .andExpect(jsonPath("$.sellEndDate").value(DEFAULT_SELL_END_DATE.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
             .andExpect(jsonPath("$.customFields").value(DEFAULT_CUSTOM_FIELDS.toString()))
             .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL.toString()));
@@ -375,7 +382,8 @@ public class StockItemsResourceIntTest {
             .typicalHeightPerUnit(UPDATED_TYPICAL_HEIGHT_PER_UNIT)
             .marketingComments(UPDATED_MARKETING_COMMENTS)
             .internalComments(UPDATED_INTERNAL_COMMENTS)
-            .discontinuedDate(UPDATED_DISCONTINUED_DATE)
+            .sellStartDate(UPDATED_SELL_START_DATE)
+            .sellEndDate(UPDATED_SELL_END_DATE)
             .sellCount(UPDATED_SELL_COUNT)
             .customFields(UPDATED_CUSTOM_FIELDS)
             .thumbnailUrl(UPDATED_THUMBNAIL_URL);
@@ -403,7 +411,8 @@ public class StockItemsResourceIntTest {
         assertThat(testStockItems.getTypicalHeightPerUnit()).isEqualTo(UPDATED_TYPICAL_HEIGHT_PER_UNIT);
         assertThat(testStockItems.getMarketingComments()).isEqualTo(UPDATED_MARKETING_COMMENTS);
         assertThat(testStockItems.getInternalComments()).isEqualTo(UPDATED_INTERNAL_COMMENTS);
-        assertThat(testStockItems.getDiscontinuedDate()).isEqualTo(UPDATED_DISCONTINUED_DATE);
+        assertThat(testStockItems.getSellStartDate()).isEqualTo(UPDATED_SELL_START_DATE);
+        assertThat(testStockItems.getSellEndDate()).isEqualTo(UPDATED_SELL_END_DATE);
         assertThat(testStockItems.getSellCount()).isEqualTo(UPDATED_SELL_COUNT);
         assertThat(testStockItems.getCustomFields()).isEqualTo(UPDATED_CUSTOM_FIELDS);
         assertThat(testStockItems.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);

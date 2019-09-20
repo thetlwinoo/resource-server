@@ -23,6 +23,10 @@ public class ProductModelDTO extends AbstractAuditingDTO implements Serializable
 
     private String photoContentType;
 
+    private Long merchantId;
+
+    private String merchantMerchantName;
+
     public Long getId() {
         return id;
     }
@@ -71,6 +75,22 @@ public class ProductModelDTO extends AbstractAuditingDTO implements Serializable
         this.photoContentType = photoContentType;
     }
 
+    public Long getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(Long merchantsId) {
+        this.merchantId = merchantsId;
+    }
+
+    public String getMerchantMerchantName() {
+        return merchantMerchantName;
+    }
+
+    public void setMerchantMerchantName(String merchantsMerchantName) {
+        this.merchantMerchantName = merchantsMerchantName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +120,8 @@ public class ProductModelDTO extends AbstractAuditingDTO implements Serializable
             ", calalogDescription='" + getCalalogDescription() + "'" +
             ", instructions='" + getInstructions() + "'" +
             ", photo='" + getPhoto() + "'" +
+            ", merchant=" + getMerchantId() +
+            ", merchant='" + getMerchantMerchantName() + "'" +
             "}";
     }
 }

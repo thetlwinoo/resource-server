@@ -51,17 +51,20 @@ export class StockItemsService {
 
     protected convertDateFromClient(stockItems: IStockItems): IStockItems {
         const copy: IStockItems = Object.assign({}, stockItems, {
-            discontinuedDate:
-                stockItems.discontinuedDate != null && stockItems.discontinuedDate.isValid()
-                    ? stockItems.discontinuedDate.format(DATE_FORMAT)
-                    : null
+            sellStartDate:
+                stockItems.sellStartDate != null && stockItems.sellStartDate.isValid()
+                    ? stockItems.sellStartDate.format(DATE_FORMAT)
+                    : null,
+            sellEndDate:
+                stockItems.sellEndDate != null && stockItems.sellEndDate.isValid() ? stockItems.sellEndDate.format(DATE_FORMAT) : null
         });
         return copy;
     }
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
-            res.body.discontinuedDate = res.body.discontinuedDate != null ? moment(res.body.discontinuedDate) : null;
+            res.body.sellStartDate = res.body.sellStartDate != null ? moment(res.body.sellStartDate) : null;
+            res.body.sellEndDate = res.body.sellEndDate != null ? moment(res.body.sellEndDate) : null;
         }
         return res;
     }
@@ -69,7 +72,8 @@ export class StockItemsService {
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
             res.body.forEach((stockItems: IStockItems) => {
-                stockItems.discontinuedDate = stockItems.discontinuedDate != null ? moment(stockItems.discontinuedDate) : null;
+                stockItems.sellStartDate = stockItems.sellStartDate != null ? moment(stockItems.sellStartDate) : null;
+                stockItems.sellEndDate = stockItems.sellEndDate != null ? moment(stockItems.sellEndDate) : null;
             });
         }
         return res;

@@ -29,7 +29,7 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
     private Integer targerStockLevel;
 
 
-    private Long stockItemId;
+    private Long stockItemHoldingOnStockItemId;
 
     public Long getId() {
         return id;
@@ -87,12 +87,12 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
         this.targerStockLevel = targerStockLevel;
     }
 
-    public Long getStockItemId() {
-        return stockItemId;
+    public Long getStockItemHoldingOnStockItemId() {
+        return stockItemHoldingOnStockItemId;
     }
 
-    public void setStockItemId(Long stockItemsId) {
-        this.stockItemId = stockItemsId;
+    public void setStockItemHoldingOnStockItemId(Long stockItemsId) {
+        this.stockItemHoldingOnStockItemId = stockItemsId;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class StockItemHoldingsDTO extends AbstractAuditingDTO implements Seriali
             ", lastCostPrice=" + getLastCostPrice() +
             ", reorderLevel=" + getReorderLevel() +
             ", targerStockLevel=" + getTargerStockLevel() +
-            ", stockItem=" + getStockItemId() +
+            ", stockItemHoldingOnStockItem=" + getStockItemHoldingOnStockItemId() +
             "}";
     }
 }

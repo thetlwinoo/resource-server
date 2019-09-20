@@ -20,7 +20,6 @@ export interface ISpecialDeals {
     customerId?: number;
     productCategoryName?: string;
     productCategoryId?: number;
-    stockItemStockItemName?: string;
     stockItemId?: number;
 }
 
@@ -43,7 +42,6 @@ export class SpecialDeals implements ISpecialDeals {
         public customerId?: number,
         public productCategoryName?: string,
         public productCategoryId?: number,
-        public stockItemStockItemName?: string,
         public stockItemId?: number
     ) {}
 }

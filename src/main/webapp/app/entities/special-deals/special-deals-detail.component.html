@@ -60,7 +60,7 @@
                 <dt><span jhiTranslate="resourceApp.specialDeals.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="specialDeals.stockItemId">
-                        <a [routerLink]="['/stock-items', specialDeals.stockItemId, 'view']">{{specialDeals.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', specialDeals.stockItemId, 'view']">{{specialDeals.stockItemId}}</a>
                     </div>
                 </dd>
             </dl>

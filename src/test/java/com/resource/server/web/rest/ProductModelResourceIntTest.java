@@ -3,11 +3,15 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductModel;
+import com.resource.server.domain.ProductModelDescription;
+import com.resource.server.domain.Merchants;
 import com.resource.server.repository.ProductModelRepository;
 import com.resource.server.service.ProductModelService;
 import com.resource.server.service.dto.ProductModelDTO;
 import com.resource.server.service.mapper.ProductModelMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.ProductModelCriteria;
+import com.resource.server.service.ProductModelQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +72,9 @@ public class ProductModelResourceIntTest {
     private ProductModelService productModelService;
 
     @Autowired
+    private ProductModelQueryService productModelQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -89,7 +96,7 @@ public class ProductModelResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductModelResource productModelResource = new ProductModelResource(productModelService);
+        final ProductModelResource productModelResource = new ProductModelResource(productModelService, productModelQueryService);
         this.restProductModelMockMvc = MockMvcBuilders.standaloneSetup(productModelResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -216,6 +223,199 @@ public class ProductModelResourceIntTest {
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByProductModelNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where productModelName equals to DEFAULT_PRODUCT_MODEL_NAME
+        defaultProductModelShouldBeFound("productModelName.equals=" + DEFAULT_PRODUCT_MODEL_NAME);
+
+        // Get all the productModelList where productModelName equals to UPDATED_PRODUCT_MODEL_NAME
+        defaultProductModelShouldNotBeFound("productModelName.equals=" + UPDATED_PRODUCT_MODEL_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByProductModelNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where productModelName in DEFAULT_PRODUCT_MODEL_NAME or UPDATED_PRODUCT_MODEL_NAME
+        defaultProductModelShouldBeFound("productModelName.in=" + DEFAULT_PRODUCT_MODEL_NAME + "," + UPDATED_PRODUCT_MODEL_NAME);
+
+        // Get all the productModelList where productModelName equals to UPDATED_PRODUCT_MODEL_NAME
+        defaultProductModelShouldNotBeFound("productModelName.in=" + UPDATED_PRODUCT_MODEL_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByProductModelNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where productModelName is not null
+        defaultProductModelShouldBeFound("productModelName.specified=true");
+
+        // Get all the productModelList where productModelName is null
+        defaultProductModelShouldNotBeFound("productModelName.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByCalalogDescriptionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where calalogDescription equals to DEFAULT_CALALOG_DESCRIPTION
+        defaultProductModelShouldBeFound("calalogDescription.equals=" + DEFAULT_CALALOG_DESCRIPTION);
+
+        // Get all the productModelList where calalogDescription equals to UPDATED_CALALOG_DESCRIPTION
+        defaultProductModelShouldNotBeFound("calalogDescription.equals=" + UPDATED_CALALOG_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByCalalogDescriptionIsInShouldWork() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where calalogDescription in DEFAULT_CALALOG_DESCRIPTION or UPDATED_CALALOG_DESCRIPTION
+        defaultProductModelShouldBeFound("calalogDescription.in=" + DEFAULT_CALALOG_DESCRIPTION + "," + UPDATED_CALALOG_DESCRIPTION);
+
+        // Get all the productModelList where calalogDescription equals to UPDATED_CALALOG_DESCRIPTION
+        defaultProductModelShouldNotBeFound("calalogDescription.in=" + UPDATED_CALALOG_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByCalalogDescriptionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where calalogDescription is not null
+        defaultProductModelShouldBeFound("calalogDescription.specified=true");
+
+        // Get all the productModelList where calalogDescription is null
+        defaultProductModelShouldNotBeFound("calalogDescription.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByInstructionsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where instructions equals to DEFAULT_INSTRUCTIONS
+        defaultProductModelShouldBeFound("instructions.equals=" + DEFAULT_INSTRUCTIONS);
+
+        // Get all the productModelList where instructions equals to UPDATED_INSTRUCTIONS
+        defaultProductModelShouldNotBeFound("instructions.equals=" + UPDATED_INSTRUCTIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByInstructionsIsInShouldWork() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where instructions in DEFAULT_INSTRUCTIONS or UPDATED_INSTRUCTIONS
+        defaultProductModelShouldBeFound("instructions.in=" + DEFAULT_INSTRUCTIONS + "," + UPDATED_INSTRUCTIONS);
+
+        // Get all the productModelList where instructions equals to UPDATED_INSTRUCTIONS
+        defaultProductModelShouldNotBeFound("instructions.in=" + UPDATED_INSTRUCTIONS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByInstructionsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productModelRepository.saveAndFlush(productModel);
+
+        // Get all the productModelList where instructions is not null
+        defaultProductModelShouldBeFound("instructions.specified=true");
+
+        // Get all the productModelList where instructions is null
+        defaultProductModelShouldNotBeFound("instructions.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByDescriptionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductModelDescription description = ProductModelDescriptionResourceIntTest.createEntity(em);
+        em.persist(description);
+        em.flush();
+        productModel.addDescription(description);
+        productModelRepository.saveAndFlush(productModel);
+        Long descriptionId = description.getId();
+
+        // Get all the productModelList where description equals to descriptionId
+        defaultProductModelShouldBeFound("descriptionId.equals=" + descriptionId);
+
+        // Get all the productModelList where description equals to descriptionId + 1
+        defaultProductModelShouldNotBeFound("descriptionId.equals=" + (descriptionId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductModelsByMerchantIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Merchants merchant = MerchantsResourceIntTest.createEntity(em);
+        em.persist(merchant);
+        em.flush();
+        productModel.setMerchant(merchant);
+        productModelRepository.saveAndFlush(productModel);
+        Long merchantId = merchant.getId();
+
+        // Get all the productModelList where merchant equals to merchantId
+        defaultProductModelShouldBeFound("merchantId.equals=" + merchantId);
+
+        // Get all the productModelList where merchant equals to merchantId + 1
+        defaultProductModelShouldNotBeFound("merchantId.equals=" + (merchantId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProductModelShouldBeFound(String filter) throws Exception {
+        restProductModelMockMvc.perform(get("/api/product-models?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(productModel.getId().intValue())))
+            .andExpect(jsonPath("$.[*].productModelName").value(hasItem(DEFAULT_PRODUCT_MODEL_NAME)))
+            .andExpect(jsonPath("$.[*].calalogDescription").value(hasItem(DEFAULT_CALALOG_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].instructions").value(hasItem(DEFAULT_INSTRUCTIONS)))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+
+        // Check, that the count call also returns 1
+        restProductModelMockMvc.perform(get("/api/product-models/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProductModelShouldNotBeFound(String filter) throws Exception {
+        restProductModelMockMvc.perform(get("/api/product-models?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductModelMockMvc.perform(get("/api/product-models/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

@@ -101,12 +101,6 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getThumbnailUrl() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), Products_.thumbnailUrl));
             }
-            if (criteria.getSellStartDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSellStartDate(), Products_.sellStartDate));
-            }
-            if (criteria.getSellEndDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSellEndDate(), Products_.sellEndDate));
-            }
             if (criteria.getWarrantyPeriod() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getWarrantyPeriod(), Products_.warrantyPeriod));
             }
@@ -118,6 +112,10 @@ public class ProductsQueryService extends QueryService<Products> {
             }
             if (criteria.getWhatInTheBox() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getWhatInTheBox(), Products_.whatInTheBox));
+            }
+            if (criteria.getStockItemListId() != null) {
+                specification = specification.and(buildSpecification(criteria.getStockItemListId(),
+                    root -> root.join(Products_.stockItemLists, JoinType.LEFT).get(StockItems_.id)));
             }
             if (criteria.getSupplierId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSupplierId(),

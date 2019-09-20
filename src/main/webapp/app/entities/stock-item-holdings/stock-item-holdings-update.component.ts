@@ -17,7 +17,7 @@ export class StockItemHoldingsUpdateComponent implements OnInit {
     stockItemHoldings: IStockItemHoldings;
     isSaving: boolean;
 
-    stockitems: IStockItems[];
+    stockitemholdingonstockitems: IStockItems[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -39,17 +39,17 @@ export class StockItemHoldingsUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: IStockItems[]) => {
-                    if (!this.stockItemHoldings.stockItemId) {
-                        this.stockitems = res;
+                    if (!this.stockItemHoldings.stockItemHoldingOnStockItemId) {
+                        this.stockitemholdingonstockitems = res;
                     } else {
                         this.stockItemsService
-                            .find(this.stockItemHoldings.stockItemId)
+                            .find(this.stockItemHoldings.stockItemHoldingOnStockItemId)
                             .pipe(
                                 filter((subResMayBeOk: HttpResponse<IStockItems>) => subResMayBeOk.ok),
                                 map((subResponse: HttpResponse<IStockItems>) => subResponse.body)
                             )
                             .subscribe(
-                                (subRes: IStockItems) => (this.stockitems = [subRes].concat(res)),
+                                (subRes: IStockItems) => (this.stockitemholdingonstockitems = [subRes].concat(res)),
                                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
                             );
                     }

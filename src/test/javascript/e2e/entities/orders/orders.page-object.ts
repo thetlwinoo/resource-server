@@ -40,7 +40,7 @@ export class OrdersUpdatePage {
     deliveryInstructionsInput = element(by.id('field_deliveryInstructions'));
     internalCommentsInput = element(by.id('field_internalComments'));
     pickingCompletedWhenInput = element(by.id('field_pickingCompletedWhen'));
-    reviewSelect = element(by.id('field_review'));
+    orderOnReviewSelect = element(by.id('field_orderOnReview'));
     customerSelect = element(by.id('field_customer'));
     shipToAddressSelect = element(by.id('field_shipToAddress'));
     billToAddressSelect = element(by.id('field_billToAddress'));
@@ -164,23 +164,23 @@ export class OrdersUpdatePage {
         return this.pickingCompletedWhenInput.getAttribute('value');
     }
 
-    async reviewSelectLastOption() {
-        await this.reviewSelect
+    async orderOnReviewSelectLastOption() {
+        await this.orderOnReviewSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async reviewSelectOption(option) {
-        await this.reviewSelect.sendKeys(option);
+    async orderOnReviewSelectOption(option) {
+        await this.orderOnReviewSelect.sendKeys(option);
     }
 
-    getReviewSelect(): ElementFinder {
-        return this.reviewSelect;
+    getOrderOnReviewSelect(): ElementFinder {
+        return this.orderOnReviewSelect;
     }
 
-    async getReviewSelectedOption() {
-        return this.reviewSelect.element(by.css('option:checked')).getText();
+    async getOrderOnReviewSelectedOption() {
+        return this.orderOnReviewSelect.element(by.css('option:checked')).getText();
     }
 
     async customerSelectLastOption() {

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Suppliers.
+    -->
+    <changeSet id="20190801044919-1" author="jhipster">
+        <createTable tableName="suppliers">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="supplier_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="supplier_reference" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bank_account_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bank_account_branch" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bank_account_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bank_account_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="bank_international_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="payment_days" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="internal_comments" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phone_number" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="fax_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="website_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="valid_from" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="valid_to" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="primary_contact_person_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="alternate_contact_person_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="supplier_category_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="delivery_method_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="delivery_city_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="postal_city_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    
+    <!-- Added the entity audit columns -->
+    <changeSet id="20190919022025-audit-1" author="jhipster-entity-audit">
+        <addColumn tableName="suppliers">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

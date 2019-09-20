@@ -96,9 +96,9 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "stockItems",
-            "otherEntityRelationshipName": "photos",
+            "otherEntityRelationshipName": "photoList",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190912101612",

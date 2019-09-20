@@ -12,7 +12,6 @@ import org.mapstruct.*;
 public interface PhotosMapper extends EntityMapper<PhotosDTO, Photos> {
 
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
     PhotosDTO toDto(Photos photos);
 
     @Mapping(source = "stockItemId", target = "stockItem")

@@ -49,7 +49,7 @@ public class PurchaseOrders extends AbstractAuditingEntity implements Serializab
     @Column(name = "internal_comments")
     private String internalComments;
 
-    @OneToMany(mappedBy = "purchaseOrder")
+    @OneToMany(mappedBy = "purchaseOrder",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PurchaseOrderLines> purchaseOrderLineLists = new HashSet<>();
     @ManyToOne

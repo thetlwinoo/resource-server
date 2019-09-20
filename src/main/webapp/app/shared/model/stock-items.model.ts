@@ -1,4 +1,6 @@
 import { Moment } from 'moment';
+import { IPhotos } from 'app/shared/model/photos.model';
+import { ISpecialDeals } from 'app/shared/model/special-deals.model';
 
 export interface IStockItems {
     id?: number;
@@ -15,13 +17,14 @@ export interface IStockItems {
     typicalHeightPerUnit?: number;
     marketingComments?: string;
     internalComments?: string;
-    discontinuedDate?: Moment;
+    sellStartDate?: Moment;
+    sellEndDate?: Moment;
     sellCount?: number;
     customFields?: string;
     thumbnailUrl?: string;
-    reviewLineId?: number;
-    productProductName?: string;
-    productId?: number;
+    stockItemOnReviewLineId?: number;
+    photoLists?: IPhotos[];
+    specialDiscounts?: ISpecialDeals[];
     lengthUnitMeasureCodeUnitMeasureCode?: string;
     lengthUnitMeasureCodeId?: number;
     weightUnitMeasureCodeUnitMeasureCode?: string;
@@ -35,6 +38,7 @@ export interface IStockItems {
     productOptionValue?: string;
     productOptionId?: number;
     stockItemHoldingId?: number;
+    productId?: number;
 }
 
 export class StockItems implements IStockItems {
@@ -53,13 +57,14 @@ export class StockItems implements IStockItems {
         public typicalHeightPerUnit?: number,
         public marketingComments?: string,
         public internalComments?: string,
-        public discontinuedDate?: Moment,
+        public sellStartDate?: Moment,
+        public sellEndDate?: Moment,
         public sellCount?: number,
         public customFields?: string,
         public thumbnailUrl?: string,
-        public reviewLineId?: number,
-        public productProductName?: string,
-        public productId?: number,
+        public stockItemOnReviewLineId?: number,
+        public photoLists?: IPhotos[],
+        public specialDiscounts?: ISpecialDeals[],
         public lengthUnitMeasureCodeUnitMeasureCode?: string,
         public lengthUnitMeasureCodeId?: number,
         public weightUnitMeasureCodeUnitMeasureCode?: string,
@@ -72,6 +77,7 @@ export class StockItems implements IStockItems {
         public productAttributeId?: number,
         public productOptionValue?: string,
         public productOptionId?: number,
-        public stockItemHoldingId?: number
+        public stockItemHoldingId?: number,
+        public productId?: number
     ) {}
 }

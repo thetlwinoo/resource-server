@@ -4,8 +4,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ProductsService } from 'app/entities/products/products.service';
 import { IProducts, Products } from 'app/shared/model/products.model';
 
@@ -15,7 +13,6 @@ describe('Service Tests', () => {
         let service: ProductsService;
         let httpMock: HttpTestingController;
         let elemDefault: IProducts;
-        let currentDate: moment.Moment;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
@@ -23,32 +20,13 @@ describe('Service Tests', () => {
             injector = getTestBed();
             service = injector.get(ProductsService);
             httpMock = injector.get(HttpTestingController);
-            currentDate = moment();
 
-            elemDefault = new Products(
-                0,
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                currentDate,
-                currentDate,
-                'AAAAAAA',
-                'AAAAAAA',
-                0,
-                'AAAAAAA'
-            );
+            elemDefault = new Products(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT)
-                    },
-                    elemDefault
-                );
+                const returnedFromService = Object.assign({}, elemDefault);
                 service
                     .find(123)
                     .pipe(take(1))
@@ -61,19 +39,11 @@ describe('Service Tests', () => {
             it('should create a Products', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        id: 0,
-                        sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT)
+                        id: 0
                     },
                     elemDefault
                 );
-                const expected = Object.assign(
-                    {
-                        sellStartDate: currentDate,
-                        sellEndDate: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .create(new Products(null))
                     .pipe(take(1))
@@ -89,8 +59,6 @@ describe('Service Tests', () => {
                         productNumber: 'BBBBBB',
                         searchDetails: 'BBBBBB',
                         thumbnailUrl: 'BBBBBB',
-                        sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT),
                         warrantyPeriod: 'BBBBBB',
                         warrantyPolicy: 'BBBBBB',
                         sellCount: 1,
@@ -99,13 +67,7 @@ describe('Service Tests', () => {
                     elemDefault
                 );
 
-                const expected = Object.assign(
-                    {
-                        sellStartDate: currentDate,
-                        sellEndDate: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .update(expected)
                     .pipe(take(1))
@@ -121,8 +83,6 @@ describe('Service Tests', () => {
                         productNumber: 'BBBBBB',
                         searchDetails: 'BBBBBB',
                         thumbnailUrl: 'BBBBBB',
-                        sellStartDate: currentDate.format(DATE_FORMAT),
-                        sellEndDate: currentDate.format(DATE_FORMAT),
                         warrantyPeriod: 'BBBBBB',
                         warrantyPolicy: 'BBBBBB',
                         sellCount: 1,
@@ -130,13 +90,7 @@ describe('Service Tests', () => {
                     },
                     elemDefault
                 );
-                const expected = Object.assign(
-                    {
-                        sellStartDate: currentDate,
-                        sellEndDate: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .query(expected)
                     .pipe(

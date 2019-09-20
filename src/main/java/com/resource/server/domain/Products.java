@@ -1,6 +1,7 @@
 package com.resource.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -41,13 +43,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "thumbnail_url")
     private String thumbnailUrl;
 
-    @NotNull
-    @Column(name = "sell_start_date", nullable = false)
-    private LocalDate sellStartDate;
-
-    @Column(name = "sell_end_date")
-    private LocalDate sellEndDate;
-
     @Column(name = "warranty_period")
     private String warrantyPeriod;
 
@@ -61,6 +56,9 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "what_in_the_box", nullable = false)
     private String whatInTheBox;
 
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<StockItems> stockItemLists = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("products")
     private Suppliers supplier;
@@ -154,32 +152,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public LocalDate getSellStartDate() {
-        return sellStartDate;
-    }
-
-    public Products sellStartDate(LocalDate sellStartDate) {
-        this.sellStartDate = sellStartDate;
-        return this;
-    }
-
-    public void setSellStartDate(LocalDate sellStartDate) {
-        this.sellStartDate = sellStartDate;
-    }
-
-    public LocalDate getSellEndDate() {
-        return sellEndDate;
-    }
-
-    public Products sellEndDate(LocalDate sellEndDate) {
-        this.sellEndDate = sellEndDate;
-        return this;
-    }
-
-    public void setSellEndDate(LocalDate sellEndDate) {
-        this.sellEndDate = sellEndDate;
-    }
-
     public String getWarrantyPeriod() {
         return warrantyPeriod;
     }
@@ -230,6 +202,31 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setWhatInTheBox(String whatInTheBox) {
         this.whatInTheBox = whatInTheBox;
+    }
+
+    public Set<StockItems> getStockItemLists() {
+        return stockItemLists;
+    }
+
+    public Products stockItemLists(Set<StockItems> stockItems) {
+        this.stockItemLists = stockItems;
+        return this;
+    }
+
+    public Products addStockItemList(StockItems stockItems) {
+        this.stockItemLists.add(stockItems);
+        stockItems.setProduct(this);
+        return this;
+    }
+
+    public Products removeStockItemList(StockItems stockItems) {
+        this.stockItemLists.remove(stockItems);
+        stockItems.setProduct(null);
+        return this;
+    }
+
+    public void setStockItemLists(Set<StockItems> stockItems) {
+        this.stockItemLists = stockItems;
     }
 
     public Suppliers getSupplier() {
@@ -365,8 +362,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
-            ", sellStartDate='" + getSellStartDate() + "'" +
-            ", sellEndDate='" + getSellEndDate() + "'" +
             ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
             ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", sellCount=" + getSellCount() +

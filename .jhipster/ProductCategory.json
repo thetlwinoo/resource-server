@@ -9,16 +9,20 @@
             ]
         },
         {
-            "fieldName": "parentId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "photo",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productCategory",
+            "otherEntityRelationshipName": "productCategory",
+            "relationshipName": "parent",
+            "otherEntityField": "name"
+        }
+    ],
     "changelogDate": "20190801044947",
     "entityTableName": "product_category",
     "dto": "mapstruct",

@@ -47,7 +47,8 @@ describe('ProductModel e2e test', () => {
             productModelUpdatePage.setProductModelNameInput('productModelName'),
             productModelUpdatePage.setCalalogDescriptionInput('calalogDescription'),
             productModelUpdatePage.setInstructionsInput('instructions'),
-            productModelUpdatePage.setPhotoInput(absolutePath)
+            productModelUpdatePage.setPhotoInput(absolutePath),
+            productModelUpdatePage.merchantSelectLastOption()
         ]);
         expect(await productModelUpdatePage.getProductModelNameInput()).to.eq('productModelName');
         expect(await productModelUpdatePage.getCalalogDescriptionInput()).to.eq('calalogDescription');

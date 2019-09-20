@@ -39,18 +39,19 @@ export class StockItemsUpdatePage {
     typicalHeightPerUnitInput = element(by.id('field_typicalHeightPerUnit'));
     marketingCommentsInput = element(by.id('field_marketingComments'));
     internalCommentsInput = element(by.id('field_internalComments'));
-    discontinuedDateInput = element(by.id('field_discontinuedDate'));
+    sellStartDateInput = element(by.id('field_sellStartDate'));
+    sellEndDateInput = element(by.id('field_sellEndDate'));
     sellCountInput = element(by.id('field_sellCount'));
     customFieldsInput = element(by.id('field_customFields'));
     thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
-    reviewLineSelect = element(by.id('field_reviewLine'));
-    productSelect = element(by.id('field_product'));
+    stockItemOnReviewLineSelect = element(by.id('field_stockItemOnReviewLine'));
     lengthUnitMeasureCodeSelect = element(by.id('field_lengthUnitMeasureCode'));
     weightUnitMeasureCodeSelect = element(by.id('field_weightUnitMeasureCode'));
     widthUnitMeasureCodeSelect = element(by.id('field_widthUnitMeasureCode'));
     heightUnitMeasureCodeSelect = element(by.id('field_heightUnitMeasureCode'));
     productAttributeSelect = element(by.id('field_productAttribute'));
     productOptionSelect = element(by.id('field_productOption'));
+    productSelect = element(by.id('field_product'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -160,12 +161,20 @@ export class StockItemsUpdatePage {
         return this.internalCommentsInput.getAttribute('value');
     }
 
-    async setDiscontinuedDateInput(discontinuedDate) {
-        await this.discontinuedDateInput.sendKeys(discontinuedDate);
+    async setSellStartDateInput(sellStartDate) {
+        await this.sellStartDateInput.sendKeys(sellStartDate);
     }
 
-    async getDiscontinuedDateInput() {
-        return this.discontinuedDateInput.getAttribute('value');
+    async getSellStartDateInput() {
+        return this.sellStartDateInput.getAttribute('value');
+    }
+
+    async setSellEndDateInput(sellEndDate) {
+        await this.sellEndDateInput.sendKeys(sellEndDate);
+    }
+
+    async getSellEndDateInput() {
+        return this.sellEndDateInput.getAttribute('value');
     }
 
     async setSellCountInput(sellCount) {
@@ -192,42 +201,23 @@ export class StockItemsUpdatePage {
         return this.thumbnailUrlInput.getAttribute('value');
     }
 
-    async reviewLineSelectLastOption() {
-        await this.reviewLineSelect
+    async stockItemOnReviewLineSelectLastOption() {
+        await this.stockItemOnReviewLineSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async reviewLineSelectOption(option) {
-        await this.reviewLineSelect.sendKeys(option);
+    async stockItemOnReviewLineSelectOption(option) {
+        await this.stockItemOnReviewLineSelect.sendKeys(option);
     }
 
-    getReviewLineSelect(): ElementFinder {
-        return this.reviewLineSelect;
+    getStockItemOnReviewLineSelect(): ElementFinder {
+        return this.stockItemOnReviewLineSelect;
     }
 
-    async getReviewLineSelectedOption() {
-        return this.reviewLineSelect.element(by.css('option:checked')).getText();
-    }
-
-    async productSelectLastOption() {
-        await this.productSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
-    }
-
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
-    }
-
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
+    async getStockItemOnReviewLineSelectedOption() {
+        return this.stockItemOnReviewLineSelect.element(by.css('option:checked')).getText();
     }
 
     async lengthUnitMeasureCodeSelectLastOption() {
@@ -342,6 +332,25 @@ export class StockItemsUpdatePage {
 
     async getProductOptionSelectedOption() {
         return this.productOptionSelect.element(by.css('option:checked')).getText();
+    }
+
+    async productSelectLastOption() {
+        await this.productSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async productSelectOption(option) {
+        await this.productSelect.sendKeys(option);
+    }
+
+    getProductSelect(): ElementFinder {
+        return this.productSelect;
+    }
+
+    async getProductSelectedOption() {
+        return this.productSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

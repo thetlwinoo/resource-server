@@ -57,9 +57,13 @@
                 <dd>
                     <span>{{stockItems.internalComments}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.discontinuedDate">Discontinued Date</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.sellStartDate">Sell Start Date</span></dt>
                 <dd>
-                    <span>{{stockItems.discontinuedDate}}</span>
+                    <span>{{stockItems.sellStartDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.sellEndDate">Sell End Date</span></dt>
+                <dd>
+                    <span>{{stockItems.sellEndDate}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.sellCount">Sell Count</span></dt>
                 <dd>
@@ -73,16 +77,10 @@
                 <dd>
                     <span>{{stockItems.thumbnailUrl}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.reviewLine">Review Line</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.stockItemOnReviewLine">Stock Item On Review Line</span></dt>
                 <dd>
-                    <div *ngIf="stockItems.reviewLineId">
-                        <a [routerLink]="['/review-lines', stockItems.reviewLineId, 'view']">{{stockItems.reviewLineId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.product">Product</span></dt>
-                <dd>
-                    <div *ngIf="stockItems.productId">
-                        <a [routerLink]="['/products', stockItems.productId, 'view']">{{stockItems.productProductName}}</a>
+                    <div *ngIf="stockItems.stockItemOnReviewLineId">
+                        <a [routerLink]="['/review-lines', stockItems.stockItemOnReviewLineId, 'view']">{{stockItems.stockItemOnReviewLineId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.lengthUnitMeasureCode">Length Unit Measure Code</span></dt>
@@ -119,6 +117,12 @@
                 <dd>
                     <div *ngIf="stockItems.productOptionId">
                         <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionValue}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.productId">
+                        <a [routerLink]="['/products', stockItems.productId, 'view']">{{stockItems.productId}}</a>
                     </div>
                 </dd>
             </dl>

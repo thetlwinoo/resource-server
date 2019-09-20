@@ -14,12 +14,14 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
     @NotNull
     private String name;
 
-    private Long parentId;
-
     @Lob
     private byte[] photo;
 
     private String photoContentType;
+
+    private Long parentId;
+
+    private String parentName;
 
     public Long getId() {
         return id;
@@ -37,14 +39,6 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
         this.name = name;
     }
 
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
@@ -59,6 +53,22 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
 
     public void setPhotoContentType(String photoContentType) {
         this.photoContentType = photoContentType;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long productCategoryId) {
+        this.parentId = productCategoryId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String productCategoryName) {
+        this.parentName = productCategoryName;
     }
 
     @Override
@@ -87,8 +97,9 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
         return "ProductCategoryDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", parentId=" + getParentId() +
             ", photo='" + getPhoto() + "'" +
+            ", parent=" + getParentId() +
+            ", parent='" + getParentName() + "'" +
             "}";
     }
 }

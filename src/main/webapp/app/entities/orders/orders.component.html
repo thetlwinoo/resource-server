@@ -29,7 +29,7 @@
             <th jhiSortBy="deliveryInstructions"><span jhiTranslate="resourceApp.orders.deliveryInstructions">Delivery Instructions</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="internalComments"><span jhiTranslate="resourceApp.orders.internalComments">Internal Comments</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="pickingCompletedWhen"><span jhiTranslate="resourceApp.orders.pickingCompletedWhen">Picking Completed When</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="reviewId"><span jhiTranslate="resourceApp.orders.review">Review</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="orderOnReviewId"><span jhiTranslate="resourceApp.orders.orderOnReview">Order On Review</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="customerId"><span jhiTranslate="resourceApp.orders.customer">Customer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="shipToAddressId"><span jhiTranslate="resourceApp.orders.shipToAddress">Ship To Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="billToAddressId"><span jhiTranslate="resourceApp.orders.billToAddress">Bill To Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -57,8 +57,8 @@
                 <td>{{orders.internalComments}}</td>
                 <td>{{orders.pickingCompletedWhen | date:'mediumDate'}}</td>
                 <td>
-                    <div *ngIf="orders.reviewId">
-                        <a [routerLink]="['../reviews', orders.reviewId , 'view' ]" >{{orders.reviewId}}</a>
+                    <div *ngIf="orders.orderOnReviewId">
+                        <a [routerLink]="['../reviews', orders.orderOnReviewId , 'view' ]" >{{orders.orderOnReviewId}}</a>
                     </div>
                 </td>
                 <td>

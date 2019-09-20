@@ -1,5 +1,4 @@
 package com.resource.server.service.dto;
-import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,11 +19,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
     private String searchDetails;
 
     private String thumbnailUrl;
-
-    @NotNull
-    private LocalDate sellStartDate;
-
-    private LocalDate sellEndDate;
 
     private String warrantyPeriod;
 
@@ -106,22 +100,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public LocalDate getSellStartDate() {
-        return sellStartDate;
-    }
-
-    public void setSellStartDate(LocalDate sellStartDate) {
-        this.sellStartDate = sellStartDate;
-    }
-
-    public LocalDate getSellEndDate() {
-        return sellEndDate;
-    }
-
-    public void setSellEndDate(LocalDate sellEndDate) {
-        this.sellEndDate = sellEndDate;
     }
 
     public String getWarrantyPeriod() {
@@ -313,8 +291,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
-            ", sellStartDate='" + getSellStartDate() + "'" +
-            ", sellEndDate='" + getSellEndDate() + "'" +
             ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
             ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", sellCount=" + getSellCount() +

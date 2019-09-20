@@ -157,7 +157,7 @@ public class BatchUploadResource {
 //                product.setProductSubCategoryId(Long.valueOf(random.nextInt(1187-1151) + 1151));
                 product.setProductModelId(Long.valueOf(random.nextInt(1250-1201) + 1201));
 //                product.setSellCount(Integer.parseInt(row[25]));
-                product.setSellStartDate(LocalDate.now());
+//                product.setSellStartDate(LocalDate.now());
                 this.productsService.save(product);
             }
         } catch (Exception ex) {

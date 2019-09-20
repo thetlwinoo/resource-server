@@ -1,0 +1,1713 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="thet.lwin (generated)" id="1568600809472-1">
+        <createTable tableName="locations">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="locationsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="availability" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost_rate" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-2">
+        <createTable tableName="product_description">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_descriptionPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_model_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-3">
+        <createTable tableName="product_inventory">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_inventoryPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="bin" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shelf" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-4">
+        <createTable tableName="product_photo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_photoPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="banner_tall_photo" type="VARCHAR(255)"/>
+            <column name="banner_wide_photo" type="VARCHAR(255)"/>
+            <column name="circle_photo" type="VARCHAR(255)"/>
+            <column name="default_ind" type="BOOLEAN"/>
+            <column name="delete_token" type="VARCHAR(1024)"/>
+            <column name="original_photo" type="VARCHAR(255)"/>
+            <column name="priority" type="INT"/>
+            <column name="sharpened_photo" type="VARCHAR(255)"/>
+            <column name="square_photo" type="VARCHAR(255)"/>
+            <column name="thumbnail_photo" type="VARCHAR(255)"/>
+            <column name="watermark_photo" type="VARCHAR(255)"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-5">
+        <createTable tableName="product_review">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_reviewPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="email_address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="review_date" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reviewer_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-6">
+        <createTable tableName="product_sub_category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_sub_categoryPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="photo" type="OID"/>
+            <column name="photo_content_type" type="VARCHAR(255)"/>
+            <column name="product_sub_category_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_category_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-7">
+        <createTable tableName="product_transactions">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_transactionsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="quantity" type="FLOAT4"/>
+            <column name="transaction_occured_when" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="BIGINT"/>
+            <column name="invoice_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+            <column name="purchase_order_id" type="BIGINT"/>
+            <column name="supplier_id" type="BIGINT"/>
+            <column name="transaction_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-8">
+        <createTable tableName="stock_groups">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="stock_groupsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="stock_group_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_from" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_to" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-9">
+        <createTable tableName="stock_item_stock_groups">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="stock_item_stock_groupsPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BYTEA"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BYTEA"/>
+            <column name="product_id" type="BIGINT"/>
+            <column name="stock_group_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-10">
+        <addColumn tableName="address_types">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-11">
+        <addColumn tableName="addresses">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-12">
+        <addColumn tableName="business_entity_address">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-13">
+        <addColumn tableName="business_entity_contact">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-14">
+        <addColumn tableName="buying_groups">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-15">
+        <addColumn tableName="cities">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-16">
+        <addColumn tableName="cold_room_temperatures">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-17">
+        <addColumn tableName="compare_products">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-18">
+        <addColumn tableName="compares">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-19">
+        <addColumn tableName="contact_type">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-20">
+        <addColumn tableName="countries">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-21">
+        <addColumn tableName="culture">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-22">
+        <addColumn tableName="currency_rate">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-23">
+        <addColumn tableName="customer_categories">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-24">
+        <addColumn tableName="customer_transactions">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-25">
+        <addColumn tableName="customers">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-26">
+        <addColumn tableName="delivery_methods">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-27">
+        <addColumn tableName="invoice_lines">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-28">
+        <addColumn tableName="invoices">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-29">
+        <addColumn tableName="merchants">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-30">
+        <addColumn tableName="order_lines">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-31">
+        <addColumn tableName="orders">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-32">
+        <addColumn tableName="package_types">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-33">
+        <addColumn tableName="payment_methods">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-34">
+        <addColumn tableName="payment_transactions">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-35">
+        <addColumn tableName="people">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-36">
+        <addColumn tableName="person_email_address">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-37">
+        <addColumn tableName="person_phone">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-38">
+        <addColumn tableName="phone_number_type">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-39">
+        <addColumn tableName="photos">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-40">
+        <addColumn tableName="product_attribute">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-41">
+        <addColumn tableName="product_attribute_set">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-42">
+        <addColumn tableName="product_brand">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-43">
+        <addColumn tableName="product_catalog">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-44">
+        <addColumn tableName="product_category">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-45">
+        <addColumn tableName="product_choice">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-46">
+        <addColumn tableName="product_document">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-47">
+        <addColumn tableName="product_model">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-48">
+        <addColumn tableName="product_model_description">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-49">
+        <addColumn tableName="product_option">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-50">
+        <addColumn tableName="product_option_set">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-51">
+        <addColumn tableName="product_set">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-52">
+        <addColumn tableName="product_set_details">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-53">
+        <addColumn tableName="product_tags">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-54">
+        <addColumn tableName="products">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-55">
+        <addColumn tableName="purchase_order_lines">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-56">
+        <addColumn tableName="purchase_orders">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-57">
+        <addColumn tableName="review_lines">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-58">
+        <addColumn tableName="reviews">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-59">
+        <addColumn tableName="ship_method">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-60">
+        <addColumn tableName="shopping_cart_items">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-61">
+        <addColumn tableName="shopping_carts">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-62">
+        <addColumn tableName="special_deals">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-63">
+        <addColumn tableName="state_provinces">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-64">
+        <addColumn tableName="stock_item_holdings">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-65">
+        <addColumn tableName="stock_item_transactions">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-66">
+        <addColumn tableName="stock_items">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-67">
+        <addColumn tableName="supplier_categories">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-68">
+        <addColumn tableName="supplier_transactions">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-69">
+        <addColumn tableName="suppliers">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-70">
+        <addColumn tableName="system_parameters">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-71">
+        <addColumn tableName="transaction_types">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-72">
+        <addColumn tableName="unit_measure">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-73">
+        <addColumn tableName="vehicle_temperatures">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-74">
+        <addColumn tableName="warranty_types">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-75">
+        <addColumn tableName="wishlist_products">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-76">
+        <addColumn tableName="wishlists">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-77">
+        <addColumn tableName="address_types">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-78">
+        <addColumn tableName="addresses">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-79">
+        <addColumn tableName="business_entity_address">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-80">
+        <addColumn tableName="business_entity_contact">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-81">
+        <addColumn tableName="buying_groups">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-82">
+        <addColumn tableName="cities">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-83">
+        <addColumn tableName="cold_room_temperatures">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-84">
+        <addColumn tableName="compare_products">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-85">
+        <addColumn tableName="compares">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-86">
+        <addColumn tableName="contact_type">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-87">
+        <addColumn tableName="countries">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-88">
+        <addColumn tableName="culture">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-89">
+        <addColumn tableName="currency_rate">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-90">
+        <addColumn tableName="customer_categories">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-91">
+        <addColumn tableName="customer_transactions">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-92">
+        <addColumn tableName="customers">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-93">
+        <addColumn tableName="delivery_methods">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-94">
+        <addColumn tableName="invoice_lines">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-95">
+        <addColumn tableName="invoices">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-96">
+        <addColumn tableName="merchants">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-97">
+        <addColumn tableName="order_lines">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-98">
+        <addColumn tableName="orders">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-99">
+        <addColumn tableName="package_types">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-100">
+        <addColumn tableName="payment_methods">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-101">
+        <addColumn tableName="payment_transactions">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-102">
+        <addColumn tableName="people">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-103">
+        <addColumn tableName="person_email_address">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-104">
+        <addColumn tableName="person_phone">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-105">
+        <addColumn tableName="phone_number_type">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-106">
+        <addColumn tableName="photos">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-107">
+        <addColumn tableName="product_attribute">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-108">
+        <addColumn tableName="product_attribute_set">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-109">
+        <addColumn tableName="product_brand">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-110">
+        <addColumn tableName="product_catalog">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-111">
+        <addColumn tableName="product_category">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-112">
+        <addColumn tableName="product_choice">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-113">
+        <addColumn tableName="product_document">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-114">
+        <addColumn tableName="product_model">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-115">
+        <addColumn tableName="product_model_description">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-116">
+        <addColumn tableName="product_option">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-117">
+        <addColumn tableName="product_option_set">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-118">
+        <addColumn tableName="product_set">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-119">
+        <addColumn tableName="product_set_details">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-120">
+        <addColumn tableName="product_tags">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-121">
+        <addColumn tableName="products">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-122">
+        <addColumn tableName="purchase_order_lines">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-123">
+        <addColumn tableName="purchase_orders">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-124">
+        <addColumn tableName="review_lines">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-125">
+        <addColumn tableName="reviews">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-126">
+        <addColumn tableName="ship_method">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-127">
+        <addColumn tableName="shopping_cart_items">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-128">
+        <addColumn tableName="shopping_carts">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-129">
+        <addColumn tableName="special_deals">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-130">
+        <addColumn tableName="state_provinces">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-131">
+        <addColumn tableName="stock_item_holdings">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-132">
+        <addColumn tableName="stock_item_transactions">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-133">
+        <addColumn tableName="stock_items">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-134">
+        <addColumn tableName="supplier_categories">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-135">
+        <addColumn tableName="supplier_transactions">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-136">
+        <addColumn tableName="suppliers">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-137">
+        <addColumn tableName="system_parameters">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-138">
+        <addColumn tableName="transaction_types">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-139">
+        <addColumn tableName="unit_measure">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-140">
+        <addColumn tableName="vehicle_temperatures">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-141">
+        <addColumn tableName="warranty_types">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-142">
+        <addColumn tableName="wishlist_products">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-143">
+        <addColumn tableName="wishlists">
+            <column name="created_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-144">
+        <addColumn tableName="address_types">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-145">
+        <addColumn tableName="addresses">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-146">
+        <addColumn tableName="business_entity_address">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-147">
+        <addColumn tableName="business_entity_contact">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-148">
+        <addColumn tableName="buying_groups">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-149">
+        <addColumn tableName="cities">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-150">
+        <addColumn tableName="cold_room_temperatures">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-151">
+        <addColumn tableName="compare_products">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-152">
+        <addColumn tableName="compares">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-153">
+        <addColumn tableName="contact_type">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-154">
+        <addColumn tableName="countries">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-155">
+        <addColumn tableName="culture">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-156">
+        <addColumn tableName="currency_rate">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-157">
+        <addColumn tableName="customer_categories">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-158">
+        <addColumn tableName="customer_transactions">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-159">
+        <addColumn tableName="customers">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-160">
+        <addColumn tableName="delivery_methods">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-161">
+        <addColumn tableName="invoice_lines">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-162">
+        <addColumn tableName="invoices">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-163">
+        <addColumn tableName="merchants">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-164">
+        <addColumn tableName="order_lines">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-165">
+        <addColumn tableName="orders">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-166">
+        <addColumn tableName="package_types">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-167">
+        <addColumn tableName="payment_methods">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-168">
+        <addColumn tableName="payment_transactions">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-169">
+        <addColumn tableName="people">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-170">
+        <addColumn tableName="person_email_address">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-171">
+        <addColumn tableName="person_phone">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-172">
+        <addColumn tableName="phone_number_type">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-173">
+        <addColumn tableName="photos">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-174">
+        <addColumn tableName="product_attribute">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-175">
+        <addColumn tableName="product_attribute_set">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-176">
+        <addColumn tableName="product_brand">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-177">
+        <addColumn tableName="product_catalog">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-178">
+        <addColumn tableName="product_category">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-179">
+        <addColumn tableName="product_choice">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-180">
+        <addColumn tableName="product_document">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-181">
+        <addColumn tableName="product_model">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-182">
+        <addColumn tableName="product_model_description">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-183">
+        <addColumn tableName="product_option">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-184">
+        <addColumn tableName="product_option_set">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-185">
+        <addColumn tableName="product_set">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-186">
+        <addColumn tableName="product_set_details">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-187">
+        <addColumn tableName="product_tags">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-188">
+        <addColumn tableName="products">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-189">
+        <addColumn tableName="purchase_order_lines">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-190">
+        <addColumn tableName="purchase_orders">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-191">
+        <addColumn tableName="review_lines">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-192">
+        <addColumn tableName="reviews">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-193">
+        <addColumn tableName="ship_method">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-194">
+        <addColumn tableName="shopping_cart_items">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-195">
+        <addColumn tableName="shopping_carts">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-196">
+        <addColumn tableName="special_deals">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-197">
+        <addColumn tableName="state_provinces">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-198">
+        <addColumn tableName="stock_item_holdings">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-199">
+        <addColumn tableName="stock_item_transactions">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-200">
+        <addColumn tableName="stock_items">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-201">
+        <addColumn tableName="supplier_categories">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-202">
+        <addColumn tableName="supplier_transactions">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-203">
+        <addColumn tableName="suppliers">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-204">
+        <addColumn tableName="system_parameters">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-205">
+        <addColumn tableName="transaction_types">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-206">
+        <addColumn tableName="unit_measure">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-207">
+        <addColumn tableName="vehicle_temperatures">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-208">
+        <addColumn tableName="warranty_types">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-209">
+        <addColumn tableName="wishlist_products">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-210">
+        <addColumn tableName="wishlists">
+            <column name="last_modified_by" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-211">
+        <addColumn tableName="address_types">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-212">
+        <addColumn tableName="addresses">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-213">
+        <addColumn tableName="business_entity_address">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-214">
+        <addColumn tableName="business_entity_contact">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-215">
+        <addColumn tableName="buying_groups">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-216">
+        <addColumn tableName="cities">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-217">
+        <addColumn tableName="cold_room_temperatures">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-218">
+        <addColumn tableName="compare_products">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-219">
+        <addColumn tableName="compares">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-220">
+        <addColumn tableName="contact_type">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-221">
+        <addColumn tableName="countries">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-222">
+        <addColumn tableName="culture">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-223">
+        <addColumn tableName="currency_rate">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-224">
+        <addColumn tableName="customer_categories">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-225">
+        <addColumn tableName="customer_transactions">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-226">
+        <addColumn tableName="customers">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-227">
+        <addColumn tableName="delivery_methods">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-228">
+        <addColumn tableName="invoice_lines">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-229">
+        <addColumn tableName="invoices">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-230">
+        <addColumn tableName="merchants">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-231">
+        <addColumn tableName="order_lines">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-232">
+        <addColumn tableName="orders">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-233">
+        <addColumn tableName="package_types">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-234">
+        <addColumn tableName="payment_methods">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-235">
+        <addColumn tableName="payment_transactions">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-236">
+        <addColumn tableName="people">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-237">
+        <addColumn tableName="person_email_address">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-238">
+        <addColumn tableName="person_phone">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-239">
+        <addColumn tableName="phone_number_type">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-240">
+        <addColumn tableName="photos">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-241">
+        <addColumn tableName="product_attribute">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-242">
+        <addColumn tableName="product_attribute_set">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-243">
+        <addColumn tableName="product_brand">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-244">
+        <addColumn tableName="product_catalog">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-245">
+        <addColumn tableName="product_category">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-246">
+        <addColumn tableName="product_choice">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-247">
+        <addColumn tableName="product_document">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-248">
+        <addColumn tableName="product_model">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-249">
+        <addColumn tableName="product_model_description">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-250">
+        <addColumn tableName="product_option">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-251">
+        <addColumn tableName="product_option_set">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-252">
+        <addColumn tableName="product_set">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-253">
+        <addColumn tableName="product_set_details">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-254">
+        <addColumn tableName="product_tags">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-255">
+        <addColumn tableName="products">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-256">
+        <addColumn tableName="purchase_order_lines">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-257">
+        <addColumn tableName="purchase_orders">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-258">
+        <addColumn tableName="review_lines">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-259">
+        <addColumn tableName="reviews">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-260">
+        <addColumn tableName="ship_method">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-261">
+        <addColumn tableName="shopping_cart_items">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-262">
+        <addColumn tableName="shopping_carts">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-263">
+        <addColumn tableName="special_deals">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-264">
+        <addColumn tableName="state_provinces">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-265">
+        <addColumn tableName="stock_item_holdings">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-266">
+        <addColumn tableName="stock_item_transactions">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-267">
+        <addColumn tableName="stock_items">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-268">
+        <addColumn tableName="supplier_categories">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-269">
+        <addColumn tableName="supplier_transactions">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-270">
+        <addColumn tableName="suppliers">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-271">
+        <addColumn tableName="system_parameters">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-272">
+        <addColumn tableName="transaction_types">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-273">
+        <addColumn tableName="unit_measure">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-274">
+        <addColumn tableName="vehicle_temperatures">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-275">
+        <addColumn tableName="warranty_types">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-276">
+        <addColumn tableName="wishlist_products">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-277">
+        <addColumn tableName="wishlists">
+            <column name="last_modified_date" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-278">
+        <addForeignKeyConstraint baseColumnNames="product_category_id" baseTableName="product_sub_category" constraintName="FK1n6k1t52xs6uvcnnwuuu3qf0d" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product_category"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-279">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_transactions" constraintName="FK2b2qoj2hddji5nqy4briekk6n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-280">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_inventory" constraintName="FK40jwyi5ktpjmllk3nvvgiy6r0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-281">
+        <addForeignKeyConstraint baseColumnNames="transaction_type_id" baseTableName="product_transactions" constraintName="FK4ad4xu0ct8d2meahm9e9pclwq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="transaction_types"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-282">
+        <addForeignKeyConstraint baseColumnNames="invoice_id" baseTableName="product_transactions" constraintName="FK6km7m89mhsh2ih26ygo4ngp8i" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="invoices"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-283">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="stock_item_stock_groups" constraintName="FK6t77ub2dtgelgsqdcy0w1yv6o" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-284">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="product_transactions" constraintName="FK7mud6pjswm82mn29bgvfx5lr0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="customers"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-285">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_photo" constraintName="FK83v101ue6ie81yx9bowlbh971" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-286">
+        <addForeignKeyConstraint baseColumnNames="stock_group_id" baseTableName="stock_item_stock_groups" constraintName="FKcx0wktqp2oj6o0pwsui7eadr0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="stock_groups"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-287">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_review" constraintName="FKlkf2n9dkjx32vcqqmds9v62" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-288">
+        <addForeignKeyConstraint baseColumnNames="product_model_id" baseTableName="product_description" constraintName="FKlrwuv24qw5nhpo5c5r2fmut2l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product_model"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-289">
+        <addForeignKeyConstraint baseColumnNames="supplier_id" baseTableName="product_transactions" constraintName="FKm3vieacejv9khblv8ha5n5w4t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="suppliers"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-290">
+        <addForeignKeyConstraint baseColumnNames="purchase_order_id" baseTableName="product_transactions" constraintName="FKmtnv5i11a4twrg6ekyuv4l01q" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="purchase_orders"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1568600809472-291">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="product_inventory" constraintName="FKt0mtpk8hh9q8i4b4oic06pimv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="locations"/>
+    </changeSet>
+</databaseChangeLog>

@@ -51,7 +51,7 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
 
     @OneToOne
     @JoinColumn(unique = true)
-    private StockItems stockItem;
+    private StockItems stockItemHoldingOnStockItem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -140,17 +140,17 @@ public class StockItemHoldings extends AbstractAuditingEntity implements Seriali
         this.targerStockLevel = targerStockLevel;
     }
 
-    public StockItems getStockItem() {
-        return stockItem;
+    public StockItems getStockItemHoldingOnStockItem() {
+        return stockItemHoldingOnStockItem;
     }
 
-    public StockItemHoldings stockItem(StockItems stockItems) {
-        this.stockItem = stockItems;
+    public StockItemHoldings stockItemHoldingOnStockItem(StockItems stockItems) {
+        this.stockItemHoldingOnStockItem = stockItems;
         return this;
     }
 
-    public void setStockItem(StockItems stockItems) {
-        this.stockItem = stockItems;
+    public void setStockItemHoldingOnStockItem(StockItems stockItems) {
+        this.stockItemHoldingOnStockItem = stockItems;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

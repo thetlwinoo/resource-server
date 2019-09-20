@@ -24,17 +24,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "sellStartDate",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "sellEndDate",
-            "fieldType": "LocalDate"
-        },
-        {
             "fieldName": "warrantyPeriod",
             "fieldType": "String"
         },
@@ -55,6 +44,12 @@
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "stockItems",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "stockItemList"
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "suppliers",

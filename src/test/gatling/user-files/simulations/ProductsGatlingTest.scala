@@ -76,8 +76,6 @@ class ProductsGatlingTest extends Simulation {
                 , "productNumber":"SAMPLE_TEXT"
                 , "searchDetails":"SAMPLE_TEXT"
                 , "thumbnailUrl":"SAMPLE_TEXT"
-                , "sellStartDate":"2020-01-01T00:00:00.000Z"
-                , "sellEndDate":"2020-01-01T00:00:00.000Z"
                 , "warrantyPeriod":"SAMPLE_TEXT"
                 , "warrantyPolicy":"SAMPLE_TEXT"
                 , "sellCount":"0"

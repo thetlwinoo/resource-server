@@ -11,6 +11,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -70,8 +72,11 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @Column(name = "internal_comments")
     private String internalComments;
 
-    @Column(name = "discontinued_date")
-    private LocalDate discontinuedDate;
+    @Column(name = "sell_start_date")
+    private LocalDate sellStartDate;
+
+    @Column(name = "sell_end_date")
+    private LocalDate sellEndDate;
 
     @Column(name = "sell_count")
     private Integer sellCount;
@@ -84,12 +89,14 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private ReviewLines reviewLine;
+    private ReviewLines stockItemOnReviewLine;
 
-    @ManyToOne
-    @JsonIgnoreProperties("stockItems")
-    private Products product;
-
+    @OneToMany(mappedBy = "stockItem",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Photos> photoLists = new HashSet<>();
+    @OneToMany(mappedBy = "stockItem",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<SpecialDeals> specialDiscounts = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
     private UnitMeasure lengthUnitMeasureCode;
@@ -114,9 +121,13 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("stockItems")
     private ProductOption productOption;
 
-    @OneToOne(mappedBy = "stockItem")
+    @OneToOne(mappedBy = "stockItemHoldingOnStockItem")
     @JsonIgnore
     private StockItemHoldings stockItemHolding;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("stockItemLists")
+    private Products product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -296,17 +307,30 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.internalComments = internalComments;
     }
 
-    public LocalDate getDiscontinuedDate() {
-        return discontinuedDate;
+    public LocalDate getSellStartDate() {
+        return sellStartDate;
     }
 
-    public StockItems discontinuedDate(LocalDate discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
+    public StockItems sellStartDate(LocalDate sellStartDate) {
+        this.sellStartDate = sellStartDate;
         return this;
     }
 
-    public void setDiscontinuedDate(LocalDate discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
+    public void setSellStartDate(LocalDate sellStartDate) {
+        this.sellStartDate = sellStartDate;
+    }
+
+    public LocalDate getSellEndDate() {
+        return sellEndDate;
+    }
+
+    public StockItems sellEndDate(LocalDate sellEndDate) {
+        this.sellEndDate = sellEndDate;
+        return this;
+    }
+
+    public void setSellEndDate(LocalDate sellEndDate) {
+        this.sellEndDate = sellEndDate;
     }
 
     public Integer getSellCount() {
@@ -348,30 +372,67 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public ReviewLines getReviewLine() {
-        return reviewLine;
+    public ReviewLines getStockItemOnReviewLine() {
+        return stockItemOnReviewLine;
     }
 
-    public StockItems reviewLine(ReviewLines reviewLines) {
-        this.reviewLine = reviewLines;
+    public StockItems stockItemOnReviewLine(ReviewLines reviewLines) {
+        this.stockItemOnReviewLine = reviewLines;
         return this;
     }
 
-    public void setReviewLine(ReviewLines reviewLines) {
-        this.reviewLine = reviewLines;
+    public void setStockItemOnReviewLine(ReviewLines reviewLines) {
+        this.stockItemOnReviewLine = reviewLines;
     }
 
-    public Products getProduct() {
-        return product;
+    public Set<Photos> getPhotoLists() {
+        return photoLists;
     }
 
-    public StockItems product(Products products) {
-        this.product = products;
+    public StockItems photoLists(Set<Photos> photos) {
+        this.photoLists = photos;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public StockItems addPhotoList(Photos photos) {
+        this.photoLists.add(photos);
+        photos.setStockItem(this);
+        return this;
+    }
+
+    public StockItems removePhotoList(Photos photos) {
+        this.photoLists.remove(photos);
+        photos.setStockItem(null);
+        return this;
+    }
+
+    public void setPhotoLists(Set<Photos> photos) {
+        this.photoLists = photos;
+    }
+
+    public Set<SpecialDeals> getSpecialDiscounts() {
+        return specialDiscounts;
+    }
+
+    public StockItems specialDiscounts(Set<SpecialDeals> specialDeals) {
+        this.specialDiscounts = specialDeals;
+        return this;
+    }
+
+    public StockItems addSpecialDiscount(SpecialDeals specialDeals) {
+        this.specialDiscounts.add(specialDeals);
+        specialDeals.setStockItem(this);
+        return this;
+    }
+
+    public StockItems removeSpecialDiscount(SpecialDeals specialDeals) {
+        this.specialDiscounts.remove(specialDeals);
+        specialDeals.setStockItem(null);
+        return this;
+    }
+
+    public void setSpecialDiscounts(Set<SpecialDeals> specialDeals) {
+        this.specialDiscounts = specialDeals;
     }
 
     public UnitMeasure getLengthUnitMeasureCode() {
@@ -464,6 +525,19 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     public void setStockItemHolding(StockItemHoldings stockItemHoldings) {
         this.stockItemHolding = stockItemHoldings;
     }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public StockItems product(Products products) {
+        this.product = products;
+        return this;
+    }
+
+    public void setProduct(Products products) {
+        this.product = products;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -503,7 +577,8 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
             ", typicalHeightPerUnit=" + getTypicalHeightPerUnit() +
             ", marketingComments='" + getMarketingComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
-            ", discontinuedDate='" + getDiscontinuedDate() + "'" +
+            ", sellStartDate='" + getSellStartDate() + "'" +
+            ", sellEndDate='" + getSellEndDate() + "'" +
             ", sellCount=" + getSellCount() +
             ", customFields='" + getCustomFields() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +

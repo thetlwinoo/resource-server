@@ -40,7 +40,9 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
 
     private String internalComments;
 
-    private LocalDate discontinuedDate;
+    private LocalDate sellStartDate;
+
+    private LocalDate sellEndDate;
 
     private Integer sellCount;
 
@@ -49,11 +51,7 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
     private String thumbnailUrl;
 
 
-    private Long reviewLineId;
-
-    private Long productId;
-
-    private String productProductName;
+    private Long stockItemOnReviewLineId;
 
     private Long lengthUnitMeasureCodeId;
 
@@ -78,6 +76,8 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
     private Long productOptionId;
 
     private String productOptionValue;
+
+    private Long productId;
 
     public Long getId() {
         return id;
@@ -191,12 +191,20 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.internalComments = internalComments;
     }
 
-    public LocalDate getDiscontinuedDate() {
-        return discontinuedDate;
+    public LocalDate getSellStartDate() {
+        return sellStartDate;
     }
 
-    public void setDiscontinuedDate(LocalDate discontinuedDate) {
-        this.discontinuedDate = discontinuedDate;
+    public void setSellStartDate(LocalDate sellStartDate) {
+        this.sellStartDate = sellStartDate;
+    }
+
+    public LocalDate getSellEndDate() {
+        return sellEndDate;
+    }
+
+    public void setSellEndDate(LocalDate sellEndDate) {
+        this.sellEndDate = sellEndDate;
     }
 
     public Integer getSellCount() {
@@ -223,28 +231,12 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public Long getReviewLineId() {
-        return reviewLineId;
+    public Long getStockItemOnReviewLineId() {
+        return stockItemOnReviewLineId;
     }
 
-    public void setReviewLineId(Long reviewLinesId) {
-        this.reviewLineId = reviewLinesId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
-    }
-
-    public String getProductProductName() {
-        return productProductName;
-    }
-
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setStockItemOnReviewLineId(Long reviewLinesId) {
+        this.stockItemOnReviewLineId = reviewLinesId;
     }
 
     public Long getLengthUnitMeasureCodeId() {
@@ -343,6 +335,14 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.productOptionValue = productOptionValue;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productsId) {
+        this.productId = productsId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -381,13 +381,12 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
             ", typicalHeightPerUnit=" + getTypicalHeightPerUnit() +
             ", marketingComments='" + getMarketingComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
-            ", discontinuedDate='" + getDiscontinuedDate() + "'" +
+            ", sellStartDate='" + getSellStartDate() + "'" +
+            ", sellEndDate='" + getSellEndDate() + "'" +
             ", sellCount=" + getSellCount() +
             ", customFields='" + getCustomFields() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
-            ", reviewLine=" + getReviewLineId() +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", stockItemOnReviewLine=" + getStockItemOnReviewLineId() +
             ", lengthUnitMeasureCode=" + getLengthUnitMeasureCodeId() +
             ", lengthUnitMeasureCode='" + getLengthUnitMeasureCodeUnitMeasureCode() + "'" +
             ", weightUnitMeasureCode=" + getWeightUnitMeasureCodeId() +
@@ -400,6 +399,7 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
             ", productAttribute='" + getProductAttributeValue() + "'" +
             ", productOption=" + getProductOptionId() +
             ", productOption='" + getProductOptionValue() + "'" +
+            ", product=" + getProductId() +
             "}";
     }
 }

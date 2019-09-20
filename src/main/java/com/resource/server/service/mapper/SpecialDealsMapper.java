@@ -19,7 +19,6 @@ public interface SpecialDealsMapper extends EntityMapper<SpecialDealsDTO, Specia
     @Mapping(source = "productCategory.id", target = "productCategoryId")
     @Mapping(source = "productCategory.name", target = "productCategoryName")
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
     SpecialDealsDTO toDto(SpecialDeals specialDeals);
 
     @Mapping(target = "cartDiscounts", ignore = true)

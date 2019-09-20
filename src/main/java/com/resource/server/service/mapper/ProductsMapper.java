@@ -29,6 +29,7 @@ public interface ProductsMapper extends EntityMapper<ProductsDTO, Products> {
     @Mapping(source = "warrantyType.warrantyTypeName", target = "warrantyTypeWarrantyTypeName")
     ProductsDTO toDto(Products products);
 
+    @Mapping(target = "stockItemLists", ignore = true)
     @Mapping(source = "supplierId", target = "supplier")
     @Mapping(source = "merchantId", target = "merchant")
     @Mapping(source = "unitPackageId", target = "unitPackage")

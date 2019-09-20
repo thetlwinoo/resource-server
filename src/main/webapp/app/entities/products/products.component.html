@@ -19,8 +19,6 @@
             <th jhiSortBy="productNumber"><span jhiTranslate="resourceApp.products.productNumber">Product Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="searchDetails"><span jhiTranslate="resourceApp.products.searchDetails">Search Details</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="thumbnailUrl"><span jhiTranslate="resourceApp.products.thumbnailUrl">Thumbnail Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="sellStartDate"><span jhiTranslate="resourceApp.products.sellStartDate">Sell Start Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="sellEndDate"><span jhiTranslate="resourceApp.products.sellEndDate">Sell End Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="warrantyPeriod"><span jhiTranslate="resourceApp.products.warrantyPeriod">Warranty Period</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="warrantyPolicy"><span jhiTranslate="resourceApp.products.warrantyPolicy">Warranty Policy</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sellCount"><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -43,8 +41,6 @@
                 <td>{{products.productNumber}}</td>
                 <td>{{products.searchDetails}}</td>
                 <td>{{products.thumbnailUrl}}</td>
-                <td>{{products.sellStartDate | date:'mediumDate'}}</td>
-                <td>{{products.sellEndDate | date:'mediumDate'}}</td>
                 <td>{{products.warrantyPeriod}}</td>
                 <td>{{products.warrantyPolicy}}</td>
                 <td>{{products.sellCount}}</td>

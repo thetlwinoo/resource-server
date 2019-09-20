@@ -3,6 +3,7 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Products;
+import com.resource.server.domain.StockItems;
 import com.resource.server.domain.Suppliers;
 import com.resource.server.domain.Merchants;
 import com.resource.server.domain.PackageTypes;
@@ -34,8 +35,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 
@@ -65,12 +64,6 @@ public class ProductsResourceIntTest {
 
     private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
     private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_SELL_START_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SELL_START_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_SELL_END_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SELL_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_WARRANTY_PERIOD = "AAAAAAAAAA";
     private static final String UPDATED_WARRANTY_PERIOD = "BBBBBBBBBB";
@@ -139,8 +132,6 @@ public class ProductsResourceIntTest {
             .productNumber(DEFAULT_PRODUCT_NUMBER)
             .searchDetails(DEFAULT_SEARCH_DETAILS)
             .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
-            .sellStartDate(DEFAULT_SELL_START_DATE)
-            .sellEndDate(DEFAULT_SELL_END_DATE)
             .warrantyPeriod(DEFAULT_WARRANTY_PERIOD)
             .warrantyPolicy(DEFAULT_WARRANTY_POLICY)
             .sellCount(DEFAULT_SELL_COUNT)
@@ -173,8 +164,6 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getProductNumber()).isEqualTo(DEFAULT_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(DEFAULT_SEARCH_DETAILS);
         assertThat(testProducts.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
-        assertThat(testProducts.getSellStartDate()).isEqualTo(DEFAULT_SELL_START_DATE);
-        assertThat(testProducts.getSellEndDate()).isEqualTo(DEFAULT_SELL_END_DATE);
         assertThat(testProducts.getWarrantyPeriod()).isEqualTo(DEFAULT_WARRANTY_PERIOD);
         assertThat(testProducts.getWarrantyPolicy()).isEqualTo(DEFAULT_WARRANTY_POLICY);
         assertThat(testProducts.getSellCount()).isEqualTo(DEFAULT_SELL_COUNT);
@@ -241,25 +230,6 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkSellStartDateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productsRepository.findAll().size();
-        // set the field null
-        products.setSellStartDate(null);
-
-        // Create the Products, which fails.
-        ProductsDTO productsDTO = productsMapper.toDto(products);
-
-        restProductsMockMvc.perform(post("/api/products")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(productsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Products> productsList = productsRepository.findAll();
-        assertThat(productsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkWhatInTheBoxIsRequired() throws Exception {
         int databaseSizeBeforeTest = productsRepository.findAll().size();
         // set the field null
@@ -292,8 +262,6 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL.toString())))
-            .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].warrantyPeriod").value(hasItem(DEFAULT_WARRANTY_PERIOD.toString())))
             .andExpect(jsonPath("$.[*].warrantyPolicy").value(hasItem(DEFAULT_WARRANTY_POLICY.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
@@ -315,8 +283,6 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER.toString()))
             .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS.toString()))
             .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL.toString()))
-            .andExpect(jsonPath("$.sellStartDate").value(DEFAULT_SELL_START_DATE.toString()))
-            .andExpect(jsonPath("$.sellEndDate").value(DEFAULT_SELL_END_DATE.toString()))
             .andExpect(jsonPath("$.warrantyPeriod").value(DEFAULT_WARRANTY_PERIOD.toString()))
             .andExpect(jsonPath("$.warrantyPolicy").value(DEFAULT_WARRANTY_POLICY.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
@@ -478,138 +444,6 @@ public class ProductsResourceIntTest {
         // Get all the productsList where thumbnailUrl is null
         defaultProductsShouldNotBeFound("thumbnailUrl.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellStartDateIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellStartDate equals to DEFAULT_SELL_START_DATE
-        defaultProductsShouldBeFound("sellStartDate.equals=" + DEFAULT_SELL_START_DATE);
-
-        // Get all the productsList where sellStartDate equals to UPDATED_SELL_START_DATE
-        defaultProductsShouldNotBeFound("sellStartDate.equals=" + UPDATED_SELL_START_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellStartDateIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellStartDate in DEFAULT_SELL_START_DATE or UPDATED_SELL_START_DATE
-        defaultProductsShouldBeFound("sellStartDate.in=" + DEFAULT_SELL_START_DATE + "," + UPDATED_SELL_START_DATE);
-
-        // Get all the productsList where sellStartDate equals to UPDATED_SELL_START_DATE
-        defaultProductsShouldNotBeFound("sellStartDate.in=" + UPDATED_SELL_START_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellStartDateIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellStartDate is not null
-        defaultProductsShouldBeFound("sellStartDate.specified=true");
-
-        // Get all the productsList where sellStartDate is null
-        defaultProductsShouldNotBeFound("sellStartDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellStartDateIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellStartDate greater than or equals to DEFAULT_SELL_START_DATE
-        defaultProductsShouldBeFound("sellStartDate.greaterOrEqualThan=" + DEFAULT_SELL_START_DATE);
-
-        // Get all the productsList where sellStartDate greater than or equals to UPDATED_SELL_START_DATE
-        defaultProductsShouldNotBeFound("sellStartDate.greaterOrEqualThan=" + UPDATED_SELL_START_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellStartDateIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellStartDate less than or equals to DEFAULT_SELL_START_DATE
-        defaultProductsShouldNotBeFound("sellStartDate.lessThan=" + DEFAULT_SELL_START_DATE);
-
-        // Get all the productsList where sellStartDate less than or equals to UPDATED_SELL_START_DATE
-        defaultProductsShouldBeFound("sellStartDate.lessThan=" + UPDATED_SELL_START_DATE);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellEndDateIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellEndDate equals to DEFAULT_SELL_END_DATE
-        defaultProductsShouldBeFound("sellEndDate.equals=" + DEFAULT_SELL_END_DATE);
-
-        // Get all the productsList where sellEndDate equals to UPDATED_SELL_END_DATE
-        defaultProductsShouldNotBeFound("sellEndDate.equals=" + UPDATED_SELL_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellEndDateIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellEndDate in DEFAULT_SELL_END_DATE or UPDATED_SELL_END_DATE
-        defaultProductsShouldBeFound("sellEndDate.in=" + DEFAULT_SELL_END_DATE + "," + UPDATED_SELL_END_DATE);
-
-        // Get all the productsList where sellEndDate equals to UPDATED_SELL_END_DATE
-        defaultProductsShouldNotBeFound("sellEndDate.in=" + UPDATED_SELL_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellEndDateIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellEndDate is not null
-        defaultProductsShouldBeFound("sellEndDate.specified=true");
-
-        // Get all the productsList where sellEndDate is null
-        defaultProductsShouldNotBeFound("sellEndDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellEndDateIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellEndDate greater than or equals to DEFAULT_SELL_END_DATE
-        defaultProductsShouldBeFound("sellEndDate.greaterOrEqualThan=" + DEFAULT_SELL_END_DATE);
-
-        // Get all the productsList where sellEndDate greater than or equals to UPDATED_SELL_END_DATE
-        defaultProductsShouldNotBeFound("sellEndDate.greaterOrEqualThan=" + UPDATED_SELL_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsBySellEndDateIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where sellEndDate less than or equals to DEFAULT_SELL_END_DATE
-        defaultProductsShouldNotBeFound("sellEndDate.lessThan=" + DEFAULT_SELL_END_DATE);
-
-        // Get all the productsList where sellEndDate less than or equals to UPDATED_SELL_END_DATE
-        defaultProductsShouldBeFound("sellEndDate.lessThan=" + UPDATED_SELL_END_DATE);
-    }
-
 
     @Test
     @Transactional
@@ -796,6 +630,25 @@ public class ProductsResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllProductsByStockItemListIsEqualToSomething() throws Exception {
+        // Initialize the database
+        StockItems stockItemList = StockItemsResourceIntTest.createEntity(em);
+        em.persist(stockItemList);
+        em.flush();
+        products.addStockItemList(stockItemList);
+        productsRepository.saveAndFlush(products);
+        Long stockItemListId = stockItemList.getId();
+
+        // Get all the productsList where stockItemList equals to stockItemListId
+        defaultProductsShouldBeFound("stockItemListId.equals=" + stockItemListId);
+
+        // Get all the productsList where stockItemList equals to stockItemListId + 1
+        defaultProductsShouldNotBeFound("stockItemListId.equals=" + (stockItemListId + 1));
+    }
+
+
+    @Test
+    @Transactional
     public void getAllProductsBySupplierIsEqualToSomething() throws Exception {
         // Initialize the database
         Suppliers supplier = SuppliersResourceIntTest.createEntity(em);
@@ -957,8 +810,6 @@ public class ProductsResourceIntTest {
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS)))
             .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
-            .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].warrantyPeriod").value(hasItem(DEFAULT_WARRANTY_PERIOD)))
             .andExpect(jsonPath("$.[*].warrantyPolicy").value(hasItem(DEFAULT_WARRANTY_POLICY)))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
@@ -1014,8 +865,6 @@ public class ProductsResourceIntTest {
             .productNumber(UPDATED_PRODUCT_NUMBER)
             .searchDetails(UPDATED_SEARCH_DETAILS)
             .thumbnailUrl(UPDATED_THUMBNAIL_URL)
-            .sellStartDate(UPDATED_SELL_START_DATE)
-            .sellEndDate(UPDATED_SELL_END_DATE)
             .warrantyPeriod(UPDATED_WARRANTY_PERIOD)
             .warrantyPolicy(UPDATED_WARRANTY_POLICY)
             .sellCount(UPDATED_SELL_COUNT)
@@ -1035,8 +884,6 @@ public class ProductsResourceIntTest {
         assertThat(testProducts.getProductNumber()).isEqualTo(UPDATED_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(UPDATED_SEARCH_DETAILS);
         assertThat(testProducts.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
-        assertThat(testProducts.getSellStartDate()).isEqualTo(UPDATED_SELL_START_DATE);
-        assertThat(testProducts.getSellEndDate()).isEqualTo(UPDATED_SELL_END_DATE);
         assertThat(testProducts.getWarrantyPeriod()).isEqualTo(UPDATED_WARRANTY_PERIOD);
         assertThat(testProducts.getWarrantyPolicy()).isEqualTo(UPDATED_WARRANTY_POLICY);
         assertThat(testProducts.getSellCount()).isEqualTo(UPDATED_SELL_COUNT);

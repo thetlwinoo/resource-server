@@ -54,7 +54,7 @@ describe('Orders e2e test', () => {
             ordersUpdatePage.setDeliveryInstructionsInput('deliveryInstructions'),
             ordersUpdatePage.setInternalCommentsInput('internalComments'),
             ordersUpdatePage.setPickingCompletedWhenInput('2000-12-31'),
-            ordersUpdatePage.reviewSelectLastOption(),
+            ordersUpdatePage.orderOnReviewSelectLastOption(),
             ordersUpdatePage.customerSelectLastOption(),
             ordersUpdatePage.shipToAddressSelectLastOption(),
             ordersUpdatePage.billToAddressSelectLastOption(),

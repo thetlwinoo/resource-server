@@ -16,8 +16,8 @@
                 "title": "Product Category"
             },
             "name": "Name",
-            "parentId": "Parent Id",
-            "photo": "Photo"
+            "photo": "Photo",
+            "parent": "Parent"
         }
     }
 }

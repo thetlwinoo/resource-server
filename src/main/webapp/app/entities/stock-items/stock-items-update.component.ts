@@ -9,8 +9,6 @@ import { IStockItems } from 'app/shared/model/stock-items.model';
 import { StockItemsService } from './stock-items.service';
 import { IReviewLines } from 'app/shared/model/review-lines.model';
 import { ReviewLinesService } from 'app/entities/review-lines';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
 import { IUnitMeasure } from 'app/shared/model/unit-measure.model';
 import { UnitMeasureService } from 'app/entities/unit-measure';
 import { IProductAttribute } from 'app/shared/model/product-attribute.model';
@@ -19,6 +17,8 @@ import { IProductOption } from 'app/shared/model/product-option.model';
 import { ProductOptionService } from 'app/entities/product-option';
 import { IStockItemHoldings } from 'app/shared/model/stock-item-holdings.model';
 import { StockItemHoldingsService } from 'app/entities/stock-item-holdings';
+import { IProducts } from 'app/shared/model/products.model';
+import { ProductsService } from 'app/entities/products';
 
 @Component({
     selector: 'jhi-stock-items-update',
@@ -28,9 +28,7 @@ export class StockItemsUpdateComponent implements OnInit {
     stockItems: IStockItems;
     isSaving: boolean;
 
-    reviewlines: IReviewLines[];
-
-    products: IProducts[];
+    stockitemonreviewlines: IReviewLines[];
 
     unitmeasures: IUnitMeasure[];
 
@@ -39,17 +37,20 @@ export class StockItemsUpdateComponent implements OnInit {
     productoptions: IProductOption[];
 
     stockitemholdings: IStockItemHoldings[];
-    discontinuedDateDp: any;
+
+    products: IProducts[];
+    sellStartDateDp: any;
+    sellEndDateDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected stockItemsService: StockItemsService,
         protected reviewLinesService: ReviewLinesService,
-        protected productsService: ProductsService,
         protected unitMeasureService: UnitMeasureService,
         protected productAttributeService: ProductAttributeService,
         protected productOptionService: ProductOptionService,
         protected stockItemHoldingsService: StockItemHoldingsService,
+        protected productsService: ProductsService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -66,30 +67,23 @@ export class StockItemsUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: IReviewLines[]) => {
-                    if (!this.stockItems.reviewLineId) {
-                        this.reviewlines = res;
+                    if (!this.stockItems.stockItemOnReviewLineId) {
+                        this.stockitemonreviewlines = res;
                     } else {
                         this.reviewLinesService
-                            .find(this.stockItems.reviewLineId)
+                            .find(this.stockItems.stockItemOnReviewLineId)
                             .pipe(
                                 filter((subResMayBeOk: HttpResponse<IReviewLines>) => subResMayBeOk.ok),
                                 map((subResponse: HttpResponse<IReviewLines>) => subResponse.body)
                             )
                             .subscribe(
-                                (subRes: IReviewLines) => (this.reviewlines = [subRes].concat(res)),
+                                (subRes: IReviewLines) => (this.stockitemonreviewlines = [subRes].concat(res)),
                                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
                             );
                     }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        this.productsService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
-            )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.unitMeasureService
             .query()
             .pipe(
@@ -121,6 +115,13 @@ export class StockItemsUpdateComponent implements OnInit {
                 (res: IStockItemHoldings[]) => (this.stockitemholdings = res),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.productsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProducts[]>) => response.body)
+            )
+            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -157,10 +158,6 @@ export class StockItemsUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackProductsById(index: number, item: IProducts) {
-        return item.id;
-    }
-
     trackUnitMeasureById(index: number, item: IUnitMeasure) {
         return item.id;
     }
@@ -174,6 +171,10 @@ export class StockItemsUpdateComponent implements OnInit {
     }
 
     trackStockItemHoldingsById(index: number, item: IStockItemHoldings) {
+        return item.id;
+    }
+
+    trackProductsById(index: number, item: IProducts) {
         return item.id;
     }
 }

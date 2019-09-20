@@ -45,7 +45,8 @@ describe('ProductBrand e2e test', () => {
         await productBrandComponentsPage.clickOnCreateButton();
         await promise.all([
             productBrandUpdatePage.setProductBrandNameInput('productBrandName'),
-            productBrandUpdatePage.setPhotoInput(absolutePath)
+            productBrandUpdatePage.setPhotoInput(absolutePath),
+            productBrandUpdatePage.merchantSelectLastOption()
         ]);
         expect(await productBrandUpdatePage.getProductBrandNameInput()).to.eq('productBrandName');
         expect(await productBrandUpdatePage.getPhotoInput()).to.endsWith(fileNameToUpload);

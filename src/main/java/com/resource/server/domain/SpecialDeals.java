@@ -76,8 +76,8 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
     @JsonIgnoreProperties("specialDeals")
     private ProductCategory productCategory;
 
-    @ManyToOne
-    @JsonIgnoreProperties("specialDeals")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("specialDiscounts")
     private StockItems stockItem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

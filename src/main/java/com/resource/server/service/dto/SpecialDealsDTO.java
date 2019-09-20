@@ -45,8 +45,6 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
-
     public Long getId() {
         return id;
     }
@@ -175,14 +173,6 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
-    }
-
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -223,7 +213,6 @@ public class SpecialDealsDTO extends AbstractAuditingDTO implements Serializable
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
             "}";
     }
 }

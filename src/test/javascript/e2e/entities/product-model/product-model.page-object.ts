@@ -30,6 +30,7 @@ export class ProductModelUpdatePage {
     calalogDescriptionInput = element(by.id('field_calalogDescription'));
     instructionsInput = element(by.id('field_instructions'));
     photoInput = element(by.id('file_photo'));
+    merchantSelect = element(by.id('field_merchant'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -65,6 +66,25 @@ export class ProductModelUpdatePage {
 
     async getPhotoInput() {
         return this.photoInput.getAttribute('value');
+    }
+
+    async merchantSelectLastOption() {
+        await this.merchantSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async merchantSelectOption(option) {
+        await this.merchantSelect.sendKeys(option);
+    }
+
+    getMerchantSelect(): ElementFinder {
+        return this.merchantSelect;
+    }
+
+    async getMerchantSelectedOption() {
+        return this.merchantSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

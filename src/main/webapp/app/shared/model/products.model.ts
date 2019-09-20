@@ -1,4 +1,4 @@
-import { Moment } from 'moment';
+import { IStockItems } from 'app/shared/model/stock-items.model';
 
 export interface IProducts {
     id?: number;
@@ -6,12 +6,11 @@ export interface IProducts {
     productNumber?: string;
     searchDetails?: string;
     thumbnailUrl?: string;
-    sellStartDate?: Moment;
-    sellEndDate?: Moment;
     warrantyPeriod?: string;
     warrantyPolicy?: string;
     sellCount?: number;
     whatInTheBox?: string;
+    stockItemLists?: IStockItems[];
     supplierSupplierName?: string;
     supplierId?: number;
     merchantMerchantName?: string;
@@ -37,12 +36,11 @@ export class Products implements IProducts {
         public productNumber?: string,
         public searchDetails?: string,
         public thumbnailUrl?: string,
-        public sellStartDate?: Moment,
-        public sellEndDate?: Moment,
         public warrantyPeriod?: string,
         public warrantyPolicy?: string,
         public sellCount?: number,
         public whatInTheBox?: string,
+        public stockItemLists?: IStockItems[],
         public supplierSupplierName?: string,
         public supplierId?: number,
         public merchantMerchantName?: string,

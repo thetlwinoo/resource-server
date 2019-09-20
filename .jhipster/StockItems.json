@@ -63,7 +63,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "discontinuedDate",
+            "fieldName": "sellStartDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sellEndDate",
             "fieldType": "LocalDate"
         },
         {
@@ -84,16 +88,21 @@
             "relationshipType": "one-to-one",
             "otherEntityName": "reviewLines",
             "otherEntityRelationshipName": "stockItem",
-            "relationshipName": "reviewLine",
+            "relationshipName": "stockItemOnReviewLine",
             "otherEntityField": "id",
             "ownerSide": true
         },
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "products",
-            "otherEntityRelationshipName": "stockItems",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
+            "relationshipType": "one-to-many",
+            "otherEntityName": "photos",
+            "otherEntityRelationshipName": "stockItem",
+            "relationshipName": "photoList"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "specialDeals",
+            "otherEntityRelationshipName": "stockItem",
+            "relationshipName": "specialDiscount"
         },
         {
             "relationshipType": "many-to-one",
@@ -140,9 +149,16 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "stockItemHoldings",
-            "otherEntityRelationshipName": "stockItem",
+            "otherEntityRelationshipName": "stockItemHoldingOnStockItem",
             "relationshipName": "stockItemHolding",
             "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "stockItemList",
+            "relationshipName": "product",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190912101555",

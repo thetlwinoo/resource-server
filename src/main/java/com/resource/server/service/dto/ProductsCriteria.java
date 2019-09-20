@@ -9,7 +9,6 @@ import io.github.jhipster.service.filter.FloatFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-import io.github.jhipster.service.filter.LocalDateFilter;
 
 /**
  * Criteria class for the Products entity. This class is used in ProductsResource to
@@ -33,10 +32,6 @@ public class ProductsCriteria implements Serializable {
 
     private StringFilter thumbnailUrl;
 
-    private LocalDateFilter sellStartDate;
-
-    private LocalDateFilter sellEndDate;
-
     private StringFilter warrantyPeriod;
 
     private StringFilter warrantyPolicy;
@@ -44,6 +39,8 @@ public class ProductsCriteria implements Serializable {
     private IntegerFilter sellCount;
 
     private StringFilter whatInTheBox;
+
+    private LongFilter stockItemListId;
 
     private LongFilter supplierId;
 
@@ -101,22 +98,6 @@ public class ProductsCriteria implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public LocalDateFilter getSellStartDate() {
-        return sellStartDate;
-    }
-
-    public void setSellStartDate(LocalDateFilter sellStartDate) {
-        this.sellStartDate = sellStartDate;
-    }
-
-    public LocalDateFilter getSellEndDate() {
-        return sellEndDate;
-    }
-
-    public void setSellEndDate(LocalDateFilter sellEndDate) {
-        this.sellEndDate = sellEndDate;
-    }
-
     public StringFilter getWarrantyPeriod() {
         return warrantyPeriod;
     }
@@ -147,6 +128,14 @@ public class ProductsCriteria implements Serializable {
 
     public void setWhatInTheBox(StringFilter whatInTheBox) {
         this.whatInTheBox = whatInTheBox;
+    }
+
+    public LongFilter getStockItemListId() {
+        return stockItemListId;
+    }
+
+    public void setStockItemListId(LongFilter stockItemListId) {
+        this.stockItemListId = stockItemListId;
     }
 
     public LongFilter getSupplierId() {
@@ -229,12 +218,11 @@ public class ProductsCriteria implements Serializable {
             Objects.equals(productNumber, that.productNumber) &&
             Objects.equals(searchDetails, that.searchDetails) &&
             Objects.equals(thumbnailUrl, that.thumbnailUrl) &&
-            Objects.equals(sellStartDate, that.sellStartDate) &&
-            Objects.equals(sellEndDate, that.sellEndDate) &&
             Objects.equals(warrantyPeriod, that.warrantyPeriod) &&
             Objects.equals(warrantyPolicy, that.warrantyPolicy) &&
             Objects.equals(sellCount, that.sellCount) &&
             Objects.equals(whatInTheBox, that.whatInTheBox) &&
+            Objects.equals(stockItemListId, that.stockItemListId) &&
             Objects.equals(supplierId, that.supplierId) &&
             Objects.equals(merchantId, that.merchantId) &&
             Objects.equals(unitPackageId, that.unitPackageId) &&
@@ -253,12 +241,11 @@ public class ProductsCriteria implements Serializable {
         productNumber,
         searchDetails,
         thumbnailUrl,
-        sellStartDate,
-        sellEndDate,
         warrantyPeriod,
         warrantyPolicy,
         sellCount,
         whatInTheBox,
+        stockItemListId,
         supplierId,
         merchantId,
         unitPackageId,
@@ -278,12 +265,11 @@ public class ProductsCriteria implements Serializable {
                 (productNumber != null ? "productNumber=" + productNumber + ", " : "") +
                 (searchDetails != null ? "searchDetails=" + searchDetails + ", " : "") +
                 (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
-                (sellStartDate != null ? "sellStartDate=" + sellStartDate + ", " : "") +
-                (sellEndDate != null ? "sellEndDate=" + sellEndDate + ", " : "") +
                 (warrantyPeriod != null ? "warrantyPeriod=" + warrantyPeriod + ", " : "") +
                 (warrantyPolicy != null ? "warrantyPolicy=" + warrantyPolicy + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
                 (whatInTheBox != null ? "whatInTheBox=" + whatInTheBox + ", " : "") +
+                (stockItemListId != null ? "stockItemListId=" + stockItemListId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +
                 (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
                 (unitPackageId != null ? "unitPackageId=" + unitPackageId + ", " : "") +

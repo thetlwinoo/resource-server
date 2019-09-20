@@ -3,11 +3,14 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductBrand;
+import com.resource.server.domain.Merchants;
 import com.resource.server.repository.ProductBrandRepository;
 import com.resource.server.service.ProductBrandService;
 import com.resource.server.service.dto.ProductBrandDTO;
 import com.resource.server.service.mapper.ProductBrandMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.ProductBrandCriteria;
+import com.resource.server.service.ProductBrandQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +65,9 @@ public class ProductBrandResourceIntTest {
     private ProductBrandService productBrandService;
 
     @Autowired
+    private ProductBrandQueryService productBrandQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -83,7 +89,7 @@ public class ProductBrandResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductBrandResource productBrandResource = new ProductBrandResource(productBrandService);
+        final ProductBrandResource productBrandResource = new ProductBrandResource(productBrandService, productBrandQueryService);
         this.restProductBrandMockMvc = MockMvcBuilders.standaloneSetup(productBrandResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -202,6 +208,100 @@ public class ProductBrandResourceIntTest {
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByProductBrandNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where productBrandName equals to DEFAULT_PRODUCT_BRAND_NAME
+        defaultProductBrandShouldBeFound("productBrandName.equals=" + DEFAULT_PRODUCT_BRAND_NAME);
+
+        // Get all the productBrandList where productBrandName equals to UPDATED_PRODUCT_BRAND_NAME
+        defaultProductBrandShouldNotBeFound("productBrandName.equals=" + UPDATED_PRODUCT_BRAND_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByProductBrandNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where productBrandName in DEFAULT_PRODUCT_BRAND_NAME or UPDATED_PRODUCT_BRAND_NAME
+        defaultProductBrandShouldBeFound("productBrandName.in=" + DEFAULT_PRODUCT_BRAND_NAME + "," + UPDATED_PRODUCT_BRAND_NAME);
+
+        // Get all the productBrandList where productBrandName equals to UPDATED_PRODUCT_BRAND_NAME
+        defaultProductBrandShouldNotBeFound("productBrandName.in=" + UPDATED_PRODUCT_BRAND_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByProductBrandNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where productBrandName is not null
+        defaultProductBrandShouldBeFound("productBrandName.specified=true");
+
+        // Get all the productBrandList where productBrandName is null
+        defaultProductBrandShouldNotBeFound("productBrandName.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByMerchantIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Merchants merchant = MerchantsResourceIntTest.createEntity(em);
+        em.persist(merchant);
+        em.flush();
+        productBrand.setMerchant(merchant);
+        productBrandRepository.saveAndFlush(productBrand);
+        Long merchantId = merchant.getId();
+
+        // Get all the productBrandList where merchant equals to merchantId
+        defaultProductBrandShouldBeFound("merchantId.equals=" + merchantId);
+
+        // Get all the productBrandList where merchant equals to merchantId + 1
+        defaultProductBrandShouldNotBeFound("merchantId.equals=" + (merchantId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProductBrandShouldBeFound(String filter) throws Exception {
+        restProductBrandMockMvc.perform(get("/api/product-brands?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(productBrand.getId().intValue())))
+            .andExpect(jsonPath("$.[*].productBrandName").value(hasItem(DEFAULT_PRODUCT_BRAND_NAME)))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+
+        // Check, that the count call also returns 1
+        restProductBrandMockMvc.perform(get("/api/product-brands/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProductBrandShouldNotBeFound(String filter) throws Exception {
+        restProductBrandMockMvc.perform(get("/api/product-brands?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductBrandMockMvc.perform(get("/api/product-brands/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

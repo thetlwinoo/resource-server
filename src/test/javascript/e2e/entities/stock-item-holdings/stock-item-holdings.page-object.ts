@@ -32,7 +32,7 @@ export class StockItemHoldingsUpdatePage {
     lastCostPriceInput = element(by.id('field_lastCostPrice'));
     reorderLevelInput = element(by.id('field_reorderLevel'));
     targerStockLevelInput = element(by.id('field_targerStockLevel'));
-    stockItemSelect = element(by.id('field_stockItem'));
+    stockItemHoldingOnStockItemSelect = element(by.id('field_stockItemHoldingOnStockItem'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -86,23 +86,23 @@ export class StockItemHoldingsUpdatePage {
         return this.targerStockLevelInput.getAttribute('value');
     }
 
-    async stockItemSelectLastOption() {
-        await this.stockItemSelect
+    async stockItemHoldingOnStockItemSelectLastOption() {
+        await this.stockItemHoldingOnStockItemSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async stockItemSelectOption(option) {
-        await this.stockItemSelect.sendKeys(option);
+    async stockItemHoldingOnStockItemSelectOption(option) {
+        await this.stockItemHoldingOnStockItemSelect.sendKeys(option);
     }
 
-    getStockItemSelect(): ElementFinder {
-        return this.stockItemSelect;
+    getStockItemHoldingOnStockItemSelect(): ElementFinder {
+        return this.stockItemHoldingOnStockItemSelect;
     }
 
-    async getStockItemSelectedOption() {
-        return this.stockItemSelect.element(by.css('option:checked')).getText();
+    async getStockItemHoldingOnStockItemSelectedOption() {
+        return this.stockItemHoldingOnStockItemSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

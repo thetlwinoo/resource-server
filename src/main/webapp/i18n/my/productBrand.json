@@ -16,7 +16,8 @@
                 "title": "Product Brand"
             },
             "productBrandName": "Product Brand Name",
-            "photo": "Photo"
+            "photo": "Photo",
+            "merchant": "Merchant"
         }
     }
 }

@@ -44,8 +44,6 @@ describe('Products e2e test', () => {
             productsUpdatePage.setProductNumberInput('productNumber'),
             productsUpdatePage.setSearchDetailsInput('searchDetails'),
             productsUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
-            productsUpdatePage.setSellStartDateInput('2000-12-31'),
-            productsUpdatePage.setSellEndDateInput('2000-12-31'),
             productsUpdatePage.setWarrantyPeriodInput('warrantyPeriod'),
             productsUpdatePage.setWarrantyPolicyInput('warrantyPolicy'),
             productsUpdatePage.setSellCountInput('5'),
@@ -63,8 +61,6 @@ describe('Products e2e test', () => {
         expect(await productsUpdatePage.getProductNumberInput()).to.eq('productNumber');
         expect(await productsUpdatePage.getSearchDetailsInput()).to.eq('searchDetails');
         expect(await productsUpdatePage.getThumbnailUrlInput()).to.eq('thumbnailUrl');
-        expect(await productsUpdatePage.getSellStartDateInput()).to.eq('2000-12-31');
-        expect(await productsUpdatePage.getSellEndDateInput()).to.eq('2000-12-31');
         expect(await productsUpdatePage.getWarrantyPeriodInput()).to.eq('warrantyPeriod');
         expect(await productsUpdatePage.getWarrantyPolicyInput()).to.eq('warrantyPolicy');
         expect(await productsUpdatePage.getSellCountInput()).to.eq('5');

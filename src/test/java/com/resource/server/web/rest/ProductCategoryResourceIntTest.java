@@ -3,6 +3,7 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductCategory;
+import com.resource.server.domain.ProductCategory;
 import com.resource.server.repository.ProductCategoryRepository;
 import com.resource.server.service.ProductCategoryService;
 import com.resource.server.service.dto.ProductCategoryDTO;
@@ -48,9 +49,6 @@ public class ProductCategoryResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_PARENT_ID = 1L;
-    private static final Long UPDATED_PARENT_ID = 2L;
 
     private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
@@ -109,7 +107,6 @@ public class ProductCategoryResourceIntTest {
     public static ProductCategory createEntity(EntityManager em) {
         ProductCategory productCategory = new ProductCategory()
             .name(DEFAULT_NAME)
-            .parentId(DEFAULT_PARENT_ID)
             .photo(DEFAULT_PHOTO)
             .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
         return productCategory;
@@ -137,7 +134,6 @@ public class ProductCategoryResourceIntTest {
         assertThat(productCategoryList).hasSize(databaseSizeBeforeCreate + 1);
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProductCategory.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
         assertThat(testProductCategory.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testProductCategory.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
     }
@@ -193,7 +189,6 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_ID.intValue())))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
     }
@@ -210,7 +205,6 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productCategory.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.parentId").value(DEFAULT_PARENT_ID.intValue()))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
@@ -256,67 +250,20 @@ public class ProductCategoryResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllProductCategoriesByParentIdIsEqualToSomething() throws Exception {
+    public void getAllProductCategoriesByParentIsEqualToSomething() throws Exception {
         // Initialize the database
+        ProductCategory parent = ProductCategoryResourceIntTest.createEntity(em);
+        em.persist(parent);
+        em.flush();
+        productCategory.setParent(parent);
         productCategoryRepository.saveAndFlush(productCategory);
+        Long parentId = parent.getId();
 
-        // Get all the productCategoryList where parentId equals to DEFAULT_PARENT_ID
-        defaultProductCategoryShouldBeFound("parentId.equals=" + DEFAULT_PARENT_ID);
+        // Get all the productCategoryList where parent equals to parentId
+        defaultProductCategoryShouldBeFound("parentId.equals=" + parentId);
 
-        // Get all the productCategoryList where parentId equals to UPDATED_PARENT_ID
-        defaultProductCategoryShouldNotBeFound("parentId.equals=" + UPDATED_PARENT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductCategoriesByParentIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        productCategoryRepository.saveAndFlush(productCategory);
-
-        // Get all the productCategoryList where parentId in DEFAULT_PARENT_ID or UPDATED_PARENT_ID
-        defaultProductCategoryShouldBeFound("parentId.in=" + DEFAULT_PARENT_ID + "," + UPDATED_PARENT_ID);
-
-        // Get all the productCategoryList where parentId equals to UPDATED_PARENT_ID
-        defaultProductCategoryShouldNotBeFound("parentId.in=" + UPDATED_PARENT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductCategoriesByParentIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productCategoryRepository.saveAndFlush(productCategory);
-
-        // Get all the productCategoryList where parentId is not null
-        defaultProductCategoryShouldBeFound("parentId.specified=true");
-
-        // Get all the productCategoryList where parentId is null
-        defaultProductCategoryShouldNotBeFound("parentId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductCategoriesByParentIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        productCategoryRepository.saveAndFlush(productCategory);
-
-        // Get all the productCategoryList where parentId greater than or equals to DEFAULT_PARENT_ID
-        defaultProductCategoryShouldBeFound("parentId.greaterOrEqualThan=" + DEFAULT_PARENT_ID);
-
-        // Get all the productCategoryList where parentId greater than or equals to UPDATED_PARENT_ID
-        defaultProductCategoryShouldNotBeFound("parentId.greaterOrEqualThan=" + UPDATED_PARENT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductCategoriesByParentIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productCategoryRepository.saveAndFlush(productCategory);
-
-        // Get all the productCategoryList where parentId less than or equals to DEFAULT_PARENT_ID
-        defaultProductCategoryShouldNotBeFound("parentId.lessThan=" + DEFAULT_PARENT_ID);
-
-        // Get all the productCategoryList where parentId less than or equals to UPDATED_PARENT_ID
-        defaultProductCategoryShouldBeFound("parentId.lessThan=" + UPDATED_PARENT_ID);
+        // Get all the productCategoryList where parent equals to parentId + 1
+        defaultProductCategoryShouldNotBeFound("parentId.equals=" + (parentId + 1));
     }
 
     /**
@@ -328,7 +275,6 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_ID.intValue())))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
 
@@ -379,7 +325,6 @@ public class ProductCategoryResourceIntTest {
         em.detach(updatedProductCategory);
         updatedProductCategory
             .name(UPDATED_NAME)
-            .parentId(UPDATED_PARENT_ID)
             .photo(UPDATED_PHOTO)
             .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
         ProductCategoryDTO productCategoryDTO = productCategoryMapper.toDto(updatedProductCategory);
@@ -394,7 +339,6 @@ public class ProductCategoryResourceIntTest {
         assertThat(productCategoryList).hasSize(databaseSizeBeforeUpdate);
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProductCategory.getParentId()).isEqualTo(UPDATED_PARENT_ID);
         assertThat(testProductCategory.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testProductCategory.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
     }

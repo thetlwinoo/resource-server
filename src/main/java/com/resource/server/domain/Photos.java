@@ -116,8 +116,8 @@ public class Photos extends AbstractAuditingEntity implements Serializable {
     @Column(name = "delete_token", length = 1024)
     private String deleteToken;
 
-    @ManyToOne
-    @JsonIgnoreProperties("photos")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("photoLists")
     private StockItems stockItem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

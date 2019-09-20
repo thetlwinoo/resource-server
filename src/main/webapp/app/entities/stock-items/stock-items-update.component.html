@@ -101,12 +101,22 @@
                         [(ngModel)]="stockItems.internalComments" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.discontinuedDate" for="field_discontinuedDate">Discontinued Date</label>
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.sellStartDate" for="field_sellStartDate">Sell Start Date</label>
                     <div class="input-group">
-                        <input id="field_discontinuedDate" type="text" class="form-control" name="discontinuedDate" ngbDatepicker  #discontinuedDateDp="ngbDatepicker" [(ngModel)]="stockItems.discontinuedDate"
+                        <input id="field_sellStartDate" type="text" class="form-control" name="sellStartDate" ngbDatepicker  #sellStartDateDp="ngbDatepicker" [(ngModel)]="stockItems.sellStartDate"
                         />
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="discontinuedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            <button type="button" class="btn btn-secondary" (click)="sellStartDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.sellEndDate" for="field_sellEndDate">Sell End Date</label>
+                    <div class="input-group">
+                        <input id="field_sellEndDate" type="text" class="form-control" name="sellEndDate" ngbDatepicker  #sellEndDateDp="ngbDatepicker" [(ngModel)]="stockItems.sellEndDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="sellEndDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                 </div>
@@ -127,17 +137,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.reviewLine" for="field_reviewLine">Review Line</label>
-                    <select class="form-control" id="field_reviewLine" name="reviewLine" [(ngModel)]="stockItems.reviewLineId">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.stockItemOnReviewLine" for="field_stockItemOnReviewLine">Stock Item On Review Line</label>
+                    <select class="form-control" id="field_stockItemOnReviewLine" name="stockItemOnReviewLine" [(ngModel)]="stockItems.stockItemOnReviewLineId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="reviewLinesOption.id" *ngFor="let reviewLinesOption of reviewlines; trackBy: trackReviewLinesById">{{reviewLinesOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="stockItems.productId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                        <option [ngValue]="reviewLinesOption.id" *ngFor="let reviewLinesOption of stockitemonreviewlines; trackBy: trackReviewLinesById">{{reviewLinesOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -180,6 +183,13 @@
                     <select class="form-control" id="field_productOption" name="productOption" [(ngModel)]="stockItems.productOptionId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="productOptionOption.id" *ngFor="let productOptionOption of productoptions; trackBy: trackProductOptionById">{{productOptionOption.value}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.stockItems.product" for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="stockItems.productId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.id}}</option>
                     </select>
                 </div>
             </div>

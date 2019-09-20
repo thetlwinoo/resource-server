@@ -19,7 +19,8 @@
             "calalogDescription": "Calalog Description",
             "instructions": "Instructions",
             "photo": "Photo",
-            "description": "Description"
+            "description": "Description",
+            "merchant": "Merchant"
         }
     }
 }

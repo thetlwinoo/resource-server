@@ -107,10 +107,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.orders.review" for="field_review">Review</label>
-                    <select class="form-control" id="field_review" name="review" [(ngModel)]="orders.reviewId">
+                    <label class="form-control-label" jhiTranslate="resourceApp.orders.orderOnReview" for="field_orderOnReview">Order On Review</label>
+                    <select class="form-control" id="field_orderOnReview" name="orderOnReview" [(ngModel)]="orders.orderOnReviewId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="reviewsOption.id" *ngFor="let reviewsOption of reviews; trackBy: trackReviewsById">{{reviewsOption.id}}</option>
+                        <option [ngValue]="reviewsOption.id" *ngFor="let reviewsOption of orderonreviews; trackBy: trackReviewsById">{{reviewsOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -11,7 +11,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {ReviewsMapper.class, CustomersMapper.class, AddressesMapper.class, ShipMethodMapper.class, CurrencyRateMapper.class, SpecialDealsMapper.class})
 public interface OrdersMapper extends EntityMapper<OrdersDTO, Orders> {
 
-    @Mapping(source = "review.id", target = "reviewId")
+    @Mapping(source = "orderOnReview.id", target = "orderOnReviewId")
     @Mapping(source = "customer.id", target = "customerId")
     @Mapping(source = "shipToAddress.id", target = "shipToAddressId")
     @Mapping(source = "billToAddress.id", target = "billToAddressId")
@@ -21,7 +21,7 @@ public interface OrdersMapper extends EntityMapper<OrdersDTO, Orders> {
     @Mapping(source = "specialDeals.id", target = "specialDealsId")
     OrdersDTO toDto(Orders orders);
 
-    @Mapping(source = "reviewId", target = "review")
+    @Mapping(source = "orderOnReviewId", target = "orderOnReview")
     @Mapping(target = "orderLineLists", ignore = true)
     @Mapping(source = "customerId", target = "customer")
     @Mapping(source = "shipToAddressId", target = "shipToAddress")

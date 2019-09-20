@@ -11,10 +11,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {StockItemsMapper.class})
 public interface StockItemHoldingsMapper extends EntityMapper<StockItemHoldingsDTO, StockItemHoldings> {
 
-    @Mapping(source = "stockItem.id", target = "stockItemId")
+    @Mapping(source = "stockItemHoldingOnStockItem.id", target = "stockItemHoldingOnStockItemId")
     StockItemHoldingsDTO toDto(StockItemHoldings stockItemHoldings);
 
-    @Mapping(source = "stockItemId", target = "stockItem")
+    @Mapping(source = "stockItemHoldingOnStockItemId", target = "stockItemHoldingOnStockItem")
     StockItemHoldings toEntity(StockItemHoldingsDTO stockItemHoldingsDTO);
 
     default StockItemHoldings fromId(Long id) {

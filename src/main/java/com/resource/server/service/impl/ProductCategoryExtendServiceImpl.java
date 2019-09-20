@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.resource.server.domain.ProductCategory;
 import com.resource.server.repository.ProductCategoryExtendRepository;
 import com.resource.server.service.ProductCategoryExtendService;
+import com.resource.server.service.dto.ProductCategoryDTO;
+import com.resource.server.service.mapper.ProductCategoryMapper;
 import com.stripe.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.resource.server.service.util.NodeUtil;
 
@@ -25,9 +29,11 @@ public class ProductCategoryExtendServiceImpl implements ProductCategoryExtendSe
 
     private final Logger log = LoggerFactory.getLogger(ProductCategoryExtendServiceImpl.class);
     private final ProductCategoryExtendRepository productCategoryExtendRepository;
+    private final ProductCategoryMapper productCategoryMapper;
 
-    public ProductCategoryExtendServiceImpl(ProductCategoryExtendRepository productCategoryExtendRepository) {
+    public ProductCategoryExtendServiceImpl(ProductCategoryExtendRepository productCategoryExtendRepository, ProductCategoryMapper productCategoryMapper) {
         this.productCategoryExtendRepository = productCategoryExtendRepository;
+        this.productCategoryMapper = productCategoryMapper;
     }
 
 
@@ -35,16 +41,26 @@ public class ProductCategoryExtendServiceImpl implements ProductCategoryExtendSe
     public JsonNode getAllProductCategories() {
 
         try {
-            List<ProductCategory> rootCategories = productCategoryExtendRepository.findAllByParentIdIsNull();
+            List<ProductCategoryDTO> rootCategoriesDTO = productCategoryExtendRepository.findAllByParentIdIsNull()
+                .stream()
+                .map(productCategoryMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.createArrayNode();
-            for (ProductCategory parentCategory : rootCategories) {
-                List<ProductCategory> childCategories = productCategoryExtendRepository.findAllByParentId(parentCategory.getId());
-                JsonNode categoryNode = mapper.convertValue(parentCategory, JsonNode.class);
 
-                JsonNode subCategoryNodes = mapper.valueToTree(childCategories);
-                ((ObjectNode)categoryNode).put("children",subCategoryNodes);
-                ((ArrayNode)rootNode).add(categoryNode);
+            for (ProductCategoryDTO parentCategoryDTO : rootCategoriesDTO) {
+
+                List<ProductCategoryDTO> childCategoriesDTO = productCategoryExtendRepository.findAllByParentId(parentCategoryDTO.getId())
+                    .stream()
+                    .map(productCategoryMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+
+                JsonNode categoryNode = mapper.convertValue(parentCategoryDTO, JsonNode.class);
+
+                JsonNode subCategoryNodes = mapper.valueToTree(childCategoriesDTO);
+                ((ObjectNode) categoryNode).put("children", subCategoryNodes);
+                ((ArrayNode) rootNode).add(categoryNode);
             }
 
             return rootNode;

@@ -1005,20 +1005,20 @@ public class OrdersResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllOrdersByReviewIsEqualToSomething() throws Exception {
+    public void getAllOrdersByOrderOnReviewIsEqualToSomething() throws Exception {
         // Initialize the database
-        Reviews review = ReviewsResourceIntTest.createEntity(em);
-        em.persist(review);
+        Reviews orderOnReview = ReviewsResourceIntTest.createEntity(em);
+        em.persist(orderOnReview);
         em.flush();
-        orders.setReview(review);
+        orders.setOrderOnReview(orderOnReview);
         ordersRepository.saveAndFlush(orders);
-        Long reviewId = review.getId();
+        Long orderOnReviewId = orderOnReview.getId();
 
-        // Get all the ordersList where review equals to reviewId
-        defaultOrdersShouldBeFound("reviewId.equals=" + reviewId);
+        // Get all the ordersList where orderOnReview equals to orderOnReviewId
+        defaultOrdersShouldBeFound("orderOnReviewId.equals=" + orderOnReviewId);
 
-        // Get all the ordersList where review equals to reviewId + 1
-        defaultOrdersShouldNotBeFound("reviewId.equals=" + (reviewId + 1));
+        // Get all the ordersList where orderOnReview equals to orderOnReviewId + 1
+        defaultOrdersShouldNotBeFound("orderOnReviewId.equals=" + (orderOnReviewId + 1));
     }
 
 

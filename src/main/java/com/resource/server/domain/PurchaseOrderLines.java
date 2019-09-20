@@ -54,7 +54,7 @@ public class PurchaseOrderLines extends AbstractAuditingEntity implements Serial
     @JsonIgnoreProperties("purchaseOrderLines")
     private StockItems stockItem;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("purchaseOrderLineLists")
     private PurchaseOrders purchaseOrder;
 

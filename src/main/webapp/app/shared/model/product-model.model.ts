@@ -8,6 +8,8 @@ export interface IProductModel {
     photoContentType?: string;
     photo?: any;
     descriptions?: IProductModelDescription[];
+    merchantMerchantName?: string;
+    merchantId?: number;
 }
 
 export class ProductModel implements IProductModel {
@@ -18,6 +20,8 @@ export class ProductModel implements IProductModel {
         public instructions?: string,
         public photoContentType?: string,
         public photo?: any,
-        public descriptions?: IProductModelDescription[]
+        public descriptions?: IProductModelDescription[],
+        public merchantMerchantName?: string,
+        public merchantId?: number
     ) {}
 }

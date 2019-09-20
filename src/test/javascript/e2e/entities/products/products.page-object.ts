@@ -30,8 +30,6 @@ export class ProductsUpdatePage {
     productNumberInput = element(by.id('field_productNumber'));
     searchDetailsInput = element(by.id('field_searchDetails'));
     thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
-    sellStartDateInput = element(by.id('field_sellStartDate'));
-    sellEndDateInput = element(by.id('field_sellEndDate'));
     warrantyPeriodInput = element(by.id('field_warrantyPeriod'));
     warrantyPolicyInput = element(by.id('field_warrantyPolicy'));
     sellCountInput = element(by.id('field_sellCount'));
@@ -79,22 +77,6 @@ export class ProductsUpdatePage {
 
     async getThumbnailUrlInput() {
         return this.thumbnailUrlInput.getAttribute('value');
-    }
-
-    async setSellStartDateInput(sellStartDate) {
-        await this.sellStartDateInput.sendKeys(sellStartDate);
-    }
-
-    async getSellStartDateInput() {
-        return this.sellStartDateInput.getAttribute('value');
-    }
-
-    async setSellEndDateInput(sellEndDate) {
-        await this.sellEndDateInput.sendKeys(sellEndDate);
-    }
-
-    async getSellEndDateInput() {
-        return this.sellEndDateInput.getAttribute('value');
     }
 
     async setWarrantyPeriodInput(warrantyPeriod) {

@@ -42,32 +42,6 @@
                         [(ngModel)]="products.thumbnailUrl" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.sellStartDate" for="field_sellStartDate">Sell Start Date</label>
-                    <div class="input-group">
-                        <input id="field_sellStartDate" type="text" class="form-control" name="sellStartDate" ngbDatepicker  #sellStartDateDp="ngbDatepicker" [(ngModel)]="products.sellStartDate"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="sellStartDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.sellStartDate?.dirty && editForm.controls.sellStartDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.sellStartDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.products.sellEndDate" for="field_sellEndDate">Sell End Date</label>
-                    <div class="input-group">
-                        <input id="field_sellEndDate" type="text" class="form-control" name="sellEndDate" ngbDatepicker  #sellEndDateDp="ngbDatepicker" [(ngModel)]="products.sellEndDate"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="sellEndDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.products.warrantyPeriod" for="field_warrantyPeriod">Warranty Period</label>
                     <input type="text" class="form-control" name="warrantyPeriod" id="field_warrantyPeriod"
                         [(ngModel)]="products.warrantyPeriod" />

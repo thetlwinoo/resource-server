@@ -1,6 +1,7 @@
 package com.resource.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,15 +30,16 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "parent_id")
-    private Long parentId;
-
     @Lob
     @Column(name = "photo")
     private byte[] photo;
 
     @Column(name = "photo_content_type")
     private String photoContentType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("productCategories")
+    private ProductCategory parent;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -59,19 +61,6 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public ProductCategory parentId(Long parentId) {
-        this.parentId = parentId;
-        return this;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
     }
 
     public byte[] getPhoto() {
@@ -98,6 +87,19 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
 
     public void setPhotoContentType(String photoContentType) {
         this.photoContentType = photoContentType;
+    }
+
+    public ProductCategory getParent() {
+        return parent;
+    }
+
+    public ProductCategory parent(ProductCategory productCategory) {
+        this.parent = productCategory;
+        return this;
+    }
+
+    public void setParent(ProductCategory productCategory) {
+        this.parent = productCategory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -126,7 +128,6 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
         return "ProductCategory{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", parentId=" + getParentId() +
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
             "}";

@@ -53,18 +53,19 @@ describe('StockItems e2e test', () => {
             stockItemsUpdatePage.setTypicalHeightPerUnitInput('5'),
             stockItemsUpdatePage.setMarketingCommentsInput('marketingComments'),
             stockItemsUpdatePage.setInternalCommentsInput('internalComments'),
-            stockItemsUpdatePage.setDiscontinuedDateInput('2000-12-31'),
+            stockItemsUpdatePage.setSellStartDateInput('2000-12-31'),
+            stockItemsUpdatePage.setSellEndDateInput('2000-12-31'),
             stockItemsUpdatePage.setSellCountInput('5'),
             stockItemsUpdatePage.setCustomFieldsInput('customFields'),
             stockItemsUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
-            stockItemsUpdatePage.reviewLineSelectLastOption(),
-            stockItemsUpdatePage.productSelectLastOption(),
+            stockItemsUpdatePage.stockItemOnReviewLineSelectLastOption(),
             stockItemsUpdatePage.lengthUnitMeasureCodeSelectLastOption(),
             stockItemsUpdatePage.weightUnitMeasureCodeSelectLastOption(),
             stockItemsUpdatePage.widthUnitMeasureCodeSelectLastOption(),
             stockItemsUpdatePage.heightUnitMeasureCodeSelectLastOption(),
             stockItemsUpdatePage.productAttributeSelectLastOption(),
-            stockItemsUpdatePage.productOptionSelectLastOption()
+            stockItemsUpdatePage.productOptionSelectLastOption(),
+            stockItemsUpdatePage.productSelectLastOption()
         ]);
         expect(await stockItemsUpdatePage.getStockItemNameInput()).to.eq('stockItemName');
         expect(await stockItemsUpdatePage.getSellerSKUInput()).to.eq('sellerSKU');
@@ -79,7 +80,8 @@ describe('StockItems e2e test', () => {
         expect(await stockItemsUpdatePage.getTypicalHeightPerUnitInput()).to.eq('5');
         expect(await stockItemsUpdatePage.getMarketingCommentsInput()).to.eq('marketingComments');
         expect(await stockItemsUpdatePage.getInternalCommentsInput()).to.eq('internalComments');
-        expect(await stockItemsUpdatePage.getDiscontinuedDateInput()).to.eq('2000-12-31');
+        expect(await stockItemsUpdatePage.getSellStartDateInput()).to.eq('2000-12-31');
+        expect(await stockItemsUpdatePage.getSellEndDateInput()).to.eq('2000-12-31');
         expect(await stockItemsUpdatePage.getSellCountInput()).to.eq('5');
         expect(await stockItemsUpdatePage.getCustomFieldsInput()).to.eq('customFields');
         expect(await stockItemsUpdatePage.getThumbnailUrlInput()).to.eq('thumbnailUrl');

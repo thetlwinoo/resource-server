@@ -1,6 +1,7 @@
 package com.resource.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -35,6 +36,10 @@ public class ProductBrand extends AbstractAuditingEntity implements Serializable
 
     @Column(name = "photo_content_type")
     private String photoContentType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("productBrands")
+    private Merchants merchant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -82,6 +87,19 @@ public class ProductBrand extends AbstractAuditingEntity implements Serializable
 
     public void setPhotoContentType(String photoContentType) {
         this.photoContentType = photoContentType;
+    }
+
+    public Merchants getMerchant() {
+        return merchant;
+    }
+
+    public ProductBrand merchant(Merchants merchants) {
+        this.merchant = merchants;
+        return this;
+    }
+
+    public void setMerchant(Merchants merchants) {
+        this.merchant = merchants;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

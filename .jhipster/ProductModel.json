@@ -28,6 +28,13 @@
             "otherEntityName": "productModelDescription",
             "otherEntityRelationshipName": "productModel",
             "relationshipName": "description"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "merchants",
+            "otherEntityRelationshipName": "productModel",
+            "relationshipName": "merchant",
+            "otherEntityField": "merchantName"
         }
     ],
     "changelogDate": "20190801044946",
@@ -35,7 +42,7 @@
     "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",

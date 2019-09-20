@@ -3,6 +3,8 @@ import com.resource.server.service.ProductModelService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.service.dto.ProductModelDTO;
+import com.resource.server.service.dto.ProductModelCriteria;
+import com.resource.server.service.ProductModelQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +31,11 @@ public class ProductModelResource {
 
     private final ProductModelService productModelService;
 
-    public ProductModelResource(ProductModelService productModelService) {
+    private final ProductModelQueryService productModelQueryService;
+
+    public ProductModelResource(ProductModelService productModelService, ProductModelQueryService productModelQueryService) {
         this.productModelService = productModelService;
+        this.productModelQueryService = productModelQueryService;
     }
 
     /**
@@ -76,12 +81,26 @@ public class ProductModelResource {
     /**
      * GET  /product-models : get all the productModels.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of productModels in body
      */
     @GetMapping("/product-models")
-    public List<ProductModelDTO> getAllProductModels() {
-        log.debug("REST request to get all ProductModels");
-        return productModelService.findAll();
+    public ResponseEntity<List<ProductModelDTO>> getAllProductModels(ProductModelCriteria criteria) {
+        log.debug("REST request to get ProductModels by criteria: {}", criteria);
+        List<ProductModelDTO> entityList = productModelQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /product-models/count : count all the productModels.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/product-models/count")
+    public ResponseEntity<Long> countProductModels(ProductModelCriteria criteria) {
+        log.debug("REST request to count ProductModels by criteria: {}", criteria);
+        return ResponseEntity.ok().body(productModelQueryService.countByCriteria(criteria));
     }
 
     /**

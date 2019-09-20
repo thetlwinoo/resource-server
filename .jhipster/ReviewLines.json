@@ -35,7 +35,7 @@
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "stockItems",
-            "otherEntityRelationshipName": "reviewLine",
+            "otherEntityRelationshipName": "stockItemOnReviewLine",
             "relationshipName": "stockItem",
             "ownerSide": false
         },

@@ -27,8 +27,8 @@ export class ProductCategoryUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
-    parentIdInput = element(by.id('field_parentId'));
     photoInput = element(by.id('file_photo'));
+    parentSelect = element(by.id('field_parent'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -42,20 +42,31 @@ export class ProductCategoryUpdatePage {
         return this.nameInput.getAttribute('value');
     }
 
-    async setParentIdInput(parentId) {
-        await this.parentIdInput.sendKeys(parentId);
-    }
-
-    async getParentIdInput() {
-        return this.parentIdInput.getAttribute('value');
-    }
-
     async setPhotoInput(photo) {
         await this.photoInput.sendKeys(photo);
     }
 
     async getPhotoInput() {
         return this.photoInput.getAttribute('value');
+    }
+
+    async parentSelectLastOption() {
+        await this.parentSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async parentSelectOption(option) {
+        await this.parentSelect.sendKeys(option);
+    }
+
+    getParentSelect(): ElementFinder {
+        return this.parentSelect;
+    }
+
+    async getParentSelectedOption() {
+        return this.parentSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

@@ -53,7 +53,7 @@ public class OrdersCriteria implements Serializable {
 
     private LocalDateFilter pickingCompletedWhen;
 
-    private LongFilter reviewId;
+    private LongFilter orderOnReviewId;
 
     private LongFilter orderLineListId;
 
@@ -191,12 +191,12 @@ public class OrdersCriteria implements Serializable {
         this.pickingCompletedWhen = pickingCompletedWhen;
     }
 
-    public LongFilter getReviewId() {
-        return reviewId;
+    public LongFilter getOrderOnReviewId() {
+        return orderOnReviewId;
     }
 
-    public void setReviewId(LongFilter reviewId) {
-        this.reviewId = reviewId;
+    public void setOrderOnReviewId(LongFilter orderOnReviewId) {
+        this.orderOnReviewId = orderOnReviewId;
     }
 
     public LongFilter getOrderLineListId() {
@@ -289,7 +289,7 @@ public class OrdersCriteria implements Serializable {
             Objects.equals(deliveryInstructions, that.deliveryInstructions) &&
             Objects.equals(internalComments, that.internalComments) &&
             Objects.equals(pickingCompletedWhen, that.pickingCompletedWhen) &&
-            Objects.equals(reviewId, that.reviewId) &&
+            Objects.equals(orderOnReviewId, that.orderOnReviewId) &&
             Objects.equals(orderLineListId, that.orderLineListId) &&
             Objects.equals(customerId, that.customerId) &&
             Objects.equals(shipToAddressId, that.shipToAddressId) &&
@@ -318,7 +318,7 @@ public class OrdersCriteria implements Serializable {
         deliveryInstructions,
         internalComments,
         pickingCompletedWhen,
-        reviewId,
+        orderOnReviewId,
         orderLineListId,
         customerId,
         shipToAddressId,
@@ -348,7 +348,7 @@ public class OrdersCriteria implements Serializable {
                 (deliveryInstructions != null ? "deliveryInstructions=" + deliveryInstructions + ", " : "") +
                 (internalComments != null ? "internalComments=" + internalComments + ", " : "") +
                 (pickingCompletedWhen != null ? "pickingCompletedWhen=" + pickingCompletedWhen + ", " : "") +
-                (reviewId != null ? "reviewId=" + reviewId + ", " : "") +
+                (orderOnReviewId != null ? "orderOnReviewId=" + orderOnReviewId + ", " : "") +
                 (orderLineListId != null ? "orderLineListId=" + orderLineListId + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
                 (shipToAddressId != null ? "shipToAddressId=" + shipToAddressId + ", " : "") +

@@ -27,7 +27,6 @@ export interface IPhotos {
     priority?: number;
     defaultInd?: boolean;
     deleteToken?: string;
-    stockItemStockItemName?: string;
     stockItemId?: number;
 }
 
@@ -61,7 +60,6 @@ export class Photos implements IPhotos {
         public priority?: number,
         public defaultInd?: boolean,
         public deleteToken?: string,
-        public stockItemStockItemName?: string,
         public stockItemId?: number
     ) {
         this.defaultInd = this.defaultInd || false;

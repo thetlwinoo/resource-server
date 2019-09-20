@@ -18,6 +18,12 @@
                         {{productBrand.photoContentType}}, {{byteSize(productBrand.photo)}}
                     </div>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.productBrand.merchant">Merchant</span></dt>
+                <dd>
+                    <div *ngIf="productBrand.merchantId">
+                        <a [routerLink]="['/merchants', productBrand.merchantId, 'view']">{{productBrand.merchantMerchantName}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

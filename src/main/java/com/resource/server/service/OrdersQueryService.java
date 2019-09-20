@@ -131,9 +131,9 @@ public class OrdersQueryService extends QueryService<Orders> {
             if (criteria.getPickingCompletedWhen() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPickingCompletedWhen(), Orders_.pickingCompletedWhen));
             }
-            if (criteria.getReviewId() != null) {
-                specification = specification.and(buildSpecification(criteria.getReviewId(),
-                    root -> root.join(Orders_.review, JoinType.LEFT).get(Reviews_.id)));
+            if (criteria.getOrderOnReviewId() != null) {
+                specification = specification.and(buildSpecification(criteria.getOrderOnReviewId(),
+                    root -> root.join(Orders_.orderOnReview, JoinType.LEFT).get(Reviews_.id)));
             }
             if (criteria.getOrderLineListId() != null) {
                 specification = specification.and(buildSpecification(criteria.getOrderLineListId(),

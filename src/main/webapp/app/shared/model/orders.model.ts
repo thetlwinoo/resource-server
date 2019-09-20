@@ -17,7 +17,7 @@ export interface IOrders {
     deliveryInstructions?: string;
     internalComments?: string;
     pickingCompletedWhen?: Moment;
-    reviewId?: number;
+    orderOnReviewId?: number;
     orderLineLists?: IOrderLines[];
     customerId?: number;
     shipToAddressId?: number;
@@ -46,7 +46,7 @@ export class Orders implements IOrders {
         public deliveryInstructions?: string,
         public internalComments?: string,
         public pickingCompletedWhen?: Moment,
-        public reviewId?: number,
+        public orderOnReviewId?: number,
         public orderLineLists?: IOrderLines[],
         public customerId?: number,
         public shipToAddressId?: number,

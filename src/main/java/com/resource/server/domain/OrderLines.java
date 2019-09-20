@@ -60,7 +60,7 @@ public class OrderLines extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("orderLines")
     private PackageTypes packageType;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("orderLineLists")
     private Orders order;
 

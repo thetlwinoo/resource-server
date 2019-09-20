@@ -38,6 +38,13 @@
                         [(ngModel)]="productBrand.photoContentType" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productBrand.merchant" for="field_merchant">Merchant</label>
+                    <select class="form-control" id="field_merchant" name="merchant" [(ngModel)]="productBrand.merchantId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="merchantsOption.id" *ngFor="let merchantsOption of merchants; trackBy: trackMerchantsById">{{merchantsOption.merchantName}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

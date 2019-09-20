@@ -41,6 +41,7 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 currentDate,
+                currentDate,
                 0,
                 'AAAAAAA',
                 'AAAAAAA'
@@ -51,7 +52,8 @@ describe('Service Tests', () => {
             it('should find an element', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        discontinuedDate: currentDate.format(DATE_FORMAT)
+                        sellStartDate: currentDate.format(DATE_FORMAT),
+                        sellEndDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
@@ -68,13 +70,15 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 0,
-                        discontinuedDate: currentDate.format(DATE_FORMAT)
+                        sellStartDate: currentDate.format(DATE_FORMAT),
+                        sellEndDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
-                        discontinuedDate: currentDate
+                        sellStartDate: currentDate,
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );
@@ -102,7 +106,8 @@ describe('Service Tests', () => {
                         typicalHeightPerUnit: 1,
                         marketingComments: 'BBBBBB',
                         internalComments: 'BBBBBB',
-                        discontinuedDate: currentDate.format(DATE_FORMAT),
+                        sellStartDate: currentDate.format(DATE_FORMAT),
+                        sellEndDate: currentDate.format(DATE_FORMAT),
                         sellCount: 1,
                         customFields: 'BBBBBB',
                         thumbnailUrl: 'BBBBBB'
@@ -112,7 +117,8 @@ describe('Service Tests', () => {
 
                 const expected = Object.assign(
                     {
-                        discontinuedDate: currentDate
+                        sellStartDate: currentDate,
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );
@@ -140,7 +146,8 @@ describe('Service Tests', () => {
                         typicalHeightPerUnit: 1,
                         marketingComments: 'BBBBBB',
                         internalComments: 'BBBBBB',
-                        discontinuedDate: currentDate.format(DATE_FORMAT),
+                        sellStartDate: currentDate.format(DATE_FORMAT),
+                        sellEndDate: currentDate.format(DATE_FORMAT),
                         sellCount: 1,
                         customFields: 'BBBBBB',
                         thumbnailUrl: 'BBBBBB'
@@ -149,7 +156,8 @@ describe('Service Tests', () => {
                 );
                 const expected = Object.assign(
                     {
-                        discontinuedDate: currentDate
+                        sellStartDate: currentDate,
+                        sellEndDate: currentDate
                     },
                     returnedFromService
                 );

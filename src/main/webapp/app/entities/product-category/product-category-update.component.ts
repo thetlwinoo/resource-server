@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IProductCategory } from 'app/shared/model/product-category.model';
 import { ProductCategoryService } from './product-category.service';
 
@@ -15,8 +15,11 @@ export class ProductCategoryUpdateComponent implements OnInit {
     productCategory: IProductCategory;
     isSaving: boolean;
 
+    productcategories: IProductCategory[];
+
     constructor(
         protected dataUtils: JhiDataUtils,
+        protected jhiAlertService: JhiAlertService,
         protected productCategoryService: ProductCategoryService,
         protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
@@ -27,6 +30,13 @@ export class ProductCategoryUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ productCategory }) => {
             this.productCategory = productCategory;
         });
+        this.productCategoryService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProductCategory[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProductCategory[]>) => response.body)
+            )
+            .subscribe((res: IProductCategory[]) => (this.productcategories = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -69,5 +79,13 @@ export class ProductCategoryUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackProductCategoryById(index: number, item: IProductCategory) {
+        return item.id;
     }
 }

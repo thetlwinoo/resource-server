@@ -29,7 +29,7 @@
             "deliveryInstructions": "Delivery Instructions",
             "internalComments": "Internal Comments",
             "pickingCompletedWhen": "Picking Completed When",
-            "review": "Review",
+            "orderOnReview": "Order On Review",
             "orderLineList": "Order Line List",
             "customer": "Customer",
             "shipToAddress": "Ship To Address",

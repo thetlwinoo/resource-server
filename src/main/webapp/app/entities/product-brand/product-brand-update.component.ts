@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IProductBrand } from 'app/shared/model/product-brand.model';
 import { ProductBrandService } from './product-brand.service';
+import { IMerchants } from 'app/shared/model/merchants.model';
+import { MerchantsService } from 'app/entities/merchants';
 
 @Component({
     selector: 'jhi-product-brand-update',
@@ -15,9 +17,13 @@ export class ProductBrandUpdateComponent implements OnInit {
     productBrand: IProductBrand;
     isSaving: boolean;
 
+    merchants: IMerchants[];
+
     constructor(
         protected dataUtils: JhiDataUtils,
+        protected jhiAlertService: JhiAlertService,
         protected productBrandService: ProductBrandService,
+        protected merchantsService: MerchantsService,
         protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -27,6 +33,13 @@ export class ProductBrandUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ productBrand }) => {
             this.productBrand = productBrand;
         });
+        this.merchantsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IMerchants[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IMerchants[]>) => response.body)
+            )
+            .subscribe((res: IMerchants[]) => (this.merchants = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -69,5 +82,13 @@ export class ProductBrandUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackMerchantsById(index: number, item: IMerchants) {
+        return item.id;
     }
 }

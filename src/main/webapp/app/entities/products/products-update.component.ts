@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IProducts } from 'app/shared/model/products.model';
 import { ProductsService } from './products.service';
@@ -43,8 +42,6 @@ export class ProductsUpdateComponent implements OnInit {
     productbrands: IProductBrand[];
 
     warrantytypes: IWarrantyTypes[];
-    sellStartDateDp: any;
-    sellEndDateDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,

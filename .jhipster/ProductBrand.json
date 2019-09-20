@@ -14,13 +14,21 @@
             "fieldTypeBlobContent": "image"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "merchants",
+            "otherEntityRelationshipName": "productBrand",
+            "relationshipName": "merchant",
+            "otherEntityField": "merchantName"
+        }
+    ],
     "changelogDate": "20190912101609",
     "entityTableName": "product_brand",
     "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
