@@ -1,5 +1,6 @@
 package com.resource.server.web.rest;
 
+import com.resource.server.domain.Products;
 import com.resource.server.service.ProductPhotoService;
 import com.resource.server.service.ProductsExtendService;
 import com.resource.server.service.ProductsQueryService;
@@ -7,6 +8,8 @@ import com.resource.server.service.ProductsService;
 import com.resource.server.service.dto.ProductCategoryDTO;
 import com.resource.server.service.dto.ProductsCriteria;
 import com.resource.server.service.dto.ProductsDTO;
+import com.resource.server.web.rest.errors.BadRequestAlertException;
+import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -19,6 +22,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +34,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/products-extend")
 public class ProductsExtendResource {
-
+    private static final String ENTITY_NAME = "products";
     private final Logger log = LoggerFactory.getLogger(ProductsExtendResource.class);
     private final ProductsExtendService productExtendService;
     private final ProductsService productsService;
@@ -40,6 +46,20 @@ public class ProductsExtendResource {
         this.productsService = productsService;
         this.productPhotoService = productPhotoService;
         this.productsQueryService = productsQueryService;
+    }
+
+    @PostMapping("/products")
+    public ResponseEntity createProducts(@Valid @RequestBody Products products) throws URISyntaxException {
+        log.debug("REST request to save Products : {}", products);
+        if (products.getId() != null) {
+            throw new BadRequestAlertException("A new products cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        Products result = productExtendService.save(products);
+//        return ResponseEntity.ok().body(products);
+        return ResponseEntity.created(new URI("/api/products-extend/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.GET, params = "id")

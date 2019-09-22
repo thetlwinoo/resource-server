@@ -85,4 +85,10 @@ public class PhotosExtendServiceImpl implements PhotosExtendService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    public Optional<PhotosDTO> getOneByStockItem(Long stockItemId) {
+        return photosExtendRepository.findFirstByStockItemId(stockItemId)
+            .map(photosMapper::toDto);
+    }
+
 }

@@ -1,11 +1,11 @@
 package com.resource.server.service.impl;
 
-import com.resource.server.domain.Products;
+import com.resource.server.domain.*;
 import com.resource.server.repository.ProductsExtendFilterRepository;
 import com.resource.server.repository.ProductsExtendRepository;
-import com.resource.server.service.ProductsExtendService;
-import com.resource.server.service.dto.ProductCategoryDTO;
-import com.resource.server.service.mapper.ProductCategoryMapper;
+import com.resource.server.service.*;
+import com.resource.server.service.dto.*;
+import com.resource.server.service.mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,12 +28,36 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
     private final ProductsExtendRepository productsExtendRepository;
     private final ProductsExtendFilterRepository productsExtendFilterRepository;
     private final ProductCategoryMapper productCategoryMapper;
+    private final ProductsService productsService;
+    private final ProductModelService productModelService;
+    private final ProductBrandService productBrandService;
+    private final ProductCategoryService productCategoryService;
+    private final ProductModelMapper productModelMapper;
+    private final ProductBrandMapper productBrandMapper;
+    private final ProductAttributeService productAttributeService;
+    private final ProductOptionService productOptionService;
+    private final ProductAttributeMapper productAttributeMapper;
+    private final ProductOptionMapper productOptionMapper;
+    private final WarrantyTypesService warrantyTypesService;
+    private final WarrantyTypesMapper warrantyTypesMapper;
 
     @Autowired
-    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper) {
+    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper, ProductsService productsService, ProductModelService productModelService, ProductBrandService productBrandService, ProductCategoryService productCategoryService, ProductModelMapper productModelMapper, ProductBrandMapper productBrandMapper, ProductAttributeService productAttributeService, ProductOptionService productOptionService, ProductAttributeMapper productAttributeMapper, ProductOptionMapper productOptionMapper, WarrantyTypesService warrantyTypesService, WarrantyTypesMapper warrantyTypesMapper) {
         this.productsExtendRepository = productsExtendRepository;
         this.productsExtendFilterRepository = productsExtendFilterRepository;
         this.productCategoryMapper = productCategoryMapper;
+        this.productsService = productsService;
+        this.productModelService = productModelService;
+        this.productBrandService = productBrandService;
+        this.productCategoryService = productCategoryService;
+        this.productModelMapper = productModelMapper;
+        this.productBrandMapper = productBrandMapper;
+        this.productAttributeService = productAttributeService;
+        this.productOptionService = productOptionService;
+        this.productAttributeMapper = productAttributeMapper;
+        this.productOptionMapper = productOptionMapper;
+        this.warrantyTypesService = warrantyTypesService;
+        this.warrantyTypesMapper = warrantyTypesMapper;
     }
 
     @Override
@@ -129,5 +154,65 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
         } catch (Exception ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }
+    }
+
+    @Override
+    public Products save(Products products) {
+        Products saveProduct = new Products();
+        Optional<ProductModelDTO> productModelDTO = productModelService.findOne(products.getProductModel().getId());
+        saveProduct.setProductModel(productModelMapper.toEntity(productModelDTO.get()));
+
+        Optional<ProductBrandDTO> productBrandDTO = productBrandService.findOne(products.getProductBrand().getId());
+        saveProduct.setProductBrand(productBrandMapper.toEntity(productBrandDTO.get()));
+
+        Optional<ProductCategoryDTO> productCategoryDTO = productCategoryService.findOne(products.getProductCategory().getId());
+        saveProduct.setProductCategory(productCategoryMapper.toEntity(productCategoryDTO.get()));
+
+        Optional<WarrantyTypesDTO> warrantyTypesDTO = warrantyTypesService.findOne(products.getWarrantyType().getId());
+        saveProduct.setWarrantyType(warrantyTypesMapper.toEntity(warrantyTypesDTO.get()));
+
+        saveProduct.setProductName(products.getProductName());
+        saveProduct.setSearchDetails(products.getSearchDetails());
+        saveProduct.setMerchant(products.getMerchant());
+        saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
+        saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
+        saveProduct.setWhatInTheBox(products.getWhatInTheBox());
+
+        for (StockItems _stockItems : products.getStockItemLists()) {
+            StockItems stockItems = new StockItems();
+            stockItems.setStockItemName(products.getProductName());
+            stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
+            stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
+            stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
+            stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
+            stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
+            stockItems.setUnitPrice(_stockItems.getUnitPrice());
+            stockItems.setRecommendedRetailPrice(_stockItems.getRecommendedRetailPrice());
+
+            Optional<ProductAttributeDTO> productAttributeDTO = productAttributeService.findOne(_stockItems.getProductAttribute().getId());
+            stockItems.setProductAttribute(productAttributeMapper.toEntity(productAttributeDTO.get()));
+
+            Optional<ProductOptionDTO> productOptionDTO = productOptionService.findOne(_stockItems.getProductOption().getId());
+            stockItems.setProductOption(productOptionMapper.toEntity(productOptionDTO.get()));
+
+            for (Photos _photos : _stockItems.getPhotoLists()) {
+                if (_photos.getOriginalPhotoBlob() != null) {
+                    Photos photos = new Photos();
+                    photos.originalPhotoBlob(_photos.getOriginalPhotoBlob());
+                    photos.originalPhotoBlobContentType(_photos.getOriginalPhotoBlobContentType());
+                    stockItems.getPhotoLists().add(photos);
+                }
+
+            }
+            saveProduct.getStockItemLists().add(stockItems);
+        }
+
+        saveProduct = productsExtendRepository.save(saveProduct);
+
+        return saveProduct;
+    }
+
+    private boolean isBlank(String param) {
+        return param.isEmpty() || param.trim().equals("");
     }
 }

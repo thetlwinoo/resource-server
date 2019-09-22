@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface PhotosExtendRepository extends PhotosRepository {
     Optional<Photos> findByStockItemAndDefaultIndIsTrue(Long stockItemId);
+    Optional<Photos> findFirstByStockItemId(Long stockItemId);
     List<Photos> findAllByStockItemId(Long stockItemId);
 }

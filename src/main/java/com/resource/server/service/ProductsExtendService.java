@@ -32,4 +32,6 @@ public interface ProductsExtendService {
     Object getRelatedPriceRange(String keyword, Long category);
 
     List<String> getRelatedBrands(String keyword, Long category);
+
+    Products save(Products products);
 }
