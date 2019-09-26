@@ -1,6 +1,8 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.domain.Products;
+import com.resource.server.repository.ProductsExtendRepository;
+import com.resource.server.repository.ProductsRepository;
 import com.resource.server.service.ProductPhotoService;
 import com.resource.server.service.ProductsExtendService;
 import com.resource.server.service.ProductsQueryService;
@@ -8,6 +10,7 @@ import com.resource.server.service.ProductsService;
 import com.resource.server.service.dto.ProductCategoryDTO;
 import com.resource.server.service.dto.ProductsCriteria;
 import com.resource.server.service.dto.ProductsDTO;
+import com.resource.server.service.mapper.ProductsMapper;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.web.rest.util.PaginationUtil;
@@ -22,9 +25,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,36 +45,68 @@ public class ProductsExtendResource {
     private final ProductsService productsService;
     private final ProductPhotoService productPhotoService;
     private final ProductsQueryService productsQueryService;
+    private final ProductsExtendRepository productsExtendRepository;
+    private final ProductsMapper productsMapper;
 
-    public ProductsExtendResource(ProductsExtendService productExtendService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService) {
+    public ProductsExtendResource(ProductsExtendService productExtendService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService, ProductsExtendRepository productsExtendRepository, ProductsMapper productsMapper) {
         this.productExtendService = productExtendService;
         this.productsService = productsService;
         this.productPhotoService = productPhotoService;
         this.productsQueryService = productsQueryService;
+        this.productsExtendRepository = productsExtendRepository;
+        this.productsMapper = productsMapper;
     }
 
     @PostMapping("/products")
-    public ResponseEntity createProducts(@Valid @RequestBody Products products) throws URISyntaxException {
+    public ResponseEntity<ProductsDTO> createProducts(@Valid @RequestBody Products products, HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save Products : {}", products);
         if (products.getId() != null) {
             throw new BadRequestAlertException("A new products cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        String _serverUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+        try {
+            ProductsDTO result = productExtendService.save(products, _serverUrl);
 
-        Products result = productExtendService.save(products);
-//        return ResponseEntity.ok().body(products);
-        return ResponseEntity.created(new URI("/api/products-extend/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            return ResponseEntity.created(new URI("/products-extend/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        } catch (Exception ex) {
+            throw new BadRequestAlertException(ex.getMessage(), ENTITY_NAME, "error");
+        }
+//        return ResponseEntity.ok().body(result);
+
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET, params = "id")
-    public ResponseEntity getFullById(@RequestParam("id") Long id) {
-        Optional<ProductsDTO> productsDTO = productsService.findOne(id);
+    @PutMapping("/products")
+    public ResponseEntity<ProductsDTO> updateProducts(@Valid @RequestBody Products products, HttpServletRequest request) throws URISyntaxException {
+        log.debug("REST request to update Products : {}", products);
+        if (products.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        String _serverUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+        try {
+            ProductsDTO result = productExtendService.save(products, _serverUrl);
 
-        if (productsDTO == null) {
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        } catch (Exception ex) {
+            throw new BadRequestAlertException(ex.getMessage(), ENTITY_NAME, "error");
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity getFullById(@PathVariable Long id) {
+//
+//        if (productsDTO == null) {
+//            return new ResponseEntity(HttpStatus.NOT_FOUND);
+//        }
+//        return ResponseUtil.wrapOrNotFound(productsDTO);
+        Products product = productsExtendRepository.findProductsById(id);
+        if (product == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        return ResponseUtil.wrapOrNotFound(productsDTO);
+        return ResponseEntity.ok().body(product);
     }
 
     @RequestMapping(value = "/related", method = RequestMethod.GET, params = "id")

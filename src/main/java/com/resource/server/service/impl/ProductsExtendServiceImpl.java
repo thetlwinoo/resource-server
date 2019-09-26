@@ -15,9 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,9 +40,11 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
     private final ProductOptionMapper productOptionMapper;
     private final WarrantyTypesService warrantyTypesService;
     private final WarrantyTypesMapper warrantyTypesMapper;
+    private final StockItemsService stockItemsService;
+    private final ProductsMapper productsMapper;
 
     @Autowired
-    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper, ProductsService productsService, ProductModelService productModelService, ProductBrandService productBrandService, ProductCategoryService productCategoryService, ProductModelMapper productModelMapper, ProductBrandMapper productBrandMapper, ProductAttributeService productAttributeService, ProductOptionService productOptionService, ProductAttributeMapper productAttributeMapper, ProductOptionMapper productOptionMapper, WarrantyTypesService warrantyTypesService, WarrantyTypesMapper warrantyTypesMapper) {
+    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper, ProductsService productsService, ProductModelService productModelService, ProductBrandService productBrandService, ProductCategoryService productCategoryService, ProductModelMapper productModelMapper, ProductBrandMapper productBrandMapper, ProductAttributeService productAttributeService, ProductOptionService productOptionService, ProductAttributeMapper productAttributeMapper, ProductOptionMapper productOptionMapper, WarrantyTypesService warrantyTypesService, WarrantyTypesMapper warrantyTypesMapper, StockItemsService stockItemsService, ProductsMapper productsMapper) {
         this.productsExtendRepository = productsExtendRepository;
         this.productsExtendFilterRepository = productsExtendFilterRepository;
         this.productCategoryMapper = productCategoryMapper;
@@ -58,6 +60,8 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
         this.productOptionMapper = productOptionMapper;
         this.warrantyTypesService = warrantyTypesService;
         this.warrantyTypesMapper = warrantyTypesMapper;
+        this.stockItemsService = stockItemsService;
+        this.productsMapper = productsMapper;
     }
 
     @Override
@@ -157,62 +161,97 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
     }
 
     @Override
-    public Products save(Products products) {
+    @Transactional
+    public ProductsDTO save(Products products, String serverUrl) {
         Products saveProduct = new Products();
-        Optional<ProductModelDTO> productModelDTO = productModelService.findOne(products.getProductModel().getId());
-        saveProduct.setProductModel(productModelMapper.toEntity(productModelDTO.get()));
 
-        Optional<ProductBrandDTO> productBrandDTO = productBrandService.findOne(products.getProductBrand().getId());
-        saveProduct.setProductBrand(productBrandMapper.toEntity(productBrandDTO.get()));
-
-        Optional<ProductCategoryDTO> productCategoryDTO = productCategoryService.findOne(products.getProductCategory().getId());
-        saveProduct.setProductCategory(productCategoryMapper.toEntity(productCategoryDTO.get()));
-
-        Optional<WarrantyTypesDTO> warrantyTypesDTO = warrantyTypesService.findOne(products.getWarrantyType().getId());
-        saveProduct.setWarrantyType(warrantyTypesMapper.toEntity(warrantyTypesDTO.get()));
-
-        saveProduct.setProductName(products.getProductName());
-        saveProduct.setSearchDetails(products.getSearchDetails());
-        saveProduct.setMerchant(products.getMerchant());
-        saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
-        saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
-        saveProduct.setWhatInTheBox(products.getWhatInTheBox());
-
-        for (StockItems _stockItems : products.getStockItemLists()) {
-            StockItems stockItems = new StockItems();
-            stockItems.setStockItemName(products.getProductName());
-            stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
-            stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
-            stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
-            stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
-            stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
-            stockItems.setUnitPrice(_stockItems.getUnitPrice());
-            stockItems.setRecommendedRetailPrice(_stockItems.getRecommendedRetailPrice());
-
-            Optional<ProductAttributeDTO> productAttributeDTO = productAttributeService.findOne(_stockItems.getProductAttribute().getId());
-            stockItems.setProductAttribute(productAttributeMapper.toEntity(productAttributeDTO.get()));
-
-            Optional<ProductOptionDTO> productOptionDTO = productOptionService.findOne(_stockItems.getProductOption().getId());
-            stockItems.setProductOption(productOptionMapper.toEntity(productOptionDTO.get()));
-
-            for (Photos _photos : _stockItems.getPhotoLists()) {
-                if (_photos.getOriginalPhotoBlob() != null) {
-                    Photos photos = new Photos();
-                    photos.originalPhotoBlob(_photos.getOriginalPhotoBlob());
-                    photos.originalPhotoBlobContentType(_photos.getOriginalPhotoBlobContentType());
-                    stockItems.getPhotoLists().add(photos);
+        try {
+            if (products.getId() != null) {
+                saveProduct = products;
+                for (StockItems _stockItems : products.getStockItemLists()) {
+                    _stockItems.setStockItemName(products.getProductName());
+                    _stockItems.setProduct(products);
+                    Set<Photos> photoList = new HashSet<Photos>();
+                    for (Photos _photos : _stockItems.getPhotoLists()) {
+                        if (_photos.getId() != null || _photos.getOriginalPhotoBlob() != null) {
+                            _photos.setStockItem(_stockItems);
+                            photoList.add(_photos);
+                        }
+                    }
+                    _stockItems.getPhotoLists().clear();
+                    _stockItems.getPhotoLists().addAll(photoList);
                 }
+            } else {
+                saveProduct.setProductModel(products.getProductModel());
+                saveProduct.setProductBrand(products.getProductBrand());
+                saveProduct.setProductCategory(products.getProductCategory());
+                saveProduct.setWarrantyType(products.getWarrantyType());
 
+                saveProduct.setProductName(products.getProductName());
+                saveProduct.setSearchDetails(products.getSearchDetails());
+                saveProduct.setMerchant(products.getMerchant());
+                saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
+                saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
+                saveProduct.setWhatInTheBox(products.getWhatInTheBox());
+
+                for (StockItems _stockItems : products.getStockItemLists()) {
+                    StockItems stockItems = new StockItems();
+                    stockItems.setStockItemName(products.getProductName());
+                    stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
+                    stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
+                    stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
+                    stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
+                    stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
+                    stockItems.setUnitPrice(_stockItems.getUnitPrice());
+                    stockItems.setRecommendedRetailPrice(_stockItems.getRecommendedRetailPrice());
+
+                    stockItems.setProductAttribute(_stockItems.getProductAttribute());
+                    stockItems.setProductOption(_stockItems.getProductOption());
+
+                    stockItems.setProduct(saveProduct);
+
+                    for (Photos _photos : _stockItems.getPhotoLists()) {
+                        if (_photos.getOriginalPhotoBlob() != null) {
+                            Photos photos = new Photos();
+
+                            if (_photos.getOriginalPhotoBlob() != null) {
+                                photos.originalPhotoBlob(_photos.getOriginalPhotoBlob());
+                                photos.originalPhotoBlobContentType(_photos.getOriginalPhotoBlobContentType());
+                            }
+
+                            if (_photos.getThumbnailPhotoBlob() != null) {
+                                photos.thumbnailPhotoBlob(_photos.getThumbnailPhotoBlob());
+                                photos.thumbnailPhotoBlobContentType(_photos.getThumbnailPhotoBlobContentType());
+                            }
+
+                            photos.setStockItem(stockItems);
+                            stockItems.getPhotoLists().add(photos);
+                        }
+                    }
+                    saveProduct.getStockItemLists().add(stockItems);
+                }
             }
-            saveProduct.getStockItemLists().add(stockItems);
+
+            saveProduct = productsExtendRepository.save(saveProduct);
+            String _productThumbnailUrl = "";
+            int index = 0;
+            for (StockItems _stockItems : saveProduct.getStockItemLists()) {
+                if(++index == 1){
+                    _productThumbnailUrl = serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail";
+                }
+                _stockItems.setThumbnailUrl(serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail");
+            }
+            saveProduct.setThumbnailUrl(_productThumbnailUrl);
+            String _productnumber = saveProduct.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+            _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
+            _productnumber = _productnumber + "-" + saveProduct.getId();
+            saveProduct.setProductNumber(_productnumber);
+            productsExtendRepository.save(saveProduct);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
-
-        saveProduct = productsExtendRepository.save(saveProduct);
-
-        return saveProduct;
+        return productsMapper.toDto(saveProduct);
     }
 
-    private boolean isBlank(String param) {
-        return param.isEmpty() || param.trim().equals("");
-    }
+
 }

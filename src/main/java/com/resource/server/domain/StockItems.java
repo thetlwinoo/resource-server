@@ -125,7 +125,7 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     private StockItemHoldings stockItemHolding;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("stockItemLists")
     private Products product;
 

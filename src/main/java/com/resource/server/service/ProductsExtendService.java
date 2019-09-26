@@ -2,6 +2,7 @@ package com.resource.server.service;
 
 import com.resource.server.domain.Products;
 import com.resource.server.service.dto.ProductCategoryDTO;
+import com.resource.server.service.dto.ProductsDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -33,5 +34,5 @@ public interface ProductsExtendService {
 
     List<String> getRelatedBrands(String keyword, Long category);
 
-    Products save(Products products);
+    ProductsDTO save(Products products, String serverUrl);
 }

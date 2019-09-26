@@ -87,7 +87,7 @@ public class PhotosExtendServiceImpl implements PhotosExtendService {
 
     @Override
     public Optional<PhotosDTO> getOneByStockItem(Long stockItemId) {
-        return photosExtendRepository.findFirstByStockItemId(stockItemId)
+        return photosExtendRepository.findFirstByStockItemIdAAndThumbnailPhotoBlobIsNotNull(stockItemId)
             .map(photosMapper::toDto);
     }
 
