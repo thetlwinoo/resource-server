@@ -11,7 +11,7 @@
             <ng-template pTemplate="caption">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText placeholder="Global Filter"
-                       (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                       (input)="tt.filterGlobal($event.target.value, 'contains')" appendTostyle="width:auto">
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>

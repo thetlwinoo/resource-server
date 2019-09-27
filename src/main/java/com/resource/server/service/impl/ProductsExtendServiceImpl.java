@@ -173,7 +173,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                     _stockItems.setProduct(products);
                     Set<Photos> photoList = new HashSet<Photos>();
                     for (Photos _photos : _stockItems.getPhotoLists()) {
-                        if (_photos.getId() != null || _photos.getOriginalPhotoBlob() != null) {
+                        if (_photos.getOriginalPhotoBlob() != null && _photos.getThumbnailPhotoBlob() != null) {
                             _photos.setStockItem(_stockItems);
                             photoList.add(_photos);
                         }
@@ -211,18 +211,14 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                     stockItems.setProduct(saveProduct);
 
                     for (Photos _photos : _stockItems.getPhotoLists()) {
-                        if (_photos.getOriginalPhotoBlob() != null) {
+                        if (_photos.getOriginalPhotoBlob() != null && _photos.getThumbnailPhotoBlob() != null) {
                             Photos photos = new Photos();
 
-                            if (_photos.getOriginalPhotoBlob() != null) {
-                                photos.originalPhotoBlob(_photos.getOriginalPhotoBlob());
-                                photos.originalPhotoBlobContentType(_photos.getOriginalPhotoBlobContentType());
-                            }
+                            photos.originalPhotoBlob(_photos.getOriginalPhotoBlob());
+                            photos.originalPhotoBlobContentType(_photos.getOriginalPhotoBlobContentType());
 
-                            if (_photos.getThumbnailPhotoBlob() != null) {
-                                photos.thumbnailPhotoBlob(_photos.getThumbnailPhotoBlob());
-                                photos.thumbnailPhotoBlobContentType(_photos.getThumbnailPhotoBlobContentType());
-                            }
+                            photos.thumbnailPhotoBlob(_photos.getThumbnailPhotoBlob());
+                            photos.thumbnailPhotoBlobContentType(_photos.getThumbnailPhotoBlobContentType());
 
                             photos.setStockItem(stockItems);
                             stockItems.getPhotoLists().add(photos);

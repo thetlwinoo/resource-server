@@ -1,7 +1,12 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.repository.PhotosExtendRepository;
+import com.resource.server.repository.StockItemsRepository;
 import com.resource.server.service.PhotosExtendService;
+import com.resource.server.service.PhotosService;
+import com.resource.server.service.StockItemsService;
+import com.resource.server.service.mapper.PhotosMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,16 +29,18 @@ public class PhotosExtendResourceIntTest {
 
     private MockMvc restMockMvc;
     private final PhotosExtendService photosExtendService;
+    private final PhotosExtendRepository photosExtendRepository;
 
-    public PhotosExtendResourceIntTest(PhotosExtendService photosExtendService) {
+    public PhotosExtendResourceIntTest(PhotosExtendService photosExtendService,  PhotosExtendRepository photosExtendRepository) {
         this.photosExtendService = photosExtendService;
+        this.photosExtendRepository = photosExtendRepository;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        PhotosExtendResource photosExtendResource = new PhotosExtendResource(photosExtendService);
+        PhotosExtendResource photosExtendResource = new PhotosExtendResource(photosExtendService, photosExtendRepository);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(photosExtendResource)
             .build();

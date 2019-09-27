@@ -116,7 +116,7 @@ public class Photos extends AbstractAuditingEntity implements Serializable {
     @Column(name = "delete_token", length = 1024)
     private String deleteToken;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("photoLists")
     private StockItems stockItem;
 
