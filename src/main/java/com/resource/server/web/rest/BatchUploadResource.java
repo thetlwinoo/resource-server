@@ -31,7 +31,7 @@ import java.util.Random;
  * BatchUploadResource controller
  */
 @RestController
-@RequestMapping("/api/batch-upload")
+@RequestMapping("/api")
 public class BatchUploadResource {
 
     private final Logger log = LoggerFactory.getLogger(ProductsResource.class);
@@ -44,6 +44,7 @@ public class BatchUploadResource {
         this.productsService = productsService;
     }
 
+    @CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080"})
     @PostMapping("/batchupload")
 //    public String uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
     public ResponseEntity<RedirectAttributes> uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
@@ -100,7 +101,7 @@ public class BatchUploadResource {
                 product.setProductName(row.getCell(0).getStringCellValue());
             }
 
-            this.productsService.save(product);
+//            this.productsService.save(product);
         }
 
         return true;
