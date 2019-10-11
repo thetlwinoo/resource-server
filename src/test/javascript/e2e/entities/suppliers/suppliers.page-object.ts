@@ -38,6 +38,10 @@ export class SuppliersUpdatePage {
     phoneNumberInput = element(by.id('field_phoneNumber'));
     faxNumberInput = element(by.id('field_faxNumber'));
     websiteURLInput = element(by.id('field_websiteURL'));
+    webServiceUrlInput = element(by.id('field_webServiceUrl'));
+    creditRatingInput = element(by.id('field_creditRating'));
+    activeFlagInput = element(by.id('field_activeFlag'));
+    avatarInput = element(by.id('file_avatar'));
     validFromInput = element(by.id('field_validFrom'));
     validToInput = element(by.id('field_validTo'));
     primaryContactPersonSelect = element(by.id('field_primaryContactPerson'));
@@ -145,6 +149,33 @@ export class SuppliersUpdatePage {
 
     async getWebsiteURLInput() {
         return this.websiteURLInput.getAttribute('value');
+    }
+
+    async setWebServiceUrlInput(webServiceUrl) {
+        await this.webServiceUrlInput.sendKeys(webServiceUrl);
+    }
+
+    async getWebServiceUrlInput() {
+        return this.webServiceUrlInput.getAttribute('value');
+    }
+
+    async setCreditRatingInput(creditRating) {
+        await this.creditRatingInput.sendKeys(creditRating);
+    }
+
+    async getCreditRatingInput() {
+        return this.creditRatingInput.getAttribute('value');
+    }
+
+    getActiveFlagInput() {
+        return this.activeFlagInput;
+    }
+    async setAvatarInput(avatar) {
+        await this.avatarInput.sendKeys(avatar);
+    }
+
+    async getAvatarInput() {
+        return this.avatarInput.getAttribute('value');
     }
 
     async setValidFromInput(validFrom) {

@@ -25,23 +25,15 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="handle" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="product_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="search_details" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="thumbnail_url" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="warranty_period" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="warranty_policy" type="varchar(255)">
+            <column name="search_details" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -49,27 +41,13 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="what_in_the_box" type="varchar(255)">
-                <constraints nullable="false" />
+            <column name="active_ind" type="boolean">
+                <constraints nullable="true" />
             </column>
-
+            <column name="document_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_products_document_id" />
+            </column>
             <column name="supplier_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="merchant_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="unit_package_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="outer_package_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="product_model_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -81,17 +59,13 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="warranty_type_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190919022025-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20191010085253-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="products">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

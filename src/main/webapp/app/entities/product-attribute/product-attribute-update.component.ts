@@ -8,6 +8,8 @@ import { IProductAttribute } from 'app/shared/model/product-attribute.model';
 import { ProductAttributeService } from './product-attribute.service';
 import { IProductAttributeSet } from 'app/shared/model/product-attribute-set.model';
 import { ProductAttributeSetService } from 'app/entities/product-attribute-set';
+import { ISuppliers } from 'app/shared/model/suppliers.model';
+import { SuppliersService } from 'app/entities/suppliers';
 
 @Component({
     selector: 'jhi-product-attribute-update',
@@ -19,10 +21,13 @@ export class ProductAttributeUpdateComponent implements OnInit {
 
     productattributesets: IProductAttributeSet[];
 
+    suppliers: ISuppliers[];
+
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected productAttributeService: ProductAttributeService,
         protected productAttributeSetService: ProductAttributeSetService,
+        protected suppliersService: SuppliersService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -41,6 +46,13 @@ export class ProductAttributeUpdateComponent implements OnInit {
                 (res: IProductAttributeSet[]) => (this.productattributesets = res),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.suppliersService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ISuppliers[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ISuppliers[]>) => response.body)
+            )
+            .subscribe((res: ISuppliers[]) => (this.suppliers = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -74,6 +86,10 @@ export class ProductAttributeUpdateComponent implements OnInit {
     }
 
     trackProductAttributeSetById(index: number, item: IProductAttributeSet) {
+        return item.id;
+    }
+
+    trackSuppliersById(index: number, item: ISuppliers) {
         return item.id;
     }
 }

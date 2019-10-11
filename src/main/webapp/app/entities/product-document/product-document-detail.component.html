@@ -5,13 +5,6 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="resourceApp.productDocument.documentNode">Document Node</span></dt>
-                <dd>
-                    <div *ngIf="productDocument.documentNode">
-                        <a (click)="openFile(productDocument.documentNodeContentType, productDocument.documentNode)" jhiTranslate="entity.action.open">open</a>
-                        {{productDocument.documentNodeContentType}}, {{byteSize(productDocument.documentNode)}}
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.productDocument.videoUrl">Video Url</span></dt>
                 <dd>
                     <span>{{productDocument.videoUrl}}</span>
@@ -20,10 +13,77 @@
                 <dd>
                     <span>{{productDocument.highlights}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.productDocument.product">Product</span></dt>
+                <dt><span jhiTranslate="resourceApp.productDocument.longDescription">Long Description</span></dt>
                 <dd>
-                    <div *ngIf="productDocument.productId">
-                        <a [routerLink]="['/products', productDocument.productId, 'view']">{{productDocument.productProductName}}</a>
+                    <div *ngIf="productDocument.longDescription">
+                        <a (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a>
+                        {{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.shortDescription">Short Description</span></dt>
+                <dd>
+                    <span>{{productDocument.shortDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.description">Description</span></dt>
+                <dd>
+                    <span>{{productDocument.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.careInstructions">Care Instructions</span></dt>
+                <dd>
+                    <span>{{productDocument.careInstructions}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.productType">Product Type</span></dt>
+                <dd>
+                    <span>{{productDocument.productType}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.modelName">Model Name</span></dt>
+                <dd>
+                    <span>{{productDocument.modelName}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.modelNumber">Model Number</span></dt>
+                <dd>
+                    <span>{{productDocument.modelNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.fabricType">Fabric Type</span></dt>
+                <dd>
+                    <span>{{productDocument.fabricType}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.specialFeatures">Special Features</span></dt>
+                <dd>
+                    <span>{{productDocument.specialFeatures}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.productComplianceCertificate">Product Compliance Certificate</span></dt>
+                <dd>
+                    <span>{{productDocument.productComplianceCertificate}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.genuineAndLegal">Genuine And Legal</span></dt>
+                <dd>
+                    <span>{{productDocument.genuineAndLegal}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.countryOfOrigin">Country Of Origin</span></dt>
+                <dd>
+                    <span>{{productDocument.countryOfOrigin}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.usageAndSideEffects">Usage And Side Effects</span></dt>
+                <dd>
+                    <span>{{productDocument.usageAndSideEffects}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.safetyWarnning">Safety Warnning</span></dt>
+                <dd>
+                    <span>{{productDocument.safetyWarnning}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.warrantyPeriod">Warranty Period</span></dt>
+                <dd>
+                    <span>{{productDocument.warrantyPeriod}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.warrantyPolicy">Warranty Policy</span></dt>
+                <dd>
+                    <span>{{productDocument.warrantyPolicy}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productDocument.warrantyType">Warranty Type</span></dt>
+                <dd>
+                    <div *ngIf="productDocument.warrantyTypeId">
+                        <a [routerLink]="['/warranty-types', productDocument.warrantyTypeId, 'view']">{{productDocument.warrantyTypeWarrantyTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.productDocument.culture">Culture</span></dt>

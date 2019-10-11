@@ -66,6 +66,22 @@ public class Suppliers extends AbstractAuditingEntity implements Serializable {
     @Column(name = "website_url")
     private String websiteURL;
 
+    @Column(name = "web_service_url")
+    private String webServiceUrl;
+
+    @Column(name = "credit_rating")
+    private Integer creditRating;
+
+    @Column(name = "active_flag")
+    private Boolean activeFlag;
+
+    @Lob
+    @Column(name = "avatar")
+    private byte[] avatar;
+
+    @Column(name = "avatar_content_type")
+    private String avatarContentType;
+
     @NotNull
     @Column(name = "valid_from", nullable = false)
     private LocalDate validFrom;
@@ -263,6 +279,71 @@ public class Suppliers extends AbstractAuditingEntity implements Serializable {
         this.websiteURL = websiteURL;
     }
 
+    public String getWebServiceUrl() {
+        return webServiceUrl;
+    }
+
+    public Suppliers webServiceUrl(String webServiceUrl) {
+        this.webServiceUrl = webServiceUrl;
+        return this;
+    }
+
+    public void setWebServiceUrl(String webServiceUrl) {
+        this.webServiceUrl = webServiceUrl;
+    }
+
+    public Integer getCreditRating() {
+        return creditRating;
+    }
+
+    public Suppliers creditRating(Integer creditRating) {
+        this.creditRating = creditRating;
+        return this;
+    }
+
+    public void setCreditRating(Integer creditRating) {
+        this.creditRating = creditRating;
+    }
+
+    public Boolean isActiveFlag() {
+        return activeFlag;
+    }
+
+    public Suppliers activeFlag(Boolean activeFlag) {
+        this.activeFlag = activeFlag;
+        return this;
+    }
+
+    public void setActiveFlag(Boolean activeFlag) {
+        this.activeFlag = activeFlag;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public Suppliers avatar(byte[] avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public Suppliers avatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+        return this;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+    }
+
     public LocalDate getValidFrom() {
         return validFrom;
     }
@@ -404,6 +485,11 @@ public class Suppliers extends AbstractAuditingEntity implements Serializable {
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", faxNumber='" + getFaxNumber() + "'" +
             ", websiteURL='" + getWebsiteURL() + "'" +
+            ", webServiceUrl='" + getWebServiceUrl() + "'" +
+            ", creditRating=" + getCreditRating() +
+            ", activeFlag='" + isActiveFlag() + "'" +
+            ", avatar='" + getAvatar() + "'" +
+            ", avatarContentType='" + getAvatarContentType() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

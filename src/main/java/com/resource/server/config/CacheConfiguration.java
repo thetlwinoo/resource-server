@@ -130,6 +130,20 @@ public class CacheConfiguration {
             cm.createCache(com.resource.server.domain.StockItems.class.getName() + ".photoLists", jcacheConfiguration);
             cm.createCache(com.resource.server.domain.Products.class.getName() + ".stockItemLists", jcacheConfiguration);
             cm.createCache(com.resource.server.domain.StockItems.class.getName() + ".specialDiscounts", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.BarcodeTypes.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.StockItems.class.getName() + ".dangerousGoodLists", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.StockItemTemp.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.UploadTransactions.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.UploadTransactions.class.getName() + ".stockItemTempLists", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.UploadActionTypes.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.Materials.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.DangerousGoods.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.Currency.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.LastestMerchantUploadedDocument.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductAttribute.class.getName() + ".suppliers", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.ProductOption.class.getName() + ".suppliers", jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.SupplierImportedDocument.class.getName(), jcacheConfiguration);
+            cm.createCache(com.resource.server.domain.UploadTransactions.class.getName() + ".importDocumentLists", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

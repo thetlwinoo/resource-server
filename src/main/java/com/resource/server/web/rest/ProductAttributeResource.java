@@ -3,6 +3,8 @@ import com.resource.server.service.ProductAttributeService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.service.dto.ProductAttributeDTO;
+import com.resource.server.service.dto.ProductAttributeCriteria;
+import com.resource.server.service.ProductAttributeQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +31,11 @@ public class ProductAttributeResource {
 
     private final ProductAttributeService productAttributeService;
 
-    public ProductAttributeResource(ProductAttributeService productAttributeService) {
+    private final ProductAttributeQueryService productAttributeQueryService;
+
+    public ProductAttributeResource(ProductAttributeService productAttributeService, ProductAttributeQueryService productAttributeQueryService) {
         this.productAttributeService = productAttributeService;
+        this.productAttributeQueryService = productAttributeQueryService;
     }
 
     /**
@@ -76,12 +81,26 @@ public class ProductAttributeResource {
     /**
      * GET  /product-attributes : get all the productAttributes.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of productAttributes in body
      */
     @GetMapping("/product-attributes")
-    public List<ProductAttributeDTO> getAllProductAttributes() {
-        log.debug("REST request to get all ProductAttributes");
-        return productAttributeService.findAll();
+    public ResponseEntity<List<ProductAttributeDTO>> getAllProductAttributes(ProductAttributeCriteria criteria) {
+        log.debug("REST request to get ProductAttributes by criteria: {}", criteria);
+        List<ProductAttributeDTO> entityList = productAttributeQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /product-attributes/count : count all the productAttributes.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/product-attributes/count")
+    public ResponseEntity<Long> countProductAttributes(ProductAttributeCriteria criteria) {
+        log.debug("REST request to count ProductAttributes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(productAttributeQueryService.countByCriteria(criteria));
     }
 
     /**

@@ -182,26 +182,26 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                     _stockItems.getPhotoLists().addAll(photoList);
                 }
             } else {
-                saveProduct.setProductModel(products.getProductModel());
+//                saveProduct.setProductModel(products.getProductModel());
                 saveProduct.setProductBrand(products.getProductBrand());
                 saveProduct.setProductCategory(products.getProductCategory());
-                saveProduct.setWarrantyType(products.getWarrantyType());
+//                saveProduct.setWarrantyType(products.getWarrantyType());
 
                 saveProduct.setProductName(products.getProductName());
                 saveProduct.setSearchDetails(products.getSearchDetails());
-                saveProduct.setMerchant(products.getMerchant());
-                saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
-                saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
-                saveProduct.setWhatInTheBox(products.getWhatInTheBox());
+                saveProduct.setSupplier(products.getSupplier());
+//                saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
+//                saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
+//                saveProduct.setWhatInTheBox(products.getWhatInTheBox());
 
                 for (StockItems _stockItems : products.getStockItemLists()) {
                     StockItems stockItems = new StockItems();
                     stockItems.setStockItemName(products.getProductName());
-                    stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
-                    stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
-                    stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
-                    stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
-                    stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
+//                    stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
+//                    stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
+//                    stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
+//                    stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
+//                    stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
                     stockItems.setUnitPrice(_stockItems.getUnitPrice());
                     stockItems.setRecommendedRetailPrice(_stockItems.getRecommendedRetailPrice());
 
@@ -237,7 +237,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                 }
                 _stockItems.setThumbnailUrl(serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail");
             }
-            saveProduct.setThumbnailUrl(_productThumbnailUrl);
+//            saveProduct.setThumbnailUrl(_productThumbnailUrl);
             String _productnumber = saveProduct.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
             _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
             _productnumber = _productnumber + "-" + saveProduct.getId();

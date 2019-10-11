@@ -2,6 +2,7 @@ package com.resource.server.service.dto;
 import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Reviews entity.
@@ -18,10 +19,12 @@ public class ReviewsDTO extends AbstractAuditingDTO implements Serializable {
 
     private Integer overAllSellerRating;
 
+    @Lob
     private String overAllSellerReview;
 
     private Integer overAllDeliveryRating;
 
+    @Lob
     private String overAllDeliveryReview;
 
     private Boolean reviewAsAnonymous;

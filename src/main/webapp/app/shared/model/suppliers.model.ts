@@ -14,6 +14,11 @@ export interface ISuppliers {
     phoneNumber?: string;
     faxNumber?: string;
     websiteURL?: string;
+    webServiceUrl?: string;
+    creditRating?: number;
+    activeFlag?: boolean;
+    avatarContentType?: string;
+    avatar?: any;
     validFrom?: Moment;
     validTo?: Moment;
     primaryContactPersonFullName?: string;
@@ -45,6 +50,11 @@ export class Suppliers implements ISuppliers {
         public phoneNumber?: string,
         public faxNumber?: string,
         public websiteURL?: string,
+        public webServiceUrl?: string,
+        public creditRating?: number,
+        public activeFlag?: boolean,
+        public avatarContentType?: string,
+        public avatar?: any,
         public validFrom?: Moment,
         public validTo?: Moment,
         public primaryContactPersonFullName?: string,
@@ -59,5 +69,7 @@ export class Suppliers implements ISuppliers {
         public deliveryCityId?: number,
         public postalCityCityName?: string,
         public postalCityId?: number
-    ) {}
+    ) {
+        this.activeFlag = this.activeFlag || false;
+    }
 }

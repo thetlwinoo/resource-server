@@ -9,9 +9,13 @@
                 <dd>
                     <span>{{stockItems.stockItemName}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.sellerSKU">Seller SKU</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.vendorCode">Vendor Code</span></dt>
                 <dd>
-                    <span>{{stockItems.sellerSKU}}</span>
+                    <span>{{stockItems.vendorCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.vendorSKU">Vendor SKU</span></dt>
+                <dd>
+                    <span>{{stockItems.vendorSKU}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.generatedSKU">Generated SKU</span></dt>
                 <dd>
@@ -29,25 +33,53 @@
                 <dd>
                     <span>{{stockItems.recommendedRetailPrice}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.quantityPerOuter">Quantity Per Outer</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.quantityOnHand">Quantity On Hand</span></dt>
                 <dd>
-                    <span>{{stockItems.quantityPerOuter}}</span>
+                    <span>{{stockItems.quantityOnHand}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.typicalWeightPerUnit">Typical Weight Per Unit</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemLength">Item Length</span></dt>
                 <dd>
-                    <span>{{stockItems.typicalWeightPerUnit}}</span>
+                    <span>{{stockItems.itemLength}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.typicalLengthPerUnit">Typical Length Per Unit</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemWidth">Item Width</span></dt>
                 <dd>
-                    <span>{{stockItems.typicalLengthPerUnit}}</span>
+                    <span>{{stockItems.itemWidth}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.typicalWidthPerUnit">Typical Width Per Unit</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemHeight">Item Height</span></dt>
                 <dd>
-                    <span>{{stockItems.typicalWidthPerUnit}}</span>
+                    <span>{{stockItems.itemHeight}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.typicalHeightPerUnit">Typical Height Per Unit</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemWeight">Item Weight</span></dt>
                 <dd>
-                    <span>{{stockItems.typicalHeightPerUnit}}</span>
+                    <span>{{stockItems.itemWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemPackageLength">Item Package Length</span></dt>
+                <dd>
+                    <span>{{stockItems.itemPackageLength}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemPackageWidth">Item Package Width</span></dt>
+                <dd>
+                    <span>{{stockItems.itemPackageWidth}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemPackageHeight">Item Package Height</span></dt>
+                <dd>
+                    <span>{{stockItems.itemPackageHeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemPackageWeight">Item Package Weight</span></dt>
+                <dd>
+                    <span>{{stockItems.itemPackageWeight}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.noOfPieces">No Of Pieces</span></dt>
+                <dd>
+                    <span>{{stockItems.noOfPieces}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.noOfItems">No Of Items</span></dt>
+                <dd>
+                    <span>{{stockItems.noOfItems}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.manufacture">Manufacture</span></dt>
+                <dd>
+                    <span>{{stockItems.manufacture}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.marketingComments">Marketing Comments</span></dt>
                 <dd>
@@ -77,46 +109,86 @@
                 <dd>
                     <span>{{stockItems.thumbnailUrl}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.activeInd">Active Ind</span></dt>
+                <dd>
+                    <span>{{stockItems.activeInd}}</span>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.stockItemOnReviewLine">Stock Item On Review Line</span></dt>
                 <dd>
                     <div *ngIf="stockItems.stockItemOnReviewLineId">
                         <a [routerLink]="['/review-lines', stockItems.stockItemOnReviewLineId, 'view']">{{stockItems.stockItemOnReviewLineId}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.lengthUnitMeasureCode">Length Unit Measure Code</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemLengthUnit">Item Length Unit</span></dt>
                 <dd>
-                    <div *ngIf="stockItems.lengthUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', stockItems.lengthUnitMeasureCodeId, 'view']">{{stockItems.lengthUnitMeasureCodeUnitMeasureCode}}</a>
+                    <div *ngIf="stockItems.itemLengthUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.itemLengthUnitId, 'view']">{{stockItems.itemLengthUnitUnitMeasureCode}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.weightUnitMeasureCode">Weight Unit Measure Code</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemWidthUnit">Item Width Unit</span></dt>
                 <dd>
-                    <div *ngIf="stockItems.weightUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', stockItems.weightUnitMeasureCodeId, 'view']">{{stockItems.weightUnitMeasureCodeUnitMeasureCode}}</a>
+                    <div *ngIf="stockItems.itemWidthUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.itemWidthUnitId, 'view']">{{stockItems.itemWidthUnitUnitMeasureCode}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.widthUnitMeasureCode">Width Unit Measure Code</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemHeightUnit">Item Height Unit</span></dt>
                 <dd>
-                    <div *ngIf="stockItems.widthUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', stockItems.widthUnitMeasureCodeId, 'view']">{{stockItems.widthUnitMeasureCodeUnitMeasureCode}}</a>
+                    <div *ngIf="stockItems.itemHeightUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.itemHeightUnitId, 'view']">{{stockItems.itemHeightUnitUnitMeasureCode}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.stockItems.heightUnitMeasureCode">Height Unit Measure Code</span></dt>
+                <dt><span jhiTranslate="resourceApp.stockItems.packageLengthUnit">Package Length Unit</span></dt>
                 <dd>
-                    <div *ngIf="stockItems.heightUnitMeasureCodeId">
-                        <a [routerLink]="['/unit-measure', stockItems.heightUnitMeasureCodeId, 'view']">{{stockItems.heightUnitMeasureCodeUnitMeasureCode}}</a>
+                    <div *ngIf="stockItems.packageLengthUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.packageLengthUnitId, 'view']">{{stockItems.packageLengthUnitUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.packageWidthUnit">Package Width Unit</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.packageWidthUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.packageWidthUnitId, 'view']">{{stockItems.packageWidthUnitUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.packageHeightUnit">Package Height Unit</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.packageHeightUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.packageHeightUnitId, 'view']">{{stockItems.packageHeightUnitUnitMeasureCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.itemPackageWeightUnit">Item Package Weight Unit</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.itemPackageWeightUnitId">
+                        <a [routerLink]="['/unit-measure', stockItems.itemPackageWeightUnitId, 'view']">{{stockItems.itemPackageWeightUnitUnitMeasureCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.productAttribute">Product Attribute</span></dt>
                 <dd>
                     <div *ngIf="stockItems.productAttributeId">
-                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId, 'view']">{{stockItems.productAttributeValue}}</a>
+                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId, 'view']">{{stockItems.productAttributeProductAttributeValue}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.productOption">Product Option</span></dt>
                 <dd>
                     <div *ngIf="stockItems.productOptionId">
-                        <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionValue}}</a>
+                        <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionProductOptionValue}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.material">Material</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.materialId">
+                        <a [routerLink]="['/materials', stockItems.materialId, 'view']">{{stockItems.materialMaterialName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.currency">Currency</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.currencyId">
+                        <a [routerLink]="['/currency', stockItems.currencyId, 'view']">{{stockItems.currencyCurrencyCode}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.stockItems.barcodeType">Barcode Type</span></dt>
+                <dd>
+                    <div *ngIf="stockItems.barcodeTypeId">
+                        <a [routerLink]="['/barcode-types', stockItems.barcodeTypeId, 'view']">{{stockItems.barcodeTypeBarcodeTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.stockItems.product">Product</span></dt>

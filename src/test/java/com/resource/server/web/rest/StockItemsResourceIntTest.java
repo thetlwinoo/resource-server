@@ -48,8 +48,11 @@ public class StockItemsResourceIntTest {
     private static final String DEFAULT_STOCK_ITEM_NAME = "AAAAAAAAAA";
     private static final String UPDATED_STOCK_ITEM_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SELLER_SKU = "AAAAAAAAAA";
-    private static final String UPDATED_SELLER_SKU = "BBBBBBBBBB";
+    private static final String DEFAULT_VENDOR_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_VENDOR_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_VENDOR_SKU = "AAAAAAAAAA";
+    private static final String UPDATED_VENDOR_SKU = "BBBBBBBBBB";
 
     private static final String DEFAULT_GENERATED_SKU = "AAAAAAAAAA";
     private static final String UPDATED_GENERATED_SKU = "BBBBBBBBBB";
@@ -63,20 +66,41 @@ public class StockItemsResourceIntTest {
     private static final Float DEFAULT_RECOMMENDED_RETAIL_PRICE = 1F;
     private static final Float UPDATED_RECOMMENDED_RETAIL_PRICE = 2F;
 
-    private static final Integer DEFAULT_QUANTITY_PER_OUTER = 1;
-    private static final Integer UPDATED_QUANTITY_PER_OUTER = 2;
+    private static final Integer DEFAULT_QUANTITY_ON_HAND = 1;
+    private static final Integer UPDATED_QUANTITY_ON_HAND = 2;
 
-    private static final Float DEFAULT_TYPICAL_WEIGHT_PER_UNIT = 1F;
-    private static final Float UPDATED_TYPICAL_WEIGHT_PER_UNIT = 2F;
+    private static final Integer DEFAULT_ITEM_LENGTH = 1;
+    private static final Integer UPDATED_ITEM_LENGTH = 2;
 
-    private static final Integer DEFAULT_TYPICAL_LENGTH_PER_UNIT = 1;
-    private static final Integer UPDATED_TYPICAL_LENGTH_PER_UNIT = 2;
+    private static final Integer DEFAULT_ITEM_WIDTH = 1;
+    private static final Integer UPDATED_ITEM_WIDTH = 2;
 
-    private static final Integer DEFAULT_TYPICAL_WIDTH_PER_UNIT = 1;
-    private static final Integer UPDATED_TYPICAL_WIDTH_PER_UNIT = 2;
+    private static final Integer DEFAULT_ITEM_HEIGHT = 1;
+    private static final Integer UPDATED_ITEM_HEIGHT = 2;
 
-    private static final Integer DEFAULT_TYPICAL_HEIGHT_PER_UNIT = 1;
-    private static final Integer UPDATED_TYPICAL_HEIGHT_PER_UNIT = 2;
+    private static final Float DEFAULT_ITEM_WEIGHT = 1F;
+    private static final Float UPDATED_ITEM_WEIGHT = 2F;
+
+    private static final Integer DEFAULT_ITEM_PACKAGE_LENGTH = 1;
+    private static final Integer UPDATED_ITEM_PACKAGE_LENGTH = 2;
+
+    private static final Integer DEFAULT_ITEM_PACKAGE_WIDTH = 1;
+    private static final Integer UPDATED_ITEM_PACKAGE_WIDTH = 2;
+
+    private static final Integer DEFAULT_ITEM_PACKAGE_HEIGHT = 1;
+    private static final Integer UPDATED_ITEM_PACKAGE_HEIGHT = 2;
+
+    private static final Float DEFAULT_ITEM_PACKAGE_WEIGHT = 1F;
+    private static final Float UPDATED_ITEM_PACKAGE_WEIGHT = 2F;
+
+    private static final Integer DEFAULT_NO_OF_PIECES = 1;
+    private static final Integer UPDATED_NO_OF_PIECES = 2;
+
+    private static final Integer DEFAULT_NO_OF_ITEMS = 1;
+    private static final Integer UPDATED_NO_OF_ITEMS = 2;
+
+    private static final String DEFAULT_MANUFACTURE = "AAAAAAAAAA";
+    private static final String UPDATED_MANUFACTURE = "BBBBBBBBBB";
 
     private static final String DEFAULT_MARKETING_COMMENTS = "AAAAAAAAAA";
     private static final String UPDATED_MARKETING_COMMENTS = "BBBBBBBBBB";
@@ -98,6 +122,9 @@ public class StockItemsResourceIntTest {
 
     private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
     private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_ACTIVE_IND = false;
+    private static final Boolean UPDATED_ACTIVE_IND = true;
 
     @Autowired
     private StockItemsRepository stockItemsRepository;
@@ -148,23 +175,32 @@ public class StockItemsResourceIntTest {
     public static StockItems createEntity(EntityManager em) {
         StockItems stockItems = new StockItems()
             .stockItemName(DEFAULT_STOCK_ITEM_NAME)
-            .sellerSKU(DEFAULT_SELLER_SKU)
+            .vendorCode(DEFAULT_VENDOR_CODE)
+            .vendorSKU(DEFAULT_VENDOR_SKU)
             .generatedSKU(DEFAULT_GENERATED_SKU)
             .barcode(DEFAULT_BARCODE)
             .unitPrice(DEFAULT_UNIT_PRICE)
             .recommendedRetailPrice(DEFAULT_RECOMMENDED_RETAIL_PRICE)
-            .quantityPerOuter(DEFAULT_QUANTITY_PER_OUTER)
-            .typicalWeightPerUnit(DEFAULT_TYPICAL_WEIGHT_PER_UNIT)
-            .typicalLengthPerUnit(DEFAULT_TYPICAL_LENGTH_PER_UNIT)
-            .typicalWidthPerUnit(DEFAULT_TYPICAL_WIDTH_PER_UNIT)
-            .typicalHeightPerUnit(DEFAULT_TYPICAL_HEIGHT_PER_UNIT)
+            .quantityOnHand(DEFAULT_QUANTITY_ON_HAND)
+            .itemLength(DEFAULT_ITEM_LENGTH)
+            .itemWidth(DEFAULT_ITEM_WIDTH)
+            .itemHeight(DEFAULT_ITEM_HEIGHT)
+            .itemWeight(DEFAULT_ITEM_WEIGHT)
+            .itemPackageLength(DEFAULT_ITEM_PACKAGE_LENGTH)
+            .itemPackageWidth(DEFAULT_ITEM_PACKAGE_WIDTH)
+            .itemPackageHeight(DEFAULT_ITEM_PACKAGE_HEIGHT)
+            .itemPackageWeight(DEFAULT_ITEM_PACKAGE_WEIGHT)
+            .noOfPieces(DEFAULT_NO_OF_PIECES)
+            .noOfItems(DEFAULT_NO_OF_ITEMS)
+            .manufacture(DEFAULT_MANUFACTURE)
             .marketingComments(DEFAULT_MARKETING_COMMENTS)
             .internalComments(DEFAULT_INTERNAL_COMMENTS)
             .sellStartDate(DEFAULT_SELL_START_DATE)
             .sellEndDate(DEFAULT_SELL_END_DATE)
             .sellCount(DEFAULT_SELL_COUNT)
             .customFields(DEFAULT_CUSTOM_FIELDS)
-            .thumbnailUrl(DEFAULT_THUMBNAIL_URL);
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
+            .activeInd(DEFAULT_ACTIVE_IND);
         return stockItems;
     }
 
@@ -190,16 +226,24 @@ public class StockItemsResourceIntTest {
         assertThat(stockItemsList).hasSize(databaseSizeBeforeCreate + 1);
         StockItems testStockItems = stockItemsList.get(stockItemsList.size() - 1);
         assertThat(testStockItems.getStockItemName()).isEqualTo(DEFAULT_STOCK_ITEM_NAME);
-        assertThat(testStockItems.getSellerSKU()).isEqualTo(DEFAULT_SELLER_SKU);
+        assertThat(testStockItems.getVendorCode()).isEqualTo(DEFAULT_VENDOR_CODE);
+        assertThat(testStockItems.getVendorSKU()).isEqualTo(DEFAULT_VENDOR_SKU);
         assertThat(testStockItems.getGeneratedSKU()).isEqualTo(DEFAULT_GENERATED_SKU);
         assertThat(testStockItems.getBarcode()).isEqualTo(DEFAULT_BARCODE);
         assertThat(testStockItems.getUnitPrice()).isEqualTo(DEFAULT_UNIT_PRICE);
         assertThat(testStockItems.getRecommendedRetailPrice()).isEqualTo(DEFAULT_RECOMMENDED_RETAIL_PRICE);
-        assertThat(testStockItems.getQuantityPerOuter()).isEqualTo(DEFAULT_QUANTITY_PER_OUTER);
-        assertThat(testStockItems.getTypicalWeightPerUnit()).isEqualTo(DEFAULT_TYPICAL_WEIGHT_PER_UNIT);
-        assertThat(testStockItems.getTypicalLengthPerUnit()).isEqualTo(DEFAULT_TYPICAL_LENGTH_PER_UNIT);
-        assertThat(testStockItems.getTypicalWidthPerUnit()).isEqualTo(DEFAULT_TYPICAL_WIDTH_PER_UNIT);
-        assertThat(testStockItems.getTypicalHeightPerUnit()).isEqualTo(DEFAULT_TYPICAL_HEIGHT_PER_UNIT);
+        assertThat(testStockItems.getQuantityOnHand()).isEqualTo(DEFAULT_QUANTITY_ON_HAND);
+        assertThat(testStockItems.getItemLength()).isEqualTo(DEFAULT_ITEM_LENGTH);
+        assertThat(testStockItems.getItemWidth()).isEqualTo(DEFAULT_ITEM_WIDTH);
+        assertThat(testStockItems.getItemHeight()).isEqualTo(DEFAULT_ITEM_HEIGHT);
+        assertThat(testStockItems.getItemWeight()).isEqualTo(DEFAULT_ITEM_WEIGHT);
+        assertThat(testStockItems.getItemPackageLength()).isEqualTo(DEFAULT_ITEM_PACKAGE_LENGTH);
+        assertThat(testStockItems.getItemPackageWidth()).isEqualTo(DEFAULT_ITEM_PACKAGE_WIDTH);
+        assertThat(testStockItems.getItemPackageHeight()).isEqualTo(DEFAULT_ITEM_PACKAGE_HEIGHT);
+        assertThat(testStockItems.getItemPackageWeight()).isEqualTo(DEFAULT_ITEM_PACKAGE_WEIGHT);
+        assertThat(testStockItems.getNoOfPieces()).isEqualTo(DEFAULT_NO_OF_PIECES);
+        assertThat(testStockItems.getNoOfItems()).isEqualTo(DEFAULT_NO_OF_ITEMS);
+        assertThat(testStockItems.getManufacture()).isEqualTo(DEFAULT_MANUFACTURE);
         assertThat(testStockItems.getMarketingComments()).isEqualTo(DEFAULT_MARKETING_COMMENTS);
         assertThat(testStockItems.getInternalComments()).isEqualTo(DEFAULT_INTERNAL_COMMENTS);
         assertThat(testStockItems.getSellStartDate()).isEqualTo(DEFAULT_SELL_START_DATE);
@@ -207,6 +251,7 @@ public class StockItemsResourceIntTest {
         assertThat(testStockItems.getSellCount()).isEqualTo(DEFAULT_SELL_COUNT);
         assertThat(testStockItems.getCustomFields()).isEqualTo(DEFAULT_CUSTOM_FIELDS);
         assertThat(testStockItems.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
+        assertThat(testStockItems.isActiveInd()).isEqualTo(DEFAULT_ACTIVE_IND);
     }
 
     @Test
@@ -269,10 +314,10 @@ public class StockItemsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkQuantityPerOuterIsRequired() throws Exception {
+    public void checkQuantityOnHandIsRequired() throws Exception {
         int databaseSizeBeforeTest = stockItemsRepository.findAll().size();
         // set the field null
-        stockItems.setQuantityPerOuter(null);
+        stockItems.setQuantityOnHand(null);
 
         // Create the StockItems, which fails.
         StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
@@ -298,23 +343,32 @@ public class StockItemsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItems.getId().intValue())))
             .andExpect(jsonPath("$.[*].stockItemName").value(hasItem(DEFAULT_STOCK_ITEM_NAME.toString())))
-            .andExpect(jsonPath("$.[*].sellerSKU").value(hasItem(DEFAULT_SELLER_SKU.toString())))
+            .andExpect(jsonPath("$.[*].vendorCode").value(hasItem(DEFAULT_VENDOR_CODE.toString())))
+            .andExpect(jsonPath("$.[*].vendorSKU").value(hasItem(DEFAULT_VENDOR_SKU.toString())))
             .andExpect(jsonPath("$.[*].generatedSKU").value(hasItem(DEFAULT_GENERATED_SKU.toString())))
             .andExpect(jsonPath("$.[*].barcode").value(hasItem(DEFAULT_BARCODE.toString())))
             .andExpect(jsonPath("$.[*].unitPrice").value(hasItem(DEFAULT_UNIT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].recommendedRetailPrice").value(hasItem(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].quantityPerOuter").value(hasItem(DEFAULT_QUANTITY_PER_OUTER)))
-            .andExpect(jsonPath("$.[*].typicalWeightPerUnit").value(hasItem(DEFAULT_TYPICAL_WEIGHT_PER_UNIT.doubleValue())))
-            .andExpect(jsonPath("$.[*].typicalLengthPerUnit").value(hasItem(DEFAULT_TYPICAL_LENGTH_PER_UNIT)))
-            .andExpect(jsonPath("$.[*].typicalWidthPerUnit").value(hasItem(DEFAULT_TYPICAL_WIDTH_PER_UNIT)))
-            .andExpect(jsonPath("$.[*].typicalHeightPerUnit").value(hasItem(DEFAULT_TYPICAL_HEIGHT_PER_UNIT)))
+            .andExpect(jsonPath("$.[*].quantityOnHand").value(hasItem(DEFAULT_QUANTITY_ON_HAND)))
+            .andExpect(jsonPath("$.[*].itemLength").value(hasItem(DEFAULT_ITEM_LENGTH)))
+            .andExpect(jsonPath("$.[*].itemWidth").value(hasItem(DEFAULT_ITEM_WIDTH)))
+            .andExpect(jsonPath("$.[*].itemHeight").value(hasItem(DEFAULT_ITEM_HEIGHT)))
+            .andExpect(jsonPath("$.[*].itemWeight").value(hasItem(DEFAULT_ITEM_WEIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].itemPackageLength").value(hasItem(DEFAULT_ITEM_PACKAGE_LENGTH)))
+            .andExpect(jsonPath("$.[*].itemPackageWidth").value(hasItem(DEFAULT_ITEM_PACKAGE_WIDTH)))
+            .andExpect(jsonPath("$.[*].itemPackageHeight").value(hasItem(DEFAULT_ITEM_PACKAGE_HEIGHT)))
+            .andExpect(jsonPath("$.[*].itemPackageWeight").value(hasItem(DEFAULT_ITEM_PACKAGE_WEIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].noOfPieces").value(hasItem(DEFAULT_NO_OF_PIECES)))
+            .andExpect(jsonPath("$.[*].noOfItems").value(hasItem(DEFAULT_NO_OF_ITEMS)))
+            .andExpect(jsonPath("$.[*].manufacture").value(hasItem(DEFAULT_MANUFACTURE.toString())))
             .andExpect(jsonPath("$.[*].marketingComments").value(hasItem(DEFAULT_MARKETING_COMMENTS.toString())))
             .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS.toString())))
             .andExpect(jsonPath("$.[*].sellStartDate").value(hasItem(DEFAULT_SELL_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellEndDate").value(hasItem(DEFAULT_SELL_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
             .andExpect(jsonPath("$.[*].customFields").value(hasItem(DEFAULT_CUSTOM_FIELDS.toString())))
-            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL.toString())));
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL.toString())))
+            .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())));
     }
     
     @Test
@@ -329,23 +383,32 @@ public class StockItemsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stockItems.getId().intValue()))
             .andExpect(jsonPath("$.stockItemName").value(DEFAULT_STOCK_ITEM_NAME.toString()))
-            .andExpect(jsonPath("$.sellerSKU").value(DEFAULT_SELLER_SKU.toString()))
+            .andExpect(jsonPath("$.vendorCode").value(DEFAULT_VENDOR_CODE.toString()))
+            .andExpect(jsonPath("$.vendorSKU").value(DEFAULT_VENDOR_SKU.toString()))
             .andExpect(jsonPath("$.generatedSKU").value(DEFAULT_GENERATED_SKU.toString()))
             .andExpect(jsonPath("$.barcode").value(DEFAULT_BARCODE.toString()))
             .andExpect(jsonPath("$.unitPrice").value(DEFAULT_UNIT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.recommendedRetailPrice").value(DEFAULT_RECOMMENDED_RETAIL_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.quantityPerOuter").value(DEFAULT_QUANTITY_PER_OUTER))
-            .andExpect(jsonPath("$.typicalWeightPerUnit").value(DEFAULT_TYPICAL_WEIGHT_PER_UNIT.doubleValue()))
-            .andExpect(jsonPath("$.typicalLengthPerUnit").value(DEFAULT_TYPICAL_LENGTH_PER_UNIT))
-            .andExpect(jsonPath("$.typicalWidthPerUnit").value(DEFAULT_TYPICAL_WIDTH_PER_UNIT))
-            .andExpect(jsonPath("$.typicalHeightPerUnit").value(DEFAULT_TYPICAL_HEIGHT_PER_UNIT))
+            .andExpect(jsonPath("$.quantityOnHand").value(DEFAULT_QUANTITY_ON_HAND))
+            .andExpect(jsonPath("$.itemLength").value(DEFAULT_ITEM_LENGTH))
+            .andExpect(jsonPath("$.itemWidth").value(DEFAULT_ITEM_WIDTH))
+            .andExpect(jsonPath("$.itemHeight").value(DEFAULT_ITEM_HEIGHT))
+            .andExpect(jsonPath("$.itemWeight").value(DEFAULT_ITEM_WEIGHT.doubleValue()))
+            .andExpect(jsonPath("$.itemPackageLength").value(DEFAULT_ITEM_PACKAGE_LENGTH))
+            .andExpect(jsonPath("$.itemPackageWidth").value(DEFAULT_ITEM_PACKAGE_WIDTH))
+            .andExpect(jsonPath("$.itemPackageHeight").value(DEFAULT_ITEM_PACKAGE_HEIGHT))
+            .andExpect(jsonPath("$.itemPackageWeight").value(DEFAULT_ITEM_PACKAGE_WEIGHT.doubleValue()))
+            .andExpect(jsonPath("$.noOfPieces").value(DEFAULT_NO_OF_PIECES))
+            .andExpect(jsonPath("$.noOfItems").value(DEFAULT_NO_OF_ITEMS))
+            .andExpect(jsonPath("$.manufacture").value(DEFAULT_MANUFACTURE.toString()))
             .andExpect(jsonPath("$.marketingComments").value(DEFAULT_MARKETING_COMMENTS.toString()))
             .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS.toString()))
             .andExpect(jsonPath("$.sellStartDate").value(DEFAULT_SELL_START_DATE.toString()))
             .andExpect(jsonPath("$.sellEndDate").value(DEFAULT_SELL_END_DATE.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
             .andExpect(jsonPath("$.customFields").value(DEFAULT_CUSTOM_FIELDS.toString()))
-            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL.toString()));
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL.toString()))
+            .andExpect(jsonPath("$.activeInd").value(DEFAULT_ACTIVE_IND.booleanValue()));
     }
 
     @Test
@@ -370,23 +433,32 @@ public class StockItemsResourceIntTest {
         em.detach(updatedStockItems);
         updatedStockItems
             .stockItemName(UPDATED_STOCK_ITEM_NAME)
-            .sellerSKU(UPDATED_SELLER_SKU)
+            .vendorCode(UPDATED_VENDOR_CODE)
+            .vendorSKU(UPDATED_VENDOR_SKU)
             .generatedSKU(UPDATED_GENERATED_SKU)
             .barcode(UPDATED_BARCODE)
             .unitPrice(UPDATED_UNIT_PRICE)
             .recommendedRetailPrice(UPDATED_RECOMMENDED_RETAIL_PRICE)
-            .quantityPerOuter(UPDATED_QUANTITY_PER_OUTER)
-            .typicalWeightPerUnit(UPDATED_TYPICAL_WEIGHT_PER_UNIT)
-            .typicalLengthPerUnit(UPDATED_TYPICAL_LENGTH_PER_UNIT)
-            .typicalWidthPerUnit(UPDATED_TYPICAL_WIDTH_PER_UNIT)
-            .typicalHeightPerUnit(UPDATED_TYPICAL_HEIGHT_PER_UNIT)
+            .quantityOnHand(UPDATED_QUANTITY_ON_HAND)
+            .itemLength(UPDATED_ITEM_LENGTH)
+            .itemWidth(UPDATED_ITEM_WIDTH)
+            .itemHeight(UPDATED_ITEM_HEIGHT)
+            .itemWeight(UPDATED_ITEM_WEIGHT)
+            .itemPackageLength(UPDATED_ITEM_PACKAGE_LENGTH)
+            .itemPackageWidth(UPDATED_ITEM_PACKAGE_WIDTH)
+            .itemPackageHeight(UPDATED_ITEM_PACKAGE_HEIGHT)
+            .itemPackageWeight(UPDATED_ITEM_PACKAGE_WEIGHT)
+            .noOfPieces(UPDATED_NO_OF_PIECES)
+            .noOfItems(UPDATED_NO_OF_ITEMS)
+            .manufacture(UPDATED_MANUFACTURE)
             .marketingComments(UPDATED_MARKETING_COMMENTS)
             .internalComments(UPDATED_INTERNAL_COMMENTS)
             .sellStartDate(UPDATED_SELL_START_DATE)
             .sellEndDate(UPDATED_SELL_END_DATE)
             .sellCount(UPDATED_SELL_COUNT)
             .customFields(UPDATED_CUSTOM_FIELDS)
-            .thumbnailUrl(UPDATED_THUMBNAIL_URL);
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
+            .activeInd(UPDATED_ACTIVE_IND);
         StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(updatedStockItems);
 
         restStockItemsMockMvc.perform(put("/api/stock-items")
@@ -399,16 +471,24 @@ public class StockItemsResourceIntTest {
         assertThat(stockItemsList).hasSize(databaseSizeBeforeUpdate);
         StockItems testStockItems = stockItemsList.get(stockItemsList.size() - 1);
         assertThat(testStockItems.getStockItemName()).isEqualTo(UPDATED_STOCK_ITEM_NAME);
-        assertThat(testStockItems.getSellerSKU()).isEqualTo(UPDATED_SELLER_SKU);
+        assertThat(testStockItems.getVendorCode()).isEqualTo(UPDATED_VENDOR_CODE);
+        assertThat(testStockItems.getVendorSKU()).isEqualTo(UPDATED_VENDOR_SKU);
         assertThat(testStockItems.getGeneratedSKU()).isEqualTo(UPDATED_GENERATED_SKU);
         assertThat(testStockItems.getBarcode()).isEqualTo(UPDATED_BARCODE);
         assertThat(testStockItems.getUnitPrice()).isEqualTo(UPDATED_UNIT_PRICE);
         assertThat(testStockItems.getRecommendedRetailPrice()).isEqualTo(UPDATED_RECOMMENDED_RETAIL_PRICE);
-        assertThat(testStockItems.getQuantityPerOuter()).isEqualTo(UPDATED_QUANTITY_PER_OUTER);
-        assertThat(testStockItems.getTypicalWeightPerUnit()).isEqualTo(UPDATED_TYPICAL_WEIGHT_PER_UNIT);
-        assertThat(testStockItems.getTypicalLengthPerUnit()).isEqualTo(UPDATED_TYPICAL_LENGTH_PER_UNIT);
-        assertThat(testStockItems.getTypicalWidthPerUnit()).isEqualTo(UPDATED_TYPICAL_WIDTH_PER_UNIT);
-        assertThat(testStockItems.getTypicalHeightPerUnit()).isEqualTo(UPDATED_TYPICAL_HEIGHT_PER_UNIT);
+        assertThat(testStockItems.getQuantityOnHand()).isEqualTo(UPDATED_QUANTITY_ON_HAND);
+        assertThat(testStockItems.getItemLength()).isEqualTo(UPDATED_ITEM_LENGTH);
+        assertThat(testStockItems.getItemWidth()).isEqualTo(UPDATED_ITEM_WIDTH);
+        assertThat(testStockItems.getItemHeight()).isEqualTo(UPDATED_ITEM_HEIGHT);
+        assertThat(testStockItems.getItemWeight()).isEqualTo(UPDATED_ITEM_WEIGHT);
+        assertThat(testStockItems.getItemPackageLength()).isEqualTo(UPDATED_ITEM_PACKAGE_LENGTH);
+        assertThat(testStockItems.getItemPackageWidth()).isEqualTo(UPDATED_ITEM_PACKAGE_WIDTH);
+        assertThat(testStockItems.getItemPackageHeight()).isEqualTo(UPDATED_ITEM_PACKAGE_HEIGHT);
+        assertThat(testStockItems.getItemPackageWeight()).isEqualTo(UPDATED_ITEM_PACKAGE_WEIGHT);
+        assertThat(testStockItems.getNoOfPieces()).isEqualTo(UPDATED_NO_OF_PIECES);
+        assertThat(testStockItems.getNoOfItems()).isEqualTo(UPDATED_NO_OF_ITEMS);
+        assertThat(testStockItems.getManufacture()).isEqualTo(UPDATED_MANUFACTURE);
         assertThat(testStockItems.getMarketingComments()).isEqualTo(UPDATED_MARKETING_COMMENTS);
         assertThat(testStockItems.getInternalComments()).isEqualTo(UPDATED_INTERNAL_COMMENTS);
         assertThat(testStockItems.getSellStartDate()).isEqualTo(UPDATED_SELL_START_DATE);
@@ -416,6 +496,7 @@ public class StockItemsResourceIntTest {
         assertThat(testStockItems.getSellCount()).isEqualTo(UPDATED_SELL_COUNT);
         assertThat(testStockItems.getCustomFields()).isEqualTo(UPDATED_CUSTOM_FIELDS);
         assertThat(testStockItems.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
+        assertThat(testStockItems.isActiveInd()).isEqualTo(UPDATED_ACTIVE_IND);
     }
 
     @Test

@@ -8,14 +8,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity ProductOption and its DTO ProductOptionDTO.
  */
-@Mapper(componentModel = "spring", uses = {ProductOptionSetMapper.class})
+@Mapper(componentModel = "spring", uses = {ProductOptionSetMapper.class, SuppliersMapper.class})
 public interface ProductOptionMapper extends EntityMapper<ProductOptionDTO, ProductOption> {
 
     @Mapping(source = "productOptionSet.id", target = "productOptionSetId")
-    @Mapping(source = "productOptionSet.value", target = "productOptionSetValue")
+    @Mapping(source = "productOptionSet.productOptionSetValue", target = "productOptionSetProductOptionSetValue")
+    @Mapping(source = "supplier.id", target = "supplierId")
     ProductOptionDTO toDto(ProductOption productOption);
 
     @Mapping(source = "productOptionSetId", target = "productOptionSet")
+    @Mapping(source = "supplierId", target = "supplier")
     ProductOption toEntity(ProductOptionDTO productOptionDTO);
 
     default ProductOption fromId(Long id) {

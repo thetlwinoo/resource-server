@@ -44,16 +44,61 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductDocumentResourceIntTest {
 
-    private static final byte[] DEFAULT_DOCUMENT_NODE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_DOCUMENT_NODE = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_DOCUMENT_NODE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_DOCUMENT_NODE_CONTENT_TYPE = "image/png";
-
     private static final String DEFAULT_VIDEO_URL = "AAAAAAAAAA";
     private static final String UPDATED_VIDEO_URL = "BBBBBBBBBB";
 
     private static final String DEFAULT_HIGHLIGHTS = "AAAAAAAAAA";
     private static final String UPDATED_HIGHLIGHTS = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_LONG_DESCRIPTION = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_LONG_DESCRIPTION = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_LONG_DESCRIPTION_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_SHORT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_SHORT_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CARE_INSTRUCTIONS = "AAAAAAAAAA";
+    private static final String UPDATED_CARE_INSTRUCTIONS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PRODUCT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_TYPE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MODEL_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_MODEL_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MODEL_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_MODEL_NUMBER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FABRIC_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_FABRIC_TYPE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_SPECIAL_FEATURES = "AAAAAAAAAA";
+    private static final String UPDATED_SPECIAL_FEATURES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PRODUCT_COMPLIANCE_CERTIFICATE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_COMPLIANCE_CERTIFICATE = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_GENUINE_AND_LEGAL = false;
+    private static final Boolean UPDATED_GENUINE_AND_LEGAL = true;
+
+    private static final String DEFAULT_COUNTRY_OF_ORIGIN = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_OF_ORIGIN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_USAGE_AND_SIDE_EFFECTS = "AAAAAAAAAA";
+    private static final String UPDATED_USAGE_AND_SIDE_EFFECTS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_SAFETY_WARNNING = "AAAAAAAAAA";
+    private static final String UPDATED_SAFETY_WARNNING = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WARRANTY_PERIOD = "AAAAAAAAAA";
+    private static final String UPDATED_WARRANTY_PERIOD = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WARRANTY_POLICY = "AAAAAAAAAA";
+    private static final String UPDATED_WARRANTY_POLICY = "BBBBBBBBBB";
 
     @Autowired
     private ProductDocumentRepository productDocumentRepository;
@@ -103,10 +148,25 @@ public class ProductDocumentResourceIntTest {
      */
     public static ProductDocument createEntity(EntityManager em) {
         ProductDocument productDocument = new ProductDocument()
-            .documentNode(DEFAULT_DOCUMENT_NODE)
-            .documentNodeContentType(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE)
             .videoUrl(DEFAULT_VIDEO_URL)
-            .highlights(DEFAULT_HIGHLIGHTS);
+            .highlights(DEFAULT_HIGHLIGHTS)
+            .longDescription(DEFAULT_LONG_DESCRIPTION)
+            .longDescriptionContentType(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE)
+            .shortDescription(DEFAULT_SHORT_DESCRIPTION)
+            .description(DEFAULT_DESCRIPTION)
+            .careInstructions(DEFAULT_CARE_INSTRUCTIONS)
+            .productType(DEFAULT_PRODUCT_TYPE)
+            .modelName(DEFAULT_MODEL_NAME)
+            .modelNumber(DEFAULT_MODEL_NUMBER)
+            .fabricType(DEFAULT_FABRIC_TYPE)
+            .specialFeatures(DEFAULT_SPECIAL_FEATURES)
+            .productComplianceCertificate(DEFAULT_PRODUCT_COMPLIANCE_CERTIFICATE)
+            .genuineAndLegal(DEFAULT_GENUINE_AND_LEGAL)
+            .countryOfOrigin(DEFAULT_COUNTRY_OF_ORIGIN)
+            .usageAndSideEffects(DEFAULT_USAGE_AND_SIDE_EFFECTS)
+            .safetyWarnning(DEFAULT_SAFETY_WARNNING)
+            .warrantyPeriod(DEFAULT_WARRANTY_PERIOD)
+            .warrantyPolicy(DEFAULT_WARRANTY_POLICY);
         return productDocument;
     }
 
@@ -131,10 +191,25 @@ public class ProductDocumentResourceIntTest {
         List<ProductDocument> productDocumentList = productDocumentRepository.findAll();
         assertThat(productDocumentList).hasSize(databaseSizeBeforeCreate + 1);
         ProductDocument testProductDocument = productDocumentList.get(productDocumentList.size() - 1);
-        assertThat(testProductDocument.getDocumentNode()).isEqualTo(DEFAULT_DOCUMENT_NODE);
-        assertThat(testProductDocument.getDocumentNodeContentType()).isEqualTo(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE);
         assertThat(testProductDocument.getVideoUrl()).isEqualTo(DEFAULT_VIDEO_URL);
         assertThat(testProductDocument.getHighlights()).isEqualTo(DEFAULT_HIGHLIGHTS);
+        assertThat(testProductDocument.getLongDescription()).isEqualTo(DEFAULT_LONG_DESCRIPTION);
+        assertThat(testProductDocument.getLongDescriptionContentType()).isEqualTo(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE);
+        assertThat(testProductDocument.getShortDescription()).isEqualTo(DEFAULT_SHORT_DESCRIPTION);
+        assertThat(testProductDocument.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testProductDocument.getCareInstructions()).isEqualTo(DEFAULT_CARE_INSTRUCTIONS);
+        assertThat(testProductDocument.getProductType()).isEqualTo(DEFAULT_PRODUCT_TYPE);
+        assertThat(testProductDocument.getModelName()).isEqualTo(DEFAULT_MODEL_NAME);
+        assertThat(testProductDocument.getModelNumber()).isEqualTo(DEFAULT_MODEL_NUMBER);
+        assertThat(testProductDocument.getFabricType()).isEqualTo(DEFAULT_FABRIC_TYPE);
+        assertThat(testProductDocument.getSpecialFeatures()).isEqualTo(DEFAULT_SPECIAL_FEATURES);
+        assertThat(testProductDocument.getProductComplianceCertificate()).isEqualTo(DEFAULT_PRODUCT_COMPLIANCE_CERTIFICATE);
+        assertThat(testProductDocument.isGenuineAndLegal()).isEqualTo(DEFAULT_GENUINE_AND_LEGAL);
+        assertThat(testProductDocument.getCountryOfOrigin()).isEqualTo(DEFAULT_COUNTRY_OF_ORIGIN);
+        assertThat(testProductDocument.getUsageAndSideEffects()).isEqualTo(DEFAULT_USAGE_AND_SIDE_EFFECTS);
+        assertThat(testProductDocument.getSafetyWarnning()).isEqualTo(DEFAULT_SAFETY_WARNNING);
+        assertThat(testProductDocument.getWarrantyPeriod()).isEqualTo(DEFAULT_WARRANTY_PERIOD);
+        assertThat(testProductDocument.getWarrantyPolicy()).isEqualTo(DEFAULT_WARRANTY_POLICY);
     }
 
     @Test
@@ -168,10 +243,25 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productDocument.getId().intValue())))
-            .andExpect(jsonPath("$.[*].documentNodeContentType").value(hasItem(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].documentNode").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENT_NODE))))
             .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL.toString())))
-            .andExpect(jsonPath("$.[*].highlights").value(hasItem(DEFAULT_HIGHLIGHTS.toString())));
+            .andExpect(jsonPath("$.[*].highlights").value(hasItem(DEFAULT_HIGHLIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].longDescriptionContentType").value(hasItem(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].longDescription").value(hasItem(Base64Utils.encodeToString(DEFAULT_LONG_DESCRIPTION))))
+            .andExpect(jsonPath("$.[*].shortDescription").value(hasItem(DEFAULT_SHORT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].careInstructions").value(hasItem(DEFAULT_CARE_INSTRUCTIONS.toString())))
+            .andExpect(jsonPath("$.[*].productType").value(hasItem(DEFAULT_PRODUCT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].modelName").value(hasItem(DEFAULT_MODEL_NAME.toString())))
+            .andExpect(jsonPath("$.[*].modelNumber").value(hasItem(DEFAULT_MODEL_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].fabricType").value(hasItem(DEFAULT_FABRIC_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].specialFeatures").value(hasItem(DEFAULT_SPECIAL_FEATURES.toString())))
+            .andExpect(jsonPath("$.[*].productComplianceCertificate").value(hasItem(DEFAULT_PRODUCT_COMPLIANCE_CERTIFICATE.toString())))
+            .andExpect(jsonPath("$.[*].genuineAndLegal").value(hasItem(DEFAULT_GENUINE_AND_LEGAL.booleanValue())))
+            .andExpect(jsonPath("$.[*].countryOfOrigin").value(hasItem(DEFAULT_COUNTRY_OF_ORIGIN.toString())))
+            .andExpect(jsonPath("$.[*].usageAndSideEffects").value(hasItem(DEFAULT_USAGE_AND_SIDE_EFFECTS.toString())))
+            .andExpect(jsonPath("$.[*].safetyWarnning").value(hasItem(DEFAULT_SAFETY_WARNNING.toString())))
+            .andExpect(jsonPath("$.[*].warrantyPeriod").value(hasItem(DEFAULT_WARRANTY_PERIOD.toString())))
+            .andExpect(jsonPath("$.[*].warrantyPolicy").value(hasItem(DEFAULT_WARRANTY_POLICY.toString())));
     }
     
     @Test
@@ -185,10 +275,25 @@ public class ProductDocumentResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productDocument.getId().intValue()))
-            .andExpect(jsonPath("$.documentNodeContentType").value(DEFAULT_DOCUMENT_NODE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.documentNode").value(Base64Utils.encodeToString(DEFAULT_DOCUMENT_NODE)))
             .andExpect(jsonPath("$.videoUrl").value(DEFAULT_VIDEO_URL.toString()))
-            .andExpect(jsonPath("$.highlights").value(DEFAULT_HIGHLIGHTS.toString()));
+            .andExpect(jsonPath("$.highlights").value(DEFAULT_HIGHLIGHTS.toString()))
+            .andExpect(jsonPath("$.longDescriptionContentType").value(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE))
+            .andExpect(jsonPath("$.longDescription").value(Base64Utils.encodeToString(DEFAULT_LONG_DESCRIPTION)))
+            .andExpect(jsonPath("$.shortDescription").value(DEFAULT_SHORT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.careInstructions").value(DEFAULT_CARE_INSTRUCTIONS.toString()))
+            .andExpect(jsonPath("$.productType").value(DEFAULT_PRODUCT_TYPE.toString()))
+            .andExpect(jsonPath("$.modelName").value(DEFAULT_MODEL_NAME.toString()))
+            .andExpect(jsonPath("$.modelNumber").value(DEFAULT_MODEL_NUMBER.toString()))
+            .andExpect(jsonPath("$.fabricType").value(DEFAULT_FABRIC_TYPE.toString()))
+            .andExpect(jsonPath("$.specialFeatures").value(DEFAULT_SPECIAL_FEATURES.toString()))
+            .andExpect(jsonPath("$.productComplianceCertificate").value(DEFAULT_PRODUCT_COMPLIANCE_CERTIFICATE.toString()))
+            .andExpect(jsonPath("$.genuineAndLegal").value(DEFAULT_GENUINE_AND_LEGAL.booleanValue()))
+            .andExpect(jsonPath("$.countryOfOrigin").value(DEFAULT_COUNTRY_OF_ORIGIN.toString()))
+            .andExpect(jsonPath("$.usageAndSideEffects").value(DEFAULT_USAGE_AND_SIDE_EFFECTS.toString()))
+            .andExpect(jsonPath("$.safetyWarnning").value(DEFAULT_SAFETY_WARNNING.toString()))
+            .andExpect(jsonPath("$.warrantyPeriod").value(DEFAULT_WARRANTY_PERIOD.toString()))
+            .andExpect(jsonPath("$.warrantyPolicy").value(DEFAULT_WARRANTY_POLICY.toString()));
     }
 
     @Test
@@ -212,10 +317,25 @@ public class ProductDocumentResourceIntTest {
         // Disconnect from session so that the updates on updatedProductDocument are not directly saved in db
         em.detach(updatedProductDocument);
         updatedProductDocument
-            .documentNode(UPDATED_DOCUMENT_NODE)
-            .documentNodeContentType(UPDATED_DOCUMENT_NODE_CONTENT_TYPE)
             .videoUrl(UPDATED_VIDEO_URL)
-            .highlights(UPDATED_HIGHLIGHTS);
+            .highlights(UPDATED_HIGHLIGHTS)
+            .longDescription(UPDATED_LONG_DESCRIPTION)
+            .longDescriptionContentType(UPDATED_LONG_DESCRIPTION_CONTENT_TYPE)
+            .shortDescription(UPDATED_SHORT_DESCRIPTION)
+            .description(UPDATED_DESCRIPTION)
+            .careInstructions(UPDATED_CARE_INSTRUCTIONS)
+            .productType(UPDATED_PRODUCT_TYPE)
+            .modelName(UPDATED_MODEL_NAME)
+            .modelNumber(UPDATED_MODEL_NUMBER)
+            .fabricType(UPDATED_FABRIC_TYPE)
+            .specialFeatures(UPDATED_SPECIAL_FEATURES)
+            .productComplianceCertificate(UPDATED_PRODUCT_COMPLIANCE_CERTIFICATE)
+            .genuineAndLegal(UPDATED_GENUINE_AND_LEGAL)
+            .countryOfOrigin(UPDATED_COUNTRY_OF_ORIGIN)
+            .usageAndSideEffects(UPDATED_USAGE_AND_SIDE_EFFECTS)
+            .safetyWarnning(UPDATED_SAFETY_WARNNING)
+            .warrantyPeriod(UPDATED_WARRANTY_PERIOD)
+            .warrantyPolicy(UPDATED_WARRANTY_POLICY);
         ProductDocumentDTO productDocumentDTO = productDocumentMapper.toDto(updatedProductDocument);
 
         restProductDocumentMockMvc.perform(put("/api/product-documents")
@@ -227,10 +347,25 @@ public class ProductDocumentResourceIntTest {
         List<ProductDocument> productDocumentList = productDocumentRepository.findAll();
         assertThat(productDocumentList).hasSize(databaseSizeBeforeUpdate);
         ProductDocument testProductDocument = productDocumentList.get(productDocumentList.size() - 1);
-        assertThat(testProductDocument.getDocumentNode()).isEqualTo(UPDATED_DOCUMENT_NODE);
-        assertThat(testProductDocument.getDocumentNodeContentType()).isEqualTo(UPDATED_DOCUMENT_NODE_CONTENT_TYPE);
         assertThat(testProductDocument.getVideoUrl()).isEqualTo(UPDATED_VIDEO_URL);
         assertThat(testProductDocument.getHighlights()).isEqualTo(UPDATED_HIGHLIGHTS);
+        assertThat(testProductDocument.getLongDescription()).isEqualTo(UPDATED_LONG_DESCRIPTION);
+        assertThat(testProductDocument.getLongDescriptionContentType()).isEqualTo(UPDATED_LONG_DESCRIPTION_CONTENT_TYPE);
+        assertThat(testProductDocument.getShortDescription()).isEqualTo(UPDATED_SHORT_DESCRIPTION);
+        assertThat(testProductDocument.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testProductDocument.getCareInstructions()).isEqualTo(UPDATED_CARE_INSTRUCTIONS);
+        assertThat(testProductDocument.getProductType()).isEqualTo(UPDATED_PRODUCT_TYPE);
+        assertThat(testProductDocument.getModelName()).isEqualTo(UPDATED_MODEL_NAME);
+        assertThat(testProductDocument.getModelNumber()).isEqualTo(UPDATED_MODEL_NUMBER);
+        assertThat(testProductDocument.getFabricType()).isEqualTo(UPDATED_FABRIC_TYPE);
+        assertThat(testProductDocument.getSpecialFeatures()).isEqualTo(UPDATED_SPECIAL_FEATURES);
+        assertThat(testProductDocument.getProductComplianceCertificate()).isEqualTo(UPDATED_PRODUCT_COMPLIANCE_CERTIFICATE);
+        assertThat(testProductDocument.isGenuineAndLegal()).isEqualTo(UPDATED_GENUINE_AND_LEGAL);
+        assertThat(testProductDocument.getCountryOfOrigin()).isEqualTo(UPDATED_COUNTRY_OF_ORIGIN);
+        assertThat(testProductDocument.getUsageAndSideEffects()).isEqualTo(UPDATED_USAGE_AND_SIDE_EFFECTS);
+        assertThat(testProductDocument.getSafetyWarnning()).isEqualTo(UPDATED_SAFETY_WARNNING);
+        assertThat(testProductDocument.getWarrantyPeriod()).isEqualTo(UPDATED_WARRANTY_PERIOD);
+        assertThat(testProductDocument.getWarrantyPolicy()).isEqualTo(UPDATED_WARRANTY_POLICY);
     }
 
     @Test

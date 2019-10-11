@@ -10,30 +10,6 @@
                         [(ngModel)]="productDocument.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.documentNode" for="field_documentNode">Document Node</label>
-                    <div>
-                        <div *ngIf="productDocument.documentNode" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(productDocument.documentNodeContentType, productDocument.documentNode)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{productDocument.documentNodeContentType}}, {{byteSize(productDocument.documentNode)}}</span>
-                            <button type="button" (click)="productDocument.documentNode=null;productDocument.documentNodeContentType=null;"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_documentNode" (change)="setFileData($event, productDocument, 'documentNode', false)" jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="documentNode" id="field_documentNode"
-                        [(ngModel)]="productDocument.documentNode" required/>
-                    <input type="hidden" class="form-control" name="documentNodeContentType" id="field_documentNodeContentType"
-                        [(ngModel)]="productDocument.documentNodeContentType" />
-                    <div [hidden]="!(editForm.controls.documentNode?.dirty && editForm.controls.documentNode?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.documentNode?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.productDocument.videoUrl" for="field_videoUrl">Video Url</label>
                     <input type="text" class="form-control" name="videoUrl" id="field_videoUrl"
                         [(ngModel)]="productDocument.videoUrl" />
@@ -41,20 +17,107 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.productDocument.highlights" for="field_highlights">Highlights</label>
                     <textarea class="form-control" name="highlights" id="field_highlights"
-                        [(ngModel)]="productDocument.highlights" required></textarea>
-                    <div [hidden]="!(editForm.controls.highlights?.dirty && editForm.controls.highlights?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.highlights?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+                        [(ngModel)]="productDocument.highlights" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.longDescription" for="field_longDescription">Long Description</label>
+                    <div>
+                        <div *ngIf="productDocument.longDescription" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}</span>
+                            <button type="button" (click)="productDocument.longDescription=null;productDocument.longDescriptionContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_longDescription" (change)="setFileData($event, productDocument, 'longDescription', false)" jhiTranslate="entity.action.addblob"/>
                     </div>
+                    <input type="hidden" class="form-control" name="longDescription" id="field_longDescription"
+                        [(ngModel)]="productDocument.longDescription" />
+                    <input type="hidden" class="form-control" name="longDescriptionContentType" id="field_longDescriptionContentType"
+                        [(ngModel)]="productDocument.longDescriptionContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.shortDescription" for="field_shortDescription">Short Description</label>
+                    <textarea class="form-control" name="shortDescription" id="field_shortDescription"
+                        [(ngModel)]="productDocument.shortDescription" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="productDocument.description" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.careInstructions" for="field_careInstructions">Care Instructions</label>
+                    <textarea class="form-control" name="careInstructions" id="field_careInstructions"
+                        [(ngModel)]="productDocument.careInstructions" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.productType" for="field_productType">Product Type</label>
+                    <input type="text" class="form-control" name="productType" id="field_productType"
+                        [(ngModel)]="productDocument.productType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.modelName" for="field_modelName">Model Name</label>
+                    <input type="text" class="form-control" name="modelName" id="field_modelName"
+                        [(ngModel)]="productDocument.modelName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.modelNumber" for="field_modelNumber">Model Number</label>
+                    <input type="text" class="form-control" name="modelNumber" id="field_modelNumber"
+                        [(ngModel)]="productDocument.modelNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.fabricType" for="field_fabricType">Fabric Type</label>
+                    <input type="text" class="form-control" name="fabricType" id="field_fabricType"
+                        [(ngModel)]="productDocument.fabricType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.specialFeatures" for="field_specialFeatures">Special Features</label>
+                    <textarea class="form-control" name="specialFeatures" id="field_specialFeatures"
+                        [(ngModel)]="productDocument.specialFeatures" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.productComplianceCertificate" for="field_productComplianceCertificate">Product Compliance Certificate</label>
+                    <input type="text" class="form-control" name="productComplianceCertificate" id="field_productComplianceCertificate"
+                        [(ngModel)]="productDocument.productComplianceCertificate" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.genuineAndLegal" for="field_genuineAndLegal">Genuine And Legal</label>
+                    <input type="checkbox" class="form-control" name="genuineAndLegal" id="field_genuineAndLegal"
+                        [(ngModel)]="productDocument.genuineAndLegal" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.countryOfOrigin" for="field_countryOfOrigin">Country Of Origin</label>
+                    <input type="text" class="form-control" name="countryOfOrigin" id="field_countryOfOrigin"
+                        [(ngModel)]="productDocument.countryOfOrigin" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.usageAndSideEffects" for="field_usageAndSideEffects">Usage And Side Effects</label>
+                    <textarea class="form-control" name="usageAndSideEffects" id="field_usageAndSideEffects"
+                        [(ngModel)]="productDocument.usageAndSideEffects" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.safetyWarnning" for="field_safetyWarnning">Safety Warnning</label>
+                    <textarea class="form-control" name="safetyWarnning" id="field_safetyWarnning"
+                        [(ngModel)]="productDocument.safetyWarnning" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.warrantyPeriod" for="field_warrantyPeriod">Warranty Period</label>
+                    <input type="text" class="form-control" name="warrantyPeriod" id="field_warrantyPeriod"
+                        [(ngModel)]="productDocument.warrantyPeriod" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.warrantyPolicy" for="field_warrantyPolicy">Warranty Policy</label>
+                    <input type="text" class="form-control" name="warrantyPolicy" id="field_warrantyPolicy"
+                        [(ngModel)]="productDocument.warrantyPolicy" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="productDocument.productId" >
+                    <label class="form-control-label" jhiTranslate="resourceApp.productDocument.warrantyType" for="field_warrantyType">Warranty Type</label>
+                    <select class="form-control" id="field_warrantyType" name="warrantyType" [(ngModel)]="productDocument.warrantyTypeId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                        <option [ngValue]="warrantyTypesOption.id" *ngFor="let warrantyTypesOption of warrantytypes; trackBy: trackWarrantyTypesById">{{warrantyTypesOption.warrantyTypeName}}</option>
                     </select>
                 </div>
                 <div class="form-group">

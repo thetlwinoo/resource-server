@@ -50,6 +50,9 @@ public class ProductCategoryResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_LABEL = "AAAAAAAAAA";
+    private static final String UPDATED_LABEL = "BBBBBBBBBB";
+
     private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
@@ -107,6 +110,7 @@ public class ProductCategoryResourceIntTest {
     public static ProductCategory createEntity(EntityManager em) {
         ProductCategory productCategory = new ProductCategory()
             .name(DEFAULT_NAME)
+            .label(DEFAULT_LABEL)
             .photo(DEFAULT_PHOTO)
             .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
         return productCategory;
@@ -134,6 +138,7 @@ public class ProductCategoryResourceIntTest {
         assertThat(productCategoryList).hasSize(databaseSizeBeforeCreate + 1);
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testProductCategory.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testProductCategory.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testProductCategory.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
     }
@@ -189,6 +194,7 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
     }
@@ -205,6 +211,7 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productCategory.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
     }
@@ -250,6 +257,45 @@ public class ProductCategoryResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllProductCategoriesByLabelIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where label equals to DEFAULT_LABEL
+        defaultProductCategoryShouldBeFound("label.equals=" + DEFAULT_LABEL);
+
+        // Get all the productCategoryList where label equals to UPDATED_LABEL
+        defaultProductCategoryShouldNotBeFound("label.equals=" + UPDATED_LABEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByLabelIsInShouldWork() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where label in DEFAULT_LABEL or UPDATED_LABEL
+        defaultProductCategoryShouldBeFound("label.in=" + DEFAULT_LABEL + "," + UPDATED_LABEL);
+
+        // Get all the productCategoryList where label equals to UPDATED_LABEL
+        defaultProductCategoryShouldNotBeFound("label.in=" + UPDATED_LABEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByLabelIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where label is not null
+        defaultProductCategoryShouldBeFound("label.specified=true");
+
+        // Get all the productCategoryList where label is null
+        defaultProductCategoryShouldNotBeFound("label.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllProductCategoriesByParentIsEqualToSomething() throws Exception {
         // Initialize the database
         ProductCategory parent = ProductCategoryResourceIntTest.createEntity(em);
@@ -275,6 +321,7 @@ public class ProductCategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL)))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
 
@@ -325,6 +372,7 @@ public class ProductCategoryResourceIntTest {
         em.detach(updatedProductCategory);
         updatedProductCategory
             .name(UPDATED_NAME)
+            .label(UPDATED_LABEL)
             .photo(UPDATED_PHOTO)
             .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
         ProductCategoryDTO productCategoryDTO = productCategoryMapper.toDto(updatedProductCategory);
@@ -339,6 +387,7 @@ public class ProductCategoryResourceIntTest {
         assertThat(productCategoryList).hasSize(databaseSizeBeforeUpdate);
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testProductCategory.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testProductCategory.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testProductCategory.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
     }

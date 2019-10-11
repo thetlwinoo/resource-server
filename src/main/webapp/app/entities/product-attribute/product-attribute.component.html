@@ -15,18 +15,24 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="resourceApp.productAttribute.value">Value</span></th>
+            <th><span jhiTranslate="resourceApp.productAttribute.productAttributeValue">Product Attribute Value</span></th>
             <th><span jhiTranslate="resourceApp.productAttribute.productAttributeSet">Product Attribute Set</span></th>
+            <th><span jhiTranslate="resourceApp.productAttribute.supplier">Supplier</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let productAttribute of productAttributes ;trackBy: trackId">
                 <td><a [routerLink]="['/product-attribute', productAttribute.id, 'view' ]">{{productAttribute.id}}</a></td>
-                <td>{{productAttribute.value}}</td>
+                <td>{{productAttribute.productAttributeValue}}</td>
                 <td>
                     <div *ngIf="productAttribute.productAttributeSetId">
-                        <a [routerLink]="['../product-attribute-set', productAttribute.productAttributeSetId , 'view' ]" >{{productAttribute.productAttributeSetName}}</a>
+                        <a [routerLink]="['../product-attribute-set', productAttribute.productAttributeSetId , 'view' ]" >{{productAttribute.productAttributeSetProductAttributeSetName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="productAttribute.supplierId">
+                        <a [routerLink]="['../suppliers', productAttribute.supplierId , 'view' ]" >{{productAttribute.supplierId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

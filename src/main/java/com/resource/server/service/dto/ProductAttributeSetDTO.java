@@ -11,12 +11,12 @@ public class ProductAttributeSetDTO extends AbstractAuditingDTO implements Seria
     private Long id;
 
     @NotNull
-    private String name;
+    private String productAttributeSetName;
 
 
     private Long productOptionSetId;
 
-    private String productOptionSetValue;
+    private String productOptionSetProductOptionSetValue;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class ProductAttributeSetDTO extends AbstractAuditingDTO implements Seria
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductAttributeSetName() {
+        return productAttributeSetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductAttributeSetName(String productAttributeSetName) {
+        this.productAttributeSetName = productAttributeSetName;
     }
 
     public Long getProductOptionSetId() {
@@ -42,12 +42,12 @@ public class ProductAttributeSetDTO extends AbstractAuditingDTO implements Seria
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetValue() {
-        return productOptionSetValue;
+    public String getProductOptionSetProductOptionSetValue() {
+        return productOptionSetProductOptionSetValue;
     }
 
-    public void setProductOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
+        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
     }
 
     @Override
@@ -75,9 +75,9 @@ public class ProductAttributeSetDTO extends AbstractAuditingDTO implements Seria
     public String toString() {
         return "ProductAttributeSetDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", productAttributeSetName='" + getProductAttributeSetName() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
             "}";
     }
 }

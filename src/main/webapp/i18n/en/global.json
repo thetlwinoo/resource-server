@@ -88,6 +88,15 @@
                 "productBrand": "Product Brand",
                 "productCatalog": "Product Catalog",
                 "photos": "Photos",
+                "barcodeTypes": "Barcode Types",
+                "stockItemTemp": "Stock Item Temp",
+                "uploadTransactions": "Upload Transactions",
+                "uploadActionTypes": "Upload Action Types",
+                "materials": "Materials",
+                "dangerousGoods": "Dangerous Goods",
+                "currency": "Currency",
+                "lastestMerchantUploadedDocument": "Lastest Merchant Uploaded Document",
+                "supplierImportedDocument": "Supplier Imported Document",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

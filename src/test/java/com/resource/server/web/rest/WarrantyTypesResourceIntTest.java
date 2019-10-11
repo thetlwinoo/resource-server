@@ -8,6 +8,8 @@ import com.resource.server.service.WarrantyTypesService;
 import com.resource.server.service.dto.WarrantyTypesDTO;
 import com.resource.server.service.mapper.WarrantyTypesMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.WarrantyTypesCriteria;
+import com.resource.server.service.WarrantyTypesQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,6 +58,9 @@ public class WarrantyTypesResourceIntTest {
     private WarrantyTypesService warrantyTypesService;
 
     @Autowired
+    private WarrantyTypesQueryService warrantyTypesQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +82,7 @@ public class WarrantyTypesResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final WarrantyTypesResource warrantyTypesResource = new WarrantyTypesResource(warrantyTypesService);
+        final WarrantyTypesResource warrantyTypesResource = new WarrantyTypesResource(warrantyTypesService, warrantyTypesQueryService);
         this.restWarrantyTypesMockMvc = MockMvcBuilders.standaloneSetup(warrantyTypesResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -188,6 +193,79 @@ public class WarrantyTypesResourceIntTest {
             .andExpect(jsonPath("$.id").value(warrantyTypes.getId().intValue()))
             .andExpect(jsonPath("$.warrantyTypeName").value(DEFAULT_WARRANTY_TYPE_NAME.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllWarrantyTypesByWarrantyTypeNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        warrantyTypesRepository.saveAndFlush(warrantyTypes);
+
+        // Get all the warrantyTypesList where warrantyTypeName equals to DEFAULT_WARRANTY_TYPE_NAME
+        defaultWarrantyTypesShouldBeFound("warrantyTypeName.equals=" + DEFAULT_WARRANTY_TYPE_NAME);
+
+        // Get all the warrantyTypesList where warrantyTypeName equals to UPDATED_WARRANTY_TYPE_NAME
+        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.equals=" + UPDATED_WARRANTY_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllWarrantyTypesByWarrantyTypeNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        warrantyTypesRepository.saveAndFlush(warrantyTypes);
+
+        // Get all the warrantyTypesList where warrantyTypeName in DEFAULT_WARRANTY_TYPE_NAME or UPDATED_WARRANTY_TYPE_NAME
+        defaultWarrantyTypesShouldBeFound("warrantyTypeName.in=" + DEFAULT_WARRANTY_TYPE_NAME + "," + UPDATED_WARRANTY_TYPE_NAME);
+
+        // Get all the warrantyTypesList where warrantyTypeName equals to UPDATED_WARRANTY_TYPE_NAME
+        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.in=" + UPDATED_WARRANTY_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllWarrantyTypesByWarrantyTypeNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        warrantyTypesRepository.saveAndFlush(warrantyTypes);
+
+        // Get all the warrantyTypesList where warrantyTypeName is not null
+        defaultWarrantyTypesShouldBeFound("warrantyTypeName.specified=true");
+
+        // Get all the warrantyTypesList where warrantyTypeName is null
+        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.specified=false");
+    }
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultWarrantyTypesShouldBeFound(String filter) throws Exception {
+        restWarrantyTypesMockMvc.perform(get("/api/warranty-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(warrantyTypes.getId().intValue())))
+            .andExpect(jsonPath("$.[*].warrantyTypeName").value(hasItem(DEFAULT_WARRANTY_TYPE_NAME)));
+
+        // Check, that the count call also returns 1
+        restWarrantyTypesMockMvc.perform(get("/api/warranty-types/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultWarrantyTypesShouldNotBeFound(String filter) throws Exception {
+        restWarrantyTypesMockMvc.perform(get("/api/warranty-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restWarrantyTypesMockMvc.perform(get("/api/warranty-types/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

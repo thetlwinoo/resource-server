@@ -24,7 +24,7 @@ import java.util.Objects;
 public class StockItems extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -34,8 +34,11 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @Column(name = "stock_item_name", nullable = false)
     private String stockItemName;
 
-    @Column(name = "seller_sku")
-    private String sellerSKU;
+    @Column(name = "vendor_code")
+    private String vendorCode;
+
+    @Column(name = "vendor_sku")
+    private String vendorSKU;
 
     @Column(name = "generated_sku")
     private String generatedSKU;
@@ -51,20 +54,41 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     private Float recommendedRetailPrice;
 
     @NotNull
-    @Column(name = "quantity_per_outer", nullable = false)
-    private Integer quantityPerOuter;
+    @Column(name = "quantity_on_hand", nullable = false)
+    private Integer quantityOnHand;
 
-    @Column(name = "typical_weight_per_unit")
-    private Float typicalWeightPerUnit;
+    @Column(name = "item_length")
+    private Integer itemLength;
 
-    @Column(name = "typical_length_per_unit")
-    private Integer typicalLengthPerUnit;
+    @Column(name = "item_width")
+    private Integer itemWidth;
 
-    @Column(name = "typical_width_per_unit")
-    private Integer typicalWidthPerUnit;
+    @Column(name = "item_height")
+    private Integer itemHeight;
 
-    @Column(name = "typical_height_per_unit")
-    private Integer typicalHeightPerUnit;
+    @Column(name = "item_weight")
+    private Float itemWeight;
+
+    @Column(name = "item_package_length")
+    private Integer itemPackageLength;
+
+    @Column(name = "item_package_width")
+    private Integer itemPackageWidth;
+
+    @Column(name = "item_package_height")
+    private Integer itemPackageHeight;
+
+    @Column(name = "item_package_weight")
+    private Float itemPackageWeight;
+
+    @Column(name = "no_of_pieces")
+    private Integer noOfPieces;
+
+    @Column(name = "no_of_items")
+    private Integer noOfItems;
+
+    @Column(name = "manufacture")
+    private String manufacture;
 
     @Column(name = "marketing_comments")
     private String marketingComments;
@@ -87,6 +111,9 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @Column(name = "thumbnail_url")
     private String thumbnailUrl;
 
+    @Column(name = "active_ind")
+    private Boolean activeInd;
+
     @OneToOne
     @JoinColumn(unique = true)
     private ReviewLines stockItemOnReviewLine;
@@ -96,22 +123,37 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     private Set<Photos> photoLists = new HashSet<>();
     @OneToMany(mappedBy = "stockItem",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DangerousGoods> dangerousGoodLists = new HashSet<>();
+    @OneToMany(mappedBy = "stockItem",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SpecialDeals> specialDiscounts = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
-    private UnitMeasure lengthUnitMeasureCode;
+    private UnitMeasure itemLengthUnit;
 
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
-    private UnitMeasure weightUnitMeasureCode;
+    private UnitMeasure itemWidthUnit;
 
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
-    private UnitMeasure widthUnitMeasureCode;
+    private UnitMeasure itemHeightUnit;
 
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
-    private UnitMeasure heightUnitMeasureCode;
+    private UnitMeasure packageLengthUnit;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private UnitMeasure packageWidthUnit;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private UnitMeasure packageHeightUnit;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private UnitMeasure itemPackageWeightUnit;
 
     @ManyToOne
     @JsonIgnoreProperties("stockItems")
@@ -121,11 +163,23 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties("stockItems")
     private ProductOption productOption;
 
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private Materials material;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private Currency currency;
+
+    @ManyToOne
+    @JsonIgnoreProperties("stockItems")
+    private BarcodeTypes barcodeType;
+
     @OneToOne(mappedBy = "stockItemHoldingOnStockItem")
     @JsonIgnore
     private StockItemHoldings stockItemHolding;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("stockItemLists")
     private Products product;
 
@@ -151,17 +205,30 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.stockItemName = stockItemName;
     }
 
-    public String getSellerSKU() {
-        return sellerSKU;
+    public String getVendorCode() {
+        return vendorCode;
     }
 
-    public StockItems sellerSKU(String sellerSKU) {
-        this.sellerSKU = sellerSKU;
+    public StockItems vendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
         return this;
     }
 
-    public void setSellerSKU(String sellerSKU) {
-        this.sellerSKU = sellerSKU;
+    public void setVendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
+    }
+
+    public String getVendorSKU() {
+        return vendorSKU;
+    }
+
+    public StockItems vendorSKU(String vendorSKU) {
+        this.vendorSKU = vendorSKU;
+        return this;
+    }
+
+    public void setVendorSKU(String vendorSKU) {
+        this.vendorSKU = vendorSKU;
     }
 
     public String getGeneratedSKU() {
@@ -216,69 +283,160 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.recommendedRetailPrice = recommendedRetailPrice;
     }
 
-    public Integer getQuantityPerOuter() {
-        return quantityPerOuter;
+    public Integer getQuantityOnHand() {
+        return quantityOnHand;
     }
 
-    public StockItems quantityPerOuter(Integer quantityPerOuter) {
-        this.quantityPerOuter = quantityPerOuter;
+    public StockItems quantityOnHand(Integer quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
         return this;
     }
 
-    public void setQuantityPerOuter(Integer quantityPerOuter) {
-        this.quantityPerOuter = quantityPerOuter;
+    public void setQuantityOnHand(Integer quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
     }
 
-    public Float getTypicalWeightPerUnit() {
-        return typicalWeightPerUnit;
+    public Integer getItemLength() {
+        return itemLength;
     }
 
-    public StockItems typicalWeightPerUnit(Float typicalWeightPerUnit) {
-        this.typicalWeightPerUnit = typicalWeightPerUnit;
+    public StockItems itemLength(Integer itemLength) {
+        this.itemLength = itemLength;
         return this;
     }
 
-    public void setTypicalWeightPerUnit(Float typicalWeightPerUnit) {
-        this.typicalWeightPerUnit = typicalWeightPerUnit;
+    public void setItemLength(Integer itemLength) {
+        this.itemLength = itemLength;
     }
 
-    public Integer getTypicalLengthPerUnit() {
-        return typicalLengthPerUnit;
+    public Integer getItemWidth() {
+        return itemWidth;
     }
 
-    public StockItems typicalLengthPerUnit(Integer typicalLengthPerUnit) {
-        this.typicalLengthPerUnit = typicalLengthPerUnit;
+    public StockItems itemWidth(Integer itemWidth) {
+        this.itemWidth = itemWidth;
         return this;
     }
 
-    public void setTypicalLengthPerUnit(Integer typicalLengthPerUnit) {
-        this.typicalLengthPerUnit = typicalLengthPerUnit;
+    public void setItemWidth(Integer itemWidth) {
+        this.itemWidth = itemWidth;
     }
 
-    public Integer getTypicalWidthPerUnit() {
-        return typicalWidthPerUnit;
+    public Integer getItemHeight() {
+        return itemHeight;
     }
 
-    public StockItems typicalWidthPerUnit(Integer typicalWidthPerUnit) {
-        this.typicalWidthPerUnit = typicalWidthPerUnit;
+    public StockItems itemHeight(Integer itemHeight) {
+        this.itemHeight = itemHeight;
         return this;
     }
 
-    public void setTypicalWidthPerUnit(Integer typicalWidthPerUnit) {
-        this.typicalWidthPerUnit = typicalWidthPerUnit;
+    public void setItemHeight(Integer itemHeight) {
+        this.itemHeight = itemHeight;
     }
 
-    public Integer getTypicalHeightPerUnit() {
-        return typicalHeightPerUnit;
+    public Float getItemWeight() {
+        return itemWeight;
     }
 
-    public StockItems typicalHeightPerUnit(Integer typicalHeightPerUnit) {
-        this.typicalHeightPerUnit = typicalHeightPerUnit;
+    public StockItems itemWeight(Float itemWeight) {
+        this.itemWeight = itemWeight;
         return this;
     }
 
-    public void setTypicalHeightPerUnit(Integer typicalHeightPerUnit) {
-        this.typicalHeightPerUnit = typicalHeightPerUnit;
+    public void setItemWeight(Float itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public Integer getItemPackageLength() {
+        return itemPackageLength;
+    }
+
+    public StockItems itemPackageLength(Integer itemPackageLength) {
+        this.itemPackageLength = itemPackageLength;
+        return this;
+    }
+
+    public void setItemPackageLength(Integer itemPackageLength) {
+        this.itemPackageLength = itemPackageLength;
+    }
+
+    public Integer getItemPackageWidth() {
+        return itemPackageWidth;
+    }
+
+    public StockItems itemPackageWidth(Integer itemPackageWidth) {
+        this.itemPackageWidth = itemPackageWidth;
+        return this;
+    }
+
+    public void setItemPackageWidth(Integer itemPackageWidth) {
+        this.itemPackageWidth = itemPackageWidth;
+    }
+
+    public Integer getItemPackageHeight() {
+        return itemPackageHeight;
+    }
+
+    public StockItems itemPackageHeight(Integer itemPackageHeight) {
+        this.itemPackageHeight = itemPackageHeight;
+        return this;
+    }
+
+    public void setItemPackageHeight(Integer itemPackageHeight) {
+        this.itemPackageHeight = itemPackageHeight;
+    }
+
+    public Float getItemPackageWeight() {
+        return itemPackageWeight;
+    }
+
+    public StockItems itemPackageWeight(Float itemPackageWeight) {
+        this.itemPackageWeight = itemPackageWeight;
+        return this;
+    }
+
+    public void setItemPackageWeight(Float itemPackageWeight) {
+        this.itemPackageWeight = itemPackageWeight;
+    }
+
+    public Integer getNoOfPieces() {
+        return noOfPieces;
+    }
+
+    public StockItems noOfPieces(Integer noOfPieces) {
+        this.noOfPieces = noOfPieces;
+        return this;
+    }
+
+    public void setNoOfPieces(Integer noOfPieces) {
+        this.noOfPieces = noOfPieces;
+    }
+
+    public Integer getNoOfItems() {
+        return noOfItems;
+    }
+
+    public StockItems noOfItems(Integer noOfItems) {
+        this.noOfItems = noOfItems;
+        return this;
+    }
+
+    public void setNoOfItems(Integer noOfItems) {
+        this.noOfItems = noOfItems;
+    }
+
+    public String getManufacture() {
+        return manufacture;
+    }
+
+    public StockItems manufacture(String manufacture) {
+        this.manufacture = manufacture;
+        return this;
+    }
+
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
 
     public String getMarketingComments() {
@@ -372,6 +530,19 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    public Boolean isActiveInd() {
+        return activeInd;
+    }
+
+    public StockItems activeInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+        return this;
+    }
+
+    public void setActiveInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+    }
+
     public ReviewLines getStockItemOnReviewLine() {
         return stockItemOnReviewLine;
     }
@@ -410,6 +581,31 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.photoLists = photos;
     }
 
+    public Set<DangerousGoods> getDangerousGoodLists() {
+        return dangerousGoodLists;
+    }
+
+    public StockItems dangerousGoodLists(Set<DangerousGoods> dangerousGoods) {
+        this.dangerousGoodLists = dangerousGoods;
+        return this;
+    }
+
+    public StockItems addDangerousGoodList(DangerousGoods dangerousGoods) {
+        this.dangerousGoodLists.add(dangerousGoods);
+        dangerousGoods.setStockItem(this);
+        return this;
+    }
+
+    public StockItems removeDangerousGoodList(DangerousGoods dangerousGoods) {
+        this.dangerousGoodLists.remove(dangerousGoods);
+        dangerousGoods.setStockItem(null);
+        return this;
+    }
+
+    public void setDangerousGoodLists(Set<DangerousGoods> dangerousGoods) {
+        this.dangerousGoodLists = dangerousGoods;
+    }
+
     public Set<SpecialDeals> getSpecialDiscounts() {
         return specialDiscounts;
     }
@@ -435,56 +631,95 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         this.specialDiscounts = specialDeals;
     }
 
-    public UnitMeasure getLengthUnitMeasureCode() {
-        return lengthUnitMeasureCode;
+    public UnitMeasure getItemLengthUnit() {
+        return itemLengthUnit;
     }
 
-    public StockItems lengthUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.lengthUnitMeasureCode = unitMeasure;
+    public StockItems itemLengthUnit(UnitMeasure unitMeasure) {
+        this.itemLengthUnit = unitMeasure;
         return this;
     }
 
-    public void setLengthUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.lengthUnitMeasureCode = unitMeasure;
+    public void setItemLengthUnit(UnitMeasure unitMeasure) {
+        this.itemLengthUnit = unitMeasure;
     }
 
-    public UnitMeasure getWeightUnitMeasureCode() {
-        return weightUnitMeasureCode;
+    public UnitMeasure getItemWidthUnit() {
+        return itemWidthUnit;
     }
 
-    public StockItems weightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.weightUnitMeasureCode = unitMeasure;
+    public StockItems itemWidthUnit(UnitMeasure unitMeasure) {
+        this.itemWidthUnit = unitMeasure;
         return this;
     }
 
-    public void setWeightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.weightUnitMeasureCode = unitMeasure;
+    public void setItemWidthUnit(UnitMeasure unitMeasure) {
+        this.itemWidthUnit = unitMeasure;
     }
 
-    public UnitMeasure getWidthUnitMeasureCode() {
-        return widthUnitMeasureCode;
+    public UnitMeasure getItemHeightUnit() {
+        return itemHeightUnit;
     }
 
-    public StockItems widthUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.widthUnitMeasureCode = unitMeasure;
+    public StockItems itemHeightUnit(UnitMeasure unitMeasure) {
+        this.itemHeightUnit = unitMeasure;
         return this;
     }
 
-    public void setWidthUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.widthUnitMeasureCode = unitMeasure;
+    public void setItemHeightUnit(UnitMeasure unitMeasure) {
+        this.itemHeightUnit = unitMeasure;
     }
 
-    public UnitMeasure getHeightUnitMeasureCode() {
-        return heightUnitMeasureCode;
+    public UnitMeasure getPackageLengthUnit() {
+        return packageLengthUnit;
     }
 
-    public StockItems heightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.heightUnitMeasureCode = unitMeasure;
+    public StockItems packageLengthUnit(UnitMeasure unitMeasure) {
+        this.packageLengthUnit = unitMeasure;
         return this;
     }
 
-    public void setHeightUnitMeasureCode(UnitMeasure unitMeasure) {
-        this.heightUnitMeasureCode = unitMeasure;
+    public void setPackageLengthUnit(UnitMeasure unitMeasure) {
+        this.packageLengthUnit = unitMeasure;
+    }
+
+    public UnitMeasure getPackageWidthUnit() {
+        return packageWidthUnit;
+    }
+
+    public StockItems packageWidthUnit(UnitMeasure unitMeasure) {
+        this.packageWidthUnit = unitMeasure;
+        return this;
+    }
+
+    public void setPackageWidthUnit(UnitMeasure unitMeasure) {
+        this.packageWidthUnit = unitMeasure;
+    }
+
+    public UnitMeasure getPackageHeightUnit() {
+        return packageHeightUnit;
+    }
+
+    public StockItems packageHeightUnit(UnitMeasure unitMeasure) {
+        this.packageHeightUnit = unitMeasure;
+        return this;
+    }
+
+    public void setPackageHeightUnit(UnitMeasure unitMeasure) {
+        this.packageHeightUnit = unitMeasure;
+    }
+
+    public UnitMeasure getItemPackageWeightUnit() {
+        return itemPackageWeightUnit;
+    }
+
+    public StockItems itemPackageWeightUnit(UnitMeasure unitMeasure) {
+        this.itemPackageWeightUnit = unitMeasure;
+        return this;
+    }
+
+    public void setItemPackageWeightUnit(UnitMeasure unitMeasure) {
+        this.itemPackageWeightUnit = unitMeasure;
     }
 
     public ProductAttribute getProductAttribute() {
@@ -511,6 +746,45 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
 
     public void setProductOption(ProductOption productOption) {
         this.productOption = productOption;
+    }
+
+    public Materials getMaterial() {
+        return material;
+    }
+
+    public StockItems material(Materials materials) {
+        this.material = materials;
+        return this;
+    }
+
+    public void setMaterial(Materials materials) {
+        this.material = materials;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public StockItems currency(Currency currency) {
+        this.currency = currency;
+        return this;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public BarcodeTypes getBarcodeType() {
+        return barcodeType;
+    }
+
+    public StockItems barcodeType(BarcodeTypes barcodeTypes) {
+        this.barcodeType = barcodeTypes;
+        return this;
+    }
+
+    public void setBarcodeType(BarcodeTypes barcodeTypes) {
+        this.barcodeType = barcodeTypes;
     }
 
     public StockItemHoldings getStockItemHolding() {
@@ -565,16 +839,24 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
         return "StockItems{" +
             "id=" + getId() +
             ", stockItemName='" + getStockItemName() + "'" +
-            ", sellerSKU='" + getSellerSKU() + "'" +
+            ", vendorCode='" + getVendorCode() + "'" +
+            ", vendorSKU='" + getVendorSKU() + "'" +
             ", generatedSKU='" + getGeneratedSKU() + "'" +
             ", barcode='" + getBarcode() + "'" +
             ", unitPrice=" + getUnitPrice() +
             ", recommendedRetailPrice=" + getRecommendedRetailPrice() +
-            ", quantityPerOuter=" + getQuantityPerOuter() +
-            ", typicalWeightPerUnit=" + getTypicalWeightPerUnit() +
-            ", typicalLengthPerUnit=" + getTypicalLengthPerUnit() +
-            ", typicalWidthPerUnit=" + getTypicalWidthPerUnit() +
-            ", typicalHeightPerUnit=" + getTypicalHeightPerUnit() +
+            ", quantityOnHand=" + getQuantityOnHand() +
+            ", itemLength=" + getItemLength() +
+            ", itemWidth=" + getItemWidth() +
+            ", itemHeight=" + getItemHeight() +
+            ", itemWeight=" + getItemWeight() +
+            ", itemPackageLength=" + getItemPackageLength() +
+            ", itemPackageWidth=" + getItemPackageWidth() +
+            ", itemPackageHeight=" + getItemPackageHeight() +
+            ", itemPackageWeight=" + getItemPackageWeight() +
+            ", noOfPieces=" + getNoOfPieces() +
+            ", noOfItems=" + getNoOfItems() +
+            ", manufacture='" + getManufacture() + "'" +
             ", marketingComments='" + getMarketingComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
             ", sellStartDate='" + getSellStartDate() + "'" +
@@ -582,6 +864,7 @@ public class StockItems extends AbstractAuditingEntity implements Serializable {
             ", sellCount=" + getSellCount() +
             ", customFields='" + getCustomFields() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
+            ", activeInd='" + isActiveInd() + "'" +
             "}";
     }
 }

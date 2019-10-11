@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Product Attribute Set"
             },
-            "name": "Name",
+            "productAttributeSetName": "Product Attribute Set Name",
             "productOptionSet": "Product Option Set"
         }
     }

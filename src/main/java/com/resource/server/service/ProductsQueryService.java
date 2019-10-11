@@ -92,26 +92,21 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getProductName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getProductName(), Products_.productName));
             }
+            if (criteria.getHandle() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHandle(), Products_.handle));
+            }
             if (criteria.getProductNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getProductNumber(), Products_.productNumber));
-            }
-            if (criteria.getSearchDetails() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getSearchDetails(), Products_.searchDetails));
-            }
-            if (criteria.getThumbnailUrl() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), Products_.thumbnailUrl));
-            }
-            if (criteria.getWarrantyPeriod() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWarrantyPeriod(), Products_.warrantyPeriod));
-            }
-            if (criteria.getWarrantyPolicy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWarrantyPolicy(), Products_.warrantyPolicy));
             }
             if (criteria.getSellCount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellCount(), Products_.sellCount));
             }
-            if (criteria.getWhatInTheBox() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWhatInTheBox(), Products_.whatInTheBox));
+            if (criteria.getActiveInd() != null) {
+                specification = specification.and(buildSpecification(criteria.getActiveInd(), Products_.activeInd));
+            }
+            if (criteria.getDocumentId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDocumentId(),
+                    root -> root.join(Products_.document, JoinType.LEFT).get(ProductDocument_.id)));
             }
             if (criteria.getStockItemListId() != null) {
                 specification = specification.and(buildSpecification(criteria.getStockItemListId(),
@@ -121,22 +116,6 @@ public class ProductsQueryService extends QueryService<Products> {
                 specification = specification.and(buildSpecification(criteria.getSupplierId(),
                     root -> root.join(Products_.supplier, JoinType.LEFT).get(Suppliers_.id)));
             }
-            if (criteria.getMerchantId() != null) {
-                specification = specification.and(buildSpecification(criteria.getMerchantId(),
-                    root -> root.join(Products_.merchant, JoinType.LEFT).get(Merchants_.id)));
-            }
-            if (criteria.getUnitPackageId() != null) {
-                specification = specification.and(buildSpecification(criteria.getUnitPackageId(),
-                    root -> root.join(Products_.unitPackage, JoinType.LEFT).get(PackageTypes_.id)));
-            }
-            if (criteria.getOuterPackageId() != null) {
-                specification = specification.and(buildSpecification(criteria.getOuterPackageId(),
-                    root -> root.join(Products_.outerPackage, JoinType.LEFT).get(PackageTypes_.id)));
-            }
-            if (criteria.getProductModelId() != null) {
-                specification = specification.and(buildSpecification(criteria.getProductModelId(),
-                    root -> root.join(Products_.productModel, JoinType.LEFT).get(ProductModel_.id)));
-            }
             if (criteria.getProductCategoryId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductCategoryId(),
                     root -> root.join(Products_.productCategory, JoinType.LEFT).get(ProductCategory_.id)));
@@ -144,10 +123,6 @@ public class ProductsQueryService extends QueryService<Products> {
             if (criteria.getProductBrandId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductBrandId(),
                     root -> root.join(Products_.productBrand, JoinType.LEFT).get(ProductBrand_.id)));
-            }
-            if (criteria.getWarrantyTypeId() != null) {
-                specification = specification.and(buildSpecification(criteria.getWarrantyTypeId(),
-                    root -> root.join(Products_.warrantyType, JoinType.LEFT).get(WarrantyTypes_.id)));
             }
         }
         return specification;

@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ProductCategoryService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new ProductCategory(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
+            elemDefault = new ProductCategory(0, 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,6 +56,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
+                        label: 'BBBBBB',
                         photo: 'BBBBBB'
                     },
                     elemDefault
@@ -74,6 +75,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
+                        label: 'BBBBBB',
                         photo: 'BBBBBB'
                     },
                     elemDefault

@@ -16,6 +16,7 @@
                 "title": "Product Category"
             },
             "name": "Name",
+            "label": "Label",
             "photo": "Photo",
             "parent": "Parent"
         }

@@ -27,6 +27,7 @@ export class ProductCategoryUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
+    labelInput = element(by.id('field_label'));
     photoInput = element(by.id('file_photo'));
     parentSelect = element(by.id('field_parent'));
 
@@ -40,6 +41,14 @@ export class ProductCategoryUpdatePage {
 
     async getNameInput() {
         return this.nameInput.getAttribute('value');
+    }
+
+    async setLabelInput(label) {
+        await this.labelInput.sendKeys(label);
+    }
+
+    async getLabelInput() {
+        return this.labelInput.getAttribute('value');
     }
 
     async setPhotoInput(photo) {

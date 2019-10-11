@@ -3,23 +3,17 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IProducts } from 'app/shared/model/products.model';
 import { ProductsService } from './products.service';
+import { IProductDocument } from 'app/shared/model/product-document.model';
+import { ProductDocumentService } from 'app/entities/product-document';
 import { ISuppliers } from 'app/shared/model/suppliers.model';
 import { SuppliersService } from 'app/entities/suppliers';
-import { IMerchants } from 'app/shared/model/merchants.model';
-import { MerchantsService } from 'app/entities/merchants';
-import { IPackageTypes } from 'app/shared/model/package-types.model';
-import { PackageTypesService } from 'app/entities/package-types';
-import { IProductModel } from 'app/shared/model/product-model.model';
-import { ProductModelService } from 'app/entities/product-model';
 import { IProductCategory } from 'app/shared/model/product-category.model';
 import { ProductCategoryService } from 'app/entities/product-category';
 import { IProductBrand } from 'app/shared/model/product-brand.model';
 import { ProductBrandService } from 'app/entities/product-brand';
-import { IWarrantyTypes } from 'app/shared/model/warranty-types.model';
-import { WarrantyTypesService } from 'app/entities/warranty-types';
 
 @Component({
     selector: 'jhi-products-update',
@@ -29,30 +23,22 @@ export class ProductsUpdateComponent implements OnInit {
     products: IProducts;
     isSaving: boolean;
 
+    documents: IProductDocument[];
+
     suppliers: ISuppliers[];
-
-    merchants: IMerchants[];
-
-    packagetypes: IPackageTypes[];
-
-    productmodels: IProductModel[];
 
     productcategories: IProductCategory[];
 
     productbrands: IProductBrand[];
 
-    warrantytypes: IWarrantyTypes[];
-
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected productsService: ProductsService,
+        protected productDocumentService: ProductDocumentService,
         protected suppliersService: SuppliersService,
-        protected merchantsService: MerchantsService,
-        protected packageTypesService: PackageTypesService,
-        protected productModelService: ProductModelService,
         protected productCategoryService: ProductCategoryService,
         protected productBrandService: ProductBrandService,
-        protected warrantyTypesService: WarrantyTypesService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -61,6 +47,31 @@ export class ProductsUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ products }) => {
             this.products = products;
         });
+        this.productDocumentService
+            .query({ 'productId.specified': 'false' })
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProductDocument[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProductDocument[]>) => response.body)
+            )
+            .subscribe(
+                (res: IProductDocument[]) => {
+                    if (!this.products.documentId) {
+                        this.documents = res;
+                    } else {
+                        this.productDocumentService
+                            .find(this.products.documentId)
+                            .pipe(
+                                filter((subResMayBeOk: HttpResponse<IProductDocument>) => subResMayBeOk.ok),
+                                map((subResponse: HttpResponse<IProductDocument>) => subResponse.body)
+                            )
+                            .subscribe(
+                                (subRes: IProductDocument) => (this.documents = [subRes].concat(res)),
+                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                            );
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         this.suppliersService
             .query()
             .pipe(
@@ -68,27 +79,6 @@ export class ProductsUpdateComponent implements OnInit {
                 map((response: HttpResponse<ISuppliers[]>) => response.body)
             )
             .subscribe((res: ISuppliers[]) => (this.suppliers = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.merchantsService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IMerchants[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IMerchants[]>) => response.body)
-            )
-            .subscribe((res: IMerchants[]) => (this.merchants = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.packageTypesService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IPackageTypes[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IPackageTypes[]>) => response.body)
-            )
-            .subscribe((res: IPackageTypes[]) => (this.packagetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.productModelService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProductModel[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProductModel[]>) => response.body)
-            )
-            .subscribe((res: IProductModel[]) => (this.productmodels = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.productCategoryService
             .query()
             .pipe(
@@ -103,13 +93,18 @@ export class ProductsUpdateComponent implements OnInit {
                 map((response: HttpResponse<IProductBrand[]>) => response.body)
             )
             .subscribe((res: IProductBrand[]) => (this.productbrands = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.warrantyTypesService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IWarrantyTypes[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IWarrantyTypes[]>) => response.body)
-            )
-            .subscribe((res: IWarrantyTypes[]) => (this.warrantytypes = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -142,19 +137,11 @@ export class ProductsUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    trackProductDocumentById(index: number, item: IProductDocument) {
+        return item.id;
+    }
+
     trackSuppliersById(index: number, item: ISuppliers) {
-        return item.id;
-    }
-
-    trackMerchantsById(index: number, item: IMerchants) {
-        return item.id;
-    }
-
-    trackPackageTypesById(index: number, item: IPackageTypes) {
-        return item.id;
-    }
-
-    trackProductModelById(index: number, item: IProductModel) {
         return item.id;
     }
 
@@ -163,10 +150,6 @@ export class ProductsUpdateComponent implements OnInit {
     }
 
     trackProductBrandById(index: number, item: IProductBrand) {
-        return item.id;
-    }
-
-    trackWarrantyTypesById(index: number, item: IWarrantyTypes) {
         return item.id;
     }
 }

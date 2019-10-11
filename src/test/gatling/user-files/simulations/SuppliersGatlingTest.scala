@@ -84,6 +84,10 @@ class SuppliersGatlingTest extends Simulation {
                 , "phoneNumber":"SAMPLE_TEXT"
                 , "faxNumber":"SAMPLE_TEXT"
                 , "websiteURL":"SAMPLE_TEXT"
+                , "webServiceUrl":"SAMPLE_TEXT"
+                , "creditRating":"0"
+                , "activeFlag":null
+                , "avatar":null
                 , "validFrom":"2020-01-01T00:00:00.000Z"
                 , "validTo":"2020-01-01T00:00:00.000Z"
                 }""")).asJSON

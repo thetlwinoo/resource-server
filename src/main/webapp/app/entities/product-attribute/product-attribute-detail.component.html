@@ -5,14 +5,20 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="resourceApp.productAttribute.value">Value</span></dt>
+                <dt><span jhiTranslate="resourceApp.productAttribute.productAttributeValue">Product Attribute Value</span></dt>
                 <dd>
-                    <span>{{productAttribute.value}}</span>
+                    <span>{{productAttribute.productAttributeValue}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.productAttribute.productAttributeSet">Product Attribute Set</span></dt>
                 <dd>
                     <div *ngIf="productAttribute.productAttributeSetId">
-                        <a [routerLink]="['/product-attribute-set', productAttribute.productAttributeSetId, 'view']">{{productAttribute.productAttributeSetName}}</a>
+                        <a [routerLink]="['/product-attribute-set', productAttribute.productAttributeSetId, 'view']">{{productAttribute.productAttributeSetProductAttributeSetName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.productAttribute.supplier">Supplier</span></dt>
+                <dd>
+                    <div *ngIf="productAttribute.supplierId">
+                        <a [routerLink]="['/suppliers', productAttribute.supplierId, 'view']">{{productAttribute.supplierId}}</a>
                     </div>
                 </dd>
             </dl>

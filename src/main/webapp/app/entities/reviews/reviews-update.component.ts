@@ -4,7 +4,7 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IReviews } from 'app/shared/model/reviews.model';
 import { ReviewsService } from './reviews.service';
 import { IOrders } from 'app/shared/model/orders.model';
@@ -22,6 +22,7 @@ export class ReviewsUpdateComponent implements OnInit {
     reviewDateDp: any;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected reviewsService: ReviewsService,
         protected ordersService: OrdersService,
@@ -40,6 +41,18 @@ export class ReviewsUpdateComponent implements OnInit {
                 map((response: HttpResponse<IOrders[]>) => response.body)
             )
             .subscribe((res: IOrders[]) => (this.orders = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {

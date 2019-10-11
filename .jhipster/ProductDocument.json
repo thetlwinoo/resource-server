@@ -2,33 +2,93 @@
     "name": "ProductDocument",
     "fields": [
         {
-            "fieldName": "documentNode",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "any",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "videoUrl",
             "fieldType": "String"
         },
         {
             "fieldName": "highlights",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "longDescription",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "shortDescription",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "careInstructions",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "productType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modelName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modelNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fabricType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "specialFeatures",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "productComplianceCertificate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "genuineAndLegal",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "countryOfOrigin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "usageAndSideEffects",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "safetyWarnning",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "warrantyPeriod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "warrantyPolicy",
+            "fieldType": "String"
         }
     ],
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "products",
+            "otherEntityName": "warrantyTypes",
             "otherEntityRelationshipName": "productDocument",
-            "relationshipName": "product",
-            "otherEntityField": "productName"
+            "relationshipName": "warrantyType",
+            "otherEntityField": "warrantyTypeName"
         },
         {
             "relationshipType": "many-to-one",
@@ -36,6 +96,13 @@
             "otherEntityRelationshipName": "productDocument",
             "relationshipName": "culture",
             "otherEntityField": "cultureName"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "products",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "product",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20190801044942",

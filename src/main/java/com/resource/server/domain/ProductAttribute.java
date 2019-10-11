@@ -27,12 +27,16 @@ public class ProductAttribute extends AbstractAuditingEntity implements Serializ
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_value", nullable = false)
-    private String value;
+    @Column(name = "product_attribute_value", nullable = false)
+    private String productAttributeValue;
 
     @ManyToOne
     @JsonIgnoreProperties("productAttributes")
     private ProductAttributeSet productAttributeSet;
+
+    @ManyToOne
+    @JsonIgnoreProperties("productAttributes")
+    private Suppliers supplier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -43,17 +47,17 @@ public class ProductAttribute extends AbstractAuditingEntity implements Serializ
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductAttributeValue() {
+        return productAttributeValue;
     }
 
-    public ProductAttribute value(String value) {
-        this.value = value;
+    public ProductAttribute productAttributeValue(String productAttributeValue) {
+        this.productAttributeValue = productAttributeValue;
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductAttributeValue(String productAttributeValue) {
+        this.productAttributeValue = productAttributeValue;
     }
 
     public ProductAttributeSet getProductAttributeSet() {
@@ -67,6 +71,19 @@ public class ProductAttribute extends AbstractAuditingEntity implements Serializ
 
     public void setProductAttributeSet(ProductAttributeSet productAttributeSet) {
         this.productAttributeSet = productAttributeSet;
+    }
+
+    public Suppliers getSupplier() {
+        return supplier;
+    }
+
+    public ProductAttribute supplier(Suppliers suppliers) {
+        this.supplier = suppliers;
+        return this;
+    }
+
+    public void setSupplier(Suppliers suppliers) {
+        this.supplier = suppliers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -94,7 +111,7 @@ public class ProductAttribute extends AbstractAuditingEntity implements Serializ
     public String toString() {
         return "ProductAttribute{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productAttributeValue='" + getProductAttributeValue() + "'" +
             "}";
     }
 }

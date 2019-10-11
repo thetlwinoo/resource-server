@@ -39,8 +39,8 @@ describe('ProductSet e2e test', () => {
         const nbButtonsBeforeCreate = await productSetComponentsPage.countDeleteButtons();
 
         await productSetComponentsPage.clickOnCreateButton();
-        await promise.all([productSetUpdatePage.setNameInput('name'), productSetUpdatePage.setNoOfPersonInput('5')]);
-        expect(await productSetUpdatePage.getNameInput()).to.eq('name');
+        await promise.all([productSetUpdatePage.setProductSetNameInput('productSetName'), productSetUpdatePage.setNoOfPersonInput('5')]);
+        expect(await productSetUpdatePage.getProductSetNameInput()).to.eq('productSetName');
         expect(await productSetUpdatePage.getNoOfPersonInput()).to.eq('5');
         const selectedIsExclusive = productSetUpdatePage.getIsExclusiveInput();
         if (await selectedIsExclusive.isSelected()) {

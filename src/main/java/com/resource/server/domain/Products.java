@@ -23,7 +23,7 @@ import java.util.Objects;
 public class Products extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -33,28 +33,25 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
+    @Column(name = "handle")
+    private String handle;
+
     @Column(name = "product_number")
     private String productNumber;
 
-    @NotNull
-    @Column(name = "search_details", nullable = false)
+    @Lob
+    @Column(name = "search_details")
     private String searchDetails;
-
-    @Column(name = "thumbnail_url")
-    private String thumbnailUrl;
-
-    @Column(name = "warranty_period")
-    private String warrantyPeriod;
-
-    @Column(name = "warranty_policy")
-    private String warrantyPolicy;
 
     @Column(name = "sell_count")
     private Integer sellCount;
 
-    @NotNull
-    @Column(name = "what_in_the_box", nullable = false)
-    private String whatInTheBox;
+    @Column(name = "active_ind")
+    private Boolean activeInd;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private ProductDocument document;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -65,31 +62,11 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("products")
-    private Merchants merchant;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private PackageTypes unitPackage;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private PackageTypes outerPackage;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private ProductModel productModel;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
     private ProductCategory productCategory;
 
     @ManyToOne
     @JsonIgnoreProperties("products")
     private ProductBrand productBrand;
-
-    @ManyToOne
-    @JsonIgnoreProperties("products")
-    private WarrantyTypes warrantyType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -111,6 +88,19 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getHandle() {
+        return handle;
+    }
+
+    public Products handle(String handle) {
+        this.handle = handle;
+        return this;
+    }
+
+    public void setHandle(String handle) {
+        this.handle = handle;
     }
 
     public String getProductNumber() {
@@ -139,45 +129,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.searchDetails = searchDetails;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public Products thumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-        return this;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public String getWarrantyPeriod() {
-        return warrantyPeriod;
-    }
-
-    public Products warrantyPeriod(String warrantyPeriod) {
-        this.warrantyPeriod = warrantyPeriod;
-        return this;
-    }
-
-    public void setWarrantyPeriod(String warrantyPeriod) {
-        this.warrantyPeriod = warrantyPeriod;
-    }
-
-    public String getWarrantyPolicy() {
-        return warrantyPolicy;
-    }
-
-    public Products warrantyPolicy(String warrantyPolicy) {
-        this.warrantyPolicy = warrantyPolicy;
-        return this;
-    }
-
-    public void setWarrantyPolicy(String warrantyPolicy) {
-        this.warrantyPolicy = warrantyPolicy;
-    }
-
     public Integer getSellCount() {
         return sellCount;
     }
@@ -191,17 +142,30 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public String getWhatInTheBox() {
-        return whatInTheBox;
+    public Boolean isActiveInd() {
+        return activeInd;
     }
 
-    public Products whatInTheBox(String whatInTheBox) {
-        this.whatInTheBox = whatInTheBox;
+    public Products activeInd(Boolean activeInd) {
+        this.activeInd = activeInd;
         return this;
     }
 
-    public void setWhatInTheBox(String whatInTheBox) {
-        this.whatInTheBox = whatInTheBox;
+    public void setActiveInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+    }
+
+    public ProductDocument getDocument() {
+        return document;
+    }
+
+    public Products document(ProductDocument productDocument) {
+        this.document = productDocument;
+        return this;
+    }
+
+    public void setDocument(ProductDocument productDocument) {
+        this.document = productDocument;
     }
 
     public Set<StockItems> getStockItemLists() {
@@ -242,58 +206,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         this.supplier = suppliers;
     }
 
-    public Merchants getMerchant() {
-        return merchant;
-    }
-
-    public Products merchant(Merchants merchants) {
-        this.merchant = merchants;
-        return this;
-    }
-
-    public void setMerchant(Merchants merchants) {
-        this.merchant = merchants;
-    }
-
-    public PackageTypes getUnitPackage() {
-        return unitPackage;
-    }
-
-    public Products unitPackage(PackageTypes packageTypes) {
-        this.unitPackage = packageTypes;
-        return this;
-    }
-
-    public void setUnitPackage(PackageTypes packageTypes) {
-        this.unitPackage = packageTypes;
-    }
-
-    public PackageTypes getOuterPackage() {
-        return outerPackage;
-    }
-
-    public Products outerPackage(PackageTypes packageTypes) {
-        this.outerPackage = packageTypes;
-        return this;
-    }
-
-    public void setOuterPackage(PackageTypes packageTypes) {
-        this.outerPackage = packageTypes;
-    }
-
-    public ProductModel getProductModel() {
-        return productModel;
-    }
-
-    public Products productModel(ProductModel productModel) {
-        this.productModel = productModel;
-        return this;
-    }
-
-    public void setProductModel(ProductModel productModel) {
-        this.productModel = productModel;
-    }
-
     public ProductCategory getProductCategory() {
         return productCategory;
     }
@@ -318,19 +230,6 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     public void setProductBrand(ProductBrand productBrand) {
         this.productBrand = productBrand;
-    }
-
-    public WarrantyTypes getWarrantyType() {
-        return warrantyType;
-    }
-
-    public Products warrantyType(WarrantyTypes warrantyTypes) {
-        this.warrantyType = warrantyTypes;
-        return this;
-    }
-
-    public void setWarrantyType(WarrantyTypes warrantyTypes) {
-        this.warrantyType = warrantyTypes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -359,13 +258,11 @@ public class Products extends AbstractAuditingEntity implements Serializable {
         return "Products{" +
             "id=" + getId() +
             ", productName='" + getProductName() + "'" +
+            ", handle='" + getHandle() + "'" +
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
-            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
-            ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
-            ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", sellCount=" + getSellCount() +
-            ", whatInTheBox='" + getWhatInTheBox() + "'" +
+            ", activeInd='" + isActiveInd() + "'" +
             "}";
     }
 }

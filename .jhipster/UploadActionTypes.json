@@ -1,0 +1,20 @@
+{
+    "name": "UploadActionTypes",
+    "fields": [
+        {
+            "fieldName": "actionTypeName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191007095635",
+    "entityTableName": "upload_action_types",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

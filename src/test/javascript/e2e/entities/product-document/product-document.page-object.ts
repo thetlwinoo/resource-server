@@ -26,22 +26,29 @@ export class ProductDocumentUpdatePage {
     pageTitle = element(by.id('jhi-product-document-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    documentNodeInput = element(by.id('file_documentNode'));
     videoUrlInput = element(by.id('field_videoUrl'));
     highlightsInput = element(by.id('field_highlights'));
-    productSelect = element(by.id('field_product'));
+    longDescriptionInput = element(by.id('file_longDescription'));
+    shortDescriptionInput = element(by.id('field_shortDescription'));
+    descriptionInput = element(by.id('field_description'));
+    careInstructionsInput = element(by.id('field_careInstructions'));
+    productTypeInput = element(by.id('field_productType'));
+    modelNameInput = element(by.id('field_modelName'));
+    modelNumberInput = element(by.id('field_modelNumber'));
+    fabricTypeInput = element(by.id('field_fabricType'));
+    specialFeaturesInput = element(by.id('field_specialFeatures'));
+    productComplianceCertificateInput = element(by.id('field_productComplianceCertificate'));
+    genuineAndLegalInput = element(by.id('field_genuineAndLegal'));
+    countryOfOriginInput = element(by.id('field_countryOfOrigin'));
+    usageAndSideEffectsInput = element(by.id('field_usageAndSideEffects'));
+    safetyWarnningInput = element(by.id('field_safetyWarnning'));
+    warrantyPeriodInput = element(by.id('field_warrantyPeriod'));
+    warrantyPolicyInput = element(by.id('field_warrantyPolicy'));
+    warrantyTypeSelect = element(by.id('field_warrantyType'));
     cultureSelect = element(by.id('field_culture'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
-    }
-
-    async setDocumentNodeInput(documentNode) {
-        await this.documentNodeInput.sendKeys(documentNode);
-    }
-
-    async getDocumentNodeInput() {
-        return this.documentNodeInput.getAttribute('value');
     }
 
     async setVideoUrlInput(videoUrl) {
@@ -60,23 +67,146 @@ export class ProductDocumentUpdatePage {
         return this.highlightsInput.getAttribute('value');
     }
 
-    async productSelectLastOption() {
-        await this.productSelect
+    async setLongDescriptionInput(longDescription) {
+        await this.longDescriptionInput.sendKeys(longDescription);
+    }
+
+    async getLongDescriptionInput() {
+        return this.longDescriptionInput.getAttribute('value');
+    }
+
+    async setShortDescriptionInput(shortDescription) {
+        await this.shortDescriptionInput.sendKeys(shortDescription);
+    }
+
+    async getShortDescriptionInput() {
+        return this.shortDescriptionInput.getAttribute('value');
+    }
+
+    async setDescriptionInput(description) {
+        await this.descriptionInput.sendKeys(description);
+    }
+
+    async getDescriptionInput() {
+        return this.descriptionInput.getAttribute('value');
+    }
+
+    async setCareInstructionsInput(careInstructions) {
+        await this.careInstructionsInput.sendKeys(careInstructions);
+    }
+
+    async getCareInstructionsInput() {
+        return this.careInstructionsInput.getAttribute('value');
+    }
+
+    async setProductTypeInput(productType) {
+        await this.productTypeInput.sendKeys(productType);
+    }
+
+    async getProductTypeInput() {
+        return this.productTypeInput.getAttribute('value');
+    }
+
+    async setModelNameInput(modelName) {
+        await this.modelNameInput.sendKeys(modelName);
+    }
+
+    async getModelNameInput() {
+        return this.modelNameInput.getAttribute('value');
+    }
+
+    async setModelNumberInput(modelNumber) {
+        await this.modelNumberInput.sendKeys(modelNumber);
+    }
+
+    async getModelNumberInput() {
+        return this.modelNumberInput.getAttribute('value');
+    }
+
+    async setFabricTypeInput(fabricType) {
+        await this.fabricTypeInput.sendKeys(fabricType);
+    }
+
+    async getFabricTypeInput() {
+        return this.fabricTypeInput.getAttribute('value');
+    }
+
+    async setSpecialFeaturesInput(specialFeatures) {
+        await this.specialFeaturesInput.sendKeys(specialFeatures);
+    }
+
+    async getSpecialFeaturesInput() {
+        return this.specialFeaturesInput.getAttribute('value');
+    }
+
+    async setProductComplianceCertificateInput(productComplianceCertificate) {
+        await this.productComplianceCertificateInput.sendKeys(productComplianceCertificate);
+    }
+
+    async getProductComplianceCertificateInput() {
+        return this.productComplianceCertificateInput.getAttribute('value');
+    }
+
+    getGenuineAndLegalInput() {
+        return this.genuineAndLegalInput;
+    }
+    async setCountryOfOriginInput(countryOfOrigin) {
+        await this.countryOfOriginInput.sendKeys(countryOfOrigin);
+    }
+
+    async getCountryOfOriginInput() {
+        return this.countryOfOriginInput.getAttribute('value');
+    }
+
+    async setUsageAndSideEffectsInput(usageAndSideEffects) {
+        await this.usageAndSideEffectsInput.sendKeys(usageAndSideEffects);
+    }
+
+    async getUsageAndSideEffectsInput() {
+        return this.usageAndSideEffectsInput.getAttribute('value');
+    }
+
+    async setSafetyWarnningInput(safetyWarnning) {
+        await this.safetyWarnningInput.sendKeys(safetyWarnning);
+    }
+
+    async getSafetyWarnningInput() {
+        return this.safetyWarnningInput.getAttribute('value');
+    }
+
+    async setWarrantyPeriodInput(warrantyPeriod) {
+        await this.warrantyPeriodInput.sendKeys(warrantyPeriod);
+    }
+
+    async getWarrantyPeriodInput() {
+        return this.warrantyPeriodInput.getAttribute('value');
+    }
+
+    async setWarrantyPolicyInput(warrantyPolicy) {
+        await this.warrantyPolicyInput.sendKeys(warrantyPolicy);
+    }
+
+    async getWarrantyPolicyInput() {
+        return this.warrantyPolicyInput.getAttribute('value');
+    }
+
+    async warrantyTypeSelectLastOption() {
+        await this.warrantyTypeSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async productSelectOption(option) {
-        await this.productSelect.sendKeys(option);
+    async warrantyTypeSelectOption(option) {
+        await this.warrantyTypeSelect.sendKeys(option);
     }
 
-    getProductSelect(): ElementFinder {
-        return this.productSelect;
+    getWarrantyTypeSelect(): ElementFinder {
+        return this.warrantyTypeSelect;
     }
 
-    async getProductSelectedOption() {
-        return this.productSelect.element(by.css('option:checked')).getText();
+    async getWarrantyTypeSelectedOption() {
+        return this.warrantyTypeSelect.element(by.css('option:checked')).getText();
     }
 
     async cultureSelectLastOption() {

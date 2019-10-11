@@ -1,0 +1,21 @@
+{
+    "resourceApp": {
+        "lastestMerchantUploadedDocument": {
+            "home": {
+                "title": "Lastest Merchant Uploaded Documents",
+                "createLabel": "Create a new Lastest Merchant Uploaded Document",
+                "createOrEditLabel": "Create or edit a Lastest Merchant Uploaded Document"
+            },
+            "created": "A new Lastest Merchant Uploaded Document is created with identifier {{ param }}",
+            "updated": "A Lastest Merchant Uploaded Document is updated with identifier {{ param }}",
+            "deleted": "A Lastest Merchant Uploaded Document is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Lastest Merchant Uploaded Document {{ id }}?"
+            },
+            "detail": {
+                "title": "Lastest Merchant Uploaded Document"
+            },
+            "productCreateTemplate": "Product Create Template"
+        }
+    }
+}

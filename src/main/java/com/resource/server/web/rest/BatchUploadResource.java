@@ -1,6 +1,12 @@
 package com.resource.server.web.rest;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.resource.server.domain.StockItemTemp;
+import com.resource.server.domain.UploadTransactions;
+import com.resource.server.service.BatchUploadService;
 import com.resource.server.service.ProductsService;
+import com.resource.server.service.dto.StockItemTempDTO;
+import com.resource.server.service.dto.UploadTransactionsDTO;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.service.dto.ProductsDTO;
 import com.opencsv.CSVReader;
@@ -18,14 +24,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * BatchUploadResource controller
@@ -39,12 +44,32 @@ public class BatchUploadResource {
     private static final String ENTITY_NAME = "products";
 
     private final ProductsService productsService;
+    private final BatchUploadService batchUploadService;
 
-    public BatchUploadResource(ProductsService productsService) {
+    public BatchUploadResource(ProductsService productsService, BatchUploadService batchUploadService) {
         this.productsService = productsService;
+        this.batchUploadService = batchUploadService;
     }
 
-    @CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080"})
+    @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080"})
+    @PostMapping("/excelupload")
+//    public String uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
+    public ResponseEntity uploadExcelFile(@RequestBody MultipartFile file) throws URISyntaxException {
+        log.debug("REST request to save Products : {}", file);
+        if (file == null) {
+            throw new BadRequestAlertException("No File to upload", ENTITY_NAME, "No File Exist");
+        }
+
+//        String _serverUrl = request.getRequestURL().toString().replace("/excelupload", "");
+        UploadTransactionsDTO uploadTransactionsDTO = batchUploadService.readDataFromExcel(file, "");
+
+//        redirectAttributes.addFlashAttribute("successmessage", "File Upload Sucessfully");
+
+        return ResponseEntity.ok()
+            .body(uploadTransactionsDTO);
+    }
+
+    @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080"})
     @PostMapping("/batchupload")
 //    public String uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
     public ResponseEntity<RedirectAttributes> uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
@@ -65,6 +90,16 @@ public class BatchUploadResource {
 //        return "redirect:/";
     }
 
+    @PostMapping("/importtosystem")
+    public ResponseEntity importToSystem(@RequestParam("id") Long id) throws URISyntaxException {
+
+//        List<StockItemsDTO> result = null;
+//        return ResponseEntity.created(new URI("/api/upload-transactions/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+//            .body(result);
+        batchUploadService.importToSystem(id);
+        return ResponseEntity.ok().body(null);
+    }
 
     private boolean saveDataFromUploadFile(MultipartFile file) {
         boolean isFlag = false;
@@ -91,6 +126,8 @@ public class BatchUploadResource {
         while (rows.hasNext()) {
             Row row = rows.next();
             ProductsDTO product = new ProductsDTO();
+
+
             if (row.getCell(0).getCellType() == Cell.CELL_TYPE_STRING) {
                 product.setProductName(row.getCell(0).getStringCellValue());
             }
@@ -156,7 +193,7 @@ public class BatchUploadResource {
 //                product.setTags(row[18]);
                 product.setSearchDetails(row[19]);
 //                product.setProductSubCategoryId(Long.valueOf(random.nextInt(1187-1151) + 1151));
-                product.setProductModelId(Long.valueOf(random.nextInt(1250-1201) + 1201));
+//                product.setProductModelId(Long.valueOf(random.nextInt(1250-1201) + 1201));
 //                product.setSellCount(Integer.parseInt(row[25]));
 //                product.setSellStartDate(LocalDate.now());
                 this.productsService.save(product);

@@ -15,7 +15,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="resourceApp.productSet.name">Name</span></th>
+            <th><span jhiTranslate="resourceApp.productSet.productSetName">Product Set Name</span></th>
             <th><span jhiTranslate="resourceApp.productSet.noOfPerson">No Of Person</span></th>
             <th><span jhiTranslate="resourceApp.productSet.isExclusive">Is Exclusive</span></th>
             <th></th>
@@ -24,7 +24,7 @@
             <tbody>
             <tr *ngFor="let productSet of productSets ;trackBy: trackId">
                 <td><a [routerLink]="['/product-set', productSet.id, 'view' ]">{{productSet.id}}</a></td>
-                <td>{{productSet.name}}</td>
+                <td>{{productSet.productSetName}}</td>
                 <td>{{productSet.noOfPerson}}</td>
                 <td>{{productSet.isExclusive}}</td>
                 <td class="text-right">

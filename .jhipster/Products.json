@@ -9,41 +9,36 @@
             ]
         },
         {
+            "fieldName": "handle",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "productNumber",
             "fieldType": "String"
         },
         {
             "fieldName": "searchDetails",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "thumbnailUrl",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "warrantyPeriod",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "warrantyPolicy",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "sellCount",
             "fieldType": "Integer"
         },
         {
-            "fieldName": "whatInTheBox",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "activeInd",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "productDocument",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "document",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "stockItems",
@@ -59,34 +54,6 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "merchants",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "merchant",
-            "otherEntityField": "merchantName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "packageTypes",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "unitPackage",
-            "otherEntityField": "packageTypeName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "packageTypes",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "outerPackage",
-            "otherEntityField": "packageTypeName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "productModel",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "productModel",
-            "otherEntityField": "productModelName"
-        },
-        {
-            "relationshipType": "many-to-one",
             "otherEntityName": "productCategory",
             "otherEntityRelationshipName": "products",
             "relationshipName": "productCategory",
@@ -98,13 +65,6 @@
             "otherEntityRelationshipName": "products",
             "relationshipName": "productBrand",
             "otherEntityField": "productBrandName"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "warrantyTypes",
-            "otherEntityRelationshipName": "products",
-            "relationshipName": "warrantyType",
-            "otherEntityField": "warrantyTypeName"
         }
     ],
     "changelogDate": "20190801044940",

@@ -3,6 +3,8 @@ import com.resource.server.service.SuppliersService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.service.dto.SuppliersDTO;
+import com.resource.server.service.dto.SuppliersCriteria;
+import com.resource.server.service.SuppliersQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +31,11 @@ public class SuppliersResource {
 
     private final SuppliersService suppliersService;
 
-    public SuppliersResource(SuppliersService suppliersService) {
+    private final SuppliersQueryService suppliersQueryService;
+
+    public SuppliersResource(SuppliersService suppliersService, SuppliersQueryService suppliersQueryService) {
         this.suppliersService = suppliersService;
+        this.suppliersQueryService = suppliersQueryService;
     }
 
     /**
@@ -76,12 +81,26 @@ public class SuppliersResource {
     /**
      * GET  /suppliers : get all the suppliers.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of suppliers in body
      */
     @GetMapping("/suppliers")
-    public List<SuppliersDTO> getAllSuppliers() {
-        log.debug("REST request to get all Suppliers");
-        return suppliersService.findAll();
+    public ResponseEntity<List<SuppliersDTO>> getAllSuppliers(SuppliersCriteria criteria) {
+        log.debug("REST request to get Suppliers by criteria: {}", criteria);
+        List<SuppliersDTO> entityList = suppliersQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /suppliers/count : count all the suppliers.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/suppliers/count")
+    public ResponseEntity<Long> countSuppliers(SuppliersCriteria criteria) {
+        log.debug("REST request to count Suppliers by criteria: {}", criteria);
+        return ResponseEntity.ok().body(suppliersQueryService.countByCriteria(criteria));
     }
 
     /**

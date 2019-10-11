@@ -30,6 +30,9 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "jhi_label")
+    private String label;
+
     @Lob
     @Column(name = "photo")
     private byte[] photo;
@@ -61,6 +64,19 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public ProductCategory label(String label) {
+        this.label = label;
+        return this;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public byte[] getPhoto() {
@@ -128,6 +144,7 @@ public class ProductCategory extends AbstractAuditingEntity implements Serializa
         return "ProductCategory{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", label='" + getLabel() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
             "}";

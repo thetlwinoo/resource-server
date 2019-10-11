@@ -1,5 +1,4 @@
 package com.resource.server.service.dto;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -11,21 +10,55 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
 
     private Long id;
 
-    
-    @Lob
-    private byte[] documentNode;
-
-    private String documentNodeContentType;
     private String videoUrl;
 
-    
     @Lob
     private String highlights;
 
+    @Lob
+    private byte[] longDescription;
 
-    private Long productId;
+    private String longDescriptionContentType;
+    @Lob
+    private String shortDescription;
 
-    private String productProductName;
+    @Lob
+    private String description;
+
+    @Lob
+    private String careInstructions;
+
+    private String productType;
+
+    private String modelName;
+
+    private String modelNumber;
+
+    private String fabricType;
+
+    @Lob
+    private String specialFeatures;
+
+    private String productComplianceCertificate;
+
+    private Boolean genuineAndLegal;
+
+    private String countryOfOrigin;
+
+    @Lob
+    private String usageAndSideEffects;
+
+    @Lob
+    private String safetyWarnning;
+
+    private String warrantyPeriod;
+
+    private String warrantyPolicy;
+
+
+    private Long warrantyTypeId;
+
+    private String warrantyTypeWarrantyTypeName;
 
     private Long cultureId;
 
@@ -37,22 +70,6 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public byte[] getDocumentNode() {
-        return documentNode;
-    }
-
-    public void setDocumentNode(byte[] documentNode) {
-        this.documentNode = documentNode;
-    }
-
-    public String getDocumentNodeContentType() {
-        return documentNodeContentType;
-    }
-
-    public void setDocumentNodeContentType(String documentNodeContentType) {
-        this.documentNodeContentType = documentNodeContentType;
     }
 
     public String getVideoUrl() {
@@ -71,20 +88,156 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
         this.highlights = highlights;
     }
 
-    public Long getProductId() {
-        return productId;
+    public byte[] getLongDescription() {
+        return longDescription;
     }
 
-    public void setProductId(Long productsId) {
-        this.productId = productsId;
+    public void setLongDescription(byte[] longDescription) {
+        this.longDescription = longDescription;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getLongDescriptionContentType() {
+        return longDescriptionContentType;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setLongDescriptionContentType(String longDescriptionContentType) {
+        this.longDescriptionContentType = longDescriptionContentType;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCareInstructions() {
+        return careInstructions;
+    }
+
+    public void setCareInstructions(String careInstructions) {
+        this.careInstructions = careInstructions;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
+
+    public String getFabricType() {
+        return fabricType;
+    }
+
+    public void setFabricType(String fabricType) {
+        this.fabricType = fabricType;
+    }
+
+    public String getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public String getProductComplianceCertificate() {
+        return productComplianceCertificate;
+    }
+
+    public void setProductComplianceCertificate(String productComplianceCertificate) {
+        this.productComplianceCertificate = productComplianceCertificate;
+    }
+
+    public Boolean isGenuineAndLegal() {
+        return genuineAndLegal;
+    }
+
+    public void setGenuineAndLegal(Boolean genuineAndLegal) {
+        this.genuineAndLegal = genuineAndLegal;
+    }
+
+    public String getCountryOfOrigin() {
+        return countryOfOrigin;
+    }
+
+    public void setCountryOfOrigin(String countryOfOrigin) {
+        this.countryOfOrigin = countryOfOrigin;
+    }
+
+    public String getUsageAndSideEffects() {
+        return usageAndSideEffects;
+    }
+
+    public void setUsageAndSideEffects(String usageAndSideEffects) {
+        this.usageAndSideEffects = usageAndSideEffects;
+    }
+
+    public String getSafetyWarnning() {
+        return safetyWarnning;
+    }
+
+    public void setSafetyWarnning(String safetyWarnning) {
+        this.safetyWarnning = safetyWarnning;
+    }
+
+    public String getWarrantyPeriod() {
+        return warrantyPeriod;
+    }
+
+    public void setWarrantyPeriod(String warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
+    }
+
+    public String getWarrantyPolicy() {
+        return warrantyPolicy;
+    }
+
+    public void setWarrantyPolicy(String warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
+    }
+
+    public Long getWarrantyTypeId() {
+        return warrantyTypeId;
+    }
+
+    public void setWarrantyTypeId(Long warrantyTypesId) {
+        this.warrantyTypeId = warrantyTypesId;
+    }
+
+    public String getWarrantyTypeWarrantyTypeName() {
+        return warrantyTypeWarrantyTypeName;
+    }
+
+    public void setWarrantyTypeWarrantyTypeName(String warrantyTypesWarrantyTypeName) {
+        this.warrantyTypeWarrantyTypeName = warrantyTypesWarrantyTypeName;
     }
 
     public Long getCultureId() {
@@ -128,11 +281,26 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
     public String toString() {
         return "ProductDocumentDTO{" +
             "id=" + getId() +
-            ", documentNode='" + getDocumentNode() + "'" +
             ", videoUrl='" + getVideoUrl() + "'" +
             ", highlights='" + getHighlights() + "'" +
-            ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", longDescription='" + getLongDescription() + "'" +
+            ", shortDescription='" + getShortDescription() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", careInstructions='" + getCareInstructions() + "'" +
+            ", productType='" + getProductType() + "'" +
+            ", modelName='" + getModelName() + "'" +
+            ", modelNumber='" + getModelNumber() + "'" +
+            ", fabricType='" + getFabricType() + "'" +
+            ", specialFeatures='" + getSpecialFeatures() + "'" +
+            ", productComplianceCertificate='" + getProductComplianceCertificate() + "'" +
+            ", genuineAndLegal='" + isGenuineAndLegal() + "'" +
+            ", countryOfOrigin='" + getCountryOfOrigin() + "'" +
+            ", usageAndSideEffects='" + getUsageAndSideEffects() + "'" +
+            ", safetyWarnning='" + getSafetyWarnning() + "'" +
+            ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
+            ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
+            ", warrantyType=" + getWarrantyTypeId() +
+            ", warrantyType='" + getWarrantyTypeWarrantyTypeName() + "'" +
             ", culture=" + getCultureId() +
             ", culture='" + getCultureCultureName() + "'" +
             "}";

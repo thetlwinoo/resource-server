@@ -11,7 +11,7 @@ public class ProductOptionSetDTO extends AbstractAuditingDTO implements Serializ
     private Long id;
 
     @NotNull
-    private String value;
+    private String productOptionSetValue;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class ProductOptionSetDTO extends AbstractAuditingDTO implements Serializ
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductOptionSetValue() {
+        return productOptionSetValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ProductOptionSetDTO extends AbstractAuditingDTO implements Serializ
     public String toString() {
         return "ProductOptionSetDTO{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productOptionSetValue='" + getProductOptionSetValue() + "'" +
             "}";
     }
 }

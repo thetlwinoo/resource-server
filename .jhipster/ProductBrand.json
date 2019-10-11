@@ -14,15 +14,7 @@
             "fieldTypeBlobContent": "image"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "merchants",
-            "otherEntityRelationshipName": "productBrand",
-            "relationshipName": "merchant",
-            "otherEntityField": "merchantName"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190912101609",
     "entityTableName": "product_brand",
     "dto": "mapstruct",

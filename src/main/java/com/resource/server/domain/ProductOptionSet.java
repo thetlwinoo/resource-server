@@ -26,8 +26,8 @@ public class ProductOptionSet extends AbstractAuditingEntity implements Serializ
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_value", nullable = false)
-    private String value;
+    @Column(name = "product_option_set_value", nullable = false)
+    private String productOptionSetValue;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -38,17 +38,17 @@ public class ProductOptionSet extends AbstractAuditingEntity implements Serializ
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductOptionSetValue() {
+        return productOptionSetValue;
     }
 
-    public ProductOptionSet value(String value) {
-        this.value = value;
+    public ProductOptionSet productOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -76,7 +76,7 @@ public class ProductOptionSet extends AbstractAuditingEntity implements Serializ
     public String toString() {
         return "ProductOptionSet{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productOptionSetValue='" + getProductOptionSetValue() + "'" +
             "}";
     }
 }

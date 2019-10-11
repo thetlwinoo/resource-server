@@ -92,6 +92,9 @@ public class ProductCategoryQueryService extends QueryService<ProductCategory> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), ProductCategory_.name));
             }
+            if (criteria.getLabel() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLabel(), ProductCategory_.label));
+            }
             if (criteria.getParentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getParentId(),
                     root -> root.join(ProductCategory_.parent, JoinType.LEFT).get(ProductCategory_.id)));

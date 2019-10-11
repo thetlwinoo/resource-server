@@ -9,6 +9,10 @@
                 <dd>
                     <span>{{products.productName}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.products.handle">Handle</span></dt>
+                <dd>
+                    <span>{{products.handle}}</span>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.products.productNumber">Product Number</span></dt>
                 <dd>
                     <span>{{products.productNumber}}</span>
@@ -17,54 +21,24 @@
                 <dd>
                     <span>{{products.searchDetails}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.thumbnailUrl">Thumbnail Url</span></dt>
-                <dd>
-                    <span>{{products.thumbnailUrl}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.warrantyPeriod">Warranty Period</span></dt>
-                <dd>
-                    <span>{{products.warrantyPeriod}}</span>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.warrantyPolicy">Warranty Policy</span></dt>
-                <dd>
-                    <span>{{products.warrantyPolicy}}</span>
-                </dd>
                 <dt><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span></dt>
                 <dd>
                     <span>{{products.sellCount}}</span>
                 </dd>
-                <dt><span jhiTranslate="resourceApp.products.whatInTheBox">What In The Box</span></dt>
+                <dt><span jhiTranslate="resourceApp.products.activeInd">Active Ind</span></dt>
                 <dd>
-                    <span>{{products.whatInTheBox}}</span>
+                    <span>{{products.activeInd}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.products.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="products.documentId">
+                        <a [routerLink]="['/product-document', products.documentId, 'view']">{{products.documentId}}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="products.supplierId">
                         <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierSupplierName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.merchant">Merchant</span></dt>
-                <dd>
-                    <div *ngIf="products.merchantId">
-                        <a [routerLink]="['/merchants', products.merchantId, 'view']">{{products.merchantMerchantName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span></dt>
-                <dd>
-                    <div *ngIf="products.unitPackageId">
-                        <a [routerLink]="['/package-types', products.unitPackageId, 'view']">{{products.unitPackagePackageTypeName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.outerPackage">Outer Package</span></dt>
-                <dd>
-                    <div *ngIf="products.outerPackageId">
-                        <a [routerLink]="['/package-types', products.outerPackageId, 'view']">{{products.outerPackagePackageTypeName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.productModel">Product Model</span></dt>
-                <dd>
-                    <div *ngIf="products.productModelId">
-                        <a [routerLink]="['/product-model', products.productModelId, 'view']">{{products.productModelProductModelName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.products.productCategory">Product Category</span></dt>
@@ -77,12 +51,6 @@
                 <dd>
                     <div *ngIf="products.productBrandId">
                         <a [routerLink]="['/product-brand', products.productBrandId, 'view']">{{products.productBrandProductBrandName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="resourceApp.products.warrantyType">Warranty Type</span></dt>
-                <dd>
-                    <div *ngIf="products.warrantyTypeId">
-                        <a [routerLink]="['/warranty-types', products.warrantyTypeId, 'view']">{{products.warrantyTypeWarrantyTypeName}}</a>
                     </div>
                 </dd>
             </dl>

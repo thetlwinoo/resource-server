@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Photos extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -116,7 +116,7 @@ public class Photos extends AbstractAuditingEntity implements Serializable {
     @Column(name = "delete_token", length = 1024)
     private String deleteToken;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("photoLists")
     private StockItems stockItem;
 

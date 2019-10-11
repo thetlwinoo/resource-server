@@ -15,18 +15,24 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="resourceApp.productOption.value">Value</span></th>
+            <th><span jhiTranslate="resourceApp.productOption.productOptionValue">Product Option Value</span></th>
             <th><span jhiTranslate="resourceApp.productOption.productOptionSet">Product Option Set</span></th>
+            <th><span jhiTranslate="resourceApp.productOption.supplier">Supplier</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let productOption of productOptions ;trackBy: trackId">
                 <td><a [routerLink]="['/product-option', productOption.id, 'view' ]">{{productOption.id}}</a></td>
-                <td>{{productOption.value}}</td>
+                <td>{{productOption.productOptionValue}}</td>
                 <td>
                     <div *ngIf="productOption.productOptionSetId">
-                        <a [routerLink]="['../product-option-set', productOption.productOptionSetId , 'view' ]" >{{productOption.productOptionSetValue}}</a>
+                        <a [routerLink]="['../product-option-set', productOption.productOptionSetId , 'view' ]" >{{productOption.productOptionSetProductOptionSetValue}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="productOption.supplierId">
+                        <a [routerLink]="['../suppliers', productOption.supplierId , 'view' ]" >{{productOption.supplierId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

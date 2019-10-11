@@ -73,11 +73,11 @@ class ReviewLinesGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "productRating":"0"
-                , "productReview":"SAMPLE_TEXT"
+                , "productReview":null
                 , "sellerRating":"0"
-                , "sellerReview":"SAMPLE_TEXT"
+                , "sellerReview":null
                 , "deliveryRating":"0"
-                , "deliveryReview":"SAMPLE_TEXT"
+                , "deliveryReview":null
                 , "photo":null
                 }""")).asJSON
             .check(status.is(201))

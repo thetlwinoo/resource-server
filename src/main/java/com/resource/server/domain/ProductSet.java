@@ -26,8 +26,8 @@ public class ProductSet extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "product_set_name", nullable = false)
+    private String productSetName;
 
     @NotNull
     @Column(name = "no_of_person", nullable = false)
@@ -45,17 +45,17 @@ public class ProductSet extends AbstractAuditingEntity implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductSetName() {
+        return productSetName;
     }
 
-    public ProductSet name(String name) {
-        this.name = name;
+    public ProductSet productSetName(String productSetName) {
+        this.productSetName = productSetName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductSetName(String productSetName) {
+        this.productSetName = productSetName;
     }
 
     public Integer getNoOfPerson() {
@@ -109,7 +109,7 @@ public class ProductSet extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "ProductSet{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", productSetName='" + getProductSetName() + "'" +
             ", noOfPerson=" + getNoOfPerson() +
             ", isExclusive='" + isIsExclusive() + "'" +
             "}";

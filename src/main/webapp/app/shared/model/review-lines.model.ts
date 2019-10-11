@@ -1,11 +1,11 @@
 export interface IReviewLines {
     id?: number;
     productRating?: number;
-    productReview?: string;
+    productReview?: any;
     sellerRating?: number;
-    sellerReview?: string;
+    sellerReview?: any;
     deliveryRating?: number;
-    deliveryReview?: string;
+    deliveryReview?: any;
     photoContentType?: string;
     photo?: any;
     stockItemId?: number;
@@ -16,11 +16,11 @@ export class ReviewLines implements IReviewLines {
     constructor(
         public id?: number,
         public productRating?: number,
-        public productReview?: string,
+        public productReview?: any,
         public sellerRating?: number,
-        public sellerReview?: string,
+        public sellerReview?: any,
         public deliveryRating?: number,
-        public deliveryReview?: string,
+        public deliveryReview?: any,
         public photoContentType?: string,
         public photo?: any,
         public stockItemId?: number,

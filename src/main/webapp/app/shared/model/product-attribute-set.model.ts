@@ -1,10 +1,15 @@
 export interface IProductAttributeSet {
     id?: number;
-    name?: string;
-    productOptionSetValue?: string;
+    productAttributeSetName?: string;
+    productOptionSetProductOptionSetValue?: string;
     productOptionSetId?: number;
 }
 
 export class ProductAttributeSet implements IProductAttributeSet {
-    constructor(public id?: number, public name?: string, public productOptionSetValue?: string, public productOptionSetId?: number) {}
+    constructor(
+        public id?: number,
+        public productAttributeSetName?: string,
+        public productOptionSetProductOptionSetValue?: string,
+        public productOptionSetId?: number
+    ) {}
 }

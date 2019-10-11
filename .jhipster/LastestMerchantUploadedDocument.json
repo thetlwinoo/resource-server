@@ -1,0 +1,21 @@
+{
+    "name": "LastestMerchantUploadedDocument",
+    "fields": [
+        {
+            "fieldName": "productCreateTemplate",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191007095705",
+    "entityTableName": "lastest_merchant_uploaded_document",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

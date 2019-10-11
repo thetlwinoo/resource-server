@@ -15,10 +15,25 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="resourceApp.productDocument.documentNode">Document Node</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.videoUrl">Video Url</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.highlights">Highlights</span></th>
-            <th><span jhiTranslate="resourceApp.productDocument.product">Product</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.longDescription">Long Description</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.shortDescription">Short Description</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.description">Description</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.careInstructions">Care Instructions</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.productType">Product Type</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.modelName">Model Name</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.modelNumber">Model Number</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.fabricType">Fabric Type</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.specialFeatures">Special Features</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.productComplianceCertificate">Product Compliance Certificate</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.genuineAndLegal">Genuine And Legal</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.countryOfOrigin">Country Of Origin</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.usageAndSideEffects">Usage And Side Effects</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.safetyWarnning">Safety Warnning</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.warrantyPeriod">Warranty Period</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.warrantyPolicy">Warranty Policy</span></th>
+            <th><span jhiTranslate="resourceApp.productDocument.warrantyType">Warranty Type</span></th>
             <th><span jhiTranslate="resourceApp.productDocument.culture">Culture</span></th>
             <th></th>
             </tr>
@@ -26,15 +41,30 @@
             <tbody>
             <tr *ngFor="let productDocument of productDocuments ;trackBy: trackId">
                 <td><a [routerLink]="['/product-document', productDocument.id, 'view' ]">{{productDocument.id}}</a></td>
-                <td>
-                    <a *ngIf="productDocument.documentNode" (click)="openFile(productDocument.documentNodeContentType, productDocument.documentNode)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="productDocument.documentNode">{{productDocument.documentNodeContentType}}, {{byteSize(productDocument.documentNode)}}</span>
-                </td>
                 <td>{{productDocument.videoUrl}}</td>
                 <td>{{productDocument.highlights}}</td>
                 <td>
-                    <div *ngIf="productDocument.productId">
-                        <a [routerLink]="['../products', productDocument.productId , 'view' ]" >{{productDocument.productProductName}}</a>
+                    <a *ngIf="productDocument.longDescription" (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="productDocument.longDescription">{{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}</span>
+                </td>
+                <td>{{productDocument.shortDescription}}</td>
+                <td>{{productDocument.description}}</td>
+                <td>{{productDocument.careInstructions}}</td>
+                <td>{{productDocument.productType}}</td>
+                <td>{{productDocument.modelName}}</td>
+                <td>{{productDocument.modelNumber}}</td>
+                <td>{{productDocument.fabricType}}</td>
+                <td>{{productDocument.specialFeatures}}</td>
+                <td>{{productDocument.productComplianceCertificate}}</td>
+                <td>{{productDocument.genuineAndLegal}}</td>
+                <td>{{productDocument.countryOfOrigin}}</td>
+                <td>{{productDocument.usageAndSideEffects}}</td>
+                <td>{{productDocument.safetyWarnning}}</td>
+                <td>{{productDocument.warrantyPeriod}}</td>
+                <td>{{productDocument.warrantyPolicy}}</td>
+                <td>
+                    <div *ngIf="productDocument.warrantyTypeId">
+                        <a [routerLink]="['../warranty-types', productDocument.warrantyTypeId , 'view' ]" >{{productDocument.warrantyTypeWarrantyTypeName}}</a>
                     </div>
                 </td>
                 <td>

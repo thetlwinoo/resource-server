@@ -16,22 +16,16 @@
                 "title": "Products"
             },
             "productName": "Product Name",
+            "handle": "Handle",
             "productNumber": "Product Number",
             "searchDetails": "Search Details",
-            "thumbnailUrl": "Thumbnail Url",
-            "warrantyPeriod": "Warranty Period",
-            "warrantyPolicy": "Warranty Policy",
             "sellCount": "Sell Count",
-            "whatInTheBox": "What In The Box",
+            "activeInd": "Active Ind",
+            "document": "Document",
             "stockItemList": "Stock Item List",
             "supplier": "Supplier",
-            "merchant": "Merchant",
-            "unitPackage": "Unit Package",
-            "outerPackage": "Outer Package",
-            "productModel": "Product Model",
             "productCategory": "Product Category",
-            "productBrand": "Product Brand",
-            "warrantyType": "Warranty Type"
+            "productBrand": "Product Brand"
         }
     }
 }

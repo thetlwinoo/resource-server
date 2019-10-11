@@ -11,7 +11,7 @@ public class ProductSetDTO extends AbstractAuditingDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String name;
+    private String productSetName;
 
     @NotNull
     private Integer noOfPerson;
@@ -27,12 +27,12 @@ public class ProductSetDTO extends AbstractAuditingDTO implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductSetName() {
+        return productSetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductSetName(String productSetName) {
+        this.productSetName = productSetName;
     }
 
     public Integer getNoOfPerson() {
@@ -76,7 +76,7 @@ public class ProductSetDTO extends AbstractAuditingDTO implements Serializable {
     public String toString() {
         return "ProductSetDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", productSetName='" + getProductSetName() + "'" +
             ", noOfPerson=" + getNoOfPerson() +
             ", isExclusive='" + isIsExclusive() + "'" +
             "}";

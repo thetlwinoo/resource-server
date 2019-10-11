@@ -25,7 +25,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="seller_sku" type="varchar(255)">
+            <column name="vendor_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vendor_sku" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -45,23 +49,51 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="quantity_per_outer" type="integer">
+            <column name="quantity_on_hand" type="integer">
                 <constraints nullable="false" />
             </column>
 
-            <column name="typical_weight_per_unit" type="${floatType}">
+            <column name="item_length" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="typical_length_per_unit" type="integer">
+            <column name="item_width" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="typical_width_per_unit" type="integer">
+            <column name="item_height" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="typical_height_per_unit" type="integer">
+            <column name="item_weight" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="item_package_length" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="item_package_width" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="item_package_height" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="item_package_weight" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="no_of_pieces" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="no_of_items" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="manufacture" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -92,22 +124,38 @@
             <column name="thumbnail_url" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
+            <column name="active_ind" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="stock_item_on_review_line_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_stock_items_stock_item_on_review_line_id" />
             </column>
-            <column name="length_unit_measure_code_id" type="bigint">
+            <column name="item_length_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="weight_unit_measure_code_id" type="bigint">
+            <column name="item_width_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="width_unit_measure_code_id" type="bigint">
+            <column name="item_height_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="height_unit_measure_code_id" type="bigint">
+            <column name="package_length_unit_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="package_width_unit_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="package_height_unit_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="item_package_weight_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -116,6 +164,18 @@
             </column>
 
             <column name="product_option_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="material_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="currency_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="barcode_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -129,7 +189,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190919022025-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20191010085253-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="stock_items">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

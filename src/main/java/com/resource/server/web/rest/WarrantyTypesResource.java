@@ -3,6 +3,8 @@ import com.resource.server.service.WarrantyTypesService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.service.dto.WarrantyTypesDTO;
+import com.resource.server.service.dto.WarrantyTypesCriteria;
+import com.resource.server.service.WarrantyTypesQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +31,11 @@ public class WarrantyTypesResource {
 
     private final WarrantyTypesService warrantyTypesService;
 
-    public WarrantyTypesResource(WarrantyTypesService warrantyTypesService) {
+    private final WarrantyTypesQueryService warrantyTypesQueryService;
+
+    public WarrantyTypesResource(WarrantyTypesService warrantyTypesService, WarrantyTypesQueryService warrantyTypesQueryService) {
         this.warrantyTypesService = warrantyTypesService;
+        this.warrantyTypesQueryService = warrantyTypesQueryService;
     }
 
     /**
@@ -76,12 +81,26 @@ public class WarrantyTypesResource {
     /**
      * GET  /warranty-types : get all the warrantyTypes.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of warrantyTypes in body
      */
     @GetMapping("/warranty-types")
-    public List<WarrantyTypesDTO> getAllWarrantyTypes() {
-        log.debug("REST request to get all WarrantyTypes");
-        return warrantyTypesService.findAll();
+    public ResponseEntity<List<WarrantyTypesDTO>> getAllWarrantyTypes(WarrantyTypesCriteria criteria) {
+        log.debug("REST request to get WarrantyTypes by criteria: {}", criteria);
+        List<WarrantyTypesDTO> entityList = warrantyTypesQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /warranty-types/count : count all the warrantyTypes.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/warranty-types/count")
+    public ResponseEntity<Long> countWarrantyTypes(WarrantyTypesCriteria criteria) {
+        log.debug("REST request to count WarrantyTypes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(warrantyTypesQueryService.countByCriteria(criteria));
     }
 
     /**

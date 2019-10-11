@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing ProductDocument.
@@ -62,6 +63,21 @@ public class ProductDocumentServiceImpl implements ProductDocumentService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
+
+    /**
+     *  get all the productDocuments where Product is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<ProductDocumentDTO> findAllWhereProductIsNull() {
+        log.debug("Request to get all productDocuments where Product is null");
+        return StreamSupport
+            .stream(productDocumentRepository.findAll().spliterator(), false)
+            .filter(productDocument -> productDocument.getProduct() == null)
+            .map(productDocumentMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get one productDocument by id.

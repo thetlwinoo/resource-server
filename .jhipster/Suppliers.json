@@ -59,6 +59,23 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "webServiceUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creditRating",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "activeFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "avatar",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
             "fieldName": "validFrom",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
@@ -122,7 +139,7 @@
     "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",

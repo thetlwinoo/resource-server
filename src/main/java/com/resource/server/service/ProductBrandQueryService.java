@@ -92,10 +92,6 @@ public class ProductBrandQueryService extends QueryService<ProductBrand> {
             if (criteria.getProductBrandName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getProductBrandName(), ProductBrand_.productBrandName));
             }
-            if (criteria.getMerchantId() != null) {
-                specification = specification.and(buildSpecification(criteria.getMerchantId(),
-                    root -> root.join(ProductBrand_.merchant, JoinType.LEFT).get(Merchants_.id)));
-            }
         }
         return specification;
     }

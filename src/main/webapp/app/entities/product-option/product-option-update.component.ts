@@ -8,6 +8,8 @@ import { IProductOption } from 'app/shared/model/product-option.model';
 import { ProductOptionService } from './product-option.service';
 import { IProductOptionSet } from 'app/shared/model/product-option-set.model';
 import { ProductOptionSetService } from 'app/entities/product-option-set';
+import { ISuppliers } from 'app/shared/model/suppliers.model';
+import { SuppliersService } from 'app/entities/suppliers';
 
 @Component({
     selector: 'jhi-product-option-update',
@@ -19,10 +21,13 @@ export class ProductOptionUpdateComponent implements OnInit {
 
     productoptionsets: IProductOptionSet[];
 
+    suppliers: ISuppliers[];
+
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected productOptionService: ProductOptionService,
         protected productOptionSetService: ProductOptionSetService,
+        protected suppliersService: SuppliersService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -38,6 +43,13 @@ export class ProductOptionUpdateComponent implements OnInit {
                 map((response: HttpResponse<IProductOptionSet[]>) => response.body)
             )
             .subscribe((res: IProductOptionSet[]) => (this.productoptionsets = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.suppliersService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ISuppliers[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ISuppliers[]>) => response.body)
+            )
+            .subscribe((res: ISuppliers[]) => (this.suppliers = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -71,6 +83,10 @@ export class ProductOptionUpdateComponent implements OnInit {
     }
 
     trackProductOptionSetById(index: number, item: IProductOptionSet) {
+        return item.id;
+    }
+
+    trackSuppliersById(index: number, item: ISuppliers) {
         return item.id;
     }
 }

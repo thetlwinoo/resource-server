@@ -20,11 +20,11 @@ public class ProductChoiceDTO extends AbstractAuditingDTO implements Serializabl
 
     private Long productAttributeSetId;
 
-    private String productAttributeSetName;
+    private String productAttributeSetProductAttributeSetName;
 
     private Long productOptionSetId;
 
-    private String productOptionSetValue;
+    private String productOptionSetProductOptionSetValue;
 
     public Long getId() {
         return id;
@@ -66,12 +66,12 @@ public class ProductChoiceDTO extends AbstractAuditingDTO implements Serializabl
         this.productAttributeSetId = productAttributeSetId;
     }
 
-    public String getProductAttributeSetName() {
-        return productAttributeSetName;
+    public String getProductAttributeSetProductAttributeSetName() {
+        return productAttributeSetProductAttributeSetName;
     }
 
-    public void setProductAttributeSetName(String productAttributeSetName) {
-        this.productAttributeSetName = productAttributeSetName;
+    public void setProductAttributeSetProductAttributeSetName(String productAttributeSetProductAttributeSetName) {
+        this.productAttributeSetProductAttributeSetName = productAttributeSetProductAttributeSetName;
     }
 
     public Long getProductOptionSetId() {
@@ -82,12 +82,12 @@ public class ProductChoiceDTO extends AbstractAuditingDTO implements Serializabl
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetValue() {
-        return productOptionSetValue;
+    public String getProductOptionSetProductOptionSetValue() {
+        return productOptionSetProductOptionSetValue;
     }
 
-    public void setProductOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
+        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
     }
 
     @Override
@@ -119,9 +119,9 @@ public class ProductChoiceDTO extends AbstractAuditingDTO implements Serializabl
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", productAttributeSet=" + getProductAttributeSetId() +
-            ", productAttributeSet='" + getProductAttributeSetName() + "'" +
+            ", productAttributeSet='" + getProductAttributeSetProductAttributeSetName() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
             "}";
     }
 }

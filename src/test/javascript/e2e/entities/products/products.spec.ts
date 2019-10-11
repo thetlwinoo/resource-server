@@ -41,30 +41,28 @@ describe('Products e2e test', () => {
         await productsComponentsPage.clickOnCreateButton();
         await promise.all([
             productsUpdatePage.setProductNameInput('productName'),
+            productsUpdatePage.setHandleInput('handle'),
             productsUpdatePage.setProductNumberInput('productNumber'),
             productsUpdatePage.setSearchDetailsInput('searchDetails'),
-            productsUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
-            productsUpdatePage.setWarrantyPeriodInput('warrantyPeriod'),
-            productsUpdatePage.setWarrantyPolicyInput('warrantyPolicy'),
             productsUpdatePage.setSellCountInput('5'),
-            productsUpdatePage.setWhatInTheBoxInput('whatInTheBox'),
+            productsUpdatePage.documentSelectLastOption(),
             productsUpdatePage.supplierSelectLastOption(),
-            productsUpdatePage.merchantSelectLastOption(),
-            productsUpdatePage.unitPackageSelectLastOption(),
-            productsUpdatePage.outerPackageSelectLastOption(),
-            productsUpdatePage.productModelSelectLastOption(),
             productsUpdatePage.productCategorySelectLastOption(),
-            productsUpdatePage.productBrandSelectLastOption(),
-            productsUpdatePage.warrantyTypeSelectLastOption()
+            productsUpdatePage.productBrandSelectLastOption()
         ]);
         expect(await productsUpdatePage.getProductNameInput()).to.eq('productName');
+        expect(await productsUpdatePage.getHandleInput()).to.eq('handle');
         expect(await productsUpdatePage.getProductNumberInput()).to.eq('productNumber');
         expect(await productsUpdatePage.getSearchDetailsInput()).to.eq('searchDetails');
-        expect(await productsUpdatePage.getThumbnailUrlInput()).to.eq('thumbnailUrl');
-        expect(await productsUpdatePage.getWarrantyPeriodInput()).to.eq('warrantyPeriod');
-        expect(await productsUpdatePage.getWarrantyPolicyInput()).to.eq('warrantyPolicy');
         expect(await productsUpdatePage.getSellCountInput()).to.eq('5');
-        expect(await productsUpdatePage.getWhatInTheBoxInput()).to.eq('whatInTheBox');
+        const selectedActiveInd = productsUpdatePage.getActiveIndInput();
+        if (await selectedActiveInd.isSelected()) {
+            await productsUpdatePage.getActiveIndInput().click();
+            expect(await productsUpdatePage.getActiveIndInput().isSelected()).to.be.false;
+        } else {
+            await productsUpdatePage.getActiveIndInput().click();
+            expect(await productsUpdatePage.getActiveIndInput().isSelected()).to.be.true;
+        }
         await productsUpdatePage.save();
         expect(await productsUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -29,18 +29,21 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
     @Column(name = "product_rating")
     private Integer productRating;
 
+    @Lob
     @Column(name = "product_review")
     private String productReview;
 
     @Column(name = "seller_rating")
     private Integer sellerRating;
 
+    @Lob
     @Column(name = "seller_review")
     private String sellerReview;
 
     @Column(name = "delivery_rating")
     private Integer deliveryRating;
 
+    @Lob
     @Column(name = "delivery_review")
     private String deliveryReview;
 
@@ -55,7 +58,7 @@ public class ReviewLines extends AbstractAuditingEntity implements Serializable 
     @JsonIgnore
     private StockItems stockItem;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("reviewLineLists")
     private Reviews review;
 

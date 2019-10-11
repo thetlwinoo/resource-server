@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Product Option Set"
             },
-            "value": "Value"
+            "productOptionSetValue": "Product Option Set Value"
         }
     }
 }

@@ -26,6 +26,8 @@ public class ProductCategoryCriteria implements Serializable {
 
     private StringFilter name;
 
+    private StringFilter label;
+
     private LongFilter parentId;
 
     public LongFilter getId() {
@@ -42,6 +44,14 @@ public class ProductCategoryCriteria implements Serializable {
 
     public void setName(StringFilter name) {
         this.name = name;
+    }
+
+    public StringFilter getLabel() {
+        return label;
+    }
+
+    public void setLabel(StringFilter label) {
+        this.label = label;
     }
 
     public LongFilter getParentId() {
@@ -65,6 +75,7 @@ public class ProductCategoryCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
+            Objects.equals(label, that.label) &&
             Objects.equals(parentId, that.parentId);
     }
 
@@ -73,6 +84,7 @@ public class ProductCategoryCriteria implements Serializable {
         return Objects.hash(
         id,
         name,
+        label,
         parentId
         );
     }
@@ -82,6 +94,7 @@ public class ProductCategoryCriteria implements Serializable {
         return "ProductCategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (label != null ? "label=" + label + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
             "}";
     }

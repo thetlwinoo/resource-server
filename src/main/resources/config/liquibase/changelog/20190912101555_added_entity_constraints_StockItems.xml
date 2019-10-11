@@ -14,27 +14,45 @@
                                  referencedColumnNames="id"
                                  referencedTableName="review_lines"/>
 
-        <addForeignKeyConstraint baseColumnNames="length_unit_measure_code_id"
+        <addForeignKeyConstraint baseColumnNames="item_length_unit_id"
                                  baseTableName="stock_items"
-                                 constraintName="fk_stock_items_length_unit_measure_code_id"
+                                 constraintName="fk_stock_items_item_length_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="unit_measure"/>
 
-        <addForeignKeyConstraint baseColumnNames="weight_unit_measure_code_id"
+        <addForeignKeyConstraint baseColumnNames="item_width_unit_id"
                                  baseTableName="stock_items"
-                                 constraintName="fk_stock_items_weight_unit_measure_code_id"
+                                 constraintName="fk_stock_items_item_width_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="unit_measure"/>
 
-        <addForeignKeyConstraint baseColumnNames="width_unit_measure_code_id"
+        <addForeignKeyConstraint baseColumnNames="item_height_unit_id"
                                  baseTableName="stock_items"
-                                 constraintName="fk_stock_items_width_unit_measure_code_id"
+                                 constraintName="fk_stock_items_item_height_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="unit_measure"/>
 
-        <addForeignKeyConstraint baseColumnNames="height_unit_measure_code_id"
+        <addForeignKeyConstraint baseColumnNames="package_length_unit_id"
                                  baseTableName="stock_items"
-                                 constraintName="fk_stock_items_height_unit_measure_code_id"
+                                 constraintName="fk_stock_items_package_length_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="package_width_unit_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_package_width_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="package_height_unit_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_package_height_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="item_package_weight_unit_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_item_package_weight_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="unit_measure"/>
 
@@ -49,6 +67,24 @@
                                  constraintName="fk_stock_items_product_option_id"
                                  referencedColumnNames="id"
                                  referencedTableName="product_option"/>
+
+        <addForeignKeyConstraint baseColumnNames="material_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_material_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="materials"/>
+
+        <addForeignKeyConstraint baseColumnNames="currency_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_currency_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="currency"/>
+
+        <addForeignKeyConstraint baseColumnNames="barcode_type_id"
+                                 baseTableName="stock_items"
+                                 constraintName="fk_stock_items_barcode_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="barcode_types"/>
 
         <addForeignKeyConstraint baseColumnNames="product_id"
                                  baseTableName="stock_items"

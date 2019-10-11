@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Suppliers entity.
@@ -38,6 +39,16 @@ public class SuppliersDTO extends AbstractAuditingDTO implements Serializable {
 
     private String websiteURL;
 
+    private String webServiceUrl;
+
+    private Integer creditRating;
+
+    private Boolean activeFlag;
+
+    @Lob
+    private byte[] avatar;
+
+    private String avatarContentType;
     @NotNull
     private LocalDate validFrom;
 
@@ -171,6 +182,46 @@ public class SuppliersDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setWebsiteURL(String websiteURL) {
         this.websiteURL = websiteURL;
+    }
+
+    public String getWebServiceUrl() {
+        return webServiceUrl;
+    }
+
+    public void setWebServiceUrl(String webServiceUrl) {
+        this.webServiceUrl = webServiceUrl;
+    }
+
+    public Integer getCreditRating() {
+        return creditRating;
+    }
+
+    public void setCreditRating(Integer creditRating) {
+        this.creditRating = creditRating;
+    }
+
+    public Boolean isActiveFlag() {
+        return activeFlag;
+    }
+
+    public void setActiveFlag(Boolean activeFlag) {
+        this.activeFlag = activeFlag;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
     }
 
     public LocalDate getValidFrom() {
@@ -322,6 +373,10 @@ public class SuppliersDTO extends AbstractAuditingDTO implements Serializable {
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", faxNumber='" + getFaxNumber() + "'" +
             ", websiteURL='" + getWebsiteURL() + "'" +
+            ", webServiceUrl='" + getWebServiceUrl() + "'" +
+            ", creditRating=" + getCreditRating() +
+            ", activeFlag='" + isActiveFlag() + "'" +
+            ", avatar='" + getAvatar() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", primaryContactPerson=" + getPrimaryContactPersonId() +

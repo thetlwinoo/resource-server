@@ -6,10 +6,12 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IProductDocument } from 'app/shared/model/product-document.model';
 import { ProductDocumentService } from './product-document.service';
-import { IProducts } from 'app/shared/model/products.model';
-import { ProductsService } from 'app/entities/products';
+import { IWarrantyTypes } from 'app/shared/model/warranty-types.model';
+import { WarrantyTypesService } from 'app/entities/warranty-types';
 import { ICulture } from 'app/shared/model/culture.model';
 import { CultureService } from 'app/entities/culture';
+import { IProducts } from 'app/shared/model/products.model';
+import { ProductsService } from 'app/entities/products';
 
 @Component({
     selector: 'jhi-product-document-update',
@@ -19,16 +21,19 @@ export class ProductDocumentUpdateComponent implements OnInit {
     productDocument: IProductDocument;
     isSaving: boolean;
 
-    products: IProducts[];
+    warrantytypes: IWarrantyTypes[];
 
     cultures: ICulture[];
+
+    products: IProducts[];
 
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected productDocumentService: ProductDocumentService,
-        protected productsService: ProductsService,
+        protected warrantyTypesService: WarrantyTypesService,
         protected cultureService: CultureService,
+        protected productsService: ProductsService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,13 +42,13 @@ export class ProductDocumentUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ productDocument }) => {
             this.productDocument = productDocument;
         });
-        this.productsService
+        this.warrantyTypesService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProducts[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IWarrantyTypes[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IWarrantyTypes[]>) => response.body)
             )
-            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: IWarrantyTypes[]) => (this.warrantytypes = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.cultureService
             .query()
             .pipe(
@@ -51,6 +56,13 @@ export class ProductDocumentUpdateComponent implements OnInit {
                 map((response: HttpResponse<ICulture[]>) => response.body)
             )
             .subscribe((res: ICulture[]) => (this.cultures = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.productsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProducts[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProducts[]>) => response.body)
+            )
+            .subscribe((res: IProducts[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -95,11 +107,15 @@ export class ProductDocumentUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductsById(index: number, item: IProducts) {
+    trackWarrantyTypesById(index: number, item: IWarrantyTypes) {
         return item.id;
     }
 
     trackCultureById(index: number, item: ICulture) {
+        return item.id;
+    }
+
+    trackProductsById(index: number, item: IProducts) {
         return item.id;
     }
 }

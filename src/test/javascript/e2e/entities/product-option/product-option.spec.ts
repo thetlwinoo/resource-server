@@ -39,8 +39,12 @@ describe('ProductOption e2e test', () => {
         const nbButtonsBeforeCreate = await productOptionComponentsPage.countDeleteButtons();
 
         await productOptionComponentsPage.clickOnCreateButton();
-        await promise.all([productOptionUpdatePage.setValueInput('value'), productOptionUpdatePage.productOptionSetSelectLastOption()]);
-        expect(await productOptionUpdatePage.getValueInput()).to.eq('value');
+        await promise.all([
+            productOptionUpdatePage.setProductOptionValueInput('productOptionValue'),
+            productOptionUpdatePage.productOptionSetSelectLastOption(),
+            productOptionUpdatePage.supplierSelectLastOption()
+        ]);
+        expect(await productOptionUpdatePage.getProductOptionValueInput()).to.eq('productOptionValue');
         await productOptionUpdatePage.save();
         expect(await productOptionUpdatePage.getSaveButton().isPresent()).to.be.false;
 

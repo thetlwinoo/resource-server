@@ -76,9 +76,9 @@ class ReviewsGatlingTest extends Simulation {
                 , "emailAddress":"SAMPLE_TEXT"
                 , "reviewDate":"2020-01-01T00:00:00.000Z"
                 , "overAllSellerRating":"0"
-                , "overAllSellerReview":"SAMPLE_TEXT"
+                , "overAllSellerReview":null
                 , "overAllDeliveryRating":"0"
-                , "overAllDeliveryReview":"SAMPLE_TEXT"
+                , "overAllDeliveryReview":null
                 , "reviewAsAnonymous":null
                 , "completedReview":null
                 }""")).asJSON

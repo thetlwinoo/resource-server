@@ -2,7 +2,7 @@
     "name": "ProductAttribute",
     "fields": [
         {
-            "fieldName": "value",
+            "fieldName": "productAttributeValue",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -15,7 +15,14 @@
             "otherEntityName": "productAttributeSet",
             "otherEntityRelationshipName": "productAttribute",
             "relationshipName": "productAttributeSet",
-            "otherEntityField": "name"
+            "otherEntityField": "productAttributeSetName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "suppliers",
+            "otherEntityRelationshipName": "productAttribute",
+            "relationshipName": "supplier",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190912101559",
@@ -23,7 +30,7 @@
     "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",

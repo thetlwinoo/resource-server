@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductOptionSetResourceIntTest {
 
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_PRODUCT_OPTION_SET_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_OPTION_SET_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductOptionSetRepository productOptionSetRepository;
@@ -94,7 +94,7 @@ public class ProductOptionSetResourceIntTest {
      */
     public static ProductOptionSet createEntity(EntityManager em) {
         ProductOptionSet productOptionSet = new ProductOptionSet()
-            .value(DEFAULT_VALUE);
+            .productOptionSetValue(DEFAULT_PRODUCT_OPTION_SET_VALUE);
         return productOptionSet;
     }
 
@@ -119,7 +119,7 @@ public class ProductOptionSetResourceIntTest {
         List<ProductOptionSet> productOptionSetList = productOptionSetRepository.findAll();
         assertThat(productOptionSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductOptionSet testProductOptionSet = productOptionSetList.get(productOptionSetList.size() - 1);
-        assertThat(testProductOptionSet.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testProductOptionSet.getProductOptionSetValue()).isEqualTo(DEFAULT_PRODUCT_OPTION_SET_VALUE);
     }
 
     @Test
@@ -144,10 +144,10 @@ public class ProductOptionSetResourceIntTest {
 
     @Test
     @Transactional
-    public void checkValueIsRequired() throws Exception {
+    public void checkProductOptionSetValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productOptionSetRepository.findAll().size();
         // set the field null
-        productOptionSet.setValue(null);
+        productOptionSet.setProductOptionSetValue(null);
 
         // Create the ProductOptionSet, which fails.
         ProductOptionSetDTO productOptionSetDTO = productOptionSetMapper.toDto(productOptionSet);
@@ -172,7 +172,7 @@ public class ProductOptionSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOptionSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())));
+            .andExpect(jsonPath("$.[*].productOptionSetValue").value(hasItem(DEFAULT_PRODUCT_OPTION_SET_VALUE.toString())));
     }
     
     @Test
@@ -186,7 +186,7 @@ public class ProductOptionSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productOptionSet.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()));
+            .andExpect(jsonPath("$.productOptionSetValue").value(DEFAULT_PRODUCT_OPTION_SET_VALUE.toString()));
     }
 
     @Test
@@ -210,7 +210,7 @@ public class ProductOptionSetResourceIntTest {
         // Disconnect from session so that the updates on updatedProductOptionSet are not directly saved in db
         em.detach(updatedProductOptionSet);
         updatedProductOptionSet
-            .value(UPDATED_VALUE);
+            .productOptionSetValue(UPDATED_PRODUCT_OPTION_SET_VALUE);
         ProductOptionSetDTO productOptionSetDTO = productOptionSetMapper.toDto(updatedProductOptionSet);
 
         restProductOptionSetMockMvc.perform(put("/api/product-option-sets")
@@ -222,7 +222,7 @@ public class ProductOptionSetResourceIntTest {
         List<ProductOptionSet> productOptionSetList = productOptionSetRepository.findAll();
         assertThat(productOptionSetList).hasSize(databaseSizeBeforeUpdate);
         ProductOptionSet testProductOptionSet = productOptionSetList.get(productOptionSetList.size() - 1);
-        assertThat(testProductOptionSet.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testProductOptionSet.getProductOptionSetValue()).isEqualTo(UPDATED_PRODUCT_OPTION_SET_VALUE);
     }
 
     @Test

@@ -22,14 +22,14 @@
             "otherEntityName": "productAttributeSet",
             "otherEntityRelationshipName": "productChoice",
             "relationshipName": "productAttributeSet",
-            "otherEntityField": "name"
+            "otherEntityField": "productAttributeSetName"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productOptionSet",
             "otherEntityRelationshipName": "productChoice",
             "relationshipName": "productOptionSet",
-            "otherEntityField": "value"
+            "otherEntityField": "productOptionSetValue"
         }
     ],
     "changelogDate": "20190912101603",
@@ -37,7 +37,7 @@
     "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",

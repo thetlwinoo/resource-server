@@ -14,6 +14,8 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
     @NotNull
     private String name;
 
+    private String label;
+
     @Lob
     private byte[] photo;
 
@@ -37,6 +39,14 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public byte[] getPhoto() {
@@ -97,6 +107,7 @@ public class ProductCategoryDTO extends AbstractAuditingDTO implements Serializa
         return "ProductCategoryDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", label='" + getLabel() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", parent=" + getParentId() +
             ", parent='" + getParentName() + "'" +

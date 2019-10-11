@@ -16,21 +16,15 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productName"><span jhiTranslate="resourceApp.products.productName">Product Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="handle"><span jhiTranslate="resourceApp.products.handle">Handle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productNumber"><span jhiTranslate="resourceApp.products.productNumber">Product Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="searchDetails"><span jhiTranslate="resourceApp.products.searchDetails">Search Details</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="thumbnailUrl"><span jhiTranslate="resourceApp.products.thumbnailUrl">Thumbnail Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="warrantyPeriod"><span jhiTranslate="resourceApp.products.warrantyPeriod">Warranty Period</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="warrantyPolicy"><span jhiTranslate="resourceApp.products.warrantyPolicy">Warranty Policy</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sellCount"><span jhiTranslate="resourceApp.products.sellCount">Sell Count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="whatInTheBox"><span jhiTranslate="resourceApp.products.whatInTheBox">What In The Box</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activeInd"><span jhiTranslate="resourceApp.products.activeInd">Active Ind</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="documentId"><span jhiTranslate="resourceApp.products.document">Document</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="supplierSupplierName"><span jhiTranslate="resourceApp.products.supplier">Supplier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="merchantMerchantName"><span jhiTranslate="resourceApp.products.merchant">Merchant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="unitPackagePackageTypeName"><span jhiTranslate="resourceApp.products.unitPackage">Unit Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="outerPackagePackageTypeName"><span jhiTranslate="resourceApp.products.outerPackage">Outer Package</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="productModelProductModelName"><span jhiTranslate="resourceApp.products.productModel">Product Model</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productCategoryName"><span jhiTranslate="resourceApp.products.productCategory">Product Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productBrandProductBrandName"><span jhiTranslate="resourceApp.products.productBrand">Product Brand</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="warrantyTypeWarrantyTypeName"><span jhiTranslate="resourceApp.products.warrantyType">Warranty Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -38,36 +32,19 @@
             <tr *ngFor="let products of products ;trackBy: trackId">
                 <td><a [routerLink]="['/products', products.id, 'view' ]">{{products.id}}</a></td>
                 <td>{{products.productName}}</td>
+                <td>{{products.handle}}</td>
                 <td>{{products.productNumber}}</td>
                 <td>{{products.searchDetails}}</td>
-                <td>{{products.thumbnailUrl}}</td>
-                <td>{{products.warrantyPeriod}}</td>
-                <td>{{products.warrantyPolicy}}</td>
                 <td>{{products.sellCount}}</td>
-                <td>{{products.whatInTheBox}}</td>
+                <td>{{products.activeInd}}</td>
+                <td>
+                    <div *ngIf="products.documentId">
+                        <a [routerLink]="['../product-document', products.documentId , 'view' ]" >{{products.documentId}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="products.supplierId">
                         <a [routerLink]="['../suppliers', products.supplierId , 'view' ]" >{{products.supplierSupplierName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="products.merchantId">
-                        <a [routerLink]="['../merchants', products.merchantId , 'view' ]" >{{products.merchantMerchantName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="products.unitPackageId">
-                        <a [routerLink]="['../package-types', products.unitPackageId , 'view' ]" >{{products.unitPackagePackageTypeName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="products.outerPackageId">
-                        <a [routerLink]="['../package-types', products.outerPackageId , 'view' ]" >{{products.outerPackagePackageTypeName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="products.productModelId">
-                        <a [routerLink]="['../product-model', products.productModelId , 'view' ]" >{{products.productModelProductModelName}}</a>
                     </div>
                 </td>
                 <td>
@@ -78,11 +55,6 @@
                 <td>
                     <div *ngIf="products.productBrandId">
                         <a [routerLink]="['../product-brand', products.productBrandId , 'view' ]" >{{products.productBrandProductBrandName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="products.warrantyTypeId">
-                        <a [routerLink]="['../warranty-types', products.warrantyTypeId , 'view' ]" >{{products.warrantyTypeWarrantyTypeName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

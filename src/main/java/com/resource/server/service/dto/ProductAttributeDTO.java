@@ -11,12 +11,14 @@ public class ProductAttributeDTO extends AbstractAuditingDTO implements Serializ
     private Long id;
 
     @NotNull
-    private String value;
+    private String productAttributeValue;
 
 
     private Long productAttributeSetId;
 
-    private String productAttributeSetName;
+    private String productAttributeSetProductAttributeSetName;
+
+    private Long supplierId;
 
     public Long getId() {
         return id;
@@ -26,12 +28,12 @@ public class ProductAttributeDTO extends AbstractAuditingDTO implements Serializ
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductAttributeValue() {
+        return productAttributeValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductAttributeValue(String productAttributeValue) {
+        this.productAttributeValue = productAttributeValue;
     }
 
     public Long getProductAttributeSetId() {
@@ -42,12 +44,20 @@ public class ProductAttributeDTO extends AbstractAuditingDTO implements Serializ
         this.productAttributeSetId = productAttributeSetId;
     }
 
-    public String getProductAttributeSetName() {
-        return productAttributeSetName;
+    public String getProductAttributeSetProductAttributeSetName() {
+        return productAttributeSetProductAttributeSetName;
     }
 
-    public void setProductAttributeSetName(String productAttributeSetName) {
-        this.productAttributeSetName = productAttributeSetName;
+    public void setProductAttributeSetProductAttributeSetName(String productAttributeSetProductAttributeSetName) {
+        this.productAttributeSetProductAttributeSetName = productAttributeSetProductAttributeSetName;
+    }
+
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Long suppliersId) {
+        this.supplierId = suppliersId;
     }
 
     @Override
@@ -75,9 +85,10 @@ public class ProductAttributeDTO extends AbstractAuditingDTO implements Serializ
     public String toString() {
         return "ProductAttributeDTO{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productAttributeValue='" + getProductAttributeValue() + "'" +
             ", productAttributeSet=" + getProductAttributeSetId() +
-            ", productAttributeSet='" + getProductAttributeSetName() + "'" +
+            ", productAttributeSet='" + getProductAttributeSetProductAttributeSetName() + "'" +
+            ", supplier=" + getSupplierId() +
             "}";
     }
 }

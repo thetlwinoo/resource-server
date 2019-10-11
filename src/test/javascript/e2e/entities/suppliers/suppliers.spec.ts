@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { SuppliersComponentsPage, SuppliersDeleteDialog, SuppliersUpdatePage } from './suppliers.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('Suppliers e2e test', () => {
     let suppliersUpdatePage: SuppliersUpdatePage;
     let suppliersComponentsPage: SuppliersComponentsPage;
     let suppliersDeleteDialog: SuppliersDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -52,6 +56,9 @@ describe('Suppliers e2e test', () => {
             suppliersUpdatePage.setPhoneNumberInput('phoneNumber'),
             suppliersUpdatePage.setFaxNumberInput('faxNumber'),
             suppliersUpdatePage.setWebsiteURLInput('websiteURL'),
+            suppliersUpdatePage.setWebServiceUrlInput('webServiceUrl'),
+            suppliersUpdatePage.setCreditRatingInput('5'),
+            suppliersUpdatePage.setAvatarInput(absolutePath),
             suppliersUpdatePage.setValidFromInput('2000-12-31'),
             suppliersUpdatePage.setValidToInput('2000-12-31'),
             suppliersUpdatePage.primaryContactPersonSelectLastOption(),
@@ -73,6 +80,17 @@ describe('Suppliers e2e test', () => {
         expect(await suppliersUpdatePage.getPhoneNumberInput()).to.eq('phoneNumber');
         expect(await suppliersUpdatePage.getFaxNumberInput()).to.eq('faxNumber');
         expect(await suppliersUpdatePage.getWebsiteURLInput()).to.eq('websiteURL');
+        expect(await suppliersUpdatePage.getWebServiceUrlInput()).to.eq('webServiceUrl');
+        expect(await suppliersUpdatePage.getCreditRatingInput()).to.eq('5');
+        const selectedActiveFlag = suppliersUpdatePage.getActiveFlagInput();
+        if (await selectedActiveFlag.isSelected()) {
+            await suppliersUpdatePage.getActiveFlagInput().click();
+            expect(await suppliersUpdatePage.getActiveFlagInput().isSelected()).to.be.false;
+        } else {
+            await suppliersUpdatePage.getActiveFlagInput().click();
+            expect(await suppliersUpdatePage.getActiveFlagInput().isSelected()).to.be.true;
+        }
+        expect(await suppliersUpdatePage.getAvatarInput()).to.endsWith(fileNameToUpload);
         expect(await suppliersUpdatePage.getValidFromInput()).to.eq('2000-12-31');
         expect(await suppliersUpdatePage.getValidToInput()).to.eq('2000-12-31');
         await suppliersUpdatePage.save();

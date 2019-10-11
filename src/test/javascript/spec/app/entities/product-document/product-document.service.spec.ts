@@ -21,7 +21,28 @@ describe('Service Tests', () => {
             service = injector.get(ProductDocumentService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new ProductDocument(0, 'image/png', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new ProductDocument(
+                0,
+                'AAAAAAA',
+                'AAAAAAA',
+                'image/png',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                false,
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA',
+                'AAAAAAA'
+            );
         });
 
         describe('Service methods', async () => {
@@ -55,9 +76,24 @@ describe('Service Tests', () => {
             it('should update a ProductDocument', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        documentNode: 'BBBBBB',
                         videoUrl: 'BBBBBB',
-                        highlights: 'BBBBBB'
+                        highlights: 'BBBBBB',
+                        longDescription: 'BBBBBB',
+                        shortDescription: 'BBBBBB',
+                        description: 'BBBBBB',
+                        careInstructions: 'BBBBBB',
+                        productType: 'BBBBBB',
+                        modelName: 'BBBBBB',
+                        modelNumber: 'BBBBBB',
+                        fabricType: 'BBBBBB',
+                        specialFeatures: 'BBBBBB',
+                        productComplianceCertificate: 'BBBBBB',
+                        genuineAndLegal: true,
+                        countryOfOrigin: 'BBBBBB',
+                        usageAndSideEffects: 'BBBBBB',
+                        safetyWarnning: 'BBBBBB',
+                        warrantyPeriod: 'BBBBBB',
+                        warrantyPolicy: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -74,9 +110,24 @@ describe('Service Tests', () => {
             it('should return a list of ProductDocument', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        documentNode: 'BBBBBB',
                         videoUrl: 'BBBBBB',
-                        highlights: 'BBBBBB'
+                        highlights: 'BBBBBB',
+                        longDescription: 'BBBBBB',
+                        shortDescription: 'BBBBBB',
+                        description: 'BBBBBB',
+                        careInstructions: 'BBBBBB',
+                        productType: 'BBBBBB',
+                        modelName: 'BBBBBB',
+                        modelNumber: 'BBBBBB',
+                        fabricType: 'BBBBBB',
+                        specialFeatures: 'BBBBBB',
+                        productComplianceCertificate: 'BBBBBB',
+                        genuineAndLegal: true,
+                        countryOfOrigin: 'BBBBBB',
+                        usageAndSideEffects: 'BBBBBB',
+                        safetyWarnning: 'BBBBBB',
+                        warrantyPeriod: 'BBBBBB',
+                        warrantyPolicy: 'BBBBBB'
                     },
                     elemDefault
                 );

@@ -7,9 +7,9 @@ export interface IReviews {
     emailAddress?: string;
     reviewDate?: Moment;
     overAllSellerRating?: number;
-    overAllSellerReview?: string;
+    overAllSellerReview?: any;
     overAllDeliveryRating?: number;
-    overAllDeliveryReview?: string;
+    overAllDeliveryReview?: any;
     reviewAsAnonymous?: boolean;
     completedReview?: boolean;
     reviewLineLists?: IReviewLines[];
@@ -23,9 +23,9 @@ export class Reviews implements IReviews {
         public emailAddress?: string,
         public reviewDate?: Moment,
         public overAllSellerRating?: number,
-        public overAllSellerReview?: string,
+        public overAllSellerReview?: any,
         public overAllDeliveryRating?: number,
-        public overAllDeliveryReview?: string,
+        public overAllDeliveryReview?: any,
         public reviewAsAnonymous?: boolean,
         public completedReview?: boolean,
         public reviewLineLists?: IReviewLines[],

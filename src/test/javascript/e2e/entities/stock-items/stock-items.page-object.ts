@@ -27,16 +27,24 @@ export class StockItemsUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     stockItemNameInput = element(by.id('field_stockItemName'));
-    sellerSKUInput = element(by.id('field_sellerSKU'));
+    vendorCodeInput = element(by.id('field_vendorCode'));
+    vendorSKUInput = element(by.id('field_vendorSKU'));
     generatedSKUInput = element(by.id('field_generatedSKU'));
     barcodeInput = element(by.id('field_barcode'));
     unitPriceInput = element(by.id('field_unitPrice'));
     recommendedRetailPriceInput = element(by.id('field_recommendedRetailPrice'));
-    quantityPerOuterInput = element(by.id('field_quantityPerOuter'));
-    typicalWeightPerUnitInput = element(by.id('field_typicalWeightPerUnit'));
-    typicalLengthPerUnitInput = element(by.id('field_typicalLengthPerUnit'));
-    typicalWidthPerUnitInput = element(by.id('field_typicalWidthPerUnit'));
-    typicalHeightPerUnitInput = element(by.id('field_typicalHeightPerUnit'));
+    quantityOnHandInput = element(by.id('field_quantityOnHand'));
+    itemLengthInput = element(by.id('field_itemLength'));
+    itemWidthInput = element(by.id('field_itemWidth'));
+    itemHeightInput = element(by.id('field_itemHeight'));
+    itemWeightInput = element(by.id('field_itemWeight'));
+    itemPackageLengthInput = element(by.id('field_itemPackageLength'));
+    itemPackageWidthInput = element(by.id('field_itemPackageWidth'));
+    itemPackageHeightInput = element(by.id('field_itemPackageHeight'));
+    itemPackageWeightInput = element(by.id('field_itemPackageWeight'));
+    noOfPiecesInput = element(by.id('field_noOfPieces'));
+    noOfItemsInput = element(by.id('field_noOfItems'));
+    manufactureInput = element(by.id('field_manufacture'));
     marketingCommentsInput = element(by.id('field_marketingComments'));
     internalCommentsInput = element(by.id('field_internalComments'));
     sellStartDateInput = element(by.id('field_sellStartDate'));
@@ -44,13 +52,20 @@ export class StockItemsUpdatePage {
     sellCountInput = element(by.id('field_sellCount'));
     customFieldsInput = element(by.id('field_customFields'));
     thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
+    activeIndInput = element(by.id('field_activeInd'));
     stockItemOnReviewLineSelect = element(by.id('field_stockItemOnReviewLine'));
-    lengthUnitMeasureCodeSelect = element(by.id('field_lengthUnitMeasureCode'));
-    weightUnitMeasureCodeSelect = element(by.id('field_weightUnitMeasureCode'));
-    widthUnitMeasureCodeSelect = element(by.id('field_widthUnitMeasureCode'));
-    heightUnitMeasureCodeSelect = element(by.id('field_heightUnitMeasureCode'));
+    itemLengthUnitSelect = element(by.id('field_itemLengthUnit'));
+    itemWidthUnitSelect = element(by.id('field_itemWidthUnit'));
+    itemHeightUnitSelect = element(by.id('field_itemHeightUnit'));
+    packageLengthUnitSelect = element(by.id('field_packageLengthUnit'));
+    packageWidthUnitSelect = element(by.id('field_packageWidthUnit'));
+    packageHeightUnitSelect = element(by.id('field_packageHeightUnit'));
+    itemPackageWeightUnitSelect = element(by.id('field_itemPackageWeightUnit'));
     productAttributeSelect = element(by.id('field_productAttribute'));
     productOptionSelect = element(by.id('field_productOption'));
+    materialSelect = element(by.id('field_material'));
+    currencySelect = element(by.id('field_currency'));
+    barcodeTypeSelect = element(by.id('field_barcodeType'));
     productSelect = element(by.id('field_product'));
 
     async getPageTitle() {
@@ -65,12 +80,20 @@ export class StockItemsUpdatePage {
         return this.stockItemNameInput.getAttribute('value');
     }
 
-    async setSellerSKUInput(sellerSKU) {
-        await this.sellerSKUInput.sendKeys(sellerSKU);
+    async setVendorCodeInput(vendorCode) {
+        await this.vendorCodeInput.sendKeys(vendorCode);
     }
 
-    async getSellerSKUInput() {
-        return this.sellerSKUInput.getAttribute('value');
+    async getVendorCodeInput() {
+        return this.vendorCodeInput.getAttribute('value');
+    }
+
+    async setVendorSKUInput(vendorSKU) {
+        await this.vendorSKUInput.sendKeys(vendorSKU);
+    }
+
+    async getVendorSKUInput() {
+        return this.vendorSKUInput.getAttribute('value');
     }
 
     async setGeneratedSKUInput(generatedSKU) {
@@ -105,44 +128,100 @@ export class StockItemsUpdatePage {
         return this.recommendedRetailPriceInput.getAttribute('value');
     }
 
-    async setQuantityPerOuterInput(quantityPerOuter) {
-        await this.quantityPerOuterInput.sendKeys(quantityPerOuter);
+    async setQuantityOnHandInput(quantityOnHand) {
+        await this.quantityOnHandInput.sendKeys(quantityOnHand);
     }
 
-    async getQuantityPerOuterInput() {
-        return this.quantityPerOuterInput.getAttribute('value');
+    async getQuantityOnHandInput() {
+        return this.quantityOnHandInput.getAttribute('value');
     }
 
-    async setTypicalWeightPerUnitInput(typicalWeightPerUnit) {
-        await this.typicalWeightPerUnitInput.sendKeys(typicalWeightPerUnit);
+    async setItemLengthInput(itemLength) {
+        await this.itemLengthInput.sendKeys(itemLength);
     }
 
-    async getTypicalWeightPerUnitInput() {
-        return this.typicalWeightPerUnitInput.getAttribute('value');
+    async getItemLengthInput() {
+        return this.itemLengthInput.getAttribute('value');
     }
 
-    async setTypicalLengthPerUnitInput(typicalLengthPerUnit) {
-        await this.typicalLengthPerUnitInput.sendKeys(typicalLengthPerUnit);
+    async setItemWidthInput(itemWidth) {
+        await this.itemWidthInput.sendKeys(itemWidth);
     }
 
-    async getTypicalLengthPerUnitInput() {
-        return this.typicalLengthPerUnitInput.getAttribute('value');
+    async getItemWidthInput() {
+        return this.itemWidthInput.getAttribute('value');
     }
 
-    async setTypicalWidthPerUnitInput(typicalWidthPerUnit) {
-        await this.typicalWidthPerUnitInput.sendKeys(typicalWidthPerUnit);
+    async setItemHeightInput(itemHeight) {
+        await this.itemHeightInput.sendKeys(itemHeight);
     }
 
-    async getTypicalWidthPerUnitInput() {
-        return this.typicalWidthPerUnitInput.getAttribute('value');
+    async getItemHeightInput() {
+        return this.itemHeightInput.getAttribute('value');
     }
 
-    async setTypicalHeightPerUnitInput(typicalHeightPerUnit) {
-        await this.typicalHeightPerUnitInput.sendKeys(typicalHeightPerUnit);
+    async setItemWeightInput(itemWeight) {
+        await this.itemWeightInput.sendKeys(itemWeight);
     }
 
-    async getTypicalHeightPerUnitInput() {
-        return this.typicalHeightPerUnitInput.getAttribute('value');
+    async getItemWeightInput() {
+        return this.itemWeightInput.getAttribute('value');
+    }
+
+    async setItemPackageLengthInput(itemPackageLength) {
+        await this.itemPackageLengthInput.sendKeys(itemPackageLength);
+    }
+
+    async getItemPackageLengthInput() {
+        return this.itemPackageLengthInput.getAttribute('value');
+    }
+
+    async setItemPackageWidthInput(itemPackageWidth) {
+        await this.itemPackageWidthInput.sendKeys(itemPackageWidth);
+    }
+
+    async getItemPackageWidthInput() {
+        return this.itemPackageWidthInput.getAttribute('value');
+    }
+
+    async setItemPackageHeightInput(itemPackageHeight) {
+        await this.itemPackageHeightInput.sendKeys(itemPackageHeight);
+    }
+
+    async getItemPackageHeightInput() {
+        return this.itemPackageHeightInput.getAttribute('value');
+    }
+
+    async setItemPackageWeightInput(itemPackageWeight) {
+        await this.itemPackageWeightInput.sendKeys(itemPackageWeight);
+    }
+
+    async getItemPackageWeightInput() {
+        return this.itemPackageWeightInput.getAttribute('value');
+    }
+
+    async setNoOfPiecesInput(noOfPieces) {
+        await this.noOfPiecesInput.sendKeys(noOfPieces);
+    }
+
+    async getNoOfPiecesInput() {
+        return this.noOfPiecesInput.getAttribute('value');
+    }
+
+    async setNoOfItemsInput(noOfItems) {
+        await this.noOfItemsInput.sendKeys(noOfItems);
+    }
+
+    async getNoOfItemsInput() {
+        return this.noOfItemsInput.getAttribute('value');
+    }
+
+    async setManufactureInput(manufacture) {
+        await this.manufactureInput.sendKeys(manufacture);
+    }
+
+    async getManufactureInput() {
+        return this.manufactureInput.getAttribute('value');
     }
 
     async setMarketingCommentsInput(marketingComments) {
@@ -201,6 +280,10 @@ export class StockItemsUpdatePage {
         return this.thumbnailUrlInput.getAttribute('value');
     }
 
+    getActiveIndInput() {
+        return this.activeIndInput;
+    }
+
     async stockItemOnReviewLineSelectLastOption() {
         await this.stockItemOnReviewLineSelect
             .all(by.tagName('option'))
@@ -220,80 +303,137 @@ export class StockItemsUpdatePage {
         return this.stockItemOnReviewLineSelect.element(by.css('option:checked')).getText();
     }
 
-    async lengthUnitMeasureCodeSelectLastOption() {
-        await this.lengthUnitMeasureCodeSelect
+    async itemLengthUnitSelectLastOption() {
+        await this.itemLengthUnitSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async lengthUnitMeasureCodeSelectOption(option) {
-        await this.lengthUnitMeasureCodeSelect.sendKeys(option);
+    async itemLengthUnitSelectOption(option) {
+        await this.itemLengthUnitSelect.sendKeys(option);
     }
 
-    getLengthUnitMeasureCodeSelect(): ElementFinder {
-        return this.lengthUnitMeasureCodeSelect;
+    getItemLengthUnitSelect(): ElementFinder {
+        return this.itemLengthUnitSelect;
     }
 
-    async getLengthUnitMeasureCodeSelectedOption() {
-        return this.lengthUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
+    async getItemLengthUnitSelectedOption() {
+        return this.itemLengthUnitSelect.element(by.css('option:checked')).getText();
     }
 
-    async weightUnitMeasureCodeSelectLastOption() {
-        await this.weightUnitMeasureCodeSelect
+    async itemWidthUnitSelectLastOption() {
+        await this.itemWidthUnitSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async weightUnitMeasureCodeSelectOption(option) {
-        await this.weightUnitMeasureCodeSelect.sendKeys(option);
+    async itemWidthUnitSelectOption(option) {
+        await this.itemWidthUnitSelect.sendKeys(option);
     }
 
-    getWeightUnitMeasureCodeSelect(): ElementFinder {
-        return this.weightUnitMeasureCodeSelect;
+    getItemWidthUnitSelect(): ElementFinder {
+        return this.itemWidthUnitSelect;
     }
 
-    async getWeightUnitMeasureCodeSelectedOption() {
-        return this.weightUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
+    async getItemWidthUnitSelectedOption() {
+        return this.itemWidthUnitSelect.element(by.css('option:checked')).getText();
     }
 
-    async widthUnitMeasureCodeSelectLastOption() {
-        await this.widthUnitMeasureCodeSelect
+    async itemHeightUnitSelectLastOption() {
+        await this.itemHeightUnitSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async widthUnitMeasureCodeSelectOption(option) {
-        await this.widthUnitMeasureCodeSelect.sendKeys(option);
+    async itemHeightUnitSelectOption(option) {
+        await this.itemHeightUnitSelect.sendKeys(option);
     }
 
-    getWidthUnitMeasureCodeSelect(): ElementFinder {
-        return this.widthUnitMeasureCodeSelect;
+    getItemHeightUnitSelect(): ElementFinder {
+        return this.itemHeightUnitSelect;
     }
 
-    async getWidthUnitMeasureCodeSelectedOption() {
-        return this.widthUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
+    async getItemHeightUnitSelectedOption() {
+        return this.itemHeightUnitSelect.element(by.css('option:checked')).getText();
     }
 
-    async heightUnitMeasureCodeSelectLastOption() {
-        await this.heightUnitMeasureCodeSelect
+    async packageLengthUnitSelectLastOption() {
+        await this.packageLengthUnitSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async heightUnitMeasureCodeSelectOption(option) {
-        await this.heightUnitMeasureCodeSelect.sendKeys(option);
+    async packageLengthUnitSelectOption(option) {
+        await this.packageLengthUnitSelect.sendKeys(option);
     }
 
-    getHeightUnitMeasureCodeSelect(): ElementFinder {
-        return this.heightUnitMeasureCodeSelect;
+    getPackageLengthUnitSelect(): ElementFinder {
+        return this.packageLengthUnitSelect;
     }
 
-    async getHeightUnitMeasureCodeSelectedOption() {
-        return this.heightUnitMeasureCodeSelect.element(by.css('option:checked')).getText();
+    async getPackageLengthUnitSelectedOption() {
+        return this.packageLengthUnitSelect.element(by.css('option:checked')).getText();
+    }
+
+    async packageWidthUnitSelectLastOption() {
+        await this.packageWidthUnitSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async packageWidthUnitSelectOption(option) {
+        await this.packageWidthUnitSelect.sendKeys(option);
+    }
+
+    getPackageWidthUnitSelect(): ElementFinder {
+        return this.packageWidthUnitSelect;
+    }
+
+    async getPackageWidthUnitSelectedOption() {
+        return this.packageWidthUnitSelect.element(by.css('option:checked')).getText();
+    }
+
+    async packageHeightUnitSelectLastOption() {
+        await this.packageHeightUnitSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async packageHeightUnitSelectOption(option) {
+        await this.packageHeightUnitSelect.sendKeys(option);
+    }
+
+    getPackageHeightUnitSelect(): ElementFinder {
+        return this.packageHeightUnitSelect;
+    }
+
+    async getPackageHeightUnitSelectedOption() {
+        return this.packageHeightUnitSelect.element(by.css('option:checked')).getText();
+    }
+
+    async itemPackageWeightUnitSelectLastOption() {
+        await this.itemPackageWeightUnitSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async itemPackageWeightUnitSelectOption(option) {
+        await this.itemPackageWeightUnitSelect.sendKeys(option);
+    }
+
+    getItemPackageWeightUnitSelect(): ElementFinder {
+        return this.itemPackageWeightUnitSelect;
+    }
+
+    async getItemPackageWeightUnitSelectedOption() {
+        return this.itemPackageWeightUnitSelect.element(by.css('option:checked')).getText();
     }
 
     async productAttributeSelectLastOption() {
@@ -332,6 +472,63 @@ export class StockItemsUpdatePage {
 
     async getProductOptionSelectedOption() {
         return this.productOptionSelect.element(by.css('option:checked')).getText();
+    }
+
+    async materialSelectLastOption() {
+        await this.materialSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async materialSelectOption(option) {
+        await this.materialSelect.sendKeys(option);
+    }
+
+    getMaterialSelect(): ElementFinder {
+        return this.materialSelect;
+    }
+
+    async getMaterialSelectedOption() {
+        return this.materialSelect.element(by.css('option:checked')).getText();
+    }
+
+    async currencySelectLastOption() {
+        await this.currencySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async currencySelectOption(option) {
+        await this.currencySelect.sendKeys(option);
+    }
+
+    getCurrencySelect(): ElementFinder {
+        return this.currencySelect;
+    }
+
+    async getCurrencySelectedOption() {
+        return this.currencySelect.element(by.css('option:checked')).getText();
+    }
+
+    async barcodeTypeSelectLastOption() {
+        await this.barcodeTypeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async barcodeTypeSelectOption(option) {
+        await this.barcodeTypeSelect.sendKeys(option);
+    }
+
+    getBarcodeTypeSelect(): ElementFinder {
+        return this.barcodeTypeSelect;
+    }
+
+    async getBarcodeTypeSelectedOption() {
+        return this.barcodeTypeSelect.element(by.css('option:checked')).getText();
     }
 
     async productSelectLastOption() {

@@ -1,0 +1,21 @@
+{
+    "resourceApp": {
+        "lastestMerchantUploadedDocument": {
+            "home": {
+                "title": "Lastest Merchant Uploaded Documents",
+                "createLabel": "Lastest Merchant Uploaded Document အသစ်ထည့်မည်",
+                "createOrEditLabel": "Lastest Merchant Uploaded Document အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း"
+            },
+            "created": "{{ param }} အိုင်ဒီဖြင့် Lastest Merchant Uploaded Document အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+            "updated": "{{ param }} အိုင်ဒီဖြင့် Lastest Merchant Uploaded Document တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+            "deleted": "{{ param }} အိုင်ဒီဖြင့် Lastest Merchant Uploaded Document တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+            "delete": {
+                "question": "Lastest Merchant Uploaded Document {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+            },
+            "detail": {
+                "title": "Lastest Merchant Uploaded Document"
+            },
+            "productCreateTemplate": "Product Create Template"
+        }
+    }
+}

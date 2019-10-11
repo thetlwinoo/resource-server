@@ -19,7 +19,8 @@
         },
         {
             "fieldName": "overAllSellerReview",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "overAllDeliveryRating",
@@ -27,7 +28,8 @@
         },
         {
             "fieldName": "overAllDeliveryReview",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "reviewAsAnonymous",

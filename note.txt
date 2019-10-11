@@ -37,6 +37,8 @@ domain>
 	>>
 
 
+	UploadTransactions>>
+	StockItemTemps>>
 
 	Reviews
 	@OneToOne(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)

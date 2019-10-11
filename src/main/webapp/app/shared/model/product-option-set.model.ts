@@ -1,8 +1,8 @@
 export interface IProductOptionSet {
     id?: number;
-    value?: string;
+    productOptionSetValue?: string;
 }
 
 export class ProductOptionSet implements IProductOptionSet {
-    constructor(public id?: number, public value?: string) {}
+    constructor(public id?: number, public productOptionSetValue?: string) {}
 }

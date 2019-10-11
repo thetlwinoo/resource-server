@@ -11,12 +11,14 @@ public class ProductOptionDTO extends AbstractAuditingDTO implements Serializabl
     private Long id;
 
     @NotNull
-    private String value;
+    private String productOptionValue;
 
 
     private Long productOptionSetId;
 
-    private String productOptionSetValue;
+    private String productOptionSetProductOptionSetValue;
+
+    private Long supplierId;
 
     public Long getId() {
         return id;
@@ -26,12 +28,12 @@ public class ProductOptionDTO extends AbstractAuditingDTO implements Serializabl
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductOptionValue() {
+        return productOptionValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductOptionValue(String productOptionValue) {
+        this.productOptionValue = productOptionValue;
     }
 
     public Long getProductOptionSetId() {
@@ -42,12 +44,20 @@ public class ProductOptionDTO extends AbstractAuditingDTO implements Serializabl
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetValue() {
-        return productOptionSetValue;
+    public String getProductOptionSetProductOptionSetValue() {
+        return productOptionSetProductOptionSetValue;
     }
 
-    public void setProductOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
+        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
+    }
+
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Long suppliersId) {
+        this.supplierId = suppliersId;
     }
 
     @Override
@@ -75,9 +85,10 @@ public class ProductOptionDTO extends AbstractAuditingDTO implements Serializabl
     public String toString() {
         return "ProductOptionDTO{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productOptionValue='" + getProductOptionValue() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
+            ", supplier=" + getSupplierId() +
             "}";
     }
 }

@@ -27,8 +27,8 @@ public class ProductAttributeSet extends AbstractAuditingEntity implements Seria
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "product_attribute_set_name", nullable = false)
+    private String productAttributeSetName;
 
     @ManyToOne
     @JsonIgnoreProperties("productAttributeSets")
@@ -43,17 +43,17 @@ public class ProductAttributeSet extends AbstractAuditingEntity implements Seria
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductAttributeSetName() {
+        return productAttributeSetName;
     }
 
-    public ProductAttributeSet name(String name) {
-        this.name = name;
+    public ProductAttributeSet productAttributeSetName(String productAttributeSetName) {
+        this.productAttributeSetName = productAttributeSetName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductAttributeSetName(String productAttributeSetName) {
+        this.productAttributeSetName = productAttributeSetName;
     }
 
     public ProductOptionSet getProductOptionSet() {
@@ -94,7 +94,7 @@ public class ProductAttributeSet extends AbstractAuditingEntity implements Seria
     public String toString() {
         return "ProductAttributeSet{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", productAttributeSetName='" + getProductAttributeSetName() + "'" +
             "}";
     }
 }

@@ -14,7 +14,9 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
     @NotNull
     private String stockItemName;
 
-    private String sellerSKU;
+    private String vendorCode;
+
+    private String vendorSKU;
 
     private String generatedSKU;
 
@@ -26,15 +28,29 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
     private Float recommendedRetailPrice;
 
     @NotNull
-    private Integer quantityPerOuter;
+    private Integer quantityOnHand;
 
-    private Float typicalWeightPerUnit;
+    private Integer itemLength;
 
-    private Integer typicalLengthPerUnit;
+    private Integer itemWidth;
 
-    private Integer typicalWidthPerUnit;
+    private Integer itemHeight;
 
-    private Integer typicalHeightPerUnit;
+    private Float itemWeight;
+
+    private Integer itemPackageLength;
+
+    private Integer itemPackageWidth;
+
+    private Integer itemPackageHeight;
+
+    private Float itemPackageWeight;
+
+    private Integer noOfPieces;
+
+    private Integer noOfItems;
+
+    private String manufacture;
 
     private String marketingComments;
 
@@ -50,32 +66,58 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
 
     private String thumbnailUrl;
 
+    private Boolean activeInd;
+
 
     private Long stockItemOnReviewLineId;
 
-    private Long lengthUnitMeasureCodeId;
+    private Long itemLengthUnitId;
 
-    private String lengthUnitMeasureCodeUnitMeasureCode;
+    private String itemLengthUnitUnitMeasureCode;
 
-    private Long weightUnitMeasureCodeId;
+    private Long itemWidthUnitId;
 
-    private String weightUnitMeasureCodeUnitMeasureCode;
+    private String itemWidthUnitUnitMeasureCode;
 
-    private Long widthUnitMeasureCodeId;
+    private Long itemHeightUnitId;
 
-    private String widthUnitMeasureCodeUnitMeasureCode;
+    private String itemHeightUnitUnitMeasureCode;
 
-    private Long heightUnitMeasureCodeId;
+    private Long packageLengthUnitId;
 
-    private String heightUnitMeasureCodeUnitMeasureCode;
+    private String packageLengthUnitUnitMeasureCode;
+
+    private Long packageWidthUnitId;
+
+    private String packageWidthUnitUnitMeasureCode;
+
+    private Long packageHeightUnitId;
+
+    private String packageHeightUnitUnitMeasureCode;
+
+    private Long itemPackageWeightUnitId;
+
+    private String itemPackageWeightUnitUnitMeasureCode;
 
     private Long productAttributeId;
 
-    private String productAttributeValue;
+    private String productAttributeProductAttributeValue;
 
     private Long productOptionId;
 
-    private String productOptionValue;
+    private String productOptionProductOptionValue;
+
+    private Long materialId;
+
+    private String materialMaterialName;
+
+    private Long currencyId;
+
+    private String currencyCurrencyCode;
+
+    private Long barcodeTypeId;
+
+    private String barcodeTypeBarcodeTypeName;
 
     private Long productId;
 
@@ -95,12 +137,20 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.stockItemName = stockItemName;
     }
 
-    public String getSellerSKU() {
-        return sellerSKU;
+    public String getVendorCode() {
+        return vendorCode;
     }
 
-    public void setSellerSKU(String sellerSKU) {
-        this.sellerSKU = sellerSKU;
+    public void setVendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
+    }
+
+    public String getVendorSKU() {
+        return vendorSKU;
+    }
+
+    public void setVendorSKU(String vendorSKU) {
+        this.vendorSKU = vendorSKU;
     }
 
     public String getGeneratedSKU() {
@@ -135,44 +185,100 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.recommendedRetailPrice = recommendedRetailPrice;
     }
 
-    public Integer getQuantityPerOuter() {
-        return quantityPerOuter;
+    public Integer getQuantityOnHand() {
+        return quantityOnHand;
     }
 
-    public void setQuantityPerOuter(Integer quantityPerOuter) {
-        this.quantityPerOuter = quantityPerOuter;
+    public void setQuantityOnHand(Integer quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
     }
 
-    public Float getTypicalWeightPerUnit() {
-        return typicalWeightPerUnit;
+    public Integer getItemLength() {
+        return itemLength;
     }
 
-    public void setTypicalWeightPerUnit(Float typicalWeightPerUnit) {
-        this.typicalWeightPerUnit = typicalWeightPerUnit;
+    public void setItemLength(Integer itemLength) {
+        this.itemLength = itemLength;
     }
 
-    public Integer getTypicalLengthPerUnit() {
-        return typicalLengthPerUnit;
+    public Integer getItemWidth() {
+        return itemWidth;
     }
 
-    public void setTypicalLengthPerUnit(Integer typicalLengthPerUnit) {
-        this.typicalLengthPerUnit = typicalLengthPerUnit;
+    public void setItemWidth(Integer itemWidth) {
+        this.itemWidth = itemWidth;
     }
 
-    public Integer getTypicalWidthPerUnit() {
-        return typicalWidthPerUnit;
+    public Integer getItemHeight() {
+        return itemHeight;
     }
 
-    public void setTypicalWidthPerUnit(Integer typicalWidthPerUnit) {
-        this.typicalWidthPerUnit = typicalWidthPerUnit;
+    public void setItemHeight(Integer itemHeight) {
+        this.itemHeight = itemHeight;
     }
 
-    public Integer getTypicalHeightPerUnit() {
-        return typicalHeightPerUnit;
+    public Float getItemWeight() {
+        return itemWeight;
     }
 
-    public void setTypicalHeightPerUnit(Integer typicalHeightPerUnit) {
-        this.typicalHeightPerUnit = typicalHeightPerUnit;
+    public void setItemWeight(Float itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public Integer getItemPackageLength() {
+        return itemPackageLength;
+    }
+
+    public void setItemPackageLength(Integer itemPackageLength) {
+        this.itemPackageLength = itemPackageLength;
+    }
+
+    public Integer getItemPackageWidth() {
+        return itemPackageWidth;
+    }
+
+    public void setItemPackageWidth(Integer itemPackageWidth) {
+        this.itemPackageWidth = itemPackageWidth;
+    }
+
+    public Integer getItemPackageHeight() {
+        return itemPackageHeight;
+    }
+
+    public void setItemPackageHeight(Integer itemPackageHeight) {
+        this.itemPackageHeight = itemPackageHeight;
+    }
+
+    public Float getItemPackageWeight() {
+        return itemPackageWeight;
+    }
+
+    public void setItemPackageWeight(Float itemPackageWeight) {
+        this.itemPackageWeight = itemPackageWeight;
+    }
+
+    public Integer getNoOfPieces() {
+        return noOfPieces;
+    }
+
+    public void setNoOfPieces(Integer noOfPieces) {
+        this.noOfPieces = noOfPieces;
+    }
+
+    public Integer getNoOfItems() {
+        return noOfItems;
+    }
+
+    public void setNoOfItems(Integer noOfItems) {
+        this.noOfItems = noOfItems;
+    }
+
+    public String getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
 
     public String getMarketingComments() {
@@ -231,6 +337,14 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    public Boolean isActiveInd() {
+        return activeInd;
+    }
+
+    public void setActiveInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+    }
+
     public Long getStockItemOnReviewLineId() {
         return stockItemOnReviewLineId;
     }
@@ -239,68 +353,116 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.stockItemOnReviewLineId = reviewLinesId;
     }
 
-    public Long getLengthUnitMeasureCodeId() {
-        return lengthUnitMeasureCodeId;
+    public Long getItemLengthUnitId() {
+        return itemLengthUnitId;
     }
 
-    public void setLengthUnitMeasureCodeId(Long unitMeasureId) {
-        this.lengthUnitMeasureCodeId = unitMeasureId;
+    public void setItemLengthUnitId(Long unitMeasureId) {
+        this.itemLengthUnitId = unitMeasureId;
     }
 
-    public String getLengthUnitMeasureCodeUnitMeasureCode() {
-        return lengthUnitMeasureCodeUnitMeasureCode;
+    public String getItemLengthUnitUnitMeasureCode() {
+        return itemLengthUnitUnitMeasureCode;
     }
 
-    public void setLengthUnitMeasureCodeUnitMeasureCode(String unitMeasureUnitMeasureCode) {
-        this.lengthUnitMeasureCodeUnitMeasureCode = unitMeasureUnitMeasureCode;
+    public void setItemLengthUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.itemLengthUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
     }
 
-    public Long getWeightUnitMeasureCodeId() {
-        return weightUnitMeasureCodeId;
+    public Long getItemWidthUnitId() {
+        return itemWidthUnitId;
     }
 
-    public void setWeightUnitMeasureCodeId(Long unitMeasureId) {
-        this.weightUnitMeasureCodeId = unitMeasureId;
+    public void setItemWidthUnitId(Long unitMeasureId) {
+        this.itemWidthUnitId = unitMeasureId;
     }
 
-    public String getWeightUnitMeasureCodeUnitMeasureCode() {
-        return weightUnitMeasureCodeUnitMeasureCode;
+    public String getItemWidthUnitUnitMeasureCode() {
+        return itemWidthUnitUnitMeasureCode;
     }
 
-    public void setWeightUnitMeasureCodeUnitMeasureCode(String unitMeasureUnitMeasureCode) {
-        this.weightUnitMeasureCodeUnitMeasureCode = unitMeasureUnitMeasureCode;
+    public void setItemWidthUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.itemWidthUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
     }
 
-    public Long getWidthUnitMeasureCodeId() {
-        return widthUnitMeasureCodeId;
+    public Long getItemHeightUnitId() {
+        return itemHeightUnitId;
     }
 
-    public void setWidthUnitMeasureCodeId(Long unitMeasureId) {
-        this.widthUnitMeasureCodeId = unitMeasureId;
+    public void setItemHeightUnitId(Long unitMeasureId) {
+        this.itemHeightUnitId = unitMeasureId;
     }
 
-    public String getWidthUnitMeasureCodeUnitMeasureCode() {
-        return widthUnitMeasureCodeUnitMeasureCode;
+    public String getItemHeightUnitUnitMeasureCode() {
+        return itemHeightUnitUnitMeasureCode;
     }
 
-    public void setWidthUnitMeasureCodeUnitMeasureCode(String unitMeasureUnitMeasureCode) {
-        this.widthUnitMeasureCodeUnitMeasureCode = unitMeasureUnitMeasureCode;
+    public void setItemHeightUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.itemHeightUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
     }
 
-    public Long getHeightUnitMeasureCodeId() {
-        return heightUnitMeasureCodeId;
+    public Long getPackageLengthUnitId() {
+        return packageLengthUnitId;
     }
 
-    public void setHeightUnitMeasureCodeId(Long unitMeasureId) {
-        this.heightUnitMeasureCodeId = unitMeasureId;
+    public void setPackageLengthUnitId(Long unitMeasureId) {
+        this.packageLengthUnitId = unitMeasureId;
     }
 
-    public String getHeightUnitMeasureCodeUnitMeasureCode() {
-        return heightUnitMeasureCodeUnitMeasureCode;
+    public String getPackageLengthUnitUnitMeasureCode() {
+        return packageLengthUnitUnitMeasureCode;
     }
 
-    public void setHeightUnitMeasureCodeUnitMeasureCode(String unitMeasureUnitMeasureCode) {
-        this.heightUnitMeasureCodeUnitMeasureCode = unitMeasureUnitMeasureCode;
+    public void setPackageLengthUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.packageLengthUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
+    }
+
+    public Long getPackageWidthUnitId() {
+        return packageWidthUnitId;
+    }
+
+    public void setPackageWidthUnitId(Long unitMeasureId) {
+        this.packageWidthUnitId = unitMeasureId;
+    }
+
+    public String getPackageWidthUnitUnitMeasureCode() {
+        return packageWidthUnitUnitMeasureCode;
+    }
+
+    public void setPackageWidthUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.packageWidthUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
+    }
+
+    public Long getPackageHeightUnitId() {
+        return packageHeightUnitId;
+    }
+
+    public void setPackageHeightUnitId(Long unitMeasureId) {
+        this.packageHeightUnitId = unitMeasureId;
+    }
+
+    public String getPackageHeightUnitUnitMeasureCode() {
+        return packageHeightUnitUnitMeasureCode;
+    }
+
+    public void setPackageHeightUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.packageHeightUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
+    }
+
+    public Long getItemPackageWeightUnitId() {
+        return itemPackageWeightUnitId;
+    }
+
+    public void setItemPackageWeightUnitId(Long unitMeasureId) {
+        this.itemPackageWeightUnitId = unitMeasureId;
+    }
+
+    public String getItemPackageWeightUnitUnitMeasureCode() {
+        return itemPackageWeightUnitUnitMeasureCode;
+    }
+
+    public void setItemPackageWeightUnitUnitMeasureCode(String unitMeasureUnitMeasureCode) {
+        this.itemPackageWeightUnitUnitMeasureCode = unitMeasureUnitMeasureCode;
     }
 
     public Long getProductAttributeId() {
@@ -311,12 +473,12 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.productAttributeId = productAttributeId;
     }
 
-    public String getProductAttributeValue() {
-        return productAttributeValue;
+    public String getProductAttributeProductAttributeValue() {
+        return productAttributeProductAttributeValue;
     }
 
-    public void setProductAttributeValue(String productAttributeValue) {
-        this.productAttributeValue = productAttributeValue;
+    public void setProductAttributeProductAttributeValue(String productAttributeProductAttributeValue) {
+        this.productAttributeProductAttributeValue = productAttributeProductAttributeValue;
     }
 
     public Long getProductOptionId() {
@@ -327,12 +489,60 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         this.productOptionId = productOptionId;
     }
 
-    public String getProductOptionValue() {
-        return productOptionValue;
+    public String getProductOptionProductOptionValue() {
+        return productOptionProductOptionValue;
     }
 
-    public void setProductOptionValue(String productOptionValue) {
-        this.productOptionValue = productOptionValue;
+    public void setProductOptionProductOptionValue(String productOptionProductOptionValue) {
+        this.productOptionProductOptionValue = productOptionProductOptionValue;
+    }
+
+    public Long getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(Long materialsId) {
+        this.materialId = materialsId;
+    }
+
+    public String getMaterialMaterialName() {
+        return materialMaterialName;
+    }
+
+    public void setMaterialMaterialName(String materialsMaterialName) {
+        this.materialMaterialName = materialsMaterialName;
+    }
+
+    public Long getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(Long currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public String getCurrencyCurrencyCode() {
+        return currencyCurrencyCode;
+    }
+
+    public void setCurrencyCurrencyCode(String currencyCurrencyCode) {
+        this.currencyCurrencyCode = currencyCurrencyCode;
+    }
+
+    public Long getBarcodeTypeId() {
+        return barcodeTypeId;
+    }
+
+    public void setBarcodeTypeId(Long barcodeTypesId) {
+        this.barcodeTypeId = barcodeTypesId;
+    }
+
+    public String getBarcodeTypeBarcodeTypeName() {
+        return barcodeTypeBarcodeTypeName;
+    }
+
+    public void setBarcodeTypeBarcodeTypeName(String barcodeTypesBarcodeTypeName) {
+        this.barcodeTypeBarcodeTypeName = barcodeTypesBarcodeTypeName;
     }
 
     public Long getProductId() {
@@ -369,16 +579,24 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
         return "StockItemsDTO{" +
             "id=" + getId() +
             ", stockItemName='" + getStockItemName() + "'" +
-            ", sellerSKU='" + getSellerSKU() + "'" +
+            ", vendorCode='" + getVendorCode() + "'" +
+            ", vendorSKU='" + getVendorSKU() + "'" +
             ", generatedSKU='" + getGeneratedSKU() + "'" +
             ", barcode='" + getBarcode() + "'" +
             ", unitPrice=" + getUnitPrice() +
             ", recommendedRetailPrice=" + getRecommendedRetailPrice() +
-            ", quantityPerOuter=" + getQuantityPerOuter() +
-            ", typicalWeightPerUnit=" + getTypicalWeightPerUnit() +
-            ", typicalLengthPerUnit=" + getTypicalLengthPerUnit() +
-            ", typicalWidthPerUnit=" + getTypicalWidthPerUnit() +
-            ", typicalHeightPerUnit=" + getTypicalHeightPerUnit() +
+            ", quantityOnHand=" + getQuantityOnHand() +
+            ", itemLength=" + getItemLength() +
+            ", itemWidth=" + getItemWidth() +
+            ", itemHeight=" + getItemHeight() +
+            ", itemWeight=" + getItemWeight() +
+            ", itemPackageLength=" + getItemPackageLength() +
+            ", itemPackageWidth=" + getItemPackageWidth() +
+            ", itemPackageHeight=" + getItemPackageHeight() +
+            ", itemPackageWeight=" + getItemPackageWeight() +
+            ", noOfPieces=" + getNoOfPieces() +
+            ", noOfItems=" + getNoOfItems() +
+            ", manufacture='" + getManufacture() + "'" +
             ", marketingComments='" + getMarketingComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
             ", sellStartDate='" + getSellStartDate() + "'" +
@@ -386,19 +604,32 @@ public class StockItemsDTO extends AbstractAuditingDTO implements Serializable {
             ", sellCount=" + getSellCount() +
             ", customFields='" + getCustomFields() + "'" +
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
+            ", activeInd='" + isActiveInd() + "'" +
             ", stockItemOnReviewLine=" + getStockItemOnReviewLineId() +
-            ", lengthUnitMeasureCode=" + getLengthUnitMeasureCodeId() +
-            ", lengthUnitMeasureCode='" + getLengthUnitMeasureCodeUnitMeasureCode() + "'" +
-            ", weightUnitMeasureCode=" + getWeightUnitMeasureCodeId() +
-            ", weightUnitMeasureCode='" + getWeightUnitMeasureCodeUnitMeasureCode() + "'" +
-            ", widthUnitMeasureCode=" + getWidthUnitMeasureCodeId() +
-            ", widthUnitMeasureCode='" + getWidthUnitMeasureCodeUnitMeasureCode() + "'" +
-            ", heightUnitMeasureCode=" + getHeightUnitMeasureCodeId() +
-            ", heightUnitMeasureCode='" + getHeightUnitMeasureCodeUnitMeasureCode() + "'" +
+            ", itemLengthUnit=" + getItemLengthUnitId() +
+            ", itemLengthUnit='" + getItemLengthUnitUnitMeasureCode() + "'" +
+            ", itemWidthUnit=" + getItemWidthUnitId() +
+            ", itemWidthUnit='" + getItemWidthUnitUnitMeasureCode() + "'" +
+            ", itemHeightUnit=" + getItemHeightUnitId() +
+            ", itemHeightUnit='" + getItemHeightUnitUnitMeasureCode() + "'" +
+            ", packageLengthUnit=" + getPackageLengthUnitId() +
+            ", packageLengthUnit='" + getPackageLengthUnitUnitMeasureCode() + "'" +
+            ", packageWidthUnit=" + getPackageWidthUnitId() +
+            ", packageWidthUnit='" + getPackageWidthUnitUnitMeasureCode() + "'" +
+            ", packageHeightUnit=" + getPackageHeightUnitId() +
+            ", packageHeightUnit='" + getPackageHeightUnitUnitMeasureCode() + "'" +
+            ", itemPackageWeightUnit=" + getItemPackageWeightUnitId() +
+            ", itemPackageWeightUnit='" + getItemPackageWeightUnitUnitMeasureCode() + "'" +
             ", productAttribute=" + getProductAttributeId() +
-            ", productAttribute='" + getProductAttributeValue() + "'" +
+            ", productAttribute='" + getProductAttributeProductAttributeValue() + "'" +
             ", productOption=" + getProductOptionId() +
-            ", productOption='" + getProductOptionValue() + "'" +
+            ", productOption='" + getProductOptionProductOptionValue() + "'" +
+            ", material=" + getMaterialId() +
+            ", material='" + getMaterialMaterialName() + "'" +
+            ", currency=" + getCurrencyId() +
+            ", currency='" + getCurrencyCurrencyCode() + "'" +
+            ", barcodeType=" + getBarcodeTypeId() +
+            ", barcodeType='" + getBarcodeTypeBarcodeTypeName() + "'" +
             ", product=" + getProductId() +
             "}";
     }

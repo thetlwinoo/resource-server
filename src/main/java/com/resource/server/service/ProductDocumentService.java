@@ -24,6 +24,12 @@ public interface ProductDocumentService {
      * @return the list of entities
      */
     List<ProductDocumentDTO> findAll();
+    /**
+     * Get all the ProductDocumentDTO where Product is null.
+     *
+     * @return the list of entities
+     */
+    List<ProductDocumentDTO> findAllWhereProductIsNull();
 
 
     /**

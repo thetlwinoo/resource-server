@@ -53,6 +53,27 @@
                 <dd>
                     <span>{{suppliers.websiteURL}}</span>
                 </dd>
+                <dt><span jhiTranslate="resourceApp.suppliers.webServiceUrl">Web Service Url</span></dt>
+                <dd>
+                    <span>{{suppliers.webServiceUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.suppliers.creditRating">Credit Rating</span></dt>
+                <dd>
+                    <span>{{suppliers.creditRating}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.suppliers.activeFlag">Active Flag</span></dt>
+                <dd>
+                    <span>{{suppliers.activeFlag}}</span>
+                </dd>
+                <dt><span jhiTranslate="resourceApp.suppliers.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.avatar">
+                        <a (click)="openFile(suppliers.avatarContentType, suppliers.avatar)">
+                            <img [src]="'data:' + suppliers.avatarContentType + ';base64,' + suppliers.avatar" style="max-width: 100%;" alt="suppliers image"/>
+                        </a>
+                        {{suppliers.avatarContentType}}, {{byteSize(suppliers.avatar)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="resourceApp.suppliers.validFrom">Valid From</span></dt>
                 <dd>
                     <span>{{suppliers.validFrom}}</span>

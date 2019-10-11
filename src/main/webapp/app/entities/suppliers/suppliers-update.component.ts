@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { ISuppliers } from 'app/shared/model/suppliers.model';
 import { SuppliersService } from './suppliers.service';
 import { IPeople } from 'app/shared/model/people.model';
@@ -35,12 +35,14 @@ export class SuppliersUpdateComponent implements OnInit {
     validToDp: any;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected suppliersService: SuppliersService,
         protected peopleService: PeopleService,
         protected supplierCategoriesService: SupplierCategoriesService,
         protected deliveryMethodsService: DeliveryMethodsService,
         protected citiesService: CitiesService,
+        protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -80,6 +82,22 @@ export class SuppliersUpdateComponent implements OnInit {
                 map((response: HttpResponse<ICities[]>) => response.body)
             )
             .subscribe((res: ICities[]) => (this.cities = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.suppliers, this.elementRef, field, fieldContentType, idInput);
     }
 
     previousState() {

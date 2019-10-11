@@ -2,6 +2,7 @@ package com.resource.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Products entity.
@@ -13,42 +14,23 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
     @NotNull
     private String productName;
 
+    private String handle;
+
     private String productNumber;
 
-    @NotNull
+    @Lob
     private String searchDetails;
-
-    private String thumbnailUrl;
-
-    private String warrantyPeriod;
-
-    private String warrantyPolicy;
 
     private Integer sellCount;
 
-    @NotNull
-    private String whatInTheBox;
+    private Boolean activeInd;
 
+
+    private Long documentId;
 
     private Long supplierId;
 
     private String supplierSupplierName;
-
-    private Long merchantId;
-
-    private String merchantMerchantName;
-
-    private Long unitPackageId;
-
-    private String unitPackagePackageTypeName;
-
-    private Long outerPackageId;
-
-    private String outerPackagePackageTypeName;
-
-    private Long productModelId;
-
-    private String productModelProductModelName;
 
     private Long productCategoryId;
 
@@ -57,10 +39,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
     private Long productBrandId;
 
     private String productBrandProductBrandName;
-
-    private Long warrantyTypeId;
-
-    private String warrantyTypeWarrantyTypeName;
 
     public Long getId() {
         return id;
@@ -76,6 +54,14 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getHandle() {
+        return handle;
+    }
+
+    public void setHandle(String handle) {
+        this.handle = handle;
     }
 
     public String getProductNumber() {
@@ -94,30 +80,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.searchDetails = searchDetails;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public String getWarrantyPeriod() {
-        return warrantyPeriod;
-    }
-
-    public void setWarrantyPeriod(String warrantyPeriod) {
-        this.warrantyPeriod = warrantyPeriod;
-    }
-
-    public String getWarrantyPolicy() {
-        return warrantyPolicy;
-    }
-
-    public void setWarrantyPolicy(String warrantyPolicy) {
-        this.warrantyPolicy = warrantyPolicy;
-    }
-
     public Integer getSellCount() {
         return sellCount;
     }
@@ -126,12 +88,20 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.sellCount = sellCount;
     }
 
-    public String getWhatInTheBox() {
-        return whatInTheBox;
+    public Boolean isActiveInd() {
+        return activeInd;
     }
 
-    public void setWhatInTheBox(String whatInTheBox) {
-        this.whatInTheBox = whatInTheBox;
+    public void setActiveInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+    }
+
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long productDocumentId) {
+        this.documentId = productDocumentId;
     }
 
     public Long getSupplierId() {
@@ -148,70 +118,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
 
     public void setSupplierSupplierName(String suppliersSupplierName) {
         this.supplierSupplierName = suppliersSupplierName;
-    }
-
-    public Long getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Long merchantsId) {
-        this.merchantId = merchantsId;
-    }
-
-    public String getMerchantMerchantName() {
-        return merchantMerchantName;
-    }
-
-    public void setMerchantMerchantName(String merchantsMerchantName) {
-        this.merchantMerchantName = merchantsMerchantName;
-    }
-
-    public Long getUnitPackageId() {
-        return unitPackageId;
-    }
-
-    public void setUnitPackageId(Long packageTypesId) {
-        this.unitPackageId = packageTypesId;
-    }
-
-    public String getUnitPackagePackageTypeName() {
-        return unitPackagePackageTypeName;
-    }
-
-    public void setUnitPackagePackageTypeName(String packageTypesPackageTypeName) {
-        this.unitPackagePackageTypeName = packageTypesPackageTypeName;
-    }
-
-    public Long getOuterPackageId() {
-        return outerPackageId;
-    }
-
-    public void setOuterPackageId(Long packageTypesId) {
-        this.outerPackageId = packageTypesId;
-    }
-
-    public String getOuterPackagePackageTypeName() {
-        return outerPackagePackageTypeName;
-    }
-
-    public void setOuterPackagePackageTypeName(String packageTypesPackageTypeName) {
-        this.outerPackagePackageTypeName = packageTypesPackageTypeName;
-    }
-
-    public Long getProductModelId() {
-        return productModelId;
-    }
-
-    public void setProductModelId(Long productModelId) {
-        this.productModelId = productModelId;
-    }
-
-    public String getProductModelProductModelName() {
-        return productModelProductModelName;
-    }
-
-    public void setProductModelProductModelName(String productModelProductModelName) {
-        this.productModelProductModelName = productModelProductModelName;
     }
 
     public Long getProductCategoryId() {
@@ -246,22 +152,6 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         this.productBrandProductBrandName = productBrandProductBrandName;
     }
 
-    public Long getWarrantyTypeId() {
-        return warrantyTypeId;
-    }
-
-    public void setWarrantyTypeId(Long warrantyTypesId) {
-        this.warrantyTypeId = warrantyTypesId;
-    }
-
-    public String getWarrantyTypeWarrantyTypeName() {
-        return warrantyTypeWarrantyTypeName;
-    }
-
-    public void setWarrantyTypeWarrantyTypeName(String warrantyTypesWarrantyTypeName) {
-        this.warrantyTypeWarrantyTypeName = warrantyTypesWarrantyTypeName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -288,29 +178,18 @@ public class ProductsDTO extends AbstractAuditingDTO implements Serializable {
         return "ProductsDTO{" +
             "id=" + getId() +
             ", productName='" + getProductName() + "'" +
+            ", handle='" + getHandle() + "'" +
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
-            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
-            ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
-            ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", sellCount=" + getSellCount() +
-            ", whatInTheBox='" + getWhatInTheBox() + "'" +
+            ", activeInd='" + isActiveInd() + "'" +
+            ", document=" + getDocumentId() +
             ", supplier=" + getSupplierId() +
             ", supplier='" + getSupplierSupplierName() + "'" +
-            ", merchant=" + getMerchantId() +
-            ", merchant='" + getMerchantMerchantName() + "'" +
-            ", unitPackage=" + getUnitPackageId() +
-            ", unitPackage='" + getUnitPackagePackageTypeName() + "'" +
-            ", outerPackage=" + getOuterPackageId() +
-            ", outerPackage='" + getOuterPackagePackageTypeName() + "'" +
-            ", productModel=" + getProductModelId() +
-            ", productModel='" + getProductModelProductModelName() + "'" +
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", productBrand=" + getProductBrandId() +
             ", productBrand='" + getProductBrandProductBrandName() + "'" +
-            ", warrantyType=" + getWarrantyTypeId() +
-            ", warrantyType='" + getWarrantyTypeWarrantyTypeName() + "'" +
             "}";
     }
 }

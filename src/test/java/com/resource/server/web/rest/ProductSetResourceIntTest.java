@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductSetResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_PRODUCT_SET_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_SET_NAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_NO_OF_PERSON = 1;
     private static final Integer UPDATED_NO_OF_PERSON = 2;
@@ -100,7 +100,7 @@ public class ProductSetResourceIntTest {
      */
     public static ProductSet createEntity(EntityManager em) {
         ProductSet productSet = new ProductSet()
-            .name(DEFAULT_NAME)
+            .productSetName(DEFAULT_PRODUCT_SET_NAME)
             .noOfPerson(DEFAULT_NO_OF_PERSON)
             .isExclusive(DEFAULT_IS_EXCLUSIVE);
         return productSet;
@@ -127,7 +127,7 @@ public class ProductSetResourceIntTest {
         List<ProductSet> productSetList = productSetRepository.findAll();
         assertThat(productSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductSet testProductSet = productSetList.get(productSetList.size() - 1);
-        assertThat(testProductSet.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testProductSet.getProductSetName()).isEqualTo(DEFAULT_PRODUCT_SET_NAME);
         assertThat(testProductSet.getNoOfPerson()).isEqualTo(DEFAULT_NO_OF_PERSON);
         assertThat(testProductSet.isIsExclusive()).isEqualTo(DEFAULT_IS_EXCLUSIVE);
     }
@@ -154,10 +154,10 @@ public class ProductSetResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkProductSetNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productSetRepository.findAll().size();
         // set the field null
-        productSet.setName(null);
+        productSet.setProductSetName(null);
 
         // Create the ProductSet, which fails.
         ProductSetDTO productSetDTO = productSetMapper.toDto(productSet);
@@ -201,7 +201,7 @@ public class ProductSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].productSetName").value(hasItem(DEFAULT_PRODUCT_SET_NAME.toString())))
             .andExpect(jsonPath("$.[*].noOfPerson").value(hasItem(DEFAULT_NO_OF_PERSON)))
             .andExpect(jsonPath("$.[*].isExclusive").value(hasItem(DEFAULT_IS_EXCLUSIVE.booleanValue())));
     }
@@ -217,7 +217,7 @@ public class ProductSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productSet.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.productSetName").value(DEFAULT_PRODUCT_SET_NAME.toString()))
             .andExpect(jsonPath("$.noOfPerson").value(DEFAULT_NO_OF_PERSON))
             .andExpect(jsonPath("$.isExclusive").value(DEFAULT_IS_EXCLUSIVE.booleanValue()));
     }
@@ -243,7 +243,7 @@ public class ProductSetResourceIntTest {
         // Disconnect from session so that the updates on updatedProductSet are not directly saved in db
         em.detach(updatedProductSet);
         updatedProductSet
-            .name(UPDATED_NAME)
+            .productSetName(UPDATED_PRODUCT_SET_NAME)
             .noOfPerson(UPDATED_NO_OF_PERSON)
             .isExclusive(UPDATED_IS_EXCLUSIVE);
         ProductSetDTO productSetDTO = productSetMapper.toDto(updatedProductSet);
@@ -257,7 +257,7 @@ public class ProductSetResourceIntTest {
         List<ProductSet> productSetList = productSetRepository.findAll();
         assertThat(productSetList).hasSize(databaseSizeBeforeUpdate);
         ProductSet testProductSet = productSetList.get(productSetList.size() - 1);
-        assertThat(testProductSet.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testProductSet.getProductSetName()).isEqualTo(UPDATED_PRODUCT_SET_NAME);
         assertThat(testProductSet.getNoOfPerson()).isEqualTo(UPDATED_NO_OF_PERSON);
         assertThat(testProductSet.isIsExclusive()).isEqualTo(UPDATED_IS_EXCLUSIVE);
     }

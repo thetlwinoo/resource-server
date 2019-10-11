@@ -3,7 +3,6 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductBrand;
-import com.resource.server.domain.Merchants;
 import com.resource.server.repository.ProductBrandRepository;
 import com.resource.server.service.ProductBrandService;
 import com.resource.server.service.dto.ProductBrandDTO;
@@ -247,25 +246,6 @@ public class ProductBrandResourceIntTest {
         // Get all the productBrandList where productBrandName is null
         defaultProductBrandShouldNotBeFound("productBrandName.specified=false");
     }
-
-    @Test
-    @Transactional
-    public void getAllProductBrandsByMerchantIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Merchants merchant = MerchantsResourceIntTest.createEntity(em);
-        em.persist(merchant);
-        em.flush();
-        productBrand.setMerchant(merchant);
-        productBrandRepository.saveAndFlush(productBrand);
-        Long merchantId = merchant.getId();
-
-        // Get all the productBrandList where merchant equals to merchantId
-        defaultProductBrandShouldBeFound("merchantId.equals=" + merchantId);
-
-        // Get all the productBrandList where merchant equals to merchantId + 1
-        defaultProductBrandShouldNotBeFound("merchantId.equals=" + (merchantId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned
      */

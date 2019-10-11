@@ -1,0 +1,31 @@
+{
+    "name": "DangerousGoods",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "stockItems",
+            "otherEntityRelationshipName": "dangerousGoodList",
+            "relationshipName": "stockItem",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191007095648",
+    "entityTableName": "dangerous_goods",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

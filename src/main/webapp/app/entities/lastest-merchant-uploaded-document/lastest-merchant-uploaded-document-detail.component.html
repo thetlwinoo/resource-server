@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lastestMerchantUploadedDocument">
+            <h2><span jhiTranslate="resourceApp.lastestMerchantUploadedDocument.detail.title">Lastest Merchant Uploaded Document</span> {{lastestMerchantUploadedDocument.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resourceApp.lastestMerchantUploadedDocument.productCreateTemplate">Product Create Template</span></dt>
+                <dd>
+                    <div *ngIf="lastestMerchantUploadedDocument.productCreateTemplate">
+                        <a (click)="openFile(lastestMerchantUploadedDocument.productCreateTemplateContentType, lastestMerchantUploadedDocument.productCreateTemplate)" jhiTranslate="entity.action.open">open</a>
+                        {{lastestMerchantUploadedDocument.productCreateTemplateContentType}}, {{byteSize(lastestMerchantUploadedDocument.productCreateTemplate)}}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lastest-merchant-uploaded-document', lastestMerchantUploadedDocument.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

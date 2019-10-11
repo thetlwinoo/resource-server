@@ -2,7 +2,7 @@
     "name": "ProductSet",
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "productSetName",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

@@ -44,10 +44,10 @@ describe('ProductAttributeSet e2e test', () => {
 
         await productAttributeSetComponentsPage.clickOnCreateButton();
         await promise.all([
-            productAttributeSetUpdatePage.setNameInput('name'),
+            productAttributeSetUpdatePage.setProductAttributeSetNameInput('productAttributeSetName'),
             productAttributeSetUpdatePage.productOptionSetSelectLastOption()
         ]);
-        expect(await productAttributeSetUpdatePage.getNameInput()).to.eq('name');
+        expect(await productAttributeSetUpdatePage.getProductAttributeSetNameInput()).to.eq('productAttributeSetName');
         await productAttributeSetUpdatePage.save();
         expect(await productAttributeSetUpdatePage.getSaveButton().isPresent()).to.be.false;
 

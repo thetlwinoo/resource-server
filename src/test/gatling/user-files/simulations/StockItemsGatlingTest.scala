@@ -73,16 +73,24 @@ class StockItemsGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "stockItemName":"SAMPLE_TEXT"
-                , "sellerSKU":"SAMPLE_TEXT"
+                , "vendorCode":"SAMPLE_TEXT"
+                , "vendorSKU":"SAMPLE_TEXT"
                 , "generatedSKU":"SAMPLE_TEXT"
                 , "barcode":"SAMPLE_TEXT"
                 , "unitPrice":null
                 , "recommendedRetailPrice":null
-                , "quantityPerOuter":"0"
-                , "typicalWeightPerUnit":null
-                , "typicalLengthPerUnit":"0"
-                , "typicalWidthPerUnit":"0"
-                , "typicalHeightPerUnit":"0"
+                , "quantityOnHand":"0"
+                , "itemLength":"0"
+                , "itemWidth":"0"
+                , "itemHeight":"0"
+                , "itemWeight":null
+                , "itemPackageLength":"0"
+                , "itemPackageWidth":"0"
+                , "itemPackageHeight":"0"
+                , "itemPackageWeight":null
+                , "noOfPieces":"0"
+                , "noOfItems":"0"
+                , "manufacture":"SAMPLE_TEXT"
                 , "marketingComments":"SAMPLE_TEXT"
                 , "internalComments":"SAMPLE_TEXT"
                 , "sellStartDate":"2020-01-01T00:00:00.000Z"
@@ -90,6 +98,7 @@ class StockItemsGatlingTest extends Simulation {
                 , "sellCount":"0"
                 , "customFields":"SAMPLE_TEXT"
                 , "thumbnailUrl":"SAMPLE_TEXT"
+                , "activeInd":null
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_stockItems_url"))).exitHereIfFailed

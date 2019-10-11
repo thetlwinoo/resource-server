@@ -25,7 +25,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="product_review" type="varchar(255)">
+            <column name="product_review" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -33,7 +33,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="seller_review" type="varchar(255)">
+            <column name="seller_review" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -41,7 +41,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="delivery_review" type="varchar(255)">
+            <column name="delivery_review" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -62,7 +62,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190919022025-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20191010085253-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="review_lines">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

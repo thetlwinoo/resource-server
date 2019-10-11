@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="product_attribute_set"/>
 
+        <addForeignKeyConstraint baseColumnNames="supplier_id"
+                                 baseTableName="product_attribute"
+                                 constraintName="fk_product_attribute_supplier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="suppliers"/>
+
     </changeSet>
 </databaseChangeLog>

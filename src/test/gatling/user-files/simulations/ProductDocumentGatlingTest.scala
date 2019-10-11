@@ -72,9 +72,24 @@ class ProductDocumentGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "documentNode":null
                 , "videoUrl":"SAMPLE_TEXT"
                 , "highlights":null
+                , "longDescription":null
+                , "shortDescription":null
+                , "description":null
+                , "careInstructions":null
+                , "productType":"SAMPLE_TEXT"
+                , "modelName":"SAMPLE_TEXT"
+                , "modelNumber":"SAMPLE_TEXT"
+                , "fabricType":"SAMPLE_TEXT"
+                , "specialFeatures":null
+                , "productComplianceCertificate":"SAMPLE_TEXT"
+                , "genuineAndLegal":null
+                , "countryOfOrigin":"SAMPLE_TEXT"
+                , "usageAndSideEffects":null
+                , "safetyWarnning":null
+                , "warrantyPeriod":"SAMPLE_TEXT"
+                , "warrantyPolicy":"SAMPLE_TEXT"
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productDocument_url"))).exitHereIfFailed

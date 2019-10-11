@@ -26,19 +26,20 @@ export class ProductOptionUpdatePage {
     pageTitle = element(by.id('jhi-product-option-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    valueInput = element(by.id('field_value'));
+    productOptionValueInput = element(by.id('field_productOptionValue'));
     productOptionSetSelect = element(by.id('field_productOptionSet'));
+    supplierSelect = element(by.id('field_supplier'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    async setValueInput(value) {
-        await this.valueInput.sendKeys(value);
+    async setProductOptionValueInput(productOptionValue) {
+        await this.productOptionValueInput.sendKeys(productOptionValue);
     }
 
-    async getValueInput() {
-        return this.valueInput.getAttribute('value');
+    async getProductOptionValueInput() {
+        return this.productOptionValueInput.getAttribute('value');
     }
 
     async productOptionSetSelectLastOption() {
@@ -58,6 +59,25 @@ export class ProductOptionUpdatePage {
 
     async getProductOptionSetSelectedOption() {
         return this.productOptionSetSelect.element(by.css('option:checked')).getText();
+    }
+
+    async supplierSelectLastOption() {
+        await this.supplierSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async supplierSelectOption(option) {
+        await this.supplierSelect.sendKeys(option);
+    }
+
+    getSupplierSelect(): ElementFinder {
+        return this.supplierSelect;
+    }
+
+    async getSupplierSelectedOption() {
+        return this.supplierSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

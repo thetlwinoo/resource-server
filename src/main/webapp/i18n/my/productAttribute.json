@@ -15,8 +15,9 @@
             "detail": {
                 "title": "Product Attribute"
             },
-            "value": "Value",
-            "productAttributeSet": "Product Attribute Set"
+            "productAttributeValue": "Product Attribute Value",
+            "productAttributeSet": "Product Attribute Set",
+            "supplier": "Supplier"
         }
     }
 }

@@ -12,14 +12,17 @@ public class ReviewLinesDTO extends AbstractAuditingDTO implements Serializable 
 
     private Integer productRating;
 
+    @Lob
     private String productReview;
 
     private Integer sellerRating;
 
+    @Lob
     private String sellerReview;
 
     private Integer deliveryRating;
 
+    @Lob
     private String deliveryReview;
 
     @Lob

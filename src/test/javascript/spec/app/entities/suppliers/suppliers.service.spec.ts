@@ -39,6 +39,11 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
+                'AAAAAAA',
+                0,
+                false,
+                'image/png',
+                'AAAAAAA',
                 currentDate,
                 currentDate
             );
@@ -101,6 +106,10 @@ describe('Service Tests', () => {
                         phoneNumber: 'BBBBBB',
                         faxNumber: 'BBBBBB',
                         websiteURL: 'BBBBBB',
+                        webServiceUrl: 'BBBBBB',
+                        creditRating: 1,
+                        activeFlag: true,
+                        avatar: 'BBBBBB',
                         validFrom: currentDate.format(DATE_FORMAT),
                         validTo: currentDate.format(DATE_FORMAT)
                     },
@@ -137,6 +146,10 @@ describe('Service Tests', () => {
                         phoneNumber: 'BBBBBB',
                         faxNumber: 'BBBBBB',
                         websiteURL: 'BBBBBB',
+                        webServiceUrl: 'BBBBBB',
+                        creditRating: 1,
+                        activeFlag: true,
+                        avatar: 'BBBBBB',
                         validFrom: currentDate.format(DATE_FORMAT),
                         validTo: currentDate.format(DATE_FORMAT)
                     },

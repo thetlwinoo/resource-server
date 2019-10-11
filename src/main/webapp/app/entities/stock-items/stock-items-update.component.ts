@@ -15,6 +15,12 @@ import { IProductAttribute } from 'app/shared/model/product-attribute.model';
 import { ProductAttributeService } from 'app/entities/product-attribute';
 import { IProductOption } from 'app/shared/model/product-option.model';
 import { ProductOptionService } from 'app/entities/product-option';
+import { IMaterials } from 'app/shared/model/materials.model';
+import { MaterialsService } from 'app/entities/materials';
+import { ICurrency } from 'app/shared/model/currency.model';
+import { CurrencyService } from 'app/entities/currency';
+import { IBarcodeTypes } from 'app/shared/model/barcode-types.model';
+import { BarcodeTypesService } from 'app/entities/barcode-types';
 import { IStockItemHoldings } from 'app/shared/model/stock-item-holdings.model';
 import { StockItemHoldingsService } from 'app/entities/stock-item-holdings';
 import { IProducts } from 'app/shared/model/products.model';
@@ -36,6 +42,12 @@ export class StockItemsUpdateComponent implements OnInit {
 
     productoptions: IProductOption[];
 
+    materials: IMaterials[];
+
+    currencies: ICurrency[];
+
+    barcodetypes: IBarcodeTypes[];
+
     stockitemholdings: IStockItemHoldings[];
 
     products: IProducts[];
@@ -49,6 +61,9 @@ export class StockItemsUpdateComponent implements OnInit {
         protected unitMeasureService: UnitMeasureService,
         protected productAttributeService: ProductAttributeService,
         protected productOptionService: ProductOptionService,
+        protected materialsService: MaterialsService,
+        protected currencyService: CurrencyService,
+        protected barcodeTypesService: BarcodeTypesService,
         protected stockItemHoldingsService: StockItemHoldingsService,
         protected productsService: ProductsService,
         protected activatedRoute: ActivatedRoute
@@ -105,6 +120,27 @@ export class StockItemsUpdateComponent implements OnInit {
                 map((response: HttpResponse<IProductOption[]>) => response.body)
             )
             .subscribe((res: IProductOption[]) => (this.productoptions = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.materialsService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IMaterials[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IMaterials[]>) => response.body)
+            )
+            .subscribe((res: IMaterials[]) => (this.materials = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.currencyService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ICurrency[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ICurrency[]>) => response.body)
+            )
+            .subscribe((res: ICurrency[]) => (this.currencies = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.barcodeTypesService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IBarcodeTypes[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IBarcodeTypes[]>) => response.body)
+            )
+            .subscribe((res: IBarcodeTypes[]) => (this.barcodetypes = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.stockItemHoldingsService
             .query()
             .pipe(
@@ -167,6 +203,18 @@ export class StockItemsUpdateComponent implements OnInit {
     }
 
     trackProductOptionById(index: number, item: IProductOption) {
+        return item.id;
+    }
+
+    trackMaterialsById(index: number, item: IMaterials) {
+        return item.id;
+    }
+
+    trackCurrencyById(index: number, item: ICurrency) {
+        return item.id;
+    }
+
+    trackBarcodeTypesById(index: number, item: IBarcodeTypes) {
         return item.id;
     }
 

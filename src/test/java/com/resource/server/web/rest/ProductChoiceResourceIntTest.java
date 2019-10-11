@@ -3,11 +3,16 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductChoice;
+import com.resource.server.domain.ProductCategory;
+import com.resource.server.domain.ProductAttributeSet;
+import com.resource.server.domain.ProductOptionSet;
 import com.resource.server.repository.ProductChoiceRepository;
 import com.resource.server.service.ProductChoiceService;
 import com.resource.server.service.dto.ProductChoiceDTO;
 import com.resource.server.service.mapper.ProductChoiceMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.ProductChoiceCriteria;
+import com.resource.server.service.ProductChoiceQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,6 +61,9 @@ public class ProductChoiceResourceIntTest {
     private ProductChoiceService productChoiceService;
 
     @Autowired
+    private ProductChoiceQueryService productChoiceQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +85,7 @@ public class ProductChoiceResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductChoiceResource productChoiceResource = new ProductChoiceResource(productChoiceService);
+        final ProductChoiceResource productChoiceResource = new ProductChoiceResource(productChoiceService, productChoiceQueryService);
         this.restProductChoiceMockMvc = MockMvcBuilders.standaloneSetup(productChoiceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -188,6 +196,136 @@ public class ProductChoiceResourceIntTest {
             .andExpect(jsonPath("$.id").value(productChoice.getId().intValue()))
             .andExpect(jsonPath("$.isMultiply").value(DEFAULT_IS_MULTIPLY.booleanValue()));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByIsMultiplyIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productChoiceRepository.saveAndFlush(productChoice);
+
+        // Get all the productChoiceList where isMultiply equals to DEFAULT_IS_MULTIPLY
+        defaultProductChoiceShouldBeFound("isMultiply.equals=" + DEFAULT_IS_MULTIPLY);
+
+        // Get all the productChoiceList where isMultiply equals to UPDATED_IS_MULTIPLY
+        defaultProductChoiceShouldNotBeFound("isMultiply.equals=" + UPDATED_IS_MULTIPLY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByIsMultiplyIsInShouldWork() throws Exception {
+        // Initialize the database
+        productChoiceRepository.saveAndFlush(productChoice);
+
+        // Get all the productChoiceList where isMultiply in DEFAULT_IS_MULTIPLY or UPDATED_IS_MULTIPLY
+        defaultProductChoiceShouldBeFound("isMultiply.in=" + DEFAULT_IS_MULTIPLY + "," + UPDATED_IS_MULTIPLY);
+
+        // Get all the productChoiceList where isMultiply equals to UPDATED_IS_MULTIPLY
+        defaultProductChoiceShouldNotBeFound("isMultiply.in=" + UPDATED_IS_MULTIPLY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByIsMultiplyIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productChoiceRepository.saveAndFlush(productChoice);
+
+        // Get all the productChoiceList where isMultiply is not null
+        defaultProductChoiceShouldBeFound("isMultiply.specified=true");
+
+        // Get all the productChoiceList where isMultiply is null
+        defaultProductChoiceShouldNotBeFound("isMultiply.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByProductCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductCategory productCategory = ProductCategoryResourceIntTest.createEntity(em);
+        em.persist(productCategory);
+        em.flush();
+        productChoice.setProductCategory(productCategory);
+        productChoiceRepository.saveAndFlush(productChoice);
+        Long productCategoryId = productCategory.getId();
+
+        // Get all the productChoiceList where productCategory equals to productCategoryId
+        defaultProductChoiceShouldBeFound("productCategoryId.equals=" + productCategoryId);
+
+        // Get all the productChoiceList where productCategory equals to productCategoryId + 1
+        defaultProductChoiceShouldNotBeFound("productCategoryId.equals=" + (productCategoryId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByProductAttributeSetIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductAttributeSet productAttributeSet = ProductAttributeSetResourceIntTest.createEntity(em);
+        em.persist(productAttributeSet);
+        em.flush();
+        productChoice.setProductAttributeSet(productAttributeSet);
+        productChoiceRepository.saveAndFlush(productChoice);
+        Long productAttributeSetId = productAttributeSet.getId();
+
+        // Get all the productChoiceList where productAttributeSet equals to productAttributeSetId
+        defaultProductChoiceShouldBeFound("productAttributeSetId.equals=" + productAttributeSetId);
+
+        // Get all the productChoiceList where productAttributeSet equals to productAttributeSetId + 1
+        defaultProductChoiceShouldNotBeFound("productAttributeSetId.equals=" + (productAttributeSetId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductChoicesByProductOptionSetIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductOptionSet productOptionSet = ProductOptionSetResourceIntTest.createEntity(em);
+        em.persist(productOptionSet);
+        em.flush();
+        productChoice.setProductOptionSet(productOptionSet);
+        productChoiceRepository.saveAndFlush(productChoice);
+        Long productOptionSetId = productOptionSet.getId();
+
+        // Get all the productChoiceList where productOptionSet equals to productOptionSetId
+        defaultProductChoiceShouldBeFound("productOptionSetId.equals=" + productOptionSetId);
+
+        // Get all the productChoiceList where productOptionSet equals to productOptionSetId + 1
+        defaultProductChoiceShouldNotBeFound("productOptionSetId.equals=" + (productOptionSetId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProductChoiceShouldBeFound(String filter) throws Exception {
+        restProductChoiceMockMvc.perform(get("/api/product-choices?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(productChoice.getId().intValue())))
+            .andExpect(jsonPath("$.[*].isMultiply").value(hasItem(DEFAULT_IS_MULTIPLY.booleanValue())));
+
+        // Check, that the count call also returns 1
+        restProductChoiceMockMvc.perform(get("/api/product-choices/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProductChoiceShouldNotBeFound(String filter) throws Exception {
+        restProductChoiceMockMvc.perform(get("/api/product-choices?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductChoiceMockMvc.perform(get("/api/product-choices/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

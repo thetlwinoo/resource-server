@@ -92,6 +92,38 @@
                         [(ngModel)]="suppliers.websiteURL" />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.suppliers.webServiceUrl" for="field_webServiceUrl">Web Service Url</label>
+                    <input type="text" class="form-control" name="webServiceUrl" id="field_webServiceUrl"
+                        [(ngModel)]="suppliers.webServiceUrl" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.suppliers.creditRating" for="field_creditRating">Credit Rating</label>
+                    <input type="number" class="form-control" name="creditRating" id="field_creditRating"
+                        [(ngModel)]="suppliers.creditRating" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.suppliers.activeFlag" for="field_activeFlag">Active Flag</label>
+                    <input type="checkbox" class="form-control" name="activeFlag" id="field_activeFlag"
+                        [(ngModel)]="suppliers.activeFlag" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.suppliers.avatar" for="field_avatar">Avatar</label>
+                    <div>
+                        <img [src]="'data:' + suppliers.avatarContentType + ';base64,' + suppliers.avatar" style="max-height: 100px;" *ngIf="suppliers.avatar" alt="suppliers image"/>
+                        <div *ngIf="suppliers.avatar" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{suppliers.avatarContentType}}, {{byteSize(suppliers.avatar)}}</span>
+                            <button type="button" (click)="clearInputImage('avatar', 'avatarContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_avatar" (change)="setFileData($event, suppliers, 'avatar', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="avatar" id="field_avatar"
+                        [(ngModel)]="suppliers.avatar" />
+                    <input type="hidden" class="form-control" name="avatarContentType" id="field_avatarContentType"
+                        [(ngModel)]="suppliers.avatarContentType" />
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.suppliers.validFrom" for="field_validFrom">Valid From</label>
                     <div class="input-group">
                         <input id="field_validFrom" type="text" class="form-control" name="validFrom" ngbDatepicker  #validFromDp="ngbDatepicker" [(ngModel)]="suppliers.validFrom"

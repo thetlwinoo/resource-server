@@ -55,7 +55,7 @@ describe('Service Tests', () => {
             it('should update a ProductOptionSet', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        value: 'BBBBBB'
+                        productOptionSetValue: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -72,7 +72,7 @@ describe('Service Tests', () => {
             it('should return a list of ProductOptionSet', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        value: 'BBBBBB'
+                        productOptionSetValue: 'BBBBBB'
                     },
                     elemDefault
                 );

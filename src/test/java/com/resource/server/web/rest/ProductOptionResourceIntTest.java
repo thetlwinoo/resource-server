@@ -3,11 +3,15 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductOption;
+import com.resource.server.domain.ProductOptionSet;
+import com.resource.server.domain.Suppliers;
 import com.resource.server.repository.ProductOptionRepository;
 import com.resource.server.service.ProductOptionService;
 import com.resource.server.service.dto.ProductOptionDTO;
 import com.resource.server.service.mapper.ProductOptionMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.ProductOptionCriteria;
+import com.resource.server.service.ProductOptionQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductOptionResourceIntTest {
 
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_PRODUCT_OPTION_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_OPTION_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductOptionRepository productOptionRepository;
@@ -54,6 +58,9 @@ public class ProductOptionResourceIntTest {
 
     @Autowired
     private ProductOptionService productOptionService;
+
+    @Autowired
+    private ProductOptionQueryService productOptionQueryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -77,7 +84,7 @@ public class ProductOptionResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductOptionResource productOptionResource = new ProductOptionResource(productOptionService);
+        final ProductOptionResource productOptionResource = new ProductOptionResource(productOptionService, productOptionQueryService);
         this.restProductOptionMockMvc = MockMvcBuilders.standaloneSetup(productOptionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -94,7 +101,7 @@ public class ProductOptionResourceIntTest {
      */
     public static ProductOption createEntity(EntityManager em) {
         ProductOption productOption = new ProductOption()
-            .value(DEFAULT_VALUE);
+            .productOptionValue(DEFAULT_PRODUCT_OPTION_VALUE);
         return productOption;
     }
 
@@ -119,7 +126,7 @@ public class ProductOptionResourceIntTest {
         List<ProductOption> productOptionList = productOptionRepository.findAll();
         assertThat(productOptionList).hasSize(databaseSizeBeforeCreate + 1);
         ProductOption testProductOption = productOptionList.get(productOptionList.size() - 1);
-        assertThat(testProductOption.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testProductOption.getProductOptionValue()).isEqualTo(DEFAULT_PRODUCT_OPTION_VALUE);
     }
 
     @Test
@@ -144,10 +151,10 @@ public class ProductOptionResourceIntTest {
 
     @Test
     @Transactional
-    public void checkValueIsRequired() throws Exception {
+    public void checkProductOptionValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productOptionRepository.findAll().size();
         // set the field null
-        productOption.setValue(null);
+        productOption.setProductOptionValue(null);
 
         // Create the ProductOption, which fails.
         ProductOptionDTO productOptionDTO = productOptionMapper.toDto(productOption);
@@ -172,7 +179,7 @@ public class ProductOptionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOption.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())));
+            .andExpect(jsonPath("$.[*].productOptionValue").value(hasItem(DEFAULT_PRODUCT_OPTION_VALUE.toString())));
     }
     
     @Test
@@ -186,8 +193,119 @@ public class ProductOptionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productOption.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()));
+            .andExpect(jsonPath("$.productOptionValue").value(DEFAULT_PRODUCT_OPTION_VALUE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductOptionsByProductOptionValueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productOptionRepository.saveAndFlush(productOption);
+
+        // Get all the productOptionList where productOptionValue equals to DEFAULT_PRODUCT_OPTION_VALUE
+        defaultProductOptionShouldBeFound("productOptionValue.equals=" + DEFAULT_PRODUCT_OPTION_VALUE);
+
+        // Get all the productOptionList where productOptionValue equals to UPDATED_PRODUCT_OPTION_VALUE
+        defaultProductOptionShouldNotBeFound("productOptionValue.equals=" + UPDATED_PRODUCT_OPTION_VALUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductOptionsByProductOptionValueIsInShouldWork() throws Exception {
+        // Initialize the database
+        productOptionRepository.saveAndFlush(productOption);
+
+        // Get all the productOptionList where productOptionValue in DEFAULT_PRODUCT_OPTION_VALUE or UPDATED_PRODUCT_OPTION_VALUE
+        defaultProductOptionShouldBeFound("productOptionValue.in=" + DEFAULT_PRODUCT_OPTION_VALUE + "," + UPDATED_PRODUCT_OPTION_VALUE);
+
+        // Get all the productOptionList where productOptionValue equals to UPDATED_PRODUCT_OPTION_VALUE
+        defaultProductOptionShouldNotBeFound("productOptionValue.in=" + UPDATED_PRODUCT_OPTION_VALUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductOptionsByProductOptionValueIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productOptionRepository.saveAndFlush(productOption);
+
+        // Get all the productOptionList where productOptionValue is not null
+        defaultProductOptionShouldBeFound("productOptionValue.specified=true");
+
+        // Get all the productOptionList where productOptionValue is null
+        defaultProductOptionShouldNotBeFound("productOptionValue.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductOptionsByProductOptionSetIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductOptionSet productOptionSet = ProductOptionSetResourceIntTest.createEntity(em);
+        em.persist(productOptionSet);
+        em.flush();
+        productOption.setProductOptionSet(productOptionSet);
+        productOptionRepository.saveAndFlush(productOption);
+        Long productOptionSetId = productOptionSet.getId();
+
+        // Get all the productOptionList where productOptionSet equals to productOptionSetId
+        defaultProductOptionShouldBeFound("productOptionSetId.equals=" + productOptionSetId);
+
+        // Get all the productOptionList where productOptionSet equals to productOptionSetId + 1
+        defaultProductOptionShouldNotBeFound("productOptionSetId.equals=" + (productOptionSetId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductOptionsBySupplierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Suppliers supplier = SuppliersResourceIntTest.createEntity(em);
+        em.persist(supplier);
+        em.flush();
+        productOption.setSupplier(supplier);
+        productOptionRepository.saveAndFlush(productOption);
+        Long supplierId = supplier.getId();
+
+        // Get all the productOptionList where supplier equals to supplierId
+        defaultProductOptionShouldBeFound("supplierId.equals=" + supplierId);
+
+        // Get all the productOptionList where supplier equals to supplierId + 1
+        defaultProductOptionShouldNotBeFound("supplierId.equals=" + (supplierId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProductOptionShouldBeFound(String filter) throws Exception {
+        restProductOptionMockMvc.perform(get("/api/product-options?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(productOption.getId().intValue())))
+            .andExpect(jsonPath("$.[*].productOptionValue").value(hasItem(DEFAULT_PRODUCT_OPTION_VALUE)));
+
+        // Check, that the count call also returns 1
+        restProductOptionMockMvc.perform(get("/api/product-options/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProductOptionShouldNotBeFound(String filter) throws Exception {
+        restProductOptionMockMvc.perform(get("/api/product-options?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductOptionMockMvc.perform(get("/api/product-options/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional
@@ -210,7 +328,7 @@ public class ProductOptionResourceIntTest {
         // Disconnect from session so that the updates on updatedProductOption are not directly saved in db
         em.detach(updatedProductOption);
         updatedProductOption
-            .value(UPDATED_VALUE);
+            .productOptionValue(UPDATED_PRODUCT_OPTION_VALUE);
         ProductOptionDTO productOptionDTO = productOptionMapper.toDto(updatedProductOption);
 
         restProductOptionMockMvc.perform(put("/api/product-options")
@@ -222,7 +340,7 @@ public class ProductOptionResourceIntTest {
         List<ProductOption> productOptionList = productOptionRepository.findAll();
         assertThat(productOptionList).hasSize(databaseSizeBeforeUpdate);
         ProductOption testProductOption = productOptionList.get(productOptionList.size() - 1);
-        assertThat(testProductOption.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testProductOption.getProductOptionValue()).isEqualTo(UPDATED_PRODUCT_OPTION_VALUE);
     }
 
     @Test

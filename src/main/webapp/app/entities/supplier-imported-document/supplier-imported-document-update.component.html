@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-supplier-imported-document-heading" jhiTranslate="resourceApp.supplierImportedDocument.home.createOrEditLabel">Create or edit a Supplier Imported Document</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!supplierImportedDocument.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="supplierImportedDocument.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.supplierImportedDocument.importedTemplate" for="field_importedTemplate">Imported Template</label>
+                    <div>
+                        <div *ngIf="supplierImportedDocument.importedTemplate" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(supplierImportedDocument.importedTemplateContentType, supplierImportedDocument.importedTemplate)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{supplierImportedDocument.importedTemplateContentType}}, {{byteSize(supplierImportedDocument.importedTemplate)}}</span>
+                            <button type="button" (click)="supplierImportedDocument.importedTemplate=null;supplierImportedDocument.importedTemplateContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_importedTemplate" (change)="setFileData($event, supplierImportedDocument, 'importedTemplate', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="importedTemplate" id="field_importedTemplate"
+                        [(ngModel)]="supplierImportedDocument.importedTemplate" />
+                    <input type="hidden" class="form-control" name="importedTemplateContentType" id="field_importedTemplateContentType"
+                        [(ngModel)]="supplierImportedDocument.importedTemplateContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.supplierImportedDocument.importedFailedTemplate" for="field_importedFailedTemplate">Imported Failed Template</label>
+                    <div>
+                        <div *ngIf="supplierImportedDocument.importedFailedTemplate" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(supplierImportedDocument.importedFailedTemplateContentType, supplierImportedDocument.importedFailedTemplate)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{supplierImportedDocument.importedFailedTemplateContentType}}, {{byteSize(supplierImportedDocument.importedFailedTemplate)}}</span>
+                            <button type="button" (click)="supplierImportedDocument.importedFailedTemplate=null;supplierImportedDocument.importedFailedTemplateContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_importedFailedTemplate" (change)="setFileData($event, supplierImportedDocument, 'importedFailedTemplate', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="importedFailedTemplate" id="field_importedFailedTemplate"
+                        [(ngModel)]="supplierImportedDocument.importedFailedTemplate" />
+                    <input type="hidden" class="form-control" name="importedFailedTemplateContentType" id="field_importedFailedTemplateContentType"
+                        [(ngModel)]="supplierImportedDocument.importedFailedTemplateContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resourceApp.supplierImportedDocument.uploadTransaction" for="field_uploadTransaction">Upload Transaction</label>
+                    <select class="form-control" id="field_uploadTransaction" name="uploadTransaction" [(ngModel)]="supplierImportedDocument.uploadTransactionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="uploadTransactionsOption.id" *ngFor="let uploadTransactionsOption of uploadtransactions; trackBy: trackUploadTransactionsById">{{uploadTransactionsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -44,15 +44,51 @@ describe('ProductDocument e2e test', () => {
 
         await productDocumentComponentsPage.clickOnCreateButton();
         await promise.all([
-            productDocumentUpdatePage.setDocumentNodeInput(absolutePath),
             productDocumentUpdatePage.setVideoUrlInput('videoUrl'),
             productDocumentUpdatePage.setHighlightsInput('highlights'),
-            productDocumentUpdatePage.productSelectLastOption(),
+            productDocumentUpdatePage.setLongDescriptionInput(absolutePath),
+            productDocumentUpdatePage.setShortDescriptionInput('shortDescription'),
+            productDocumentUpdatePage.setDescriptionInput('description'),
+            productDocumentUpdatePage.setCareInstructionsInput('careInstructions'),
+            productDocumentUpdatePage.setProductTypeInput('productType'),
+            productDocumentUpdatePage.setModelNameInput('modelName'),
+            productDocumentUpdatePage.setModelNumberInput('modelNumber'),
+            productDocumentUpdatePage.setFabricTypeInput('fabricType'),
+            productDocumentUpdatePage.setSpecialFeaturesInput('specialFeatures'),
+            productDocumentUpdatePage.setProductComplianceCertificateInput('productComplianceCertificate'),
+            productDocumentUpdatePage.setCountryOfOriginInput('countryOfOrigin'),
+            productDocumentUpdatePage.setUsageAndSideEffectsInput('usageAndSideEffects'),
+            productDocumentUpdatePage.setSafetyWarnningInput('safetyWarnning'),
+            productDocumentUpdatePage.setWarrantyPeriodInput('warrantyPeriod'),
+            productDocumentUpdatePage.setWarrantyPolicyInput('warrantyPolicy'),
+            productDocumentUpdatePage.warrantyTypeSelectLastOption(),
             productDocumentUpdatePage.cultureSelectLastOption()
         ]);
-        expect(await productDocumentUpdatePage.getDocumentNodeInput()).to.endsWith(fileNameToUpload);
         expect(await productDocumentUpdatePage.getVideoUrlInput()).to.eq('videoUrl');
         expect(await productDocumentUpdatePage.getHighlightsInput()).to.eq('highlights');
+        expect(await productDocumentUpdatePage.getLongDescriptionInput()).to.endsWith(fileNameToUpload);
+        expect(await productDocumentUpdatePage.getShortDescriptionInput()).to.eq('shortDescription');
+        expect(await productDocumentUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await productDocumentUpdatePage.getCareInstructionsInput()).to.eq('careInstructions');
+        expect(await productDocumentUpdatePage.getProductTypeInput()).to.eq('productType');
+        expect(await productDocumentUpdatePage.getModelNameInput()).to.eq('modelName');
+        expect(await productDocumentUpdatePage.getModelNumberInput()).to.eq('modelNumber');
+        expect(await productDocumentUpdatePage.getFabricTypeInput()).to.eq('fabricType');
+        expect(await productDocumentUpdatePage.getSpecialFeaturesInput()).to.eq('specialFeatures');
+        expect(await productDocumentUpdatePage.getProductComplianceCertificateInput()).to.eq('productComplianceCertificate');
+        const selectedGenuineAndLegal = productDocumentUpdatePage.getGenuineAndLegalInput();
+        if (await selectedGenuineAndLegal.isSelected()) {
+            await productDocumentUpdatePage.getGenuineAndLegalInput().click();
+            expect(await productDocumentUpdatePage.getGenuineAndLegalInput().isSelected()).to.be.false;
+        } else {
+            await productDocumentUpdatePage.getGenuineAndLegalInput().click();
+            expect(await productDocumentUpdatePage.getGenuineAndLegalInput().isSelected()).to.be.true;
+        }
+        expect(await productDocumentUpdatePage.getCountryOfOriginInput()).to.eq('countryOfOrigin');
+        expect(await productDocumentUpdatePage.getUsageAndSideEffectsInput()).to.eq('usageAndSideEffects');
+        expect(await productDocumentUpdatePage.getSafetyWarnningInput()).to.eq('safetyWarnning');
+        expect(await productDocumentUpdatePage.getWarrantyPeriodInput()).to.eq('warrantyPeriod');
+        expect(await productDocumentUpdatePage.getWarrantyPolicyInput()).to.eq('warrantyPolicy');
         await productDocumentUpdatePage.save();
         expect(await productDocumentUpdatePage.getSaveButton().isPresent()).to.be.false;
 

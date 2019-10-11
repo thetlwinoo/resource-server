@@ -69,6 +69,25 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="web_service_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="credit_rating" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="active_flag" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="avatar" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="avatar_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="valid_from" type="date">
                 <constraints nullable="false" />
             </column>
@@ -107,7 +126,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20190919022025-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20191010085253-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="suppliers">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

@@ -1,12 +1,12 @@
 package com.resource.server.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,29 +26,82 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    
-    @Lob
-    @Column(name = "document_node", nullable = false)
-    private byte[] documentNode;
-
-    @Column(name = "document_node_content_type", nullable = false)
-    private String documentNodeContentType;
-
     @Column(name = "video_url")
     private String videoUrl;
 
-    
     @Lob
-    @Column(name = "highlights", nullable = false)
+    @Column(name = "highlights")
     private String highlights;
+
+    @Lob
+    @Column(name = "long_description")
+    private byte[] longDescription;
+
+    @Column(name = "long_description_content_type")
+    private String longDescriptionContentType;
+
+    @Lob
+    @Column(name = "short_description")
+    private String shortDescription;
+
+    @Lob
+    @Column(name = "description")
+    private String description;
+
+    @Lob
+    @Column(name = "care_instructions")
+    private String careInstructions;
+
+    @Column(name = "product_type")
+    private String productType;
+
+    @Column(name = "model_name")
+    private String modelName;
+
+    @Column(name = "model_number")
+    private String modelNumber;
+
+    @Column(name = "fabric_type")
+    private String fabricType;
+
+    @Lob
+    @Column(name = "special_features")
+    private String specialFeatures;
+
+    @Column(name = "product_compliance_certificate")
+    private String productComplianceCertificate;
+
+    @Column(name = "genuine_and_legal")
+    private Boolean genuineAndLegal;
+
+    @Column(name = "country_of_origin")
+    private String countryOfOrigin;
+
+    @Lob
+    @Column(name = "usage_and_side_effects")
+    private String usageAndSideEffects;
+
+    @Lob
+    @Column(name = "safety_warnning")
+    private String safetyWarnning;
+
+    @Column(name = "warranty_period")
+    private String warrantyPeriod;
+
+    @Column(name = "warranty_policy")
+    private String warrantyPolicy;
 
     @ManyToOne
     @JsonIgnoreProperties("productDocuments")
-    private Products product;
+    private WarrantyTypes warrantyType;
 
     @ManyToOne
     @JsonIgnoreProperties("productDocuments")
     private Culture culture;
+
+    @OneToOne(mappedBy = "document")
+    @JsonIgnore
+    private Products product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -57,32 +110,6 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public byte[] getDocumentNode() {
-        return documentNode;
-    }
-
-    public ProductDocument documentNode(byte[] documentNode) {
-        this.documentNode = documentNode;
-        return this;
-    }
-
-    public void setDocumentNode(byte[] documentNode) {
-        this.documentNode = documentNode;
-    }
-
-    public String getDocumentNodeContentType() {
-        return documentNodeContentType;
-    }
-
-    public ProductDocument documentNodeContentType(String documentNodeContentType) {
-        this.documentNodeContentType = documentNodeContentType;
-        return this;
-    }
-
-    public void setDocumentNodeContentType(String documentNodeContentType) {
-        this.documentNodeContentType = documentNodeContentType;
     }
 
     public String getVideoUrl() {
@@ -111,17 +138,238 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
         this.highlights = highlights;
     }
 
-    public Products getProduct() {
-        return product;
+    public byte[] getLongDescription() {
+        return longDescription;
     }
 
-    public ProductDocument product(Products products) {
-        this.product = products;
+    public ProductDocument longDescription(byte[] longDescription) {
+        this.longDescription = longDescription;
         return this;
     }
 
-    public void setProduct(Products products) {
-        this.product = products;
+    public void setLongDescription(byte[] longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public String getLongDescriptionContentType() {
+        return longDescriptionContentType;
+    }
+
+    public ProductDocument longDescriptionContentType(String longDescriptionContentType) {
+        this.longDescriptionContentType = longDescriptionContentType;
+        return this;
+    }
+
+    public void setLongDescriptionContentType(String longDescriptionContentType) {
+        this.longDescriptionContentType = longDescriptionContentType;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public ProductDocument shortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+        return this;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ProductDocument description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCareInstructions() {
+        return careInstructions;
+    }
+
+    public ProductDocument careInstructions(String careInstructions) {
+        this.careInstructions = careInstructions;
+        return this;
+    }
+
+    public void setCareInstructions(String careInstructions) {
+        this.careInstructions = careInstructions;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public ProductDocument productType(String productType) {
+        this.productType = productType;
+        return this;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public ProductDocument modelName(String modelName) {
+        this.modelName = modelName;
+        return this;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public ProductDocument modelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+        return this;
+    }
+
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
+
+    public String getFabricType() {
+        return fabricType;
+    }
+
+    public ProductDocument fabricType(String fabricType) {
+        this.fabricType = fabricType;
+        return this;
+    }
+
+    public void setFabricType(String fabricType) {
+        this.fabricType = fabricType;
+    }
+
+    public String getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public ProductDocument specialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
+        return this;
+    }
+
+    public void setSpecialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public String getProductComplianceCertificate() {
+        return productComplianceCertificate;
+    }
+
+    public ProductDocument productComplianceCertificate(String productComplianceCertificate) {
+        this.productComplianceCertificate = productComplianceCertificate;
+        return this;
+    }
+
+    public void setProductComplianceCertificate(String productComplianceCertificate) {
+        this.productComplianceCertificate = productComplianceCertificate;
+    }
+
+    public Boolean isGenuineAndLegal() {
+        return genuineAndLegal;
+    }
+
+    public ProductDocument genuineAndLegal(Boolean genuineAndLegal) {
+        this.genuineAndLegal = genuineAndLegal;
+        return this;
+    }
+
+    public void setGenuineAndLegal(Boolean genuineAndLegal) {
+        this.genuineAndLegal = genuineAndLegal;
+    }
+
+    public String getCountryOfOrigin() {
+        return countryOfOrigin;
+    }
+
+    public ProductDocument countryOfOrigin(String countryOfOrigin) {
+        this.countryOfOrigin = countryOfOrigin;
+        return this;
+    }
+
+    public void setCountryOfOrigin(String countryOfOrigin) {
+        this.countryOfOrigin = countryOfOrigin;
+    }
+
+    public String getUsageAndSideEffects() {
+        return usageAndSideEffects;
+    }
+
+    public ProductDocument usageAndSideEffects(String usageAndSideEffects) {
+        this.usageAndSideEffects = usageAndSideEffects;
+        return this;
+    }
+
+    public void setUsageAndSideEffects(String usageAndSideEffects) {
+        this.usageAndSideEffects = usageAndSideEffects;
+    }
+
+    public String getSafetyWarnning() {
+        return safetyWarnning;
+    }
+
+    public ProductDocument safetyWarnning(String safetyWarnning) {
+        this.safetyWarnning = safetyWarnning;
+        return this;
+    }
+
+    public void setSafetyWarnning(String safetyWarnning) {
+        this.safetyWarnning = safetyWarnning;
+    }
+
+    public String getWarrantyPeriod() {
+        return warrantyPeriod;
+    }
+
+    public ProductDocument warrantyPeriod(String warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
+        return this;
+    }
+
+    public void setWarrantyPeriod(String warrantyPeriod) {
+        this.warrantyPeriod = warrantyPeriod;
+    }
+
+    public String getWarrantyPolicy() {
+        return warrantyPolicy;
+    }
+
+    public ProductDocument warrantyPolicy(String warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
+        return this;
+    }
+
+    public void setWarrantyPolicy(String warrantyPolicy) {
+        this.warrantyPolicy = warrantyPolicy;
+    }
+
+    public WarrantyTypes getWarrantyType() {
+        return warrantyType;
+    }
+
+    public ProductDocument warrantyType(WarrantyTypes warrantyTypes) {
+        this.warrantyType = warrantyTypes;
+        return this;
+    }
+
+    public void setWarrantyType(WarrantyTypes warrantyTypes) {
+        this.warrantyType = warrantyTypes;
     }
 
     public Culture getCulture() {
@@ -135,6 +383,19 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
 
     public void setCulture(Culture culture) {
         this.culture = culture;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public ProductDocument product(Products products) {
+        this.product = products;
+        return this;
+    }
+
+    public void setProduct(Products products) {
+        this.product = products;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -162,10 +423,25 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
     public String toString() {
         return "ProductDocument{" +
             "id=" + getId() +
-            ", documentNode='" + getDocumentNode() + "'" +
-            ", documentNodeContentType='" + getDocumentNodeContentType() + "'" +
             ", videoUrl='" + getVideoUrl() + "'" +
             ", highlights='" + getHighlights() + "'" +
+            ", longDescription='" + getLongDescription() + "'" +
+            ", longDescriptionContentType='" + getLongDescriptionContentType() + "'" +
+            ", shortDescription='" + getShortDescription() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", careInstructions='" + getCareInstructions() + "'" +
+            ", productType='" + getProductType() + "'" +
+            ", modelName='" + getModelName() + "'" +
+            ", modelNumber='" + getModelNumber() + "'" +
+            ", fabricType='" + getFabricType() + "'" +
+            ", specialFeatures='" + getSpecialFeatures() + "'" +
+            ", productComplianceCertificate='" + getProductComplianceCertificate() + "'" +
+            ", genuineAndLegal='" + isGenuineAndLegal() + "'" +
+            ", countryOfOrigin='" + getCountryOfOrigin() + "'" +
+            ", usageAndSideEffects='" + getUsageAndSideEffects() + "'" +
+            ", safetyWarnning='" + getSafetyWarnning() + "'" +
+            ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
+            ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             "}";
     }
 }

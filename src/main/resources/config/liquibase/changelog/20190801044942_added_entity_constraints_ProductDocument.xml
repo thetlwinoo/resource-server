@@ -8,11 +8,11 @@
     -->
     <changeSet id="20190801044942-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="product_id"
+        <addForeignKeyConstraint baseColumnNames="warranty_type_id"
                                  baseTableName="product_document"
-                                 constraintName="fk_product_document_product_id"
+                                 constraintName="fk_product_document_warranty_type_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="products"/>
+                                 referencedTableName="warranty_types"/>
 
         <addForeignKeyConstraint baseColumnNames="culture_id"
                                  baseTableName="product_document"

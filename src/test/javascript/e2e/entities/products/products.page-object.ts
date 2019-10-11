@@ -27,21 +27,15 @@ export class ProductsUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     productNameInput = element(by.id('field_productName'));
+    handleInput = element(by.id('field_handle'));
     productNumberInput = element(by.id('field_productNumber'));
     searchDetailsInput = element(by.id('field_searchDetails'));
-    thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
-    warrantyPeriodInput = element(by.id('field_warrantyPeriod'));
-    warrantyPolicyInput = element(by.id('field_warrantyPolicy'));
     sellCountInput = element(by.id('field_sellCount'));
-    whatInTheBoxInput = element(by.id('field_whatInTheBox'));
+    activeIndInput = element(by.id('field_activeInd'));
+    documentSelect = element(by.id('field_document'));
     supplierSelect = element(by.id('field_supplier'));
-    merchantSelect = element(by.id('field_merchant'));
-    unitPackageSelect = element(by.id('field_unitPackage'));
-    outerPackageSelect = element(by.id('field_outerPackage'));
-    productModelSelect = element(by.id('field_productModel'));
     productCategorySelect = element(by.id('field_productCategory'));
     productBrandSelect = element(by.id('field_productBrand'));
-    warrantyTypeSelect = element(by.id('field_warrantyType'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -53,6 +47,14 @@ export class ProductsUpdatePage {
 
     async getProductNameInput() {
         return this.productNameInput.getAttribute('value');
+    }
+
+    async setHandleInput(handle) {
+        await this.handleInput.sendKeys(handle);
+    }
+
+    async getHandleInput() {
+        return this.handleInput.getAttribute('value');
     }
 
     async setProductNumberInput(productNumber) {
@@ -71,30 +73,6 @@ export class ProductsUpdatePage {
         return this.searchDetailsInput.getAttribute('value');
     }
 
-    async setThumbnailUrlInput(thumbnailUrl) {
-        await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
-    }
-
-    async getThumbnailUrlInput() {
-        return this.thumbnailUrlInput.getAttribute('value');
-    }
-
-    async setWarrantyPeriodInput(warrantyPeriod) {
-        await this.warrantyPeriodInput.sendKeys(warrantyPeriod);
-    }
-
-    async getWarrantyPeriodInput() {
-        return this.warrantyPeriodInput.getAttribute('value');
-    }
-
-    async setWarrantyPolicyInput(warrantyPolicy) {
-        await this.warrantyPolicyInput.sendKeys(warrantyPolicy);
-    }
-
-    async getWarrantyPolicyInput() {
-        return this.warrantyPolicyInput.getAttribute('value');
-    }
-
     async setSellCountInput(sellCount) {
         await this.sellCountInput.sendKeys(sellCount);
     }
@@ -103,12 +81,27 @@ export class ProductsUpdatePage {
         return this.sellCountInput.getAttribute('value');
     }
 
-    async setWhatInTheBoxInput(whatInTheBox) {
-        await this.whatInTheBoxInput.sendKeys(whatInTheBox);
+    getActiveIndInput() {
+        return this.activeIndInput;
     }
 
-    async getWhatInTheBoxInput() {
-        return this.whatInTheBoxInput.getAttribute('value');
+    async documentSelectLastOption() {
+        await this.documentSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async documentSelectOption(option) {
+        await this.documentSelect.sendKeys(option);
+    }
+
+    getDocumentSelect(): ElementFinder {
+        return this.documentSelect;
+    }
+
+    async getDocumentSelectedOption() {
+        return this.documentSelect.element(by.css('option:checked')).getText();
     }
 
     async supplierSelectLastOption() {
@@ -128,82 +121,6 @@ export class ProductsUpdatePage {
 
     async getSupplierSelectedOption() {
         return this.supplierSelect.element(by.css('option:checked')).getText();
-    }
-
-    async merchantSelectLastOption() {
-        await this.merchantSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async merchantSelectOption(option) {
-        await this.merchantSelect.sendKeys(option);
-    }
-
-    getMerchantSelect(): ElementFinder {
-        return this.merchantSelect;
-    }
-
-    async getMerchantSelectedOption() {
-        return this.merchantSelect.element(by.css('option:checked')).getText();
-    }
-
-    async unitPackageSelectLastOption() {
-        await this.unitPackageSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async unitPackageSelectOption(option) {
-        await this.unitPackageSelect.sendKeys(option);
-    }
-
-    getUnitPackageSelect(): ElementFinder {
-        return this.unitPackageSelect;
-    }
-
-    async getUnitPackageSelectedOption() {
-        return this.unitPackageSelect.element(by.css('option:checked')).getText();
-    }
-
-    async outerPackageSelectLastOption() {
-        await this.outerPackageSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async outerPackageSelectOption(option) {
-        await this.outerPackageSelect.sendKeys(option);
-    }
-
-    getOuterPackageSelect(): ElementFinder {
-        return this.outerPackageSelect;
-    }
-
-    async getOuterPackageSelectedOption() {
-        return this.outerPackageSelect.element(by.css('option:checked')).getText();
-    }
-
-    async productModelSelectLastOption() {
-        await this.productModelSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async productModelSelectOption(option) {
-        await this.productModelSelect.sendKeys(option);
-    }
-
-    getProductModelSelect(): ElementFinder {
-        return this.productModelSelect;
-    }
-
-    async getProductModelSelectedOption() {
-        return this.productModelSelect.element(by.css('option:checked')).getText();
     }
 
     async productCategorySelectLastOption() {
@@ -242,25 +159,6 @@ export class ProductsUpdatePage {
 
     async getProductBrandSelectedOption() {
         return this.productBrandSelect.element(by.css('option:checked')).getText();
-    }
-
-    async warrantyTypeSelectLastOption() {
-        await this.warrantyTypeSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async warrantyTypeSelectOption(option) {
-        await this.warrantyTypeSelect.sendKeys(option);
-    }
-
-    getWarrantyTypeSelect(): ElementFinder {
-        return this.warrantyTypeSelect;
-    }
-
-    async getWarrantyTypeSelectedOption() {
-        return this.warrantyTypeSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

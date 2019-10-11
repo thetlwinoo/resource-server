@@ -3,11 +3,15 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.ProductAttribute;
+import com.resource.server.domain.ProductAttributeSet;
+import com.resource.server.domain.Suppliers;
 import com.resource.server.repository.ProductAttributeRepository;
 import com.resource.server.service.ProductAttributeService;
 import com.resource.server.service.dto.ProductAttributeDTO;
 import com.resource.server.service.mapper.ProductAttributeMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.ProductAttributeCriteria;
+import com.resource.server.service.ProductAttributeQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductAttributeResourceIntTest {
 
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_PRODUCT_ATTRIBUTE_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_ATTRIBUTE_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductAttributeRepository productAttributeRepository;
@@ -54,6 +58,9 @@ public class ProductAttributeResourceIntTest {
 
     @Autowired
     private ProductAttributeService productAttributeService;
+
+    @Autowired
+    private ProductAttributeQueryService productAttributeQueryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -77,7 +84,7 @@ public class ProductAttributeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductAttributeResource productAttributeResource = new ProductAttributeResource(productAttributeService);
+        final ProductAttributeResource productAttributeResource = new ProductAttributeResource(productAttributeService, productAttributeQueryService);
         this.restProductAttributeMockMvc = MockMvcBuilders.standaloneSetup(productAttributeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -94,7 +101,7 @@ public class ProductAttributeResourceIntTest {
      */
     public static ProductAttribute createEntity(EntityManager em) {
         ProductAttribute productAttribute = new ProductAttribute()
-            .value(DEFAULT_VALUE);
+            .productAttributeValue(DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
         return productAttribute;
     }
 
@@ -119,7 +126,7 @@ public class ProductAttributeResourceIntTest {
         List<ProductAttribute> productAttributeList = productAttributeRepository.findAll();
         assertThat(productAttributeList).hasSize(databaseSizeBeforeCreate + 1);
         ProductAttribute testProductAttribute = productAttributeList.get(productAttributeList.size() - 1);
-        assertThat(testProductAttribute.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testProductAttribute.getProductAttributeValue()).isEqualTo(DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
     }
 
     @Test
@@ -144,10 +151,10 @@ public class ProductAttributeResourceIntTest {
 
     @Test
     @Transactional
-    public void checkValueIsRequired() throws Exception {
+    public void checkProductAttributeValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productAttributeRepository.findAll().size();
         // set the field null
-        productAttribute.setValue(null);
+        productAttribute.setProductAttributeValue(null);
 
         // Create the ProductAttribute, which fails.
         ProductAttributeDTO productAttributeDTO = productAttributeMapper.toDto(productAttribute);
@@ -172,7 +179,7 @@ public class ProductAttributeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttribute.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())));
+            .andExpect(jsonPath("$.[*].productAttributeValue").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_VALUE.toString())));
     }
     
     @Test
@@ -186,8 +193,119 @@ public class ProductAttributeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productAttribute.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()));
+            .andExpect(jsonPath("$.productAttributeValue").value(DEFAULT_PRODUCT_ATTRIBUTE_VALUE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductAttributesByProductAttributeValueIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productAttributeRepository.saveAndFlush(productAttribute);
+
+        // Get all the productAttributeList where productAttributeValue equals to DEFAULT_PRODUCT_ATTRIBUTE_VALUE
+        defaultProductAttributeShouldBeFound("productAttributeValue.equals=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+
+        // Get all the productAttributeList where productAttributeValue equals to UPDATED_PRODUCT_ATTRIBUTE_VALUE
+        defaultProductAttributeShouldNotBeFound("productAttributeValue.equals=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductAttributesByProductAttributeValueIsInShouldWork() throws Exception {
+        // Initialize the database
+        productAttributeRepository.saveAndFlush(productAttribute);
+
+        // Get all the productAttributeList where productAttributeValue in DEFAULT_PRODUCT_ATTRIBUTE_VALUE or UPDATED_PRODUCT_ATTRIBUTE_VALUE
+        defaultProductAttributeShouldBeFound("productAttributeValue.in=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE + "," + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+
+        // Get all the productAttributeList where productAttributeValue equals to UPDATED_PRODUCT_ATTRIBUTE_VALUE
+        defaultProductAttributeShouldNotBeFound("productAttributeValue.in=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductAttributesByProductAttributeValueIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productAttributeRepository.saveAndFlush(productAttribute);
+
+        // Get all the productAttributeList where productAttributeValue is not null
+        defaultProductAttributeShouldBeFound("productAttributeValue.specified=true");
+
+        // Get all the productAttributeList where productAttributeValue is null
+        defaultProductAttributeShouldNotBeFound("productAttributeValue.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductAttributesByProductAttributeSetIsEqualToSomething() throws Exception {
+        // Initialize the database
+        ProductAttributeSet productAttributeSet = ProductAttributeSetResourceIntTest.createEntity(em);
+        em.persist(productAttributeSet);
+        em.flush();
+        productAttribute.setProductAttributeSet(productAttributeSet);
+        productAttributeRepository.saveAndFlush(productAttribute);
+        Long productAttributeSetId = productAttributeSet.getId();
+
+        // Get all the productAttributeList where productAttributeSet equals to productAttributeSetId
+        defaultProductAttributeShouldBeFound("productAttributeSetId.equals=" + productAttributeSetId);
+
+        // Get all the productAttributeList where productAttributeSet equals to productAttributeSetId + 1
+        defaultProductAttributeShouldNotBeFound("productAttributeSetId.equals=" + (productAttributeSetId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductAttributesBySupplierIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Suppliers supplier = SuppliersResourceIntTest.createEntity(em);
+        em.persist(supplier);
+        em.flush();
+        productAttribute.setSupplier(supplier);
+        productAttributeRepository.saveAndFlush(productAttribute);
+        Long supplierId = supplier.getId();
+
+        // Get all the productAttributeList where supplier equals to supplierId
+        defaultProductAttributeShouldBeFound("supplierId.equals=" + supplierId);
+
+        // Get all the productAttributeList where supplier equals to supplierId + 1
+        defaultProductAttributeShouldNotBeFound("supplierId.equals=" + (supplierId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultProductAttributeShouldBeFound(String filter) throws Exception {
+        restProductAttributeMockMvc.perform(get("/api/product-attributes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(productAttribute.getId().intValue())))
+            .andExpect(jsonPath("$.[*].productAttributeValue").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_VALUE)));
+
+        // Check, that the count call also returns 1
+        restProductAttributeMockMvc.perform(get("/api/product-attributes/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultProductAttributeShouldNotBeFound(String filter) throws Exception {
+        restProductAttributeMockMvc.perform(get("/api/product-attributes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductAttributeMockMvc.perform(get("/api/product-attributes/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional
@@ -210,7 +328,7 @@ public class ProductAttributeResourceIntTest {
         // Disconnect from session so that the updates on updatedProductAttribute are not directly saved in db
         em.detach(updatedProductAttribute);
         updatedProductAttribute
-            .value(UPDATED_VALUE);
+            .productAttributeValue(UPDATED_PRODUCT_ATTRIBUTE_VALUE);
         ProductAttributeDTO productAttributeDTO = productAttributeMapper.toDto(updatedProductAttribute);
 
         restProductAttributeMockMvc.perform(put("/api/product-attributes")
@@ -222,7 +340,7 @@ public class ProductAttributeResourceIntTest {
         List<ProductAttribute> productAttributeList = productAttributeRepository.findAll();
         assertThat(productAttributeList).hasSize(databaseSizeBeforeUpdate);
         ProductAttribute testProductAttribute = productAttributeList.get(productAttributeList.size() - 1);
-        assertThat(testProductAttribute.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testProductAttribute.getProductAttributeValue()).isEqualTo(UPDATED_PRODUCT_ATTRIBUTE_VALUE);
     }
 
     @Test

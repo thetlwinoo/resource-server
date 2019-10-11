@@ -26,8 +26,6 @@ public class ProductBrandCriteria implements Serializable {
 
     private StringFilter productBrandName;
 
-    private LongFilter merchantId;
-
     public LongFilter getId() {
         return id;
     }
@@ -44,14 +42,6 @@ public class ProductBrandCriteria implements Serializable {
         this.productBrandName = productBrandName;
     }
 
-    public LongFilter getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(LongFilter merchantId) {
-        this.merchantId = merchantId;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -64,16 +54,14 @@ public class ProductBrandCriteria implements Serializable {
         final ProductBrandCriteria that = (ProductBrandCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productBrandName, that.productBrandName) &&
-            Objects.equals(merchantId, that.merchantId);
+            Objects.equals(productBrandName, that.productBrandName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        productBrandName,
-        merchantId
+        productBrandName
         );
     }
 
@@ -82,7 +70,6 @@ public class ProductBrandCriteria implements Serializable {
         return "ProductBrandCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (productBrandName != null ? "productBrandName=" + productBrandName + ", " : "") +
-                (merchantId != null ? "merchantId=" + merchantId + ", " : "") +
             "}";
     }
 

@@ -8,35 +8,17 @@
     -->
     <changeSet id="20190801044940-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="products"
+                                 constraintName="fk_products_document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_document"/>
+
         <addForeignKeyConstraint baseColumnNames="supplier_id"
                                  baseTableName="products"
                                  constraintName="fk_products_supplier_id"
                                  referencedColumnNames="id"
                                  referencedTableName="suppliers"/>
-
-        <addForeignKeyConstraint baseColumnNames="merchant_id"
-                                 baseTableName="products"
-                                 constraintName="fk_products_merchant_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="merchants"/>
-
-        <addForeignKeyConstraint baseColumnNames="unit_package_id"
-                                 baseTableName="products"
-                                 constraintName="fk_products_unit_package_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="package_types"/>
-
-        <addForeignKeyConstraint baseColumnNames="outer_package_id"
-                                 baseTableName="products"
-                                 constraintName="fk_products_outer_package_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="package_types"/>
-
-        <addForeignKeyConstraint baseColumnNames="product_model_id"
-                                 baseTableName="products"
-                                 constraintName="fk_products_product_model_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="product_model"/>
 
         <addForeignKeyConstraint baseColumnNames="product_category_id"
                                  baseTableName="products"
@@ -49,12 +31,6 @@
                                  constraintName="fk_products_product_brand_id"
                                  referencedColumnNames="id"
                                  referencedTableName="product_brand"/>
-
-        <addForeignKeyConstraint baseColumnNames="warranty_type_id"
-                                 baseTableName="products"
-                                 constraintName="fk_products_warranty_type_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="warranty_types"/>
 
     </changeSet>
 </databaseChangeLog>

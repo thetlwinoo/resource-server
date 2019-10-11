@@ -1,0 +1,204 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resourceApp.stockItemTemp.home.title">Stock Item Temps</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-stock-item-temp" [routerLink]="['/stock-item-temp/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="resourceApp.stockItemTemp.home.createLabel">
+            Create new Stock Item Temp
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="stockItemTemps">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.stockItemName">Stock Item Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.vendorCode">Vendor Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.vendorSKU">Vendor SKU</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.barcode">Barcode</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.barcodeTypeId">Barcode Type Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.barcodeTypeName">Barcode Type Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productType">Product Type</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productCategoryId">Product Category Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productCategoryName">Product Category Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productAttributeSetId">Product Attribute Set Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productAttributeId">Product Attribute Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productAttributeValue">Product Attribute Value</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productOptionSetId">Product Option Set Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productOptionId">Product Option Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productOptionValue">Product Option Value</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.modelName">Model Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.modelNumber">Model Number</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.materialId">Material Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.materialName">Material Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.shortDescription">Short Description</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.description">Description</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productBrandId">Product Brand Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productBrandName">Product Brand Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.highlights">Highlights</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.searchDetails">Search Details</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.careInstructions">Care Instructions</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.dangerousGoods">Dangerous Goods</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.videoUrl">Video Url</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.unitPrice">Unit Price</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.remommendedRetailPrice">Remommended Retail Price</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.currencyCode">Currency Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.quantityOnHand">Quantity On Hand</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.warrantyPeriod">Warranty Period</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.warrantyPolicy">Warranty Policy</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.warrantyTypeId">Warranty Type Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.warrantyTypeName">Warranty Type Name</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.whatInTheBox">What In The Box</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemLength">Item Length</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWidth">Item Width</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemHeight">Item Height</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWeight">Item Weight</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageLength">Item Package Length</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWidth">Item Package Width</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageHeight">Item Package Height</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWeight">Item Package Weight</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemLengthUnitMeasureId">Item Length Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemLengthUnitMeasureCode">Item Length Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWidthUnitMeasureId">Item Width Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWidthUnitMeasureCode">Item Width Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemHeightUnitMeasureId">Item Height Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemHeightUnitMeasureCode">Item Height Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWeightUnitMeasureId">Item Weight Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemWeightUnitMeasureCode">Item Weight Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageLengthUnitMeasureId">Item Package Length Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageLengthUnitMeasureCode">Item Package Length Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWidthUnitMeasureId">Item Package Width Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWidthUnitMeasureCode">Item Package Width Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageHeightUnitMeasureId">Item Package Height Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageHeightUnitMeasureCode">Item Package Height Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWeightUnitMeasureId">Item Package Weight Unit Measure Id</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.itemPackageWeightUnitMeasureCode">Item Package Weight Unit Measure Code</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.noOfPieces">No Of Pieces</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.noOfItems">No Of Items</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.manufacture">Manufacture</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.specialFeactures">Special Feactures</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.productComplianceCertificate">Product Compliance Certificate</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.genuineAndLegal">Genuine And Legal</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.countryOfOrigin">Country Of Origin</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.usageAndSideEffects">Usage And Side Effects</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.safetyWarnning">Safety Warnning</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.sellStartDate">Sell Start Date</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.sellEndDate">Sell End Date</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.status">Status</span></th>
+            <th><span jhiTranslate="resourceApp.stockItemTemp.uploadTransaction">Upload Transaction</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let stockItemTemp of stockItemTemps ;trackBy: trackId">
+                <td><a [routerLink]="['/stock-item-temp', stockItemTemp.id, 'view' ]">{{stockItemTemp.id}}</a></td>
+                <td>{{stockItemTemp.stockItemName}}</td>
+                <td>{{stockItemTemp.vendorCode}}</td>
+                <td>{{stockItemTemp.vendorSKU}}</td>
+                <td>{{stockItemTemp.barcode}}</td>
+                <td>{{stockItemTemp.barcodeTypeId}}</td>
+                <td>{{stockItemTemp.barcodeTypeName}}</td>
+                <td>{{stockItemTemp.productType}}</td>
+                <td>{{stockItemTemp.productCategoryId}}</td>
+                <td>{{stockItemTemp.productCategoryName}}</td>
+                <td>{{stockItemTemp.productAttributeSetId}}</td>
+                <td>{{stockItemTemp.productAttributeId}}</td>
+                <td>{{stockItemTemp.productAttributeValue}}</td>
+                <td>{{stockItemTemp.productOptionSetId}}</td>
+                <td>{{stockItemTemp.productOptionId}}</td>
+                <td>{{stockItemTemp.productOptionValue}}</td>
+                <td>{{stockItemTemp.modelName}}</td>
+                <td>{{stockItemTemp.modelNumber}}</td>
+                <td>{{stockItemTemp.materialId}}</td>
+                <td>{{stockItemTemp.materialName}}</td>
+                <td>{{stockItemTemp.shortDescription}}</td>
+                <td>{{stockItemTemp.description}}</td>
+                <td>{{stockItemTemp.productBrandId}}</td>
+                <td>{{stockItemTemp.productBrandName}}</td>
+                <td>{{stockItemTemp.highlights}}</td>
+                <td>{{stockItemTemp.searchDetails}}</td>
+                <td>{{stockItemTemp.careInstructions}}</td>
+                <td>{{stockItemTemp.dangerousGoods}}</td>
+                <td>{{stockItemTemp.videoUrl}}</td>
+                <td>{{stockItemTemp.unitPrice}}</td>
+                <td>{{stockItemTemp.remommendedRetailPrice}}</td>
+                <td>{{stockItemTemp.currencyCode}}</td>
+                <td>{{stockItemTemp.quantityOnHand}}</td>
+                <td>{{stockItemTemp.warrantyPeriod}}</td>
+                <td>{{stockItemTemp.warrantyPolicy}}</td>
+                <td>{{stockItemTemp.warrantyTypeId}}</td>
+                <td>{{stockItemTemp.warrantyTypeName}}</td>
+                <td>{{stockItemTemp.whatInTheBox}}</td>
+                <td>{{stockItemTemp.itemLength}}</td>
+                <td>{{stockItemTemp.itemWidth}}</td>
+                <td>{{stockItemTemp.itemHeight}}</td>
+                <td>{{stockItemTemp.itemWeight}}</td>
+                <td>{{stockItemTemp.itemPackageLength}}</td>
+                <td>{{stockItemTemp.itemPackageWidth}}</td>
+                <td>{{stockItemTemp.itemPackageHeight}}</td>
+                <td>{{stockItemTemp.itemPackageWeight}}</td>
+                <td>{{stockItemTemp.itemLengthUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemLengthUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemWidthUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemWidthUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemHeightUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemHeightUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemWeightUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemWeightUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemPackageLengthUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemPackageLengthUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemPackageWidthUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemPackageWidthUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemPackageHeightUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemPackageHeightUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.itemPackageWeightUnitMeasureId}}</td>
+                <td>{{stockItemTemp.itemPackageWeightUnitMeasureCode}}</td>
+                <td>{{stockItemTemp.noOfPieces}}</td>
+                <td>{{stockItemTemp.noOfItems}}</td>
+                <td>{{stockItemTemp.manufacture}}</td>
+                <td>{{stockItemTemp.specialFeactures}}</td>
+                <td>{{stockItemTemp.productComplianceCertificate}}</td>
+                <td>{{stockItemTemp.genuineAndLegal}}</td>
+                <td>{{stockItemTemp.countryOfOrigin}}</td>
+                <td>{{stockItemTemp.usageAndSideEffects}}</td>
+                <td>{{stockItemTemp.safetyWarnning}}</td>
+                <td>{{stockItemTemp.sellStartDate | date:'mediumDate'}}</td>
+                <td>{{stockItemTemp.sellEndDate | date:'mediumDate'}}</td>
+                <td>{{stockItemTemp.status}}</td>
+                <td>
+                    <div *ngIf="stockItemTemp.uploadTransactionId">
+                        <a [routerLink]="['../upload-transactions', stockItemTemp.uploadTransactionId , 'view' ]" >{{stockItemTemp.uploadTransactionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/stock-item-temp', stockItemTemp.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/stock-item-temp', stockItemTemp.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'stock-item-temp', { outlets: { popup: stockItemTemp.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

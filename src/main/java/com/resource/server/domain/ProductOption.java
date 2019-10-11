@@ -27,12 +27,16 @@ public class ProductOption extends AbstractAuditingEntity implements Serializabl
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_value", nullable = false)
-    private String value;
+    @Column(name = "product_option_value", nullable = false)
+    private String productOptionValue;
 
     @ManyToOne
     @JsonIgnoreProperties("productOptions")
     private ProductOptionSet productOptionSet;
+
+    @ManyToOne
+    @JsonIgnoreProperties("productOptions")
+    private Suppliers supplier;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -43,17 +47,17 @@ public class ProductOption extends AbstractAuditingEntity implements Serializabl
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getProductOptionValue() {
+        return productOptionValue;
     }
 
-    public ProductOption value(String value) {
-        this.value = value;
+    public ProductOption productOptionValue(String productOptionValue) {
+        this.productOptionValue = productOptionValue;
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setProductOptionValue(String productOptionValue) {
+        this.productOptionValue = productOptionValue;
     }
 
     public ProductOptionSet getProductOptionSet() {
@@ -67,6 +71,19 @@ public class ProductOption extends AbstractAuditingEntity implements Serializabl
 
     public void setProductOptionSet(ProductOptionSet productOptionSet) {
         this.productOptionSet = productOptionSet;
+    }
+
+    public Suppliers getSupplier() {
+        return supplier;
+    }
+
+    public ProductOption supplier(Suppliers suppliers) {
+        this.supplier = suppliers;
+        return this;
+    }
+
+    public void setSupplier(Suppliers suppliers) {
+        this.supplier = suppliers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -94,7 +111,7 @@ public class ProductOption extends AbstractAuditingEntity implements Serializabl
     public String toString() {
         return "ProductOption{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", productOptionValue='" + getProductOptionValue() + "'" +
             "}";
     }
 }

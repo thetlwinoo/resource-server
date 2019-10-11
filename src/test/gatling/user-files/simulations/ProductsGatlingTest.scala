@@ -73,13 +73,11 @@ class ProductsGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "productName":"SAMPLE_TEXT"
+                , "handle":"SAMPLE_TEXT"
                 , "productNumber":"SAMPLE_TEXT"
-                , "searchDetails":"SAMPLE_TEXT"
-                , "thumbnailUrl":"SAMPLE_TEXT"
-                , "warrantyPeriod":"SAMPLE_TEXT"
-                , "warrantyPolicy":"SAMPLE_TEXT"
+                , "searchDetails":null
                 , "sellCount":"0"
-                , "whatInTheBox":"SAMPLE_TEXT"
+                , "activeInd":null
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_products_url"))).exitHereIfFailed

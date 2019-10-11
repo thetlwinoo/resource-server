@@ -15,11 +15,27 @@
             "detail": {
                 "title": "Product Document"
             },
-            "documentNode": "Document Node",
             "videoUrl": "Video Url",
             "highlights": "Highlights",
-            "product": "Product",
-            "culture": "Culture"
+            "longDescription": "Long Description",
+            "shortDescription": "Short Description",
+            "description": "Description",
+            "careInstructions": "Care Instructions",
+            "productType": "Product Type",
+            "modelName": "Model Name",
+            "modelNumber": "Model Number",
+            "fabricType": "Fabric Type",
+            "specialFeatures": "Special Features",
+            "productComplianceCertificate": "Product Compliance Certificate",
+            "genuineAndLegal": "Genuine And Legal",
+            "countryOfOrigin": "Country Of Origin",
+            "usageAndSideEffects": "Usage And Side Effects",
+            "safetyWarnning": "Safety Warnning",
+            "warrantyPeriod": "Warranty Period",
+            "warrantyPolicy": "Warranty Policy",
+            "warrantyType": "Warranty Type",
+            "culture": "Culture",
+            "product": "Product"
         }
     }
 }

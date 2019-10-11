@@ -17,7 +17,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="resourceApp.productBrand.productBrandName">Product Brand Name</span></th>
             <th><span jhiTranslate="resourceApp.productBrand.photo">Photo</span></th>
-            <th><span jhiTranslate="resourceApp.productBrand.merchant">Merchant</span></th>
             <th></th>
             </tr>
             </thead>
@@ -30,11 +29,6 @@
                         <img [src]="'data:' + productBrand.photoContentType + ';base64,' + productBrand.photo" style="max-height: 30px;" alt="productBrand image"/>
                     </a>
                     <span *ngIf="productBrand.photo">{{productBrand.photoContentType}}, {{byteSize(productBrand.photo)}}</span>
-                </td>
-                <td>
-                    <div *ngIf="productBrand.merchantId">
-                        <a [routerLink]="['../merchants', productBrand.merchantId , 'view' ]" >{{productBrand.merchantMerchantName}}</a>
-                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

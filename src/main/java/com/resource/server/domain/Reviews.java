@@ -40,12 +40,14 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @Column(name = "over_all_seller_rating")
     private Integer overAllSellerRating;
 
+    @Lob
     @Column(name = "over_all_seller_review")
     private String overAllSellerReview;
 
     @Column(name = "over_all_delivery_rating")
     private Integer overAllDeliveryRating;
 
+    @Lob
     @Column(name = "over_all_delivery_review")
     private String overAllDeliveryReview;
 
@@ -55,7 +57,7 @@ public class Reviews extends AbstractAuditingEntity implements Serializable {
     @Column(name = "completed_review")
     private Boolean completedReview;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewLines> reviewLineLists = new HashSet<>();
     @OneToOne(mappedBy = "orderOnReview")

@@ -1,5 +1,4 @@
 package com.resource.server.web.rest;
-import com.resource.server.domain.StockItems;
 import com.resource.server.service.StockItemsService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;

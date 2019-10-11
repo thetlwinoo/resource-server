@@ -54,10 +54,10 @@ public class SpecialDeals extends AbstractAuditingEntity implements Serializable
     @Column(name = "unit_price")
     private Float unitPrice;
 
-    @OneToMany(mappedBy = "specialDeals")
+    @OneToMany(mappedBy = "specialDeals",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ShoppingCarts> cartDiscounts = new HashSet<>();
-    @OneToMany(mappedBy = "specialDeals")
+    @OneToMany(mappedBy = "specialDeals",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Orders> orderDiscounts = new HashSet<>();
     @ManyToOne

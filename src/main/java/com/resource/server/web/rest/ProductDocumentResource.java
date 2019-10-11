@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing ProductDocument.
@@ -41,7 +41,7 @@ public class ProductDocumentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/product-documents")
-    public ResponseEntity<ProductDocumentDTO> createProductDocument(@Valid @RequestBody ProductDocumentDTO productDocumentDTO) throws URISyntaxException {
+    public ResponseEntity<ProductDocumentDTO> createProductDocument(@RequestBody ProductDocumentDTO productDocumentDTO) throws URISyntaxException {
         log.debug("REST request to save ProductDocument : {}", productDocumentDTO);
         if (productDocumentDTO.getId() != null) {
             throw new BadRequestAlertException("A new productDocument cannot already have an ID", ENTITY_NAME, "idexists");
@@ -62,7 +62,7 @@ public class ProductDocumentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/product-documents")
-    public ResponseEntity<ProductDocumentDTO> updateProductDocument(@Valid @RequestBody ProductDocumentDTO productDocumentDTO) throws URISyntaxException {
+    public ResponseEntity<ProductDocumentDTO> updateProductDocument(@RequestBody ProductDocumentDTO productDocumentDTO) throws URISyntaxException {
         log.debug("REST request to update ProductDocument : {}", productDocumentDTO);
         if (productDocumentDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -76,10 +76,15 @@ public class ProductDocumentResource {
     /**
      * GET  /product-documents : get all the productDocuments.
      *
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of productDocuments in body
      */
     @GetMapping("/product-documents")
-    public List<ProductDocumentDTO> getAllProductDocuments() {
+    public List<ProductDocumentDTO> getAllProductDocuments(@RequestParam(required = false) String filter) {
+        if ("product-is-null".equals(filter)) {
+            log.debug("REST request to get all ProductDocuments where product is null");
+            return productDocumentService.findAllWhereProductIsNull();
+        }
         log.debug("REST request to get all ProductDocuments");
         return productDocumentService.findAll();
     }

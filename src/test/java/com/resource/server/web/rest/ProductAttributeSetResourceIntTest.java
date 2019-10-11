@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ResourceApp.class)
 public class ProductAttributeSetResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCT_ATTRIBUTE_SET_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ProductAttributeSetRepository productAttributeSetRepository;
@@ -94,7 +94,7 @@ public class ProductAttributeSetResourceIntTest {
      */
     public static ProductAttributeSet createEntity(EntityManager em) {
         ProductAttributeSet productAttributeSet = new ProductAttributeSet()
-            .name(DEFAULT_NAME);
+            .productAttributeSetName(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
         return productAttributeSet;
     }
 
@@ -119,7 +119,7 @@ public class ProductAttributeSetResourceIntTest {
         List<ProductAttributeSet> productAttributeSetList = productAttributeSetRepository.findAll();
         assertThat(productAttributeSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductAttributeSet testProductAttributeSet = productAttributeSetList.get(productAttributeSetList.size() - 1);
-        assertThat(testProductAttributeSet.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testProductAttributeSet.getProductAttributeSetName()).isEqualTo(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
     }
 
     @Test
@@ -144,10 +144,10 @@ public class ProductAttributeSetResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkProductAttributeSetNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productAttributeSetRepository.findAll().size();
         // set the field null
-        productAttributeSet.setName(null);
+        productAttributeSet.setProductAttributeSetName(null);
 
         // Create the ProductAttributeSet, which fails.
         ProductAttributeSetDTO productAttributeSetDTO = productAttributeSetMapper.toDto(productAttributeSet);
@@ -172,7 +172,7 @@ public class ProductAttributeSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttributeSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].productAttributeSetName").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME.toString())));
     }
     
     @Test
@@ -186,7 +186,7 @@ public class ProductAttributeSetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productAttributeSet.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.productAttributeSetName").value(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME.toString()));
     }
 
     @Test
@@ -210,7 +210,7 @@ public class ProductAttributeSetResourceIntTest {
         // Disconnect from session so that the updates on updatedProductAttributeSet are not directly saved in db
         em.detach(updatedProductAttributeSet);
         updatedProductAttributeSet
-            .name(UPDATED_NAME);
+            .productAttributeSetName(UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
         ProductAttributeSetDTO productAttributeSetDTO = productAttributeSetMapper.toDto(updatedProductAttributeSet);
 
         restProductAttributeSetMockMvc.perform(put("/api/product-attribute-sets")
@@ -222,7 +222,7 @@ public class ProductAttributeSetResourceIntTest {
         List<ProductAttributeSet> productAttributeSetList = productAttributeSetRepository.findAll();
         assertThat(productAttributeSetList).hasSize(databaseSizeBeforeUpdate);
         ProductAttributeSet testProductAttributeSet = productAttributeSetList.get(productAttributeSetList.size() - 1);
-        assertThat(testProductAttributeSet.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testProductAttributeSet.getProductAttributeSetName()).isEqualTo(UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
     }
 
     @Test

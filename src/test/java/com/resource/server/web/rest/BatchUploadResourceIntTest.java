@@ -1,6 +1,7 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.service.BatchUploadService;
 import com.resource.server.service.ProductsService;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * Test class for the BatchUploadResource REST controller.
  *
@@ -23,17 +25,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BatchUploadResourceIntTest {
 
     private MockMvc restMockMvc;
-private final ProductsService productsService;
+    private final ProductsService productsService;
+    private final BatchUploadService batchUploadService;
 
-    public BatchUploadResourceIntTest(ProductsService productsService) {
+    public BatchUploadResourceIntTest(ProductsService productsService, BatchUploadService batchUploadService) {
         this.productsService = productsService;
+        this.batchUploadService = batchUploadService;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        BatchUploadResource batchUploadResource = new BatchUploadResource(productsService);
+        BatchUploadResource batchUploadResource = new BatchUploadResource(productsService, batchUploadService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(batchUploadResource)
             .build();
