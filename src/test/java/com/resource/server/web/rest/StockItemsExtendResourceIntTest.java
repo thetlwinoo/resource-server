@@ -1,7 +1,11 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
+import com.resource.server.repository.StockItemsExtendRepository;
+import com.resource.server.service.ProductsExtendService;
 import com.resource.server.service.StockItemsExtendService;
+import com.resource.server.service.StockItemsQueryService;
+import com.resource.server.service.SuppliersExtendService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,16 +29,24 @@ public class StockItemsExtendResourceIntTest {
 
     private MockMvc restMockMvc;
     private final StockItemsExtendService stockItemsExtendService;
+    private final StockItemsExtendRepository stockItemsExtendRepository;
+    private final StockItemsQueryService stockItemsQueryService;
+    private final SuppliersExtendService suppliersExtendService;
+    private final ProductsExtendService productsExtendService;
 
-    public StockItemsExtendResourceIntTest(StockItemsExtendService stockItemsExtendService) {
+    public StockItemsExtendResourceIntTest(StockItemsExtendService stockItemsExtendService, StockItemsExtendRepository stockItemsExtendRepository, StockItemsQueryService stockItemsQueryService, SuppliersExtendService suppliersExtendService, ProductsExtendService productsExtendService) {
         this.stockItemsExtendService = stockItemsExtendService;
+        this.stockItemsExtendRepository = stockItemsExtendRepository;
+        this.stockItemsQueryService = stockItemsQueryService;
+        this.suppliersExtendService = suppliersExtendService;
+        this.productsExtendService = productsExtendService;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        StockItemsExtendResource stockItemsExtendResource = new StockItemsExtendResource(stockItemsExtendService);
+        StockItemsExtendResource stockItemsExtendResource = new StockItemsExtendResource(stockItemsExtendService, stockItemsQueryService, suppliersExtendService, productsExtendService, stockItemsExtendRepository);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(stockItemsExtendResource)
             .build();

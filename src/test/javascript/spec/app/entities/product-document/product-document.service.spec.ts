@@ -25,7 +25,6 @@ describe('Service Tests', () => {
                 0,
                 'AAAAAAA',
                 'AAAAAAA',
-                'image/png',
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',

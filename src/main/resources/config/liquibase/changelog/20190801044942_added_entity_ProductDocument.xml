@@ -29,10 +29,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="long_description" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="long_description_content_type" type="varchar(255)">
+            <column name="long_description" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -110,7 +107,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20191010085253-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20191017062029-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="product_document">
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>

@@ -35,10 +35,7 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
 
     @Lob
     @Column(name = "long_description")
-    private byte[] longDescription;
-
-    @Column(name = "long_description_content_type")
-    private String longDescriptionContentType;
+    private String longDescription;
 
     @Lob
     @Column(name = "short_description")
@@ -138,30 +135,17 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
         this.highlights = highlights;
     }
 
-    public byte[] getLongDescription() {
+    public String getLongDescription() {
         return longDescription;
     }
 
-    public ProductDocument longDescription(byte[] longDescription) {
+    public ProductDocument longDescription(String longDescription) {
         this.longDescription = longDescription;
         return this;
     }
 
-    public void setLongDescription(byte[] longDescription) {
+    public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    public String getLongDescriptionContentType() {
-        return longDescriptionContentType;
-    }
-
-    public ProductDocument longDescriptionContentType(String longDescriptionContentType) {
-        this.longDescriptionContentType = longDescriptionContentType;
-        return this;
-    }
-
-    public void setLongDescriptionContentType(String longDescriptionContentType) {
-        this.longDescriptionContentType = longDescriptionContentType;
     }
 
     public String getShortDescription() {
@@ -426,7 +410,6 @@ public class ProductDocument extends AbstractAuditingEntity implements Serializa
             ", videoUrl='" + getVideoUrl() + "'" +
             ", highlights='" + getHighlights() + "'" +
             ", longDescription='" + getLongDescription() + "'" +
-            ", longDescriptionContentType='" + getLongDescriptionContentType() + "'" +
             ", shortDescription='" + getShortDescription() + "'" +
             ", description='" + getDescription() + "'" +
             ", careInstructions='" + getCareInstructions() + "'" +

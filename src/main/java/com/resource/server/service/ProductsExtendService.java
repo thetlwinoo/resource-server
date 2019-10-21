@@ -35,4 +35,6 @@ public interface ProductsExtendService {
     List<String> getRelatedBrands(String keyword, Long category);
 
     ProductsDTO save(Products products, String serverUrl);
+
+    List<Long> getProductIdsBySupplier(Long supplierId);
 }

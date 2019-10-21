@@ -16,9 +16,8 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
     private String highlights;
 
     @Lob
-    private byte[] longDescription;
+    private String longDescription;
 
-    private String longDescriptionContentType;
     @Lob
     private String shortDescription;
 
@@ -88,20 +87,12 @@ public class ProductDocumentDTO extends AbstractAuditingDTO implements Serializa
         this.highlights = highlights;
     }
 
-    public byte[] getLongDescription() {
+    public String getLongDescription() {
         return longDescription;
     }
 
-    public void setLongDescription(byte[] longDescription) {
+    public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    public String getLongDescriptionContentType() {
-        return longDescriptionContentType;
-    }
-
-    public void setLongDescriptionContentType(String longDescriptionContentType) {
-        this.longDescriptionContentType = longDescriptionContentType;
     }
 
     public String getShortDescription() {

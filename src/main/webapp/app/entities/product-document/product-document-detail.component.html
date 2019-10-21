@@ -15,10 +15,7 @@
                 </dd>
                 <dt><span jhiTranslate="resourceApp.productDocument.longDescription">Long Description</span></dt>
                 <dd>
-                    <div *ngIf="productDocument.longDescription">
-                        <a (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a>
-                        {{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}
-                    </div>
+                    <span>{{productDocument.longDescription}}</span>
                 </dd>
                 <dt><span jhiTranslate="resourceApp.productDocument.shortDescription">Short Description</span></dt>
                 <dd>

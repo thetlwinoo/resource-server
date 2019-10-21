@@ -50,10 +50,8 @@ public class ProductDocumentResourceIntTest {
     private static final String DEFAULT_HIGHLIGHTS = "AAAAAAAAAA";
     private static final String UPDATED_HIGHLIGHTS = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_LONG_DESCRIPTION = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_LONG_DESCRIPTION = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_LONG_DESCRIPTION_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_LONG_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_LONG_DESCRIPTION = "BBBBBBBBBB";
 
     private static final String DEFAULT_SHORT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_SHORT_DESCRIPTION = "BBBBBBBBBB";
@@ -151,7 +149,6 @@ public class ProductDocumentResourceIntTest {
             .videoUrl(DEFAULT_VIDEO_URL)
             .highlights(DEFAULT_HIGHLIGHTS)
             .longDescription(DEFAULT_LONG_DESCRIPTION)
-            .longDescriptionContentType(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE)
             .shortDescription(DEFAULT_SHORT_DESCRIPTION)
             .description(DEFAULT_DESCRIPTION)
             .careInstructions(DEFAULT_CARE_INSTRUCTIONS)
@@ -194,7 +191,6 @@ public class ProductDocumentResourceIntTest {
         assertThat(testProductDocument.getVideoUrl()).isEqualTo(DEFAULT_VIDEO_URL);
         assertThat(testProductDocument.getHighlights()).isEqualTo(DEFAULT_HIGHLIGHTS);
         assertThat(testProductDocument.getLongDescription()).isEqualTo(DEFAULT_LONG_DESCRIPTION);
-        assertThat(testProductDocument.getLongDescriptionContentType()).isEqualTo(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE);
         assertThat(testProductDocument.getShortDescription()).isEqualTo(DEFAULT_SHORT_DESCRIPTION);
         assertThat(testProductDocument.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testProductDocument.getCareInstructions()).isEqualTo(DEFAULT_CARE_INSTRUCTIONS);
@@ -245,8 +241,7 @@ public class ProductDocumentResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productDocument.getId().intValue())))
             .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL.toString())))
             .andExpect(jsonPath("$.[*].highlights").value(hasItem(DEFAULT_HIGHLIGHTS.toString())))
-            .andExpect(jsonPath("$.[*].longDescriptionContentType").value(hasItem(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].longDescription").value(hasItem(Base64Utils.encodeToString(DEFAULT_LONG_DESCRIPTION))))
+            .andExpect(jsonPath("$.[*].longDescription").value(hasItem(DEFAULT_LONG_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].shortDescription").value(hasItem(DEFAULT_SHORT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].careInstructions").value(hasItem(DEFAULT_CARE_INSTRUCTIONS.toString())))
@@ -277,8 +272,7 @@ public class ProductDocumentResourceIntTest {
             .andExpect(jsonPath("$.id").value(productDocument.getId().intValue()))
             .andExpect(jsonPath("$.videoUrl").value(DEFAULT_VIDEO_URL.toString()))
             .andExpect(jsonPath("$.highlights").value(DEFAULT_HIGHLIGHTS.toString()))
-            .andExpect(jsonPath("$.longDescriptionContentType").value(DEFAULT_LONG_DESCRIPTION_CONTENT_TYPE))
-            .andExpect(jsonPath("$.longDescription").value(Base64Utils.encodeToString(DEFAULT_LONG_DESCRIPTION)))
+            .andExpect(jsonPath("$.longDescription").value(DEFAULT_LONG_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.shortDescription").value(DEFAULT_SHORT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.careInstructions").value(DEFAULT_CARE_INSTRUCTIONS.toString()))
@@ -320,7 +314,6 @@ public class ProductDocumentResourceIntTest {
             .videoUrl(UPDATED_VIDEO_URL)
             .highlights(UPDATED_HIGHLIGHTS)
             .longDescription(UPDATED_LONG_DESCRIPTION)
-            .longDescriptionContentType(UPDATED_LONG_DESCRIPTION_CONTENT_TYPE)
             .shortDescription(UPDATED_SHORT_DESCRIPTION)
             .description(UPDATED_DESCRIPTION)
             .careInstructions(UPDATED_CARE_INSTRUCTIONS)
@@ -350,7 +343,6 @@ public class ProductDocumentResourceIntTest {
         assertThat(testProductDocument.getVideoUrl()).isEqualTo(UPDATED_VIDEO_URL);
         assertThat(testProductDocument.getHighlights()).isEqualTo(UPDATED_HIGHLIGHTS);
         assertThat(testProductDocument.getLongDescription()).isEqualTo(UPDATED_LONG_DESCRIPTION);
-        assertThat(testProductDocument.getLongDescriptionContentType()).isEqualTo(UPDATED_LONG_DESCRIPTION_CONTENT_TYPE);
         assertThat(testProductDocument.getShortDescription()).isEqualTo(UPDATED_SHORT_DESCRIPTION);
         assertThat(testProductDocument.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testProductDocument.getCareInstructions()).isEqualTo(UPDATED_CARE_INSTRUCTIONS);

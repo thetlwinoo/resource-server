@@ -5,7 +5,9 @@ import com.resource.server.repository.*;
 import com.resource.server.service.*;
 import com.resource.server.service.dto.*;
 import com.resource.server.service.mapper.StockItemTempMapper;
+import com.resource.server.service.mapper.SuppliersMapper;
 import com.resource.server.service.mapper.UploadTransactionsMapper;
+import com.resource.server.service.util.CommonUtil;
 import io.github.jhipster.service.filter.StringFilter;
 import javassist.expr.Cast;
 import liquibase.util.file.FilenameUtils;
@@ -23,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -52,8 +55,10 @@ public class BatchUploadServiceImpl implements BatchUploadService {
     private final MaterialsRepository materialsRepository;
     private final ProductAttributeRepository productAttributeRepository;
     private final ProductOptionRepository productOptionRepository;
+    private final SuppliersExtendService suppliersExtendService;
+    private final SuppliersMapper suppliersMapper;
 
-    public BatchUploadServiceImpl(UploadActionTypesService uploadActionTypesService, UploadActionTypesRepository uploadActionTypesRepository, UploadTransactionsRepository uploadTransactionsRepository, ProductCategoryExtendRepository productCategoryExtendRepository, UploadTransactionsMapper uploadTransactionsMapper, StockItemTempMapper stockItemTempMapper, BarcodeTypesQueryService barcodeTypesQueryService, ProductAttributeQueryService productAttributeQueryService, ProductOptionQueryService productOptionQueryService, MaterialsQueryService materialsQueryService, ProductBrandQueryService productBrandQueryService, WarrantyTypesQueryService warrantyTypesQueryService, BatchUploadRepository batchUploadRepository, ProductsRepository productsRepository, ProductBrandRepository productBrandRepository, BarcodeTypesRepository barcodeTypesRepository, MaterialsRepository materialsRepository, ProductAttributeRepository productAttributeRepository, ProductOptionRepository productOptionRepository) {
+    public BatchUploadServiceImpl(UploadActionTypesService uploadActionTypesService, UploadActionTypesRepository uploadActionTypesRepository, UploadTransactionsRepository uploadTransactionsRepository, ProductCategoryExtendRepository productCategoryExtendRepository, UploadTransactionsMapper uploadTransactionsMapper, StockItemTempMapper stockItemTempMapper, BarcodeTypesQueryService barcodeTypesQueryService, ProductAttributeQueryService productAttributeQueryService, ProductOptionQueryService productOptionQueryService, MaterialsQueryService materialsQueryService, ProductBrandQueryService productBrandQueryService, WarrantyTypesQueryService warrantyTypesQueryService, BatchUploadRepository batchUploadRepository, ProductsRepository productsRepository, ProductBrandRepository productBrandRepository, BarcodeTypesRepository barcodeTypesRepository, MaterialsRepository materialsRepository, ProductAttributeRepository productAttributeRepository, ProductOptionRepository productOptionRepository, SuppliersExtendService suppliersExtendService, SuppliersMapper suppliersMapper) {
         this.uploadActionTypesService = uploadActionTypesService;
         this.uploadActionTypesRepository = uploadActionTypesRepository;
         this.uploadTransactionsRepository = uploadTransactionsRepository;
@@ -73,16 +78,25 @@ public class BatchUploadServiceImpl implements BatchUploadService {
         this.materialsRepository = materialsRepository;
         this.productAttributeRepository = productAttributeRepository;
         this.productOptionRepository = productOptionRepository;
+        this.suppliersExtendService = suppliersExtendService;
+        this.suppliersMapper = suppliersMapper;
     }
 
     @Override
     @Transactional
-    public UploadTransactionsDTO readDataFromExcel(MultipartFile file, String serverUrl) {
+    public UploadTransactionsDTO readDataFromExcel(MultipartFile file, String serverUrl, Principal principal) {
         try {
             Workbook workbook = getWorkBook(file);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
+
+            Optional<SuppliersDTO> suppliersDTOOptional = suppliersExtendService.getSupplierByPrincipal(principal);
+            Suppliers suppliers = new Suppliers();
+            if (suppliersDTOOptional.isPresent()) {
+                suppliers = suppliersMapper.toEntity(suppliersDTOOptional.get());
+            }
+
             Integer currentColumnIndex = 0;
             List<Integer> failedIndexList = new ArrayList<>();
             UploadTransactions uploadTransactions = new UploadTransactions();
@@ -93,6 +107,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             uploadTransactions.setFileName(file.getOriginalFilename());
             uploadTransactions.setGeneratedCode(file.getOriginalFilename());
             uploadTransactions.setStatus(0);
+            uploadTransactions.setSupplier(suppliers);
 
             CellStyle style = workbook.createCellStyle();
             style.setFillBackgroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
@@ -264,7 +279,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             uploadTransactions.getImportDocumentLists().add(supplierImportedDocument);
 
             UploadTransactions savedUploadTransactions = uploadTransactionsRepository.save(uploadTransactions);
-            uploadTransactions.setTemplateUrl(serverUrl + "/supplier-imported-documents/download/" + savedUploadTransactions.getId() + "/template");
+            uploadTransactions.setTemplateUrl(serverUrl + "/supplier-imported-document-extend/download/" + savedUploadTransactions.getId() + "/template");
             savedUploadTransactions = uploadTransactionsRepository.save(savedUploadTransactions);
 //
 //            return savedUploadTransactions;
@@ -290,17 +305,26 @@ public class BatchUploadServiceImpl implements BatchUploadService {
 
     @Override
     @Transactional
-    public void importToSystem(Long transactionId) {
+    public void importToSystem(Long transactionId, Principal principal) {
         try {
             List<Object[]> productsList = batchUploadRepository.getProductsFromTemp(transactionId);
+            Optional<SuppliersDTO> suppliersDTOOptional = suppliersExtendService.getSupplierByPrincipal(principal);
+            Suppliers suppliers = new Suppliers();
+            if (suppliersDTOOptional.isPresent()) {
+                suppliers = suppliersMapper.toEntity(suppliersDTOOptional.get());
+            }
 
             for (Object[] productObj : productsList) {
                 Products products = new Products();
                 products.setProductName(productObj[0].toString());
                 ProductBrand productBrand = productBrandRepository.getOne(Long.parseLong(productObj[2].toString()));
                 products.setProductBrand(productBrand);
+                products.setHandle(CommonUtil.handleize(productObj[0].toString()));
                 ProductCategory productCategory = productCategoryExtendRepository.getOne(Long.parseLong(productObj[1].toString()));
                 products.setProductCategory(productCategory);
+                products.setSupplier(suppliers);
+
+                products.setActiveInd(false);
                 List<StockItemTemp> stockItemTempList = batchUploadRepository.getStockItemTemp(productObj[0].toString());
 
                 for (StockItemTemp stockItemTemp : stockItemTempList) {
@@ -341,8 +365,16 @@ public class BatchUploadServiceImpl implements BatchUploadService {
                     products.getStockItemLists().add(stockItems);
                 }
 
+                products = productsRepository.save(products);
+                String _productnumber = products.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+                _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
+                _productnumber = _productnumber + "-" + products.getId();
+                products.setProductNumber(_productnumber);
                 productsRepository.save(products);
             }
+
+            batchUploadRepository.clearStockItemTemps(transactionId);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IllegalArgumentException(ex.getMessage());

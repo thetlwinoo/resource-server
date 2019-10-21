@@ -21,21 +21,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.productDocument.longDescription" for="field_longDescription">Long Description</label>
-                    <div>
-                        <div *ngIf="productDocument.longDescription" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}</span>
-                            <button type="button" (click)="productDocument.longDescription=null;productDocument.longDescriptionContentType=null;"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_longDescription" (change)="setFileData($event, productDocument, 'longDescription', false)" jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="longDescription" id="field_longDescription"
-                        [(ngModel)]="productDocument.longDescription" />
-                    <input type="hidden" class="form-control" name="longDescriptionContentType" id="field_longDescriptionContentType"
-                        [(ngModel)]="productDocument.longDescriptionContentType" />
+                    <textarea class="form-control" name="longDescription" id="field_longDescription"
+                        [(ngModel)]="productDocument.longDescription" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="resourceApp.productDocument.shortDescription" for="field_shortDescription">Short Description</label>

@@ -3,7 +3,6 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { ProductDocumentComponentsPage, ProductDocumentDeleteDialog, ProductDocumentUpdatePage } from './product-document.page-object';
-import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -13,9 +12,6 @@ describe('ProductDocument e2e test', () => {
     let productDocumentUpdatePage: ProductDocumentUpdatePage;
     let productDocumentComponentsPage: ProductDocumentComponentsPage;
     let productDocumentDeleteDialog: ProductDocumentDeleteDialog;
-    const fileNameToUpload = 'logo-jhipster.png';
-    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
-    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -46,7 +42,7 @@ describe('ProductDocument e2e test', () => {
         await promise.all([
             productDocumentUpdatePage.setVideoUrlInput('videoUrl'),
             productDocumentUpdatePage.setHighlightsInput('highlights'),
-            productDocumentUpdatePage.setLongDescriptionInput(absolutePath),
+            productDocumentUpdatePage.setLongDescriptionInput('longDescription'),
             productDocumentUpdatePage.setShortDescriptionInput('shortDescription'),
             productDocumentUpdatePage.setDescriptionInput('description'),
             productDocumentUpdatePage.setCareInstructionsInput('careInstructions'),
@@ -66,7 +62,7 @@ describe('ProductDocument e2e test', () => {
         ]);
         expect(await productDocumentUpdatePage.getVideoUrlInput()).to.eq('videoUrl');
         expect(await productDocumentUpdatePage.getHighlightsInput()).to.eq('highlights');
-        expect(await productDocumentUpdatePage.getLongDescriptionInput()).to.endsWith(fileNameToUpload);
+        expect(await productDocumentUpdatePage.getLongDescriptionInput()).to.eq('longDescription');
         expect(await productDocumentUpdatePage.getShortDescriptionInput()).to.eq('shortDescription');
         expect(await productDocumentUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await productDocumentUpdatePage.getCareInstructionsInput()).to.eq('careInstructions');

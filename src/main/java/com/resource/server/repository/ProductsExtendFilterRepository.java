@@ -37,5 +37,8 @@ public interface ProductsExtendFilterRepository extends JpaRepository<ProductSub
 
     @Query(value = "select id from product_sub_category where product_category_id = :categoryId", nativeQuery = true)
     List<Long> getSubCategoryIds(@Param("categoryId") Long categoryId);
+
+    @Query(value = "SELECT id FROM products p WHERE p.supplier_id = :supplierId", nativeQuery = true)
+    List<Long> findIdsBySupplier(@Param("supplierId") Long supplierId);
 }
 

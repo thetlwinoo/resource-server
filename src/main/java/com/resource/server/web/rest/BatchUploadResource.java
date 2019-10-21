@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -54,14 +55,14 @@ public class BatchUploadResource {
     @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080"})
     @PostMapping("/excelupload")
 //    public String uploadBatchFile(@RequestBody MultipartFile file, RedirectAttributes redirectAttributes) throws URISyntaxException {
-    public ResponseEntity uploadExcelFile(@RequestBody MultipartFile file) throws URISyntaxException {
+    public ResponseEntity uploadExcelFile(@RequestBody MultipartFile file, Principal principal, HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save Products : {}", file);
         if (file == null) {
             throw new BadRequestAlertException("No File to upload", ENTITY_NAME, "No File Exist");
         }
 
-//        String _serverUrl = request.getRequestURL().toString().replace("/excelupload", "");
-        UploadTransactionsDTO uploadTransactionsDTO = batchUploadService.readDataFromExcel(file, "");
+        String _serverUrl = request.getRequestURL().toString().replace("/excelupload", "");
+        UploadTransactionsDTO uploadTransactionsDTO = batchUploadService.readDataFromExcel(file, _serverUrl,principal);
 
 //        redirectAttributes.addFlashAttribute("successmessage", "File Upload Sucessfully");
 
@@ -91,13 +92,13 @@ public class BatchUploadResource {
     }
 
     @PostMapping("/importtosystem")
-    public ResponseEntity importToSystem(@RequestParam("id") Long id) throws URISyntaxException {
+    public ResponseEntity importToSystem(@RequestParam("id") Long id, Principal principal) throws URISyntaxException {
 
 //        List<StockItemsDTO> result = null;
 //        return ResponseEntity.created(new URI("/api/upload-transactions/" + result.getId()))
 //            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
 //            .body(result);
-        batchUploadService.importToSystem(id);
+        batchUploadService.importToSystem(id,principal);
         return ResponseEntity.ok().body(null);
     }
 

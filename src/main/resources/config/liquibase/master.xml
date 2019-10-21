@@ -72,15 +72,6 @@
     <include file="config/liquibase/changelog/20190801044934_added_entity_ReviewLines.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190902042848_added_entity_ProductTags.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190910080840_added_entity_Merchants.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190916021800_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190916040200_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190917100258_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190917101401_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190918103420_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190919012332_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190919014444_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190919020802_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190919022025_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095631_added_entity_BarcodeTypes.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095633_added_entity_StockItemTemp.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095634_added_entity_UploadTransactions.xml" relativeToChangelogFile="false"/>
@@ -89,15 +80,8 @@
     <include file="config/liquibase/changelog/20191007095648_added_entity_DangerousGoods.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095652_added_entity_Currency.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095705_added_entity_LastestMerchantUploadedDocument.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191007095821_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191008012821_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191008033149_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191009091250_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191010065114_added_entity_SupplierImportedDocument.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191010065059_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191010074938_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191010080248_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20191010085253_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191017081555_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190913063552_added_entity_constraints_Addresses.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190913063553_added_entity_constraints_BusinessEntityAddress.xml" relativeToChangelogFile="false"/>
@@ -182,7 +166,7 @@
     <include file="config/liquibase/changelog/20190801044934_added_entity_constraints_ReviewLines.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190902042848_added_entity_constraints_ProductTags.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190910080840_added_entity_constraints_Merchants.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190801044946_added_entity_constraints_ProductModel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190801044946_added_entity_constraints_ProductModel.xml" relativeToChangelogFile="false"/>mvnw -Pprod clean verify
     <include file="config/liquibase/changelog/20190912101609_added_entity_constraints_ProductBrand.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095633_added_entity_constraints_StockItemTemp.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095634_added_entity_constraints_UploadTransactions.xml" relativeToChangelogFile="false"/>

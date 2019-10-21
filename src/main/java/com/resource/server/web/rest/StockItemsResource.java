@@ -4,6 +4,8 @@ import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.web.rest.util.PaginationUtil;
 import com.resource.server.service.dto.StockItemsDTO;
+import com.resource.server.service.dto.StockItemsCriteria;
+import com.resource.server.service.StockItemsQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +37,11 @@ public class StockItemsResource {
 
     private final StockItemsService stockItemsService;
 
-    public StockItemsResource(StockItemsService stockItemsService) {
+    private final StockItemsQueryService stockItemsQueryService;
+
+    public StockItemsResource(StockItemsService stockItemsService, StockItemsQueryService stockItemsQueryService) {
         this.stockItemsService = stockItemsService;
+        this.stockItemsQueryService = stockItemsQueryService;
     }
 
     /**
@@ -83,20 +88,27 @@ public class StockItemsResource {
      * GET  /stock-items : get all the stockItems.
      *
      * @param pageable the pagination information
-     * @param filter the filter of the request
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of stockItems in body
      */
     @GetMapping("/stock-items")
-    public ResponseEntity<List<StockItemsDTO>> getAllStockItems(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("stockitemholding-is-null".equals(filter)) {
-            log.debug("REST request to get all StockItemss where stockItemHolding is null");
-            return new ResponseEntity<>(stockItemsService.findAllWhereStockItemHoldingIsNull(),
-                    HttpStatus.OK);
-        }
-        log.debug("REST request to get a page of StockItems");
-        Page<StockItemsDTO> page = stockItemsService.findAll(pageable);
+    public ResponseEntity<List<StockItemsDTO>> getAllStockItems(StockItemsCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get StockItems by criteria: {}", criteria);
+        Page<StockItemsDTO> page = stockItemsQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/stock-items");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /stock-items/count : count all the stockItems.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/stock-items/count")
+    public ResponseEntity<Long> countStockItems(StockItemsCriteria criteria) {
+        log.debug("REST request to count StockItems by criteria: {}", criteria);
+        return ResponseEntity.ok().body(stockItemsQueryService.countByCriteria(criteria));
     }
 
     /**

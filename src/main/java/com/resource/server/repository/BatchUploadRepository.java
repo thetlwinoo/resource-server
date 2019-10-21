@@ -3,6 +3,7 @@ package com.resource.server.repository;
 import com.resource.server.domain.Products;
 import com.resource.server.domain.StockItemTemp;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,4 +15,8 @@ public interface BatchUploadRepository extends JpaRepository<StockItemTemp, Long
 
     @Query(value = "SELECT s.* FROM stock_item_temp s WHERE s.stock_item_name LIKE %:keyword%", nativeQuery = true)
     List<StockItemTemp> getStockItemTemp(@Param("keyword") String keyword);
+
+    @Modifying
+    @Query(value = "DELETE FROM stock_item_temp s WHERE s.upload_transaction_id=:id", nativeQuery = true)
+    void clearStockItemTemps(@Param("id") Long id);
 }

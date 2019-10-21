@@ -6,6 +6,7 @@ import com.resource.server.repository.ProductsExtendRepository;
 import com.resource.server.service.*;
 import com.resource.server.service.dto.*;
 import com.resource.server.service.mapper.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,7 +170,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
             if (products.getId() != null) {
                 saveProduct = products;
                 for (StockItems _stockItems : products.getStockItemLists()) {
-                    _stockItems.setStockItemName(products.getProductName());
+//                    _stockItems.setStockItemName(products.getProductName());
                     _stockItems.setProduct(products);
                     Set<Photos> photoList = new HashSet<Photos>();
                     for (Photos _photos : _stockItems.getPhotoLists()) {
@@ -182,31 +183,47 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                     _stockItems.getPhotoLists().addAll(photoList);
                 }
             } else {
-//                saveProduct.setProductModel(products.getProductModel());
                 saveProduct.setProductBrand(products.getProductBrand());
+                saveProduct.setHandle(products.getHandle());
                 saveProduct.setProductCategory(products.getProductCategory());
-//                saveProduct.setWarrantyType(products.getWarrantyType());
-
                 saveProduct.setProductName(products.getProductName());
                 saveProduct.setSearchDetails(products.getSearchDetails());
                 saveProduct.setSupplier(products.getSupplier());
-//                saveProduct.setWarrantyPeriod(products.getWarrantyPeriod());
-//                saveProduct.setWarrantyPolicy(products.getWarrantyPolicy());
-//                saveProduct.setWhatInTheBox(products.getWhatInTheBox());
+                saveProduct.setDocument(products.getDocument());
+                saveProduct.setActiveInd(false);
 
                 for (StockItems _stockItems : products.getStockItemLists()) {
                     StockItems stockItems = new StockItems();
-                    stockItems.setStockItemName(products.getProductName());
-//                    stockItems.setQuantityPerOuter(_stockItems.getQuantityPerOuter());
-//                    stockItems.setTypicalHeightPerUnit(_stockItems.getTypicalHeightPerUnit());
-//                    stockItems.setTypicalLengthPerUnit(_stockItems.getTypicalLengthPerUnit());
-//                    stockItems.setTypicalWeightPerUnit(_stockItems.getTypicalWeightPerUnit());
-//                    stockItems.setTypicalWidthPerUnit(_stockItems.getTypicalWidthPerUnit());
+                    String attributeName = StringUtils.isBlank(_stockItems.getProductAttribute().getProductAttributeValue()) ? "" : " - " + _stockItems.getProductAttribute().getProductAttributeValue();
+                    String optionName = StringUtils.isBlank(_stockItems.getProductOption().getProductOptionValue()) ? "" : "(" + _stockItems.getProductOption().getProductOptionValue() + ")";
+                    stockItems.setStockItemName(products.getProductName() + attributeName + optionName);
+                    stockItems.setVendorCode(_stockItems.getVendorCode());
+                    stockItems.setVendorSKU(_stockItems.getVendorSKU());
+                    stockItems.setBarcode(_stockItems.getBarcode());
+                    stockItems.setBarcodeType(_stockItems.getBarcodeType());
                     stockItems.setUnitPrice(_stockItems.getUnitPrice());
                     stockItems.setRecommendedRetailPrice(_stockItems.getRecommendedRetailPrice());
-
                     stockItems.setProductAttribute(_stockItems.getProductAttribute());
                     stockItems.setProductOption(_stockItems.getProductOption());
+                    stockItems.setQuantityOnHand(_stockItems.getQuantityOnHand());
+                    stockItems.setItemLength(_stockItems.getItemLength());
+                    stockItems.setItemWidth(_stockItems.getItemWidth());
+                    stockItems.setItemHeight(_stockItems.getItemHeight());
+                    stockItems.setItemWeight(_stockItems.getItemWeight());
+                    stockItems.setItemPackageLength(_stockItems.getItemPackageLength());
+                    stockItems.setItemPackageWidth(_stockItems.getItemPackageWidth());
+                    stockItems.setItemPackageHeight(_stockItems.getItemPackageHeight());
+                    stockItems.setItemPackageWeight(_stockItems.getItemPackageWeight());
+                    stockItems.setNoOfPieces(_stockItems.getNoOfPieces());
+                    stockItems.setNoOfItems(_stockItems.getNoOfItems());
+                    stockItems.setManufacture(_stockItems.getManufacture());
+                    stockItems.setMarketingComments(_stockItems.getMarketingComments());
+                    stockItems.setInternalComments(_stockItems.getInternalComments());
+                    stockItems.setSellStartDate(_stockItems.getSellStartDate());
+                    stockItems.setSellEndDate(_stockItems.getSellEndDate());
+                    stockItems.setCustomFields(_stockItems.getCustomFields());
+                    stockItems.setActiveInd(false);
+                    stockItems.setMaterial(_stockItems.getMaterial());
 
                     stockItems.setProduct(saveProduct);
 
@@ -229,15 +246,10 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
             }
 
             saveProduct = productsExtendRepository.save(saveProduct);
-            String _productThumbnailUrl = "";
             int index = 0;
             for (StockItems _stockItems : saveProduct.getStockItemLists()) {
-                if(++index == 1){
-                    _productThumbnailUrl = serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail";
-                }
                 _stockItems.setThumbnailUrl(serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail");
             }
-//            saveProduct.setThumbnailUrl(_productThumbnailUrl);
             String _productnumber = saveProduct.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
             _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
             _productnumber = _productnumber + "-" + saveProduct.getId();
@@ -249,5 +261,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
         return productsMapper.toDto(saveProduct);
     }
 
-
+    public List<Long> getProductIdsBySupplier(Long supplierId) {
+        return productsExtendFilterRepository.findIdsBySupplier(supplierId);
+    }
 }

@@ -2,11 +2,7 @@ package com.resource.server.web.rest;
 
 import com.resource.server.ResourceApp;
 import com.resource.server.repository.ProductsExtendRepository;
-import com.resource.server.repository.ProductsRepository;
-import com.resource.server.service.ProductPhotoService;
-import com.resource.server.service.ProductsExtendService;
-import com.resource.server.service.ProductsQueryService;
-import com.resource.server.service.ProductsService;
+import com.resource.server.service.*;
 import com.resource.server.service.mapper.ProductsMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,21 +32,23 @@ public class ProductsExtendResourceIntTest {
     private ProductsQueryService productsQueryService;
     private final ProductsMapper productsMapper;
     private final ProductsExtendRepository productsExtendRepository;
+    private final StockItemsService stockItemsService;
 
-    public ProductsExtendResourceIntTest(ProductsExtendService productExtendedService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService, ProductsMapper productsMapper, ProductsExtendRepository productsExtendRepository) {
+    public ProductsExtendResourceIntTest(ProductsExtendService productExtendedService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService, ProductsMapper productsMapper, ProductsExtendRepository productsExtendRepository, StockItemsService stockItemsService) {
         this.productExtendedService = productExtendedService;
         this.productsService = productsService;
         this.productPhotoService = productPhotoService;
         this.productsQueryService = productsQueryService;
         this.productsMapper = productsMapper;
         this.productsExtendRepository = productsExtendRepository;
+        this.stockItemsService = stockItemsService;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ProductsExtendResource productsExtendResource = new ProductsExtendResource(productExtendedService, productsService, productPhotoService, productsQueryService, productsExtendRepository, productsMapper);
+        ProductsExtendResource productsExtendResource = new ProductsExtendResource(productExtendedService, productsService, productPhotoService, productsQueryService, productsExtendRepository, productsMapper, stockItemsService);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(productsExtendResource)
             .build();

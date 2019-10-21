@@ -43,10 +43,7 @@
                 <td><a [routerLink]="['/product-document', productDocument.id, 'view' ]">{{productDocument.id}}</a></td>
                 <td>{{productDocument.videoUrl}}</td>
                 <td>{{productDocument.highlights}}</td>
-                <td>
-                    <a *ngIf="productDocument.longDescription" (click)="openFile(productDocument.longDescriptionContentType, productDocument.longDescription)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="productDocument.longDescription">{{productDocument.longDescriptionContentType}}, {{byteSize(productDocument.longDescription)}}</span>
-                </td>
+                <td>{{productDocument.longDescription}}</td>
                 <td>{{productDocument.shortDescription}}</td>
                 <td>{{productDocument.description}}</td>
                 <td>{{productDocument.careInstructions}}</td>

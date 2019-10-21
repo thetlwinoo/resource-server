@@ -2,7 +2,6 @@ export interface IProductDocument {
     id?: number;
     videoUrl?: string;
     highlights?: any;
-    longDescriptionContentType?: string;
     longDescription?: any;
     shortDescription?: any;
     description?: any;
@@ -31,7 +30,6 @@ export class ProductDocument implements IProductDocument {
         public id?: number,
         public videoUrl?: string,
         public highlights?: any,
-        public longDescriptionContentType?: string,
         public longDescription?: any,
         public shortDescription?: any,
         public description?: any,

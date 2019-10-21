@@ -31,6 +31,9 @@ domain>
 	Products>>
 	StockItems>> remove(@ManyToOne)
 
+    Products>>@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    ProductDocuments>>
+
 	people
 	@OneToOne(mappedBy = "cartUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	>>

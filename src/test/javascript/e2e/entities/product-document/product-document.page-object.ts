@@ -28,7 +28,7 @@ export class ProductDocumentUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     videoUrlInput = element(by.id('field_videoUrl'));
     highlightsInput = element(by.id('field_highlights'));
-    longDescriptionInput = element(by.id('file_longDescription'));
+    longDescriptionInput = element(by.id('field_longDescription'));
     shortDescriptionInput = element(by.id('field_shortDescription'));
     descriptionInput = element(by.id('field_description'));
     careInstructionsInput = element(by.id('field_careInstructions'));

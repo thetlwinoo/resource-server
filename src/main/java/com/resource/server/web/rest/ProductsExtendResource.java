@@ -1,15 +1,14 @@
 package com.resource.server.web.rest;
 
 import com.resource.server.domain.Products;
+import com.resource.server.domain.StockItems;
 import com.resource.server.repository.ProductsExtendRepository;
 import com.resource.server.repository.ProductsRepository;
-import com.resource.server.service.ProductPhotoService;
-import com.resource.server.service.ProductsExtendService;
-import com.resource.server.service.ProductsQueryService;
-import com.resource.server.service.ProductsService;
+import com.resource.server.service.*;
 import com.resource.server.service.dto.ProductCategoryDTO;
 import com.resource.server.service.dto.ProductsCriteria;
 import com.resource.server.service.dto.ProductsDTO;
+import com.resource.server.service.dto.StockItemsDTO;
 import com.resource.server.service.mapper.ProductsMapper;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
@@ -47,14 +46,16 @@ public class ProductsExtendResource {
     private final ProductsQueryService productsQueryService;
     private final ProductsExtendRepository productsExtendRepository;
     private final ProductsMapper productsMapper;
+    private final StockItemsService stockItemsService;
 
-    public ProductsExtendResource(ProductsExtendService productExtendService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService, ProductsExtendRepository productsExtendRepository, ProductsMapper productsMapper) {
+    public ProductsExtendResource(ProductsExtendService productExtendService, ProductsService productsService, ProductPhotoService productPhotoService, ProductsQueryService productsQueryService, ProductsExtendRepository productsExtendRepository, ProductsMapper productsMapper, StockItemsService stockItemsService) {
         this.productExtendService = productExtendService;
         this.productsService = productsService;
         this.productPhotoService = productPhotoService;
         this.productsQueryService = productsQueryService;
         this.productsExtendRepository = productsExtendRepository;
         this.productsMapper = productsMapper;
+        this.stockItemsService = stockItemsService;
     }
 
     @PostMapping("/products")
@@ -90,6 +91,42 @@ public class ProductsExtendResource {
             return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
+        } catch (Exception ex) {
+            throw new BadRequestAlertException(ex.getMessage(), ENTITY_NAME, "error");
+        }
+    }
+
+    @PutMapping("/products/stock-item")
+    public ResponseEntity updateStockItemActive(@RequestParam("stockItemId") Long stockItemId, @RequestParam("isActive") Boolean isActive) {
+        try {
+
+            Optional<StockItemsDTO> stockItemsDTOOptional = stockItemsService.findOne(stockItemId);
+            Products saveProduct = new Products();
+            if (stockItemsDTOOptional.isPresent()) {
+                saveProduct = productsExtendRepository.findProductsById(stockItemsDTOOptional.get().getProductId());
+
+                Boolean isActiveInd = false;
+                for (StockItems stockItems : saveProduct.getStockItemLists()) {
+                    if (stockItems.getId().equals(stockItemId)) {
+                        stockItems.setActiveInd(isActive);
+                    }
+
+                    if(stockItems.isActiveInd() == null){
+                        stockItems.setActiveInd(false);
+                    }
+
+                    if (stockItems.isActiveInd() == true) {
+                        isActiveInd = true;
+                    }
+                }
+
+                saveProduct.setActiveInd(isActiveInd);
+                saveProduct = productsExtendRepository.save(saveProduct);
+            }
+
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, saveProduct.getId().toString()))
+                .body(saveProduct);
         } catch (Exception ex) {
             throw new BadRequestAlertException(ex.getMessage(), ENTITY_NAME, "error");
         }

@@ -49,7 +49,7 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "active_ind")
     private Boolean activeInd;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(unique = true)
     private ProductDocument document;
 

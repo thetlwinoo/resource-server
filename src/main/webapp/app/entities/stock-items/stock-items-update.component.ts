@@ -75,7 +75,7 @@ export class StockItemsUpdateComponent implements OnInit {
             this.stockItems = stockItems;
         });
         this.reviewLinesService
-            .query({ filter: 'stockitem-is-null' })
+            .query({ 'stockItemId.specified': 'false' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IReviewLines[]>) => mayBeOk.ok),
                 map((response: HttpResponse<IReviewLines[]>) => response.body)

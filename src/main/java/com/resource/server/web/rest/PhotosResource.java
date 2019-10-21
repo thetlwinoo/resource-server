@@ -3,6 +3,8 @@ import com.resource.server.service.PhotosService;
 import com.resource.server.web.rest.errors.BadRequestAlertException;
 import com.resource.server.web.rest.util.HeaderUtil;
 import com.resource.server.service.dto.PhotosDTO;
+import com.resource.server.service.dto.PhotosCriteria;
+import com.resource.server.service.PhotosQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +31,11 @@ public class PhotosResource {
 
     private final PhotosService photosService;
 
-    public PhotosResource(PhotosService photosService) {
+    private final PhotosQueryService photosQueryService;
+
+    public PhotosResource(PhotosService photosService, PhotosQueryService photosQueryService) {
         this.photosService = photosService;
+        this.photosQueryService = photosQueryService;
     }
 
     /**
@@ -76,12 +81,26 @@ public class PhotosResource {
     /**
      * GET  /photos : get all the photos.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of photos in body
      */
     @GetMapping("/photos")
-    public List<PhotosDTO> getAllPhotos() {
-        log.debug("REST request to get all Photos");
-        return photosService.findAll();
+    public ResponseEntity<List<PhotosDTO>> getAllPhotos(PhotosCriteria criteria) {
+        log.debug("REST request to get Photos by criteria: {}", criteria);
+        List<PhotosDTO> entityList = photosQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /photos/count : count all the photos.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/photos/count")
+    public ResponseEntity<Long> countPhotos(PhotosCriteria criteria) {
+        log.debug("REST request to count Photos by criteria: {}", criteria);
+        return ResponseEntity.ok().body(photosQueryService.countByCriteria(criteria));
     }
 
     /**

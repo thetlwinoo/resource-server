@@ -9042,6 +9042,18 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'supplier-imported-document',
                 loadChildren: './supplier-imported-document/supplier-imported-document.module#ResourceSupplierImportedDocumentModule'
+            },
+            {
+                path: 'stock-items',
+                loadChildren: './stock-items/stock-items.module#ResourceStockItemsModule'
+            },
+            {
+                path: 'product-document',
+                loadChildren: './product-document/product-document.module#ResourceProductDocumentModule'
+            },
+            {
+                path: 'photos',
+                loadChildren: './photos/photos.module#ResourcePhotosModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

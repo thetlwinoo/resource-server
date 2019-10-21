@@ -3,11 +3,14 @@ package com.resource.server.web.rest;
 import com.resource.server.ResourceApp;
 
 import com.resource.server.domain.Photos;
+import com.resource.server.domain.StockItems;
 import com.resource.server.repository.PhotosRepository;
 import com.resource.server.service.PhotosService;
 import com.resource.server.service.dto.PhotosDTO;
 import com.resource.server.service.mapper.PhotosMapper;
 import com.resource.server.web.rest.errors.ExceptionTranslator;
+import com.resource.server.service.dto.PhotosCriteria;
+import com.resource.server.service.PhotosQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -127,6 +130,9 @@ public class PhotosResourceIntTest {
     private PhotosService photosService;
 
     @Autowired
+    private PhotosQueryService photosQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -148,7 +154,7 @@ public class PhotosResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PhotosResource photosResource = new PhotosResource(photosService);
+        final PhotosResource photosResource = new PhotosResource(photosService, photosQueryService);
         this.restPhotosMockMvc = MockMvcBuilders.standaloneSetup(photosResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -344,6 +350,541 @@ public class PhotosResourceIntTest {
             .andExpect(jsonPath("$.defaultInd").value(DEFAULT_DEFAULT_IND.booleanValue()))
             .andExpect(jsonPath("$.deleteToken").value(DEFAULT_DELETE_TOKEN.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByThumbnailPhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where thumbnailPhoto equals to DEFAULT_THUMBNAIL_PHOTO
+        defaultPhotosShouldBeFound("thumbnailPhoto.equals=" + DEFAULT_THUMBNAIL_PHOTO);
+
+        // Get all the photosList where thumbnailPhoto equals to UPDATED_THUMBNAIL_PHOTO
+        defaultPhotosShouldNotBeFound("thumbnailPhoto.equals=" + UPDATED_THUMBNAIL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByThumbnailPhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where thumbnailPhoto in DEFAULT_THUMBNAIL_PHOTO or UPDATED_THUMBNAIL_PHOTO
+        defaultPhotosShouldBeFound("thumbnailPhoto.in=" + DEFAULT_THUMBNAIL_PHOTO + "," + UPDATED_THUMBNAIL_PHOTO);
+
+        // Get all the photosList where thumbnailPhoto equals to UPDATED_THUMBNAIL_PHOTO
+        defaultPhotosShouldNotBeFound("thumbnailPhoto.in=" + UPDATED_THUMBNAIL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByThumbnailPhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where thumbnailPhoto is not null
+        defaultPhotosShouldBeFound("thumbnailPhoto.specified=true");
+
+        // Get all the photosList where thumbnailPhoto is null
+        defaultPhotosShouldNotBeFound("thumbnailPhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByOriginalPhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where originalPhoto equals to DEFAULT_ORIGINAL_PHOTO
+        defaultPhotosShouldBeFound("originalPhoto.equals=" + DEFAULT_ORIGINAL_PHOTO);
+
+        // Get all the photosList where originalPhoto equals to UPDATED_ORIGINAL_PHOTO
+        defaultPhotosShouldNotBeFound("originalPhoto.equals=" + UPDATED_ORIGINAL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByOriginalPhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where originalPhoto in DEFAULT_ORIGINAL_PHOTO or UPDATED_ORIGINAL_PHOTO
+        defaultPhotosShouldBeFound("originalPhoto.in=" + DEFAULT_ORIGINAL_PHOTO + "," + UPDATED_ORIGINAL_PHOTO);
+
+        // Get all the photosList where originalPhoto equals to UPDATED_ORIGINAL_PHOTO
+        defaultPhotosShouldNotBeFound("originalPhoto.in=" + UPDATED_ORIGINAL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByOriginalPhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where originalPhoto is not null
+        defaultPhotosShouldBeFound("originalPhoto.specified=true");
+
+        // Get all the photosList where originalPhoto is null
+        defaultPhotosShouldNotBeFound("originalPhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerTallPhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerTallPhoto equals to DEFAULT_BANNER_TALL_PHOTO
+        defaultPhotosShouldBeFound("bannerTallPhoto.equals=" + DEFAULT_BANNER_TALL_PHOTO);
+
+        // Get all the photosList where bannerTallPhoto equals to UPDATED_BANNER_TALL_PHOTO
+        defaultPhotosShouldNotBeFound("bannerTallPhoto.equals=" + UPDATED_BANNER_TALL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerTallPhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerTallPhoto in DEFAULT_BANNER_TALL_PHOTO or UPDATED_BANNER_TALL_PHOTO
+        defaultPhotosShouldBeFound("bannerTallPhoto.in=" + DEFAULT_BANNER_TALL_PHOTO + "," + UPDATED_BANNER_TALL_PHOTO);
+
+        // Get all the photosList where bannerTallPhoto equals to UPDATED_BANNER_TALL_PHOTO
+        defaultPhotosShouldNotBeFound("bannerTallPhoto.in=" + UPDATED_BANNER_TALL_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerTallPhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerTallPhoto is not null
+        defaultPhotosShouldBeFound("bannerTallPhoto.specified=true");
+
+        // Get all the photosList where bannerTallPhoto is null
+        defaultPhotosShouldNotBeFound("bannerTallPhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerWidePhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerWidePhoto equals to DEFAULT_BANNER_WIDE_PHOTO
+        defaultPhotosShouldBeFound("bannerWidePhoto.equals=" + DEFAULT_BANNER_WIDE_PHOTO);
+
+        // Get all the photosList where bannerWidePhoto equals to UPDATED_BANNER_WIDE_PHOTO
+        defaultPhotosShouldNotBeFound("bannerWidePhoto.equals=" + UPDATED_BANNER_WIDE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerWidePhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerWidePhoto in DEFAULT_BANNER_WIDE_PHOTO or UPDATED_BANNER_WIDE_PHOTO
+        defaultPhotosShouldBeFound("bannerWidePhoto.in=" + DEFAULT_BANNER_WIDE_PHOTO + "," + UPDATED_BANNER_WIDE_PHOTO);
+
+        // Get all the photosList where bannerWidePhoto equals to UPDATED_BANNER_WIDE_PHOTO
+        defaultPhotosShouldNotBeFound("bannerWidePhoto.in=" + UPDATED_BANNER_WIDE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByBannerWidePhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where bannerWidePhoto is not null
+        defaultPhotosShouldBeFound("bannerWidePhoto.specified=true");
+
+        // Get all the photosList where bannerWidePhoto is null
+        defaultPhotosShouldNotBeFound("bannerWidePhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByCirclePhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where circlePhoto equals to DEFAULT_CIRCLE_PHOTO
+        defaultPhotosShouldBeFound("circlePhoto.equals=" + DEFAULT_CIRCLE_PHOTO);
+
+        // Get all the photosList where circlePhoto equals to UPDATED_CIRCLE_PHOTO
+        defaultPhotosShouldNotBeFound("circlePhoto.equals=" + UPDATED_CIRCLE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByCirclePhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where circlePhoto in DEFAULT_CIRCLE_PHOTO or UPDATED_CIRCLE_PHOTO
+        defaultPhotosShouldBeFound("circlePhoto.in=" + DEFAULT_CIRCLE_PHOTO + "," + UPDATED_CIRCLE_PHOTO);
+
+        // Get all the photosList where circlePhoto equals to UPDATED_CIRCLE_PHOTO
+        defaultPhotosShouldNotBeFound("circlePhoto.in=" + UPDATED_CIRCLE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByCirclePhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where circlePhoto is not null
+        defaultPhotosShouldBeFound("circlePhoto.specified=true");
+
+        // Get all the photosList where circlePhoto is null
+        defaultPhotosShouldNotBeFound("circlePhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySharpenedPhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where sharpenedPhoto equals to DEFAULT_SHARPENED_PHOTO
+        defaultPhotosShouldBeFound("sharpenedPhoto.equals=" + DEFAULT_SHARPENED_PHOTO);
+
+        // Get all the photosList where sharpenedPhoto equals to UPDATED_SHARPENED_PHOTO
+        defaultPhotosShouldNotBeFound("sharpenedPhoto.equals=" + UPDATED_SHARPENED_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySharpenedPhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where sharpenedPhoto in DEFAULT_SHARPENED_PHOTO or UPDATED_SHARPENED_PHOTO
+        defaultPhotosShouldBeFound("sharpenedPhoto.in=" + DEFAULT_SHARPENED_PHOTO + "," + UPDATED_SHARPENED_PHOTO);
+
+        // Get all the photosList where sharpenedPhoto equals to UPDATED_SHARPENED_PHOTO
+        defaultPhotosShouldNotBeFound("sharpenedPhoto.in=" + UPDATED_SHARPENED_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySharpenedPhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where sharpenedPhoto is not null
+        defaultPhotosShouldBeFound("sharpenedPhoto.specified=true");
+
+        // Get all the photosList where sharpenedPhoto is null
+        defaultPhotosShouldNotBeFound("sharpenedPhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySquarePhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where squarePhoto equals to DEFAULT_SQUARE_PHOTO
+        defaultPhotosShouldBeFound("squarePhoto.equals=" + DEFAULT_SQUARE_PHOTO);
+
+        // Get all the photosList where squarePhoto equals to UPDATED_SQUARE_PHOTO
+        defaultPhotosShouldNotBeFound("squarePhoto.equals=" + UPDATED_SQUARE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySquarePhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where squarePhoto in DEFAULT_SQUARE_PHOTO or UPDATED_SQUARE_PHOTO
+        defaultPhotosShouldBeFound("squarePhoto.in=" + DEFAULT_SQUARE_PHOTO + "," + UPDATED_SQUARE_PHOTO);
+
+        // Get all the photosList where squarePhoto equals to UPDATED_SQUARE_PHOTO
+        defaultPhotosShouldNotBeFound("squarePhoto.in=" + UPDATED_SQUARE_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosBySquarePhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where squarePhoto is not null
+        defaultPhotosShouldBeFound("squarePhoto.specified=true");
+
+        // Get all the photosList where squarePhoto is null
+        defaultPhotosShouldNotBeFound("squarePhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByWatermarkPhotoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where watermarkPhoto equals to DEFAULT_WATERMARK_PHOTO
+        defaultPhotosShouldBeFound("watermarkPhoto.equals=" + DEFAULT_WATERMARK_PHOTO);
+
+        // Get all the photosList where watermarkPhoto equals to UPDATED_WATERMARK_PHOTO
+        defaultPhotosShouldNotBeFound("watermarkPhoto.equals=" + UPDATED_WATERMARK_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByWatermarkPhotoIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where watermarkPhoto in DEFAULT_WATERMARK_PHOTO or UPDATED_WATERMARK_PHOTO
+        defaultPhotosShouldBeFound("watermarkPhoto.in=" + DEFAULT_WATERMARK_PHOTO + "," + UPDATED_WATERMARK_PHOTO);
+
+        // Get all the photosList where watermarkPhoto equals to UPDATED_WATERMARK_PHOTO
+        defaultPhotosShouldNotBeFound("watermarkPhoto.in=" + UPDATED_WATERMARK_PHOTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByWatermarkPhotoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where watermarkPhoto is not null
+        defaultPhotosShouldBeFound("watermarkPhoto.specified=true");
+
+        // Get all the photosList where watermarkPhoto is null
+        defaultPhotosShouldNotBeFound("watermarkPhoto.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByPriorityIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where priority equals to DEFAULT_PRIORITY
+        defaultPhotosShouldBeFound("priority.equals=" + DEFAULT_PRIORITY);
+
+        // Get all the photosList where priority equals to UPDATED_PRIORITY
+        defaultPhotosShouldNotBeFound("priority.equals=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByPriorityIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where priority in DEFAULT_PRIORITY or UPDATED_PRIORITY
+        defaultPhotosShouldBeFound("priority.in=" + DEFAULT_PRIORITY + "," + UPDATED_PRIORITY);
+
+        // Get all the photosList where priority equals to UPDATED_PRIORITY
+        defaultPhotosShouldNotBeFound("priority.in=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByPriorityIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where priority is not null
+        defaultPhotosShouldBeFound("priority.specified=true");
+
+        // Get all the photosList where priority is null
+        defaultPhotosShouldNotBeFound("priority.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByPriorityIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where priority greater than or equals to DEFAULT_PRIORITY
+        defaultPhotosShouldBeFound("priority.greaterOrEqualThan=" + DEFAULT_PRIORITY);
+
+        // Get all the photosList where priority greater than or equals to UPDATED_PRIORITY
+        defaultPhotosShouldNotBeFound("priority.greaterOrEqualThan=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByPriorityIsLessThanSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where priority less than or equals to DEFAULT_PRIORITY
+        defaultPhotosShouldNotBeFound("priority.lessThan=" + DEFAULT_PRIORITY);
+
+        // Get all the photosList where priority less than or equals to UPDATED_PRIORITY
+        defaultPhotosShouldBeFound("priority.lessThan=" + UPDATED_PRIORITY);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDefaultIndIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where defaultInd equals to DEFAULT_DEFAULT_IND
+        defaultPhotosShouldBeFound("defaultInd.equals=" + DEFAULT_DEFAULT_IND);
+
+        // Get all the photosList where defaultInd equals to UPDATED_DEFAULT_IND
+        defaultPhotosShouldNotBeFound("defaultInd.equals=" + UPDATED_DEFAULT_IND);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDefaultIndIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where defaultInd in DEFAULT_DEFAULT_IND or UPDATED_DEFAULT_IND
+        defaultPhotosShouldBeFound("defaultInd.in=" + DEFAULT_DEFAULT_IND + "," + UPDATED_DEFAULT_IND);
+
+        // Get all the photosList where defaultInd equals to UPDATED_DEFAULT_IND
+        defaultPhotosShouldNotBeFound("defaultInd.in=" + UPDATED_DEFAULT_IND);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDefaultIndIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where defaultInd is not null
+        defaultPhotosShouldBeFound("defaultInd.specified=true");
+
+        // Get all the photosList where defaultInd is null
+        defaultPhotosShouldNotBeFound("defaultInd.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDeleteTokenIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where deleteToken equals to DEFAULT_DELETE_TOKEN
+        defaultPhotosShouldBeFound("deleteToken.equals=" + DEFAULT_DELETE_TOKEN);
+
+        // Get all the photosList where deleteToken equals to UPDATED_DELETE_TOKEN
+        defaultPhotosShouldNotBeFound("deleteToken.equals=" + UPDATED_DELETE_TOKEN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDeleteTokenIsInShouldWork() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where deleteToken in DEFAULT_DELETE_TOKEN or UPDATED_DELETE_TOKEN
+        defaultPhotosShouldBeFound("deleteToken.in=" + DEFAULT_DELETE_TOKEN + "," + UPDATED_DELETE_TOKEN);
+
+        // Get all the photosList where deleteToken equals to UPDATED_DELETE_TOKEN
+        defaultPhotosShouldNotBeFound("deleteToken.in=" + UPDATED_DELETE_TOKEN);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByDeleteTokenIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+
+        // Get all the photosList where deleteToken is not null
+        defaultPhotosShouldBeFound("deleteToken.specified=true");
+
+        // Get all the photosList where deleteToken is null
+        defaultPhotosShouldNotBeFound("deleteToken.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPhotosByStockItemIsEqualToSomething() throws Exception {
+        // Initialize the database
+        StockItems stockItem = StockItemsResourceIntTest.createEntity(em);
+        em.persist(stockItem);
+        em.flush();
+        photos.setStockItem(stockItem);
+        photosRepository.saveAndFlush(photos);
+        Long stockItemId = stockItem.getId();
+
+        // Get all the photosList where stockItem equals to stockItemId
+        defaultPhotosShouldBeFound("stockItemId.equals=" + stockItemId);
+
+        // Get all the photosList where stockItem equals to stockItemId + 1
+        defaultPhotosShouldNotBeFound("stockItemId.equals=" + (stockItemId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultPhotosShouldBeFound(String filter) throws Exception {
+        restPhotosMockMvc.perform(get("/api/photos?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(photos.getId().intValue())))
+            .andExpect(jsonPath("$.[*].thumbnailPhoto").value(hasItem(DEFAULT_THUMBNAIL_PHOTO)))
+            .andExpect(jsonPath("$.[*].originalPhoto").value(hasItem(DEFAULT_ORIGINAL_PHOTO)))
+            .andExpect(jsonPath("$.[*].bannerTallPhoto").value(hasItem(DEFAULT_BANNER_TALL_PHOTO)))
+            .andExpect(jsonPath("$.[*].bannerWidePhoto").value(hasItem(DEFAULT_BANNER_WIDE_PHOTO)))
+            .andExpect(jsonPath("$.[*].circlePhoto").value(hasItem(DEFAULT_CIRCLE_PHOTO)))
+            .andExpect(jsonPath("$.[*].sharpenedPhoto").value(hasItem(DEFAULT_SHARPENED_PHOTO)))
+            .andExpect(jsonPath("$.[*].squarePhoto").value(hasItem(DEFAULT_SQUARE_PHOTO)))
+            .andExpect(jsonPath("$.[*].watermarkPhoto").value(hasItem(DEFAULT_WATERMARK_PHOTO)))
+            .andExpect(jsonPath("$.[*].thumbnailPhotoBlobContentType").value(hasItem(DEFAULT_THUMBNAIL_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].thumbnailPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_THUMBNAIL_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].originalPhotoBlobContentType").value(hasItem(DEFAULT_ORIGINAL_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].originalPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_ORIGINAL_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].bannerTallPhotoBlobContentType").value(hasItem(DEFAULT_BANNER_TALL_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].bannerTallPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_BANNER_TALL_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].bannerWidePhotoBlobContentType").value(hasItem(DEFAULT_BANNER_WIDE_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].bannerWidePhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_BANNER_WIDE_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].circlePhotoBlobContentType").value(hasItem(DEFAULT_CIRCLE_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].circlePhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_CIRCLE_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].sharpenedPhotoBlobContentType").value(hasItem(DEFAULT_SHARPENED_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].sharpenedPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_SHARPENED_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].squarePhotoBlobContentType").value(hasItem(DEFAULT_SQUARE_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].squarePhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_SQUARE_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].watermarkPhotoBlobContentType").value(hasItem(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].watermarkPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_WATERMARK_PHOTO_BLOB))))
+            .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
+            .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())))
+            .andExpect(jsonPath("$.[*].deleteToken").value(hasItem(DEFAULT_DELETE_TOKEN)));
+
+        // Check, that the count call also returns 1
+        restPhotosMockMvc.perform(get("/api/photos/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultPhotosShouldNotBeFound(String filter) throws Exception {
+        restPhotosMockMvc.perform(get("/api/photos?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restPhotosMockMvc.perform(get("/api/photos/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional
