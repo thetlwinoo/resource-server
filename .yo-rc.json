@@ -39,7 +39,7 @@
         "enableTranslation": true,
         "nativeLanguage": "en",
         "languages": ["en", "my"],
-        "herokuAppName": "resource",
+        "herokuAppName": "zezawar-resource",
         "herokuDeployType": "git"
     },
     "generator-jhipster-entity-audit": {
