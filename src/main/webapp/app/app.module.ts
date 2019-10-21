@@ -16,7 +16,6 @@ import { ResourceCoreModule } from 'app/core';
 import { ResourceAppRoutingModule } from './app-routing.module';
 import { ResourceHomeModule } from './home/home.module';
 import { ResourceAccountModule } from './account/account.module';
-import { PortalProductModule } from './products/products.module';
 import { ResourceEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
@@ -39,8 +38,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         ResourceAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         ResourceEntityModule,
-        ResourceAppRoutingModule,
-        PortalProductModule
+        ResourceAppRoutingModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [

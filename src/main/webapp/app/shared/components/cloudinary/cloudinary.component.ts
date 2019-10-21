@@ -49,7 +49,7 @@ export class CloudinaryComponent implements OnInit, OnDestroy {
     // selection = new SelectionModel<any>(true, []);
     onResponseChangedSubscription: Subscription;
     private hasBaseDropZoneOver: boolean = false;
-    private uploader: FileUploader;
+    public uploader: FileUploader;
     rows = new Array<any>();
 
     constructor(
