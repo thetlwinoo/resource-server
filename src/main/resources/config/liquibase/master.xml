@@ -166,7 +166,7 @@
     <include file="config/liquibase/changelog/20190801044934_added_entity_constraints_ReviewLines.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190902042848_added_entity_constraints_ProductTags.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190910080840_added_entity_constraints_Merchants.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190801044946_added_entity_constraints_ProductModel.xml" relativeToChangelogFile="false"/>mvnw -Pprod clean verify
+    <include file="config/liquibase/changelog/20190801044946_added_entity_constraints_ProductModel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190912101609_added_entity_constraints_ProductBrand.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095633_added_entity_constraints_StockItemTemp.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191007095634_added_entity_constraints_UploadTransactions.xml" relativeToChangelogFile="false"/>
